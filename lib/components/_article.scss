@@ -1,0 +1,34 @@
+.Article-category {
+    display: inline-block;
+    @include baseline(10px);
+    margin-bottom: -1px;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 1em;
+    vertical-align: top;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+}
+
+.Article-title {
+    @include baseline(32px, 1, 1);
+    font-family: Oswald, sans-serif;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    a:hover,
+    a:active {
+        color: $hoverColor;
+    }
+}
+
+.Article-date {
+    @include baseline(10px);
+    letter-spacing: .25em;
+}
+
+.Article-content {
+    @include baseline($base-font-size, 1, 4, true);
+}

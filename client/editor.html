@@ -1,0 +1,13 @@
+<template name="editor">
+    {{#if currentUser}}
+    <form>
+        <input type="hidden" name="_id" value="{{_id}}">
+        <input type="text" name="title" value="{{title}}">
+        <input type="text" name="category" value="{{category}}">
+        <textarea name="content">{{content}}</textarea>
+        {{#markdown}}{{preview}}{{/markdown}}
+        <input type="submit" value="Save">
+    </form>
+    {{/if}}
+    {{> article}}
+</template>
