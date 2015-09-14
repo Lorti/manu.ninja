@@ -1,12 +1,12 @@
-Meteor.subscribe('theArticles');
+Meteor.subscribe('articles');
 
 Template.registerHelper('pageTitle', function () {
     return Meteor.settings.public.seo.title;
 });
-
 Template.registerHelper('pageCopyright', function () {
     return '© ' + moment(this.createDate).format('YYYY') + ' Manuel Wieser';
 });
+
 
 Template.article.helpers({
     'date': function () {
@@ -35,11 +35,8 @@ Template.article.events({
         }
     }
 });
-Template.articles.helpers({
-    'entry': function () {
-        return Articles.find({}, {sort: {createDate: -1}});
-    }
-});
+
+
 Template.editor.helpers({
     preview: function () {
         return Session.get('preview');
@@ -57,7 +54,6 @@ Template.editor.events({
             category: event.target.category.value,
             content: event.target.content.value
         };
-        console.log(data._id);
         if (data._id) {
             Meteor.call('updateArticle', data);
         } else {

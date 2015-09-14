@@ -1,7 +1,7 @@
 <template name="article">
     <article class="Article">
         <div class="Article-header u-textCenter">
-            <p class="Article-category">{{category}}</p>
+            <p class="Article-category"><a href="/category/{{category}}">{{category}}</a></p>
             <h1 class="Article-title"><a href="/article/{{slug}}">{{title}}</a></h1>
             <p class="Article-date">{{date}}</p>
         </div>

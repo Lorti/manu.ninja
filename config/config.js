@@ -1,3 +1,3 @@
 Accounts.config({
-    forbidClientAccountCreation: false
+    forbidClientAccountCreation: true
 });
