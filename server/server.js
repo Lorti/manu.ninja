@@ -11,7 +11,7 @@ Meteor.methods({
         Articles.insert({
             title: data.title,
             slug: slugify(data.title),
-            category: data.category,
+            category: data.category.toLowerCase(),
             content: data.content,
             createDate: new Date(),
             changeDate: new Date()
@@ -26,7 +26,7 @@ Meteor.methods({
             $set: {
                 title: data.title,
                 slug: slugify(data.title),
-                category: data.category,
+                category: data.category.toLowerCase(),
                 content: data.content,
                 changeDate: new Date()
             }
