@@ -4,6 +4,16 @@
 $linkColor: #f58231;
 $hoverColor: #939393;
 
+html {
+    font-size: 87.5%;
+    @media (min-width: 480px) {
+        font-size: 100%;
+    }
+    @media (min-width: 960px) {
+        font-size: 125%;
+    }
+}
+
 body {
     font-family: Lato, sans-serif;
     @include baseline($base-font-size);
@@ -32,14 +42,8 @@ code {
     font-family: Consolas, Menlo, Monaco, Lucida Console, monospace;
 }
 
-.Column {
-    max-width: 48em;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
 @import "../lib/components/article";
 @import "../lib/components/banner";
+@import "../lib/components/column";
+@import "../lib/components/footer";
 @import "../lib/utilities";

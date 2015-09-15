@@ -1,0 +1,9 @@
+.Footer {
+    overflow: hidden;
+    @include baseline($base-font-size, 6, 2);
+}
+
+.Footer-image,
+.Footer-copyright {
+    @include baseline($base-font-size, 0, 2, true);
+}

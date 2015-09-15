@@ -16,7 +16,7 @@ $base-line-height: 	1.375;
     $margin: $rhythm / $font-size;
 
     @if $only-margins == false {
-        font-size: $font-size;
+        font-size: $font-size / $base-font-size + rem;
         line-height: $line-height;
     }
 

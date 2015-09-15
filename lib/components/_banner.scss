@@ -1,7 +1,7 @@
 .Banner {
     font-family: Oswald, sans-serif;
     font-weight: bold;
-    @include baseline(40px, 4, 4);
+    @include baseline(42px, 4, 6);
 
     a {
         color: inherit;
@@ -14,5 +14,17 @@
     margin-right: .25em;
     width: auto;
     height: 1.25em;
-    vertical-align: middle;
+    vertical-align: top;
+}
+
+.Banner-line {
+    display: block;
+    margin-right: -10px;
+    font-family: Lato, sans-serif;
+    font-weight: 100;
+    @include baseline(12px, 0, 0);
+
+    @media (min-width: 480px) {
+        @include baseline(16px, 0, 0);
+    }
 }

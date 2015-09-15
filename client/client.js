@@ -3,6 +3,9 @@ Meteor.subscribe('articles');
 Template.registerHelper('pageTitle', function () {
     return Meteor.settings.public.seo.title;
 });
+Template.registerHelper('pageDescription', function () {
+    return Meteor.settings.public.seo.description;
+});
 Template.registerHelper('pageCopyright', function () {
     return '© ' + moment(this.createDate).format('YYYY') + ' Manuel Wieser';
 });
