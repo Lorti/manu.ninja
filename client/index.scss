@@ -1,8 +1,8 @@
 @import "../lib/suit";
 @import "../lib/baseline";
 
-$linkColor: #f58231;
-$hoverColor: #939393;
+$link-color: #f58231;
+$hover-color: #939393;
 
 html {
     font-size: 87.5%;
@@ -30,20 +30,22 @@ p {
 
 a:link,
 a:visited {
-    color: $linkColor;
+    color: $link-color;
 }
 
 a:hover,
 a:active {
-    color: $hoverColor;
+    color: $hover-color;
 }
 
 code {
     font-family: Consolas, Menlo, Monaco, Lucida Console, monospace;
 }
 
+@import "../lib/monokai";
 @import "../lib/components/article";
 @import "../lib/components/banner";
 @import "../lib/components/column";
 @import "../lib/components/footer";
+@import "../lib/components/form";
 @import "../lib/utilities";

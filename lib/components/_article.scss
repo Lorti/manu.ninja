@@ -21,7 +21,7 @@
 
     a:hover,
     a:active {
-        color: $hoverColor;
+        color: $hover-color;
     }
 }
 
@@ -32,5 +32,31 @@
 }
 
 .Article-content {
-    @include baseline($base-font-size, 1, 6, true);
+    @include baseline($base-font-size, 2, 6, true);
+
+    img, pre, ol, ul {
+        @include baseline(null, 0, 1, true);
+    }
+
+    ol {
+        list-style-type: decimal;
+    }
+
+    ul {
+        list-style-type: disc;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+
+    h2 {
+        @include baseline(24px, 2, 1);
+    }
+
+    h3 {
+        @include baseline(18px, 2, 1);
+    }
 }

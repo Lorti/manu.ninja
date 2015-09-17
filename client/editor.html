@@ -1,13 +1,18 @@
 <template name="editor">
     {{#if currentUser}}
-    <form>
+    <form class="Form">
         <input type="hidden" name="_id" value="{{_id}}">
-        <input type="text" name="title" value="{{title}}">
-        <input type="text" name="category" value="{{category}}">
-        <textarea name="content">{{content}}</textarea>
-        {{#markdown}}{{preview}}{{/markdown}}
-        <input type="submit" value="Save">
+
+        <input class="Form-input" type="text" name="title" placeholder="Title" value="{{title}}">
+
+        <input class="Form-input" type="text" name="category" placeholder="Category" value="{{category}}">
+
+        {{> upload_bootstrap }}
+
+        <textarea class="Form-textarea" name="content">{{content}}</textarea>
+
+        <input class="Form-button" type="submit" value="Save">
     </form>
     {{/if}}
-    {{> article}}
+    {{> article content = preview}}
 </template>

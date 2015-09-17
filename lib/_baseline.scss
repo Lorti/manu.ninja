@@ -3,6 +3,10 @@ $base-line-height: 	1.375;
 
 @mixin baseline($font-size, $margin-top: 0, $margin-bottom: 0, $only-margins: false) {
 
+    @if $font-size == null {
+        $font-size: $base-font-size;
+    }
+
     // This value gets halved, so that the rhythm is half the base line height.
     $rhythm: $base-line-height * $base-font-size / 2;
 
