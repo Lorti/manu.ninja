@@ -1,5 +1,5 @@
-@import "../lib/suit";
-@import "../lib/baseline";
+@import "suit";
+@import "baseline";
 
 $link-color: #f58231;
 $hover-color: #939393;
@@ -42,10 +42,10 @@ code {
     font-family: Consolas, Menlo, Monaco, Lucida Console, monospace;
 }
 
-@import "../lib/monokai";
-@import "../lib/components/article";
-@import "../lib/components/banner";
-@import "../lib/components/column";
-@import "../lib/components/footer";
-@import "../lib/components/form";
-@import "../lib/utilities";
+@import "monokai";
+@import "components/article";
+@import "components/banner";
+@import "components/column";
+@import "components/footer";
+@import "components/form";
+@import "utilities";

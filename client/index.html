@@ -1,3 +1,5 @@
 <template name="index">
-    {{> articles}}
+    {{#each articles}}
+        {{> article}}
+    {{/each}}
 </template>
