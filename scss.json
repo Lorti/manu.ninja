@@ -1,7 +1,6 @@
 {
   "enableAutoprefixer": true,
   "autoprefixerOptions": {
-    "browsers": ["> 1%"],
-    "cascade": false
+    "browsers": ["> 1%"]
   }
 }

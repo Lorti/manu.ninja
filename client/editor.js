@@ -4,8 +4,9 @@ Template.editor.helpers({
     }
 });
 Template.editor.events({
-    'input textarea': function (event) {
+    'input textarea, focus textarea': function (event) {
         Session.set('preview', event.target.value);
+        resizeTextarea(event.target)
     },
     'submit form': function (event) {
         event.preventDefault();
@@ -23,3 +24,17 @@ Template.editor.events({
         }
     }
 });
+
+function resizeTextarea(element) {
+    var style = window.getComputedStyle(element);
+    var offset;
+
+    if (style.boxSizing === 'content-box') {
+        offset = -(parseFloat(style.paddingTop) + parseFloat(style.paddingBottom));
+    } else {
+        offset = parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
+    }
+
+    element.style.height = 'auto';
+    element.style.height = element.scrollHeight + offset + 'px';
+}
