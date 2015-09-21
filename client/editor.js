@@ -1,11 +1,24 @@
 Template.editor.helpers({
-    preview: function () {
-        return Session.get('preview');
+    previewTitle: function () {
+        return Session.get('previewTitle');
+    },
+    previewCategory: function () {
+        return Session.get('previewCategory');
+    },
+    previewContent: function () {
+        return Session.get('previewContent');
     }
 });
+
 Template.editor.events({
+    'input [name="title"], focus [name="title"]': function (event) {
+        Session.set('previewTitle', event.target.value)
+    },
+    'input [name="category"], focus [name="category"]': function (event) {
+        Session.set('previewCategory', event.target.value)
+    },
     'input textarea, focus textarea': function (event) {
-        Session.set('preview', event.target.value);
+        Session.set('previewContent', event.target.value);
         resizeTextarea(event.target)
     },
     'submit form': function (event) {
