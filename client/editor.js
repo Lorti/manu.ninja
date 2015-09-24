@@ -1,12 +1,17 @@
 Template.editor.helpers({
     previewTitle: function () {
-        return Session.get('previewTitle');
+        return Session.get('previewTitle') || (Template.currentData() ? Template.currentData().title : undefined);
     },
     previewCategory: function () {
-        return Session.get('previewCategory');
+        return Session.get('previewCategory') || (Template.currentData() ? Template.currentData().category : undefined);
     },
     previewContent: function () {
-        return Session.get('previewContent');
+        if (Template.currentData() && Template.currentData().content) {
+            Tracker.afterFlush(function() {
+                resizeTextarea(document.querySelector('textarea'));
+            });
+        }
+        return Session.get('previewContent') || (Template.currentData() ? Template.currentData().content : undefined);
     }
 });
 
