@@ -1,0 +1,13 @@
+.Form {}
+
+.Form-input,
+.Form-textarea {
+    width: 100%;
+    @include baseline(null, 0, 1, true);
+}
+
+.Form-textarea {
+    font-family: Menlo, monospace;
+    font-size: 16px;
+    min-height: 32em;
+}

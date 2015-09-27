@@ -1,0 +1,35 @@
+$base-font-size: 	16px;
+$base-line-height: 	1.375;
+
+@mixin baseline($font-size, $margin-top: 0, $margin-bottom: 0, $only-margins: false) {
+
+    @if $font-size == null {
+        $font-size: $base-font-size;
+    }
+
+    // This value gets halved, so that the rhythm is half the base line height.
+    $rhythm: $base-line-height * $base-font-size / 2;
+
+    // Calculate the number of rhythm units that can fit the specified font size.
+    $lines: ceil($font-size / $rhythm);
+
+    // Calculate the correct line height.
+    $line-height: $rhythm * $lines / $font-size;
+
+    // The margins also have to be relative to the rhythm.
+    $margin: $rhythm / $font-size;
+
+    @if $only-margins == false {
+        font-size: $font-size / $base-font-size + rem;
+        line-height: $line-height;
+    }
+
+    @if $margin-top > 0 {
+        margin-top: $margin * $margin-top + em;
+    }
+
+    @if $margin-bottom > 0 {
+        margin-bottom: $margin * $margin-bottom + em;
+    }
+
+}
