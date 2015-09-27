@@ -1,23 +1,21 @@
 ---
 layout: default
 ---
+{% for post in site.posts %}
+    <article class="Article">
+        <div class="Article-header u-textCenter">
+            <p class="Article-category">
+                {% for category in post.categories %}
+                    <a href="/{{ category }}">{{ site.data.categories[category] }}</a>
+                {% endfor %}
+            </p>
 
-<div class="home">
+            <h1 class="Article-title"><a href="{{ post.url }}">{{ post.title }}</a></h1>
 
-  <h1 class="page-heading">Posts</h1>
-
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
-</div>
+            <p class="Article-date">{{ post.date | date: '%b %-d, %Y' }}</p>
+        </div>
+        <div class="Article-content">
+            {{ post.excerpt }}
+        </div>
+    </article>
+{% endfor %}

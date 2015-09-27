@@ -5,15 +5,15 @@ layout: default
     <div class="Article-header u-textCenter">
         <p class="Article-category">
             {% for category in page.categories %}
-                <a href="/category/{{ category }}">{{ category }}</a>
+                <a href="/{{ category }}">{{ site.data.categories[category] }}</a>
             {% endfor %}
         </p>
 
-        <h1 class="Article-title"><a href="/article/{{ page.slug }}">{{ page.title }}</a></h1>
+        <h1 class="Article-title"><a href="{{ page.url }}">{{ page.title }}</a></h1>
 
-        <p class="Article-date">{{ page.date | date: "%b %-d, %Y" }}</p>
+        <p class="Article-date">{{ page.date | date: '%b %-d, %Y' }}</p>
     </div>
-    <div class="Article-content u-dropCap">
+    <div class="Article-content">
         {{ content }}
     </div>
 </article>

@@ -1,6 +1,6 @@
 title: manu.ninja
 email: office@manuelwieser.com
 description: Front-End Development, Games and Digital Art
-baseurl: ""
+permalink: /:categories/:title
 url: "http://manu.ninja"
 markdown: kramdown
