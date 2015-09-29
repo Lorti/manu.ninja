@@ -1,6 +1,0 @@
-{
-  "enableAutoprefixer": true,
-  "autoprefixerOptions": {
-    "browsers": ["> 1%"]
-  }
-}
