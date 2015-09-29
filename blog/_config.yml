@@ -3,4 +3,5 @@ email: office@manuelwieser.com
 description: Front-End Development, Games and Digital Art
 permalink: /:categories/:title
 url: "http://manu.ninja"
-markdown: kramdown
+markdown: redcarpet
+highlighter: false
