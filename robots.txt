@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: http://manu.ninja/sitemap.xml

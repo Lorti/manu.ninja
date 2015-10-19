@@ -1,7 +1,10 @@
 title: manu.ninja
-email: office@manuelwieser.com
 description: Front-End Development, Games and Digital Art
-permalink: /:categories/:title
 url: "http://manu.ninja"
+email: office@manuelwieser.com
+
 markdown: redcarpet
 highlighter: false
+
+permalink: /:categories/:title
+gems: [jekyll-sitemap]
