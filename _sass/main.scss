@@ -38,6 +38,15 @@ a:active {
     color: $hover-color;
 }
 
+hr {
+    margin-top: -1px;
+    border-top: 1px solid lightgray;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+    @include baseline($base-font-size, 0, 2, true);
+}
+
 code {
     font-family: Consolas, Menlo, Monaco, Lucida Console, monospace;
 }

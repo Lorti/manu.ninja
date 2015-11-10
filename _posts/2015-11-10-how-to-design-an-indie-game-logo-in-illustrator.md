@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "How to Design an Indie Game Logo in Illustrator"
-date:   2015-11-10 20:15:00
-categories: games, art
+title:  How to Design an Indie Game Logo in Illustrator
+date:   2015-11-10
+categories:
+  - art
+  - games
 ---
-
-# How to Design an Indie Game Logo in Illustrator
 
 I am currently working on a game prototype with a few friends and we settled on a slightly ridiculous title. To announce our project in a way that it deserves I have created a logo that represents the over the top experience we are aiming for. Several people have asked me how the logo was created, so here you have a short tutorial on how to design an indie game logo in Illustrator.
 
@@ -39,4 +39,4 @@ The other elements got the same treatment and were then combined to the final re
 
 ![](/images/drop-shadow.png)
 
-If you have thoughts about this post please let me know on Facebook or Twitter. If you got inspired and created a logo design of your own I would of course love to see it.
+If you have thoughts about this post please let me know on [Facebook](https://www.facebook.com/mmwieser) or [Twitter](https://twitter.com/manuelwieser). If you got inspired and created a logo design of your own I would of course love to see it.
