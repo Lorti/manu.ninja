@@ -3,6 +3,6 @@
 }
 
 .Footer-image,
-.Footer-copyright {
+.Footer p:last-child {
     @include baseline($base-font-size, 0, 2, true);
 }
