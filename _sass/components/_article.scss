@@ -71,3 +71,7 @@
         @include baseline(18px, 2, 1);
     }
 }
+
+.Article-link {
+    @include baseline(12px);
+}

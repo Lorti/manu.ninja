@@ -12,13 +12,12 @@ permalink: /coding/
                         <a href="/{{ category }}">{{ site.data.categories[category] }}</a>
                     {% endfor %}
                 </p>
-
                 <h1 class="Article-title"><a href="{{ post.url }}">{{ post.title }}</a></h1>
-
                 <p class="Article-date">{{ post.date | date: '%b %-d, %Y' }}</p>
             </div>
             <div class="Article-content">
                 {{ post.excerpt }}
+                <p class="Article-link"><a href="{{ post.url }}">Read more…</a></p>
             </div>
         </article>
     {% endif %}
