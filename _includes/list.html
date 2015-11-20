@@ -22,14 +22,17 @@
         {% endif %}
 
         {{ post.excerpt }}
-        <p class="Article-link"><a href="{{ post.url }}">Read more…</a></p>
+
+        {% if post.external %}
+            <p class="Article-link"><a href="{{ post.external }}">Read more…</a></p>
+        {% else %}
+            <p class="Article-link"><a href="{{ post.url }}">Read more…</a></p>
+        {% endif %}
 
         {% if post.thumbnail %}
                 </div>
                 <div class="Grid-cell u-size1of5">
-                    <a href="{{ post.url }}">
-                        <img class="Article-thumbnail" src="{{ post.thumbnail }}">
-                    </a>
+                    <img class="Article-thumbnail" src="{{ post.thumbnail }}">
                 </div>
             </div>
         {% endif %}
