@@ -18,6 +18,14 @@
 .Article-title {
     @include baseline(32px, 1, 1);
     font-family: Oswald, sans-serif;
+
+    img {
+        margin-right: -.5em;
+        width: .5em;
+        height: .5em;
+        display: inline-block;
+        vertical-align: middle;
+    }
 }
 
 .Article-category,
@@ -70,6 +78,10 @@
     h3 {
         @include baseline(18px, 2, 1);
     }
+}
+
+.Article-thumbnail {
+    margin: 0 !important;
 }
 
 .Article-link {

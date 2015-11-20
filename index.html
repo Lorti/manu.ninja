@@ -4,17 +4,38 @@ layout: default
 {% for post in site.posts %}
     <article class="Article">
         <div class="Article-header u-textCenter">
+
             <p class="Article-category">
                 {% for category in post.categories %}
                     <a href="/{{ category }}">{{ site.data.categories[category] }}</a>
                 {% endfor %}
             </p>
-            <h1 class="Article-title"><a href="{{ post.url }}">{{ post.title }}</a></h1>
+            {% if post.external %}
+                <h1 class="Article-title"><a href="{{ post.external }}" target="_blank">{{ post.title }}</a></h1>
+            {% else %}
+                <h1 class="Article-title"><a href="{{ post.url }}">{{ post.title }}</a></h1>
+            {% endif %}
             <p class="Article-date">{{ post.date | date: '%b %-d, %Y' }}</p>
+
         </div>
         <div class="Article-content">
+
+            {% if post.thumbnail %}
+                <div class="Grid Grid--withGutter">
+                    <div class="Grid-cell u-size4of5">
+            {% endif %}
+
             {{ post.excerpt }}
             <p class="Article-link"><a href="{{ post.url }}">Read more…</a></p>
+
+            {% if post.thumbnail %}
+                    </div>
+                    <div class="Grid-cell u-size1of5">
+                        <img class="Article-thumbnail" src="{{ post.thumbnail }}">
+                    </div>
+                </div>
+            {% endif %}
+
         </div>
     </article>
 {% endfor %}
