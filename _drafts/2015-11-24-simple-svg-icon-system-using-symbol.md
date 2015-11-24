@@ -5,6 +5,8 @@ date:   2015-11-24
 categories: coding
 ---
 
+[`currentColor`](http://caniuse.com/#feat=currentcolor)
+
 [Chris Coyier](https://css-tricks.com/svg-symbol-good-choice-icons/)
 
 [npmjs.com/package/grunt-svg-symbols](https://www.npmjs.com/package/grunt-svg-symbols)
