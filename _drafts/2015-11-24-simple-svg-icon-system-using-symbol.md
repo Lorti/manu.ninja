@@ -5,11 +5,9 @@ date:   2015-11-24
 categories: coding
 ---
 
+I won't go into detail why an SVG icon system based on symbols is a good choice for your icons, because there are plenty of [great](https://css-tricks.com/svg-symbol-good-choice-icons/) [articles](http://sarasoueidan.com/blog/structuring-grouping-referencing-in-svg/) out there. I will just give you an overview of our solution at _karriere.at_ and present a tiny [grunt plugin](https://www.npmjs.com/package/grunt-svg-symbols) called `grunt-svg-symbols`, which creates a bunch of SVG icon systems from as many folders full of icons as you like.
+
 [`currentColor`](http://caniuse.com/#feat=currentcolor)
-
-[Chris Coyier](https://css-tricks.com/svg-symbol-good-choice-icons/)
-
-[npmjs.com/package/grunt-svg-symbols](https://www.npmjs.com/package/grunt-svg-symbols)
 
 ~~~ html
 <svg width="0" height="0">
@@ -27,3 +25,6 @@ categories: coding
     <use xlink:href="#mail"></use>
 </svg>
 ~~~~
+
+If you would like to give me your feedback you can do so on the [GitHub](https://github.com/Lorti/grunt-svg-symbols) repository page of the `grunt-svg-symbols` plugin. And just install it via
+[npm](https://www.npmjs.com/package/grunt-svg-symbols), if you want to use it.
