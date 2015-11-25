@@ -5,7 +5,7 @@ date:   2015-11-24
 categories: coding
 ---
 
-I won't go into detail why an SVG icon system based on symbols is a good choice for your icons, because there are plenty of [great](https://css-tricks.com/svg-symbol-good-choice-icons/) [articles](http://sarasoueidan.com/blog/structuring-grouping-referencing-in-svg/) out there. I will just give you an overview of our solution at _karriere.at_ and present a tiny [grunt plugin](https://www.npmjs.com/package/grunt-svg-symbols) called `grunt-svg-symbols`, which creates a bunch of SVG icon systems from as many folders full of icons as you like.
+I won't go into detail why an SVG icon system based on symbols is a good choice for your icons, because there are plenty of [great](https://css-tricks.com/svg-symbol-good-choice-icons/) [articles](https://24ways.org/2014/an-overview-of-svg-sprite-creation-techniques/) out there. I will just give you an overview of our solution at _karriere.at_ and present a tiny [grunt plugin](https://www.npmjs.com/package/grunt-svg-symbols) called `grunt-svg-symbols`, which creates a bunch of SVG icon systems from as many folders full of icons as you like.
 
 [`currentColor`](http://caniuse.com/#feat=currentcolor)
 
