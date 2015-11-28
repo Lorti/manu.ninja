@@ -83,6 +83,16 @@
     h3 {
         @include baseline(18px, 2, 1);
     }
+
+    code {
+        font-size: .875em;
+    }
+
+    p code {
+        display: inline;
+        padding: .25em;
+        white-space: nowrap;
+    }
 }
 
 .Article-thumbnail {

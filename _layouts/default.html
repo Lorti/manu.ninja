@@ -24,7 +24,13 @@
         </script>
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
+        <script>
+            hljs.initHighlightingOnLoad();
+            $inlined = document.querySelectorAll('.Article-content p > code');
+            for (var i = 0; i < $inlined.length; i++) {
+                hljs.highlightBlock($inlined[i])
+            }
+        </script>
 
     </body>
 
