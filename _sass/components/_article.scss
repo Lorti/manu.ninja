@@ -50,10 +50,6 @@
 .Article-content {
     @include baseline($base-font-size, 2, 6, true);
 
-    img, pre, ol, ul {
-        @include baseline(null, 0, 1, true);
-    }
-
     ol {
         list-style-type: decimal;
     }
@@ -62,13 +58,22 @@
         list-style-type: disc;
     }
 
+    ol, ul {
+        @include baseline(null, 0, 1, true);
+    }
+
     img {
         display: block;
         max-width: 100%;
         max-height: 768px;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    img,
+    pre {
         @include baseline($base-font-size, 2, 2, true);
+
     }
 
     h2 {
