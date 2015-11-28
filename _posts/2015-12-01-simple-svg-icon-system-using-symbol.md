@@ -5,7 +5,7 @@ date:   2015-12-01
 categories: coding
 ---
 
-I won't go into detail why an SVG icon system based on symbols is a good choice for your icons, because there are plenty of [great](https://css-tricks.com/svg-symbol-good-choice-icons/) [articles](https://24ways.org/2014/an-overview-of-svg-sprite-creation-techniques/) out there. I will just give you an overview of our solution at *karriere.at* and show you a tiny [Grunt plugin](https://www.npmjs.com/package/grunt-svg-symbols) called `grunt-svg-symbols`, which creates a bunch of SVG icon systems from as many folders full of icons as you like.
+I won't go into detail why an SVG icon system based on symbols is a good choice for your icons, because there are plenty of [great](https://css-tricks.com/svg-symbol-good-choice-icons/) [articles](https://24ways.org/2014/an-overview-of-svg-sprite-creation-techniques/) out there. I will just give you an overview of our solution at karriere.at and show you a tiny [Grunt plugin](https://www.npmjs.com/package/grunt-svg-symbols) called `grunt-svg-symbols`, which creates a bunch of SVG icon systems from as many folders full of icons as you like.
 
 The SVG icons we receive from our designers come from both Illustrator and Sketch. The only specification I want to give them is to center the icons in a rectangle and to make sure that the icons have the same visual weight when shown side by side. I then usually set all `fill` and `stroke` attributes to `currentColor`, as the icons are almost always monochrome. This way the SVG icon system behaves in much the same way as the icon font our developers are used to.
 

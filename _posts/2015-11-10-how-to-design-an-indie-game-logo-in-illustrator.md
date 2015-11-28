@@ -13,7 +13,7 @@ I am currently working on a game prototype with a few friends and we settled on 
 ![](/images/super-squishy-pony-force-alpha-deluxe-2.png)
 
 ## Briefing
-The first step is of course determining what message the logo has to send. In our case it has to show uncompromising fun and that the game does not take itself too seriously (like *Broforce* for example). Another logical decision is to create vector graphics, so that we can scale the logo for use in promotional material as well.
+The first step is of course determining what message the logo has to send. In our case it has to show uncompromising fun and that the game does not take itself too seriously (like [Broforce](http://www.broforcegame.com/) for example). Another logical decision is to create vector graphics, so that we can scale the logo for use in promotional material as well.
 
 ## Typography and Styling
 The game itself will be highly stylized and most likely use cartoon shaders. Therefore realism and delicate textures would be the wrong artistic choice for the logo. To hint at the mix of stylized action and fierce competition I have chosen to use *Kraash*, a highly stylized comic font, and *Univers*, the classic grotesque typeface, which has a very nice extra bold font weight.
