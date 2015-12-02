@@ -21,7 +21,9 @@
                 <div class="Grid-cell u-size4of5">
         {% endif %}
 
-        {{ post.excerpt | strip_html }}
+        <p>
+            {{ post.excerpt | strip_html }}
+        </p>
 
         {% if post.external %}
             <p class="Article-link"><a href="{{ post.external }}">Read more…</a></p>
