@@ -1,7 +1,8 @@
 ---
 layout: default
 ---
-<article class="Article">
+<article class="Article" itemscope itemtype="http://schema.org/BlogPosting">
+    <meta itemprop="image" content="{{ '/images/manu.jpg' | prepend: site.url }}">
     <div class="Article-header u-textCenter">
         <p class="Article-category">
             {% for category in page.categories %}
@@ -9,9 +10,13 @@ layout: default
             {% endfor %}
         </p>
 
-        <h1 class="Article-title"><a href="{{ page.url }}">{{ page.title }}</a></h1>
+        <h1 class="Article-title" itemprop="headline"><a href="{{ page.url }}">{{ page.title }}</a></h1>
 
-        <p class="Article-date">{{ page.date | date: '%b %-d, %Y' }}</p>
+        <p class="Article-date">
+            <time itemprop="datePublished" datetime="{{ page.date | date: '%Y-%m-%d' }}">
+                {{ page.date | date: '%b %-d, %Y' }}
+            </time>
+        </p>
     </div>
     <div class="Article-content">
         {{ content }}
