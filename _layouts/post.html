@@ -2,7 +2,13 @@
 layout: default
 ---
 <article class="Article" itemscope itemtype="http://schema.org/BlogPosting">
-    <meta itemprop="image" content="{{ '/images/manu.jpg' | prepend: site.url }}">
+
+    {% if page.thumbnail %}
+        <meta itemprop="image" content="{{ page.thumbnail | prepend: site.url }}">
+    {% else %}
+        <meta itemprop="image" content="{{ '/images/manu.jpg' | prepend: site.url }}">
+    {% endif %}
+
     <div class="Article-header u-textCenter">
         <p class="Article-category">
             {% for category in page.categories %}
