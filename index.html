@@ -1,6 +1,10 @@
 ---
 layout: default
 ---
-{% for post in site.posts %}
-    {% include listing.html %}
-{% endfor %}
+<div itemscope itemtype="https://schema.org/Blog">
+    <meta itemprop="author" content="Manuel Wieser">
+    <meta itemprop="genre" content="{{ site.description }}">
+    {% for post in site.posts %}
+        {% include listing.html %}
+    {% endfor %}
+</div>

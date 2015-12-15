@@ -1,4 +1,4 @@
-<article class="Article">
+<article class="Article" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="Article-header u-textCenter">
 
         <p class="Article-category">
@@ -6,12 +6,22 @@
                 <a href="/{{ category }}">{{ site.data.categories[category] }}</a>
             {% endfor %}
         </p>
+
         {% if post.external %}
-            <h1 class="Article-title"><a href="{{ post.external }}" target="_blank">{{ post.title }}</a></h1>
+            <h1 class="Article-title" itemprop="headline">
+                <a href="{{ post.external }}" target="_blank">{{ post.title }}</a>
+            </h1>
         {% else %}
-            <h1 class="Article-title"><a href="{{ post.url }}">{{ post.title }}</a></h1>
+            <h1 class="Article-title" itemprop="headline">
+                <a href="{{ post.url }}">{{ post.title }}</a>
+            </h1>
         {% endif %}
-        <p class="Article-date">{{ post.date | date: '%b %-d, %Y' }}</p>
+
+        <p class="Article-date">
+            <time itemprop="datePublished" datetime="{{ page.date | date: '%Y-%m-%d' }}">
+                {{ page.date | date: '%b %-d, %Y' }}
+            </time>
+        </p>
 
     </div>
     <div class="Article-content">
@@ -35,6 +45,7 @@
                 </div>
                 <div class="Grid-cell u-size1of5">
                     <img class="Article-thumbnail" src="{{ post.thumbnail }}">
+                    <meta itemprop="image" content="{{ post.thumbnail | prepend: site.url }}">
                 </div>
             </div>
         {% endif %}
