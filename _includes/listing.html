@@ -32,14 +32,15 @@
         {% endif %}
 
         <p>
-            {{ post.excerpt | strip_html }}
+            {% if post.summary %}{{ post.summary }}{% else %}{{ post.excerpt }}{% endif %}
         </p>
 
-        {% if post.external %}
-            <p class="Article-link"><a href="{{ post.external }}">Read more…</a></p>
-        {% else %}
-            <p class="Article-link"><a href="{{ post.url }}">Read more…</a></p>
-        {% endif %}
+
+        <p class="Article-link">
+            <a href="{% if post.external %}{{ post.external }}{% else %}{{ post.url }}{% endif %}">
+                Read more…
+            </a>
+        </p>
 
         {% if post.thumbnail %}
                 </div>
