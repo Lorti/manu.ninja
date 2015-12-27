@@ -2,7 +2,7 @@
 layout: post
 title:  How to Design an Indie Game Logo in Illustrator
 date:   2015-11-10
-thumbnail: /images/super-squishy-pony-force-alpha-deluxe-2.png
+thumbnail: /images/super-squishy-pony-force-alpha-deluxe-2.jpg
 categories:
   - art
   - games

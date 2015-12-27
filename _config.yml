@@ -6,5 +6,10 @@ email: office@manuelwieser.com
 markdown: kramdown
 highlighter: false
 
+sass:
+    style: compressed
+
 permalink: /:categories/:title
-gems: [jekyll-sitemap]
+gems:
+  - jekyll-sitemap
+  - jekyll-minifier
