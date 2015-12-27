@@ -3,7 +3,7 @@ layout: post
 title:  Simple SVG Icon System Using &lt;symbol&gt;
 date:   2015-12-01
 categories: coding
-summary: I won't go into detail why an SVG icon system based on symbols is a good choice for your icons, because there are plenty of great articles out there. I will just give you an overview of our solution at karriere.at and show you a tiny Grunt plugin called <code>grunt-svg-symbols</code>, which creates a bunch of SVG icon systems from as many folders full of icons as you like.
+summary: I won’t go into detail why an SVG icon system based on symbols is a good choice for your icons, because there are plenty of great articles out there. I will just give you an overview of our solution at karriere.at and show you a tiny Grunt plugin called <code>grunt-svg-symbols</code>, which creates a bunch of SVG icon systems from as many folders full of icons as you like.
 ---
 
 I won't go into detail why an SVG icon system based on symbols is a good choice for your icons, because there are plenty of [great](https://css-tricks.com/svg-symbol-good-choice-icons/) [articles](https://24ways.org/2014/an-overview-of-svg-sprite-creation-techniques/) out there. I will just give you an overview of our solution at karriere.at and show you a [tiny Grunt plugin](https://www.npmjs.com/package/grunt-svg-symbols) called `grunt-svg-symbols`, which creates a bunch of SVG icon systems from as many folders full of icons as you like.
