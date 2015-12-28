@@ -7,7 +7,7 @@ markdown: kramdown
 highlighter: false
 
 sass:
-    style: compressed
+  style: compressed
 
 permalink: /:categories/:title
 gems:
