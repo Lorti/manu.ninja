@@ -3,10 +3,10 @@ layout: post
 title:  Current Color for Fills and Strokes
 date:   2015-12-22
 categories: coding
-summary: Several people have given me feedback on my <code>grunt-svg-symbols</code> plugin. They  especially liked the idea of changing color values to <code>currentColor</code>. Therefore the updated plugin has an option to automatically replace the values of all <code>fill</code> and <code>stroke</code> attributes for you.
+summary: Several people have given me feedback on my <code>grunt-svg-symbols</code> plugin. They especially liked the idea of changing color values to <code>currentColor</code>, so that the icons inherit the text color. Therefore the updated plugin has an option to automatically replace the values of all <code>fill</code> and <code>stroke</code> attributes for you.
 ---
 
-Several people have given me feedback on my `grunt-svg-symbols` plugin. They  especially liked the idea of changing color values to `currentColor`. Therefore the updated [plugin](https://www.npmjs.com/package/grunt-svg-symbols) has an option to automatically replace the values of all `fill` and `stroke` attributes for you.
+Several people have given me feedback on my `grunt-svg-symbols` plugin. They especially liked the idea of changing color values to `currentColor`, so that the icons inherit the text color. Therefore the updated [plugin](https://www.npmjs.com/package/grunt-svg-symbols) has an option to automatically replace the values of all `fill` and `stroke` attributes for you.
 
 ~~~ js
 grunt.initConfig({
