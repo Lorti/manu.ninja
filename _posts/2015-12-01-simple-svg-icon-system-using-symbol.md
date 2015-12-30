@@ -42,7 +42,7 @@ The `precision` options tells [SVGO](https://github.com/svg/svgo) to round to a 
 </svg>
 ~~~
 
-Symbols can then be referenced by using the `xlink:href` attribute, which works with inlined as well referenced files.
+Symbols can then be referenced by using the `xlink:href`{:.html} attribute, which works with inlined as well as referenced files.
 
 ~~~ html
 <svg>
