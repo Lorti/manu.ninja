@@ -9,7 +9,7 @@ highlighter: false
 sass:
   style: compressed
 
-permalink: /:categories/:title
+permalink: /:title.html
 gems:
   - jekyll-sitemap
   - jekyll-minifier
