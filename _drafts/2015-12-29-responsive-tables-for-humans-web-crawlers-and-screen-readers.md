@@ -7,7 +7,7 @@ categories: coding
 
 The web was once full of tables and creative ways of misusing them for layout. These days are over and tables are being used for their initial purpose, being data representation. Unfortunately responsive web design and having to deal with tables on smaller screens has led people to stir `<div>`{:.html} soups on the one hand and creating JavaScript houses of cards on the other.
 
-This post summarizes what I have learnt about HTML tables and the approach that I use to get the most out of data tables while using the simplest CSS possible. You can see the end product in the <a href='http://codepen.io/Lorti/pen/obXOyM/'>CodePen</a> below. Please resize your viewport for the layout to switch.
+This post summarizes what I have learnt about HTML tables and the approach that I use to get the most out of data tables while using the simplest CSS possible. You can see the end product in the [CodePen](http://codepen.io/Lorti/pen/obXOyM/) below. Please resize your viewport for the layout to switch.
 
 <p data-height="320" data-theme-id="0" data-slug-hash="obXOyM" data-default-tab="result" data-user="Lorti" class='codepen'>See the Pen <a href='http://codepen.io/Lorti/pen/obXOyM/'>Responsive Tables II</a> by Manuel Wieser (<a href='http://codepen.io/Lorti'>@Lorti</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
  <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
@@ -25,7 +25,7 @@ This post summarizes what I have learnt about HTML tables and the approach that 
 
 In contrast to some responsive table solutions this is also a real table, not a collection of elements made to look like a table. This is good for screen readers (and web crawlers), as they would simply serialize all your `<span>`{:.html} and `<div>`{:.html} elements.
 
-* **Flexible** – We get all the cool things tables give us for free, like being able to control text alignment via `vertical-align: top | middle | bottom;`{:.css} and the browser adjusting cell size to fit the content length.
+* **Flexible** – We get all the cool things tables give us for free, like being able to control text alignment via `vertical-align: top | middle | bottom;`{:.html} and the browser adjusting cell size to fit the content length.
 
 ## Code
 
