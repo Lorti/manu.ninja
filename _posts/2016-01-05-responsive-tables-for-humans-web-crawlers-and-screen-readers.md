@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Responsive Tables for Humans, Web&nbsp;Crawlers and Screen&nbsp;Readers
-date:   2015-12-29
+date:   2016-01-05
 categories: coding
 ---
 
