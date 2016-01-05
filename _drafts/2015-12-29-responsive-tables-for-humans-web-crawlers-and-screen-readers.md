@@ -29,6 +29,8 @@ In contrast to some responsive table solutions this is also a real table, not a 
 
 ## Code
 
+To show the table data as key–value pairs on mobile you have to add the keys as custom data attributes to your HTML. You can see this in the example as `<td data-th="Bruttolohn">€ 1200</td>`{:.html}.
+
 ~~~ html
 <table>
     <caption>Brutto/Netto-Umrechnungen für das Jahr 2015</caption>
@@ -51,6 +53,12 @@ In contrast to some responsive table solutions this is also a real table, not a 
     </tbody>
 </table>
 ~~~
+
+I have stripped all HTML classes from the example for the sake of brevity. You can and should of course use BEM or any other front-end paradigm, but let's just stick with element selectors here. You can see the whole code in the [CodePen](http://codepen.io/Lorti/pen/obXOyM/), so we just take a closer look at the media query.
+
+You will notice, that this is a desktop-first approach. It is usually the only one I use in my projects. The real headings are hidden and the key–value pairs created via pseudo-elements. The `attr()`{:.html} expression used in `content: attr(data-th);`{:.html} lets you retrieve the value of custom data attributes, so you don't have to put strings into your styles. This works since Internet Explorer 8, so don't worry about that.
+
+The `<td>`{:.html} gets a padding to make room for the absolutely positioned pseudo-element, which gets a width of the same size and is positioned according to the cell padding with `top`{:.html} and `left`{:.html}.
 
 ~~~ css
 @media screen and (max-width: 640px) {
@@ -80,3 +88,5 @@ In contrast to some responsive table solutions this is also a real table, not a 
     }
 }
 ~~~
+
+It's a wrap! Hopefully you can make your tables sexy, fast, search engine optimized, accessible and flexible as well with these tips. If you spot any errors or suggest a different approach please feel free to do so!
