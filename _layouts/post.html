@@ -25,4 +25,20 @@ layout: default
     <div class="Article-content">
         {{ content }}
     </div>
+
+    <div id="disqus_thread"></div>
+
+    <script>
+        us_config = function () {
+            this.page.url = document.querySelector('link[rel="canonical"]').href;
+            this.page.identifier = document.querySelector('link[rel="canonical"]').href;
+        };
+        (function () {
+            var d = document, s = d.createElement('script');
+            s.src = '//manuninja.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
 </article>
