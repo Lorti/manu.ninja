@@ -9,8 +9,8 @@ The web was once full of tables and creative ways of misusing them for layout. T
 
 This post summarizes what I have learnt about HTML tables and the approach that I use to get the most out of data tables while using the simplest CSS possible. You can see the end product in the [CodePen](http://codepen.io/Lorti/pen/obXOyM/) below. Please resize your viewport for the layout to switch.
 
-<p data-height="320" data-theme-id="0" data-slug-hash="obXOyM" data-default-tab="result" data-user="Lorti" class='codepen'>See the Pen <a href='http://codepen.io/Lorti/pen/obXOyM/'>Responsive Tables II</a> by Manuel Wieser (<a href='http://codepen.io/Lorti'>@Lorti</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
- <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+<p data-height="320" data-theme-id="0" data-slug-hash="obXOyM" data-default-tab="result" data-user="Lorti" class='codepen'></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 
 ## Benefits
 
