@@ -5,6 +5,7 @@ email: office@manuelwieser.com
 
 markdown: kramdown
 highlighter: false
+future: true
 
 sass:
   style: compressed
