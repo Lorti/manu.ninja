@@ -31,7 +31,7 @@ layout: default
     <script>
         us_config = function () {
             this.page.url = document.querySelector('link[rel="canonical"]').href;
-            this.page.identifier = document.querySelector('link[rel="canonical"]').href;
+            this.page.identifier = '{{ page.slug }}';
         };
         (function () {
             var d = document, s = d.createElement('script');
