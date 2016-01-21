@@ -9,12 +9,9 @@ categories:
 
 You have modeled and textured hair for your low-poly character and want to drop it into Unity. After importing your mesh you play with the different rendering modes of the default material and come to the conclusion that they all give you unsatisfactory results. You then settle on the `Cutout` rendering mode and cringe while noticing the backface culling, causing most of your hair mesh to disappear.
 
-![](/images/unity-low-poly-hair-rendering.png)
+![](/images/unity-low-poly-hair-cutout.png)
 
 This was my experience a few days ago.
-
-
-
 
 ## Modifying the Standard Shader for Double-Sided Rendering
 
@@ -24,7 +21,7 @@ This was my experience a few days ago.
 
 For each pass, the object geometry is rendered, so there must be at least one pass.
 
-~~~ glsl
+~~~
 Shader "Standard" {
 
     Properties { ... }
@@ -80,7 +77,7 @@ Shader "Standard" {
 
 The commands before the Cg snippet (`CGPROGRAM` until `ENDCG`) set up the rendering pass. This is where you can turn backface culling off via the command `Cull Off`.
 
-~~~ glsl
+~~~
 Pass {
     Name "FORWARD"
     Tags { "LightMode" = "ForwardBase" }
@@ -112,6 +109,8 @@ Pass {
 }
 ~~~
 
+![](/images/unity-low-poly-hair-cull-off.png)
+
 ## The Lighting Is Wrong in This Approach
 
 [Why is this a problem?](http://danielbrauer.com/files/rendering-double-sided-geometry.html)
@@ -122,13 +121,17 @@ Pass {
 
 [double-sided rendering methods](http://forum.unity3d.com/threads/double-sided-material.21778/page-2#post-2352641)
 
-
 ## Softening the Alpha Cutoff with Fast Approximate Anti-Aliasing
 
+[anti-aliasing](http://docs.unity3d.com/Manual/script-Antialiasing.html)
+[Fast Approximate Anti-Aliasing](https://en.wikipedia.org/wiki/Fast_approximate_anti-aliasing)
+
+![](/images/unity-low-poly-hair-fxaa.png)
 
 ## Creating Low-Poly Hair Strips in ZBrush
 
 You can build your own hair strip brush following the [tutorial](http://www.3dartistonline.com/news/2015/04/how-do-i-create-real-time-hair-for-games/) by Tom Parker or just download my [hair strip brush](), if you are in a hurry.
 
-![](/images/unity-low-poly-hair-rendering.png)
+## Conclusion
 
+![](/images/unity-low-poly-hair-rendering.jpg)
