@@ -1,16 +1,16 @@
 ---
 layout: post
 title:  Rendering Low-Poly Hair in Unity
-date:   2016-01-19
+date:   2016-01-26
 categories: [coding, games]
 thumbnail: /images/unity-hair-rendering-thumbnail.jpg
 ---
 
 You have modeled and textured hair for your low-poly character and want to drop it into Unity. After importing your mesh you play with the different rendering modes of the default material and come to the conclusion that they all give you unsatisfactory results. You then settle on the `Cutout` rendering mode and cringe while noticing the backface culling, causing most of your hair mesh to disappear.
 
-![](/images/unity-low-poly-hair-cutout.png)
+![](/images/unity-low-poly-hair-cutout.jpg)
 
-This was my experience a few days ago.
+This was my experience a few days ago. Turns out, that Unity has no cutout with soft edges or a double-sided shader per default, apart from the foliage shaders. There is no well-hidden checkbox to turn off backface culling, like one might expect when coming a 3D modeling software. Luckily all the default shaders can be downloaded from the [Unity Download Archive](https://unity3d.com/get-unity/download/archive), to tinker with them.
 
 ## Modifying the Standard Shader for Double-Sided Rendering
 
@@ -108,7 +108,7 @@ Pass {
 }
 ~~~
 
-![](/images/unity-low-poly-hair-cull-off.png)
+![](/images/unity-low-poly-hair-cull-off.jpg)
 
 ## The Lighting Is Wrong in This Approach
 
@@ -125,7 +125,7 @@ Pass {
 [anti-aliasing](http://docs.unity3d.com/Manual/script-Antialiasing.html)
 [Fast Approximate Anti-Aliasing](https://en.wikipedia.org/wiki/Fast_approximate_anti-aliasing)
 
-![](/images/unity-low-poly-hair-fxaa.png)
+![](/images/unity-low-poly-hair-fxaa.jpg)
 
 ## Creating Low-Poly Hair Strips in ZBrush
 
