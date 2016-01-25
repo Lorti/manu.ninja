@@ -10,7 +10,7 @@ You have modeled and textured hair for your low-poly character and want to drop 
 
 ![](/images/unity-low-poly-hair-cutout.jpg)
 
-This was my experience a few days ago. Turns out, that Unity has no cutout with soft edges or a double-sided shader per default, apart from the foliage shaders. There is no well-hidden checkbox to turn off backface culling, like one might expect when coming a 3D modeling software. Luckily all the default shaders can be downloaded from the [Unity Download Archive](https://unity3d.com/get-unity/download/archive), to tinker with them.
+This was my experience a few days ago. Turns out, that Unity has no cutout with soft edges or a double-sided shader per default, apart from the foliage shaders. There is no well-hidden checkbox to turn off backface culling, like one might expect from a modeling software. Luckily all the default shaders can be downloaded from the [Unity Download Archive](https://unity3d.com/get-unity/download/archive), to tinker with them.
 
 
 
@@ -118,14 +118,13 @@ Pass {
 
 ## The Lighting Is Wrong in This Approach
 
-[Why is this a problem?](http://danielbrauer.com/files/rendering-double-sided-geometry.html)
-
-> Every additional pass is another draw call, which means twice as many draw calls for double-sided shaders.
+The lighting of the backfaces is wrong, as the normals of the mesh are facing away from the camera. This is because Unity does not automatically flip the normals for you like your modeling software does. You would have to create an additional pass where you duplicate and invert the faces yourself. This means twice as many draw calls for a double-sided shader. Which is why [Unity's developers](http://danielbrauer.com/files/rendering-double-sided-geometry.html) suggest to copy and invert the faces of your mesh in your modeling software, instead of using a double-sided shader.
 
 > Even if draw calls aren’t a problem, you’re still creating new shaders to render certain meshes in a way that doesn’t actually look different. Having a double-sided version of each shader you want to use for your single-sided objects means you waste the GPU’s time with state changes and shader compilation.
 
-[double-sided rendering methods](http://forum.unity3d.com/threads/double-sided-material.21778/page-2#post-2352641)
+I have decided to accept the wrong lighting, as it is hardly noticeable on the hair of my stylized character. I also plan on applying a cloth simulation later, which gets more expensive when I duplicate my mesh.
 
+If you still want to use a double-sided shader I recommend having a look at [double-sided rendering methods](http://forum.unity3d.com/threads/double-sided-material.21778/page-2#post-2352641).
 
 
 
@@ -141,8 +140,7 @@ Pass {
 
 ## Creating Low-Poly Hair Strips in ZBrush
 
-You can build your own hair strip brush following the [tutorial](http://www.3dartistonline.com/news/2015/04/how-do-i-create-real-time-hair-for-games/) by Tom Parker or just download my [hair strip brush](), if you are in a hurry.
-
+If you wonder how the hair itself was modeled, it consists of several hair strips carefully laid out with a custom brush and the curve stroke feature in ZBrush. You can build your own hair strip brush following the [tutorial](http://www.3dartistonline.com/news/2015/04/how-do-i-create-real-time-hair-for-games/) by Tom Parker or just download my [hair strip brush](), if you are in a hurry.
 
 
 
