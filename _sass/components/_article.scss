@@ -74,6 +74,7 @@
         margin-right: auto;
     }
 
+    blockquote,
     iframe,
     img,
     pre {
@@ -90,6 +91,12 @@
 
     code {
         font-size: .8125em;
+    }
+
+    blockquote {
+        color: hsl(0, 0, 37%);
+        padding: 0 3em;
+        font-style: italic;
     }
 
     li code,
