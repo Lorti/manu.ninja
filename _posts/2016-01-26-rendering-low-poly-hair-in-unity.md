@@ -14,7 +14,6 @@ This was my experience a few days ago. Turns out, that Unity has no cutout with 
 
 
 
-
 ## Modifying the Standard Shader for Double-Sided Rendering
 
 There are many files in this package. To find the standard shader you have to locate the `Standard.shader` file in the `DefaultResourcesExtra` folder. The shader itself consists of two subshaders, made up of five and four passes respectively. You can get a clear overview by collapsing the code blocks.
@@ -115,7 +114,6 @@ Pass {
 
 
 
-
 ## The Lighting Is Wrong in This Approach
 
 The lighting of the backfaces is wrong, as the normals of the mesh are facing away from the camera. This is because Unity does not automatically flip the normals for you like your modeling software does. You would have to create an additional pass where you duplicate and invert the faces yourself. This means twice as many draw calls for a double-sided shader. Which is why [Unity's developers](http://danielbrauer.com/files/rendering-double-sided-geometry.html) suggest to copy and invert the faces of your mesh in your modeling software, instead of using a double-sided shader.
@@ -130,8 +128,7 @@ If you still want to use a double-sided shader I recommend having a look at [dou
 
 ## Softening the Alpha Cutoff with Fast Approximate Anti-Aliasing
 
-[anti-aliasing](http://docs.unity3d.com/Manual/script-Antialiasing.html)
-[Fast Approximate Anti-Aliasing](https://en.wikipedia.org/wiki/Fast_approximate_anti-aliasing)
+Unity offers many image effects in the _Effects_ package of its Standard Assets. Among them are several [anti-aliasing](http://docs.unity3d.com/Manual/script-Antialiasing.html) algorithms you can add as a component to your camera. I have used [fast approximate anti-aliasing](https://en.wikipedia.org/wiki/Fast_approximate_anti-aliasing) to soften the alpha cutoff of the cutout rendering mode. It is not really noticeable in the image below but makes a huge difference when the camera or the hair is moving.
 
 ![](/images/unity-low-poly-hair-fxaa.jpg)
 
@@ -145,5 +142,7 @@ If you wonder how the hair itself was modeled, it consists of several hair strip
 
 
 ## Conclusion
+
+
 
 ![](/images/unity-low-poly-hair-rendering.jpg)
