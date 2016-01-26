@@ -1,0 +1,16 @@
+.Links {
+    margin-bottom: -1px;
+    border-bottom: 1px solid lightgray;
+}
+
+.Links-heading {
+    @include baseline(18px, 2, 1);
+}
+
+.Links-item {
+    display: block;
+    margin-top: -1px;
+    border-top: 1px solid lightgray;
+    padding-top: .6875em;
+    padding-bottom: .6875em;
+}

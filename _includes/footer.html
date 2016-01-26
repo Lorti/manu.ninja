@@ -1,6 +1,12 @@
 <footer class="Footer">
     <div class="Column">
+
+        {% if page.title %}
+            {% include related.html %}
+        {% endif %}
+
         <hr>
+
         <div class="Grid Grid--withGutter">
             <div class="Grid-cell u-size1of5">
                 <img class="Footer-image u-sizeFull u-round" src="/images/manu.jpg" alt="Manuel Wieser">
@@ -15,10 +21,13 @@
                     <a href="http://www.karriere.at">karriere.at</a>, but you can hire me as a freelancer for your web projects or as a consultant for your front-end architecture.</p>
             </div>
         </div>
+
         <hr>
+
         <p class="Footer-copyright"
             >© {{ site.time | date: '%Y' }} Manuel Wieser<br>
             <small><a href="{{ site.url }}">manu.ninja</a> is the personal blog of Manuel Wieser, where he talks about front-end development, games and digital art</small>
         </p>
+
     </div>
 </footer>
