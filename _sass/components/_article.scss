@@ -94,9 +94,10 @@
     }
 
     blockquote {
-        color: hsl(0, 0, 37%);
-        padding: 0 3em;
+        color: hsl(0, 0, 35%);
+        padding: 0 1.375em;
         font-style: italic;
+        border-left: 1px solid lightgray;
     }
 
     li code,
