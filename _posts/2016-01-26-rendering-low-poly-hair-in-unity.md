@@ -137,7 +137,7 @@ Unity offers many image effects in the _Effects_ package of its Standard Assets.
 
 ## Creating Low-Poly Hair Strips in ZBrush
 
-You may wonder how the hair itself was modeled. It consists of several hair strips carefully laid out with a custom brush and the curve stroke feature in ZBrush. You can build your own hair strip brush following the [tutorial](http://www.3dartistonline.com/news/2015/04/how-do-i-create-real-time-hair-for-games/) by Tom Parker or just download my [hair strip brush](), if you are in a hurry.
+You may wonder how the hair itself was modeled. It consists of several hair strips carefully laid out with a custom brush and the curve stroke feature in ZBrush. You can build your own hair strip brush following the [tutorial](http://www.3dartistonline.com/news/2015/04/how-do-i-create-real-time-hair-for-games/) by Tom Parker or just download my [hair strip brush](files/hair-strip-brush.zbp), if you are in a hurry.
 
 
 
