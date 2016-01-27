@@ -7,11 +7,11 @@ thumbnail: /images/unity-hair-rendering-thumbnail.jpg
 round: true
 ---
 
-You have modeled and textured hair for your low-poly character and want to drop it into Unity. After importing your mesh you play with the different rendering modes of the default material and come to the conclusion that they all give you unsatisfactory results. You then settle on the Cutout rendering mode and cringe while noticing the backface culling, causing most of your hair mesh to disappear.
+This article leads you through my experience a few weeks ago. Let's say you have modeled and textured hair for your low-poly character and want to drop it into Unity. After importing your mesh you play with the different rendering modes of the default material and come to the conclusion that they all give you unsatisfactory results. You then settle on the Cutout rendering mode and cringe while noticing the backface culling, causing most of your hair mesh to disappear.
 
 ![](/images/unity-low-poly-hair-cutout.jpg)
 
-This was my experience a few days ago. Turns out, that Unity has no alpha test with soft edges or a double-sided shader per default, apart from the foliage shaders. There is no well-hidden checkbox to turn off backface culling, like one might expect coming from a modeling software. Luckily all the default shaders can be downloaded from the [Unity Download Archive](https://unity3d.com/get-unity/download/archive) to tinker with them.
+Turns out, that Unity has no alpha test with soft edges or a double-sided shader per default, apart from the foliage shaders. There is no well-hidden checkbox to turn off backface culling, like one might expect coming from a modeling software. Luckily all the default shaders can be downloaded from the [Unity Download Archive](https://unity3d.com/get-unity/download/archive) to tinker with them.
 
 
 
