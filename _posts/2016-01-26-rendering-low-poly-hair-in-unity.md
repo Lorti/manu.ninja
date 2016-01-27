@@ -4,9 +4,10 @@ title:  Rendering Low-Poly Hair in Unity
 date:   2016-01-26
 categories: [coding, games]
 thumbnail: /images/unity-hair-rendering-thumbnail.jpg
+round: true
 ---
 
-You have modeled and textured hair for your low-poly character and want to drop it into Unity. After importing your mesh you play with the different rendering modes of the default material and come to the conclusion that they all give you unsatisfactory results. You then settle on the __Cutout__ rendering mode and cringe while noticing the backface culling, causing most of your hair mesh to disappear.
+You have modeled and textured hair for your low-poly character and want to drop it into Unity. After importing your mesh you play with the different rendering modes of the default material and come to the conclusion that they all give you unsatisfactory results. You then settle on the _Cutout_ rendering mode and cringe while noticing the backface culling, causing most of your hair mesh to disappear.
 
 ![](/images/unity-low-poly-hair-cutout.jpg)
 
@@ -16,7 +17,7 @@ This was my experience a few days ago. Turns out, that Unity has no cutout with 
 
 ## Modifying the Standard Shader for Double-Sided Rendering
 
-There are many files in this package. To find the standard shader you have to locate the __Standard.shader__ file in the __DefaultResourcesExtra__ folder. The shader itself consists of two subshaders, made up of five and four passes respectively. You can get a clear overview by collapsing the code blocks.
+There are many files in this package. To find the standard shader you have to locate the _Standard.shader_ file in the _DefaultResourcesExtra_ folder. The shader itself consists of two subshaders, made up of five and four passes respectively. You can get a clear overview by collapsing the code blocks.
 
 ~~~
 Shader "Standard" {
@@ -74,7 +75,7 @@ Shader "Standard" {
 
 The subshaders are essentially the same, but the second one can be used on weaker hardware, as indicated by the `LOD 150` line. The only difference is that the deferred pass is missing in the second subshader.
 
-If you inspect one of the passes you see a Cg snippet with `#pragma` and `#include` commands. At first the pass seems simple, but the real magic happens in the included __UnityStandardCoreForward.cginc__, which itself includes between 350 and almost 700 lines.
+If you inspect one of the passes you see a Cg snippet with `#pragma` and `#include` commands. At first the pass seems simple, but the real magic happens in the included _UnityStandardCoreForward.cginc_, which itself includes between 350 and almost 700 lines.
 
 The commands before the Cg snippet (`CGPROGRAM` until `ENDCG`) set up the rendering pass. This is where you can turn backface culling off via the command `Cull Off`. You can do this for each pass, which gives you a result similar to the image below.
 
@@ -96,7 +97,7 @@ Pass {
     #pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
     #pragma shader_feature _EMISSION
     #pragma shader_feature _METALLICGLOSSMAP
-    #pragma shader_feature ___ _DETAIL_MULX2
+    #pragma shader_feature __ _DETAIL_MULX2
     #pragma shader_feature _PARALLAXMAP
 
     #pragma multi_compile_fwdbase
@@ -128,7 +129,7 @@ If you still want to use a double-sided shader I recommend having a look at [dou
 
 ## Softening the Alpha Cutoff with Fast Approximate Anti-Aliasing
 
-Unity offers many image effects in the __Effects__ package of its Standard Assets. Among them are several [anti-aliasing](http://docs.unity3d.com/Manual/script-Antialiasing.html) algorithms you can add as a component to your camera. I have used [fast approximate anti-aliasing](https://en.wikipedia.org/wiki/Fast_approximate_anti-aliasing) to soften the alpha cutoff of the cutout rendering mode. It is not really noticeable in the image below but makes a huge difference when the camera or the hair is moving.
+Unity offers many image effects in the _Effects_ package of its Standard Assets. Among them are several [anti-aliasing](http://docs.unity3d.com/Manual/script-Antialiasing.html) algorithms you can add as a component to your camera. I have used [fast approximate anti-aliasing](https://en.wikipedia.org/wiki/Fast_approximate_anti-aliasing) to soften the alpha cutoff of the cutout rendering mode. It is not really noticeable in the image below but makes a huge difference when the camera or the hair is moving.
 
 ![](/images/unity-low-poly-hair-fxaa.jpg)
 
@@ -142,7 +143,7 @@ If you wonder how the hair itself was modeled, it consists of several hair strip
 
 ## Conclusion
 
-Unity provides a __Cutout__ rendering mode with hard edges between opaque and transparent areas. The edges can be somewhat softened by using an image-based anti-aliasing method like FXAA. Backface culling can be deactivated by modifying an existing shader, but an additional pass is needed for correct lighting. Duplicating and inverting the mesh may be the fastest option in most cases.
+Unity provides a _Cutout_ rendering mode with hard edges between opaque and transparent areas. The edges can be somewhat softened by using an image-based anti-aliasing method like FXAA. Backface culling can be deactivated by modifying an existing shader, but an additional pass is needed for correct lighting. Duplicating and inverting the mesh may be the fastest option in most cases.
 
 For the time being I will use the simple approach outlined in this article. This allows to try a cloth simulation later on. As I continue working on my character I will write updates and document my insights. Please let me know, if this article has made things clearer for you.
 

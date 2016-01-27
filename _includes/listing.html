@@ -47,7 +47,7 @@
                 </div>
                 <div class="Grid-cell u-size1of5">
                     <a href="{{ post.url }}">
-                        <img class="Article-thumbnail" src="{{ post.thumbnail }}">
+                        <img class="Article-thumbnail {% if post.round %}u-round{% endif %}" src="{{ post.thumbnail }}">
                         <meta itemprop="image" content="{{ post.thumbnail | prepend: site.url }}">
                     </a>
                 </div>
