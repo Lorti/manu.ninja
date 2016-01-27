@@ -31,10 +31,11 @@
                 <div class="Grid-cell u-size4of5">
         {% endif %}
 
-        <p>
-            {% if post.summary %}{{ post.summary }}{% else %}{{ post.excerpt }}{% endif %}
-        </p>
-
+        {% if post.summary %}
+            <p>{{ post.summary }}</p>
+        {% else %}
+            {{ post.excerpt }}
+        {% endif %}
 
         <p class="Article-link">
             <a href="{% if post.external %}{{ post.external }}{% else %}{{ post.url }}{% endif %}">
@@ -45,8 +46,10 @@
         {% if post.thumbnail %}
                 </div>
                 <div class="Grid-cell u-size1of5">
-                    <img class="Article-thumbnail" src="{{ post.thumbnail }}">
-                    <meta itemprop="image" content="{{ post.thumbnail | prepend: site.url }}">
+                    <a href="{{ post.url }}">
+                        <img class="Article-thumbnail {% if post.round %}u-round{% endif %}" src="{{ post.thumbnail }}">
+                        <meta itemprop="image" content="{{ post.thumbnail | prepend: site.url }}">
+                    </a>
                 </div>
             </div>
         {% endif %}
