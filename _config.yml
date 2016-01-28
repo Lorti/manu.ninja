@@ -10,6 +10,4 @@ sass:
   style: compressed
 
 permalink: /:title
-gems:
-  - jekyll-sitemap
-  - jekyll-minifier
+gems: [jekyll-sitemap]

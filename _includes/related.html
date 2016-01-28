@@ -2,15 +2,15 @@
     <h3 class="Links-heading">You may also like…</h3>
     <ul>
         {% for post in site.posts %}
-        {% if post.url != page.url %}
-        <li>
-            {% if post.external %}
-            <a class="Links-item u-truncated" href="{{ post.external }}" target="_blank">{{ post.title }}</a>
-            {% else %}
-            <a class="Links-item u-truncated" href="{{ post.url }}">{{ post.title }}</a>
+            {% if post.url != page.url %}
+            <li>
+                {% if post.external %}
+                    <a class="Links-item u-truncated" href="{{ post.external }}" target="_blank">{{ post.title }}</a>
+                {% else %}
+                    <a class="Links-item u-truncated" href="{{ post.url }}">{{ post.title }}</a>
+                {% endif %}
+            </li>
             {% endif %}
-        </li>
-        {% endif %}
         {% endfor %}
     </ul>
 </div>
