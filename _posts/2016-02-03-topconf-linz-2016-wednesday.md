@@ -1,9 +1,11 @@
 ---
 layout: post
-title:  Topconf Linz 2016, Wednesday
+title:  Topconf Linz 2016 -- Wednesday
 date:   2016-02-03
 categories: coding
 ---
+
+I have seen front-end, security and product development talks on the [third day](http://topconf.com/linz-2016/schedule/2016-02-03/) of Topconf Linz 2016. Here are my notes from these talks.
 
 ## Panel: Modern Application Architectures -- Agim Emruli, Michael Ploed, Simone Bordet, Rachel Andrew, Jürgen Höller and Phil Nash
 

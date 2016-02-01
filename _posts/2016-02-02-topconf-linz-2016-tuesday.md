@@ -1,15 +1,18 @@
 ---
 layout: post
-title:  Topconf Linz 2016, Tuesday
+title:  Topconf Linz 2016 -- Tuesday
 date:   2016-02-02
 categories: coding
 ---
+
+Today was the [second day](http://topconf.com/linz-2016/schedule/2016-02-02/) of Topconf Linz 2016. I have seen Phil Nash's talk about service workers and then stayed on the _New Ways To Manage_ track for the rest of the day. Here are my notes from these talks.
 
 ## Opening Keynote: One size does not fit all: Carving up stuff for fun and profit -- Stefan Tilkov
 
 (Micro-)services, bounded contexts, components, modules, classes, structs and records, procedures and functions – whatever structuring mechanism we’re talking about, a recurring challenge is to find the right size for things. Opposing forces influence our decisions from both technical and organizational perspectives, and strategies for finding a good balance are few and far between. Let’s take a closer look at what works, what doesn’t, and why.
 
 ---
+
 ## The web is getting pushy -- Phil Nash
 
 The battle between native and web rages on. The browsers are fighting hard to tear down the benefits that native developers have relied on since the inception of mobile platforms. Geolocation, sorted. Accelerometer, done. Performance, we'll come back to that. But one of the greatest draws for native developers has been push notifications, for the web, email alerts just don't cut it.
@@ -23,10 +26,11 @@ The battle may continue, but the web is definitely pushing back.
 When things go wrong the first thing we do is find who is to blame and the second thing is to punish them. This talk deives into why humans have this tendency to blame and punish. It looks at real examples of punishment within the software world and the results which were achieved. These stories not only cover managers punishing team members but also punishment within teams and self-punishment. We are all guilty of some of the behaviours discussed.
 
 This is aimed at everyone involved in software development. After the talk attendees will understand:
-•	Why we tend to blame and punish others.
-•	The impact of self-blame.
-•	The unintended (but predictable) results from punishment.
-•	The alternatives to punishment, which get real results.
+
+- Why we tend to blame and punish others.
+- The impact of self-blame.
+- The unintended (but predictable) results from punishment.
+- The alternatives to punishment, which get real results.
 
 ## There is no half-remote team -- Markus Tacker
 

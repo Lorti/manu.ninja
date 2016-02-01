@@ -77,7 +77,8 @@
     blockquote,
     iframe,
     img,
-    pre {
+    pre,
+    hr {
         @include baseline($base-font-size, 2, 2, true);
     }
 
