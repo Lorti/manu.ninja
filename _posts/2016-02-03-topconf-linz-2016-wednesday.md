@@ -14,11 +14,15 @@ This panel discussion with various conference speakers will highlight current ar
 ---
 ## CSS for Software Engineers for CSS Developers -- Harry Roberts
 
+[Slides](https://speakerdeck.com/csswizardry/css-for-software-engineers-for-css-developers)
+
 Depending on where you draw your measurements from, the first programming languages for use on ‘modern’ electric computers were designed in the ’40s and ’50s. CSS, on the other hand, is a mere adolescent—born in 1996, it’s just 18 years old. This means that software engineers have had over four decades’ head start on us: we should be listening to a lot more of what they have to say.
 
 In this talk, we’ll take a look at some very traditional computer science and software engineering paradigms and how we can steal, bend, borrow, and reimplement them when writing our CSS. Writing CSS like software engineers so that we can become better CSS developers.
 
 ## We're going in: The 3D web -- Martin Naumann
+
+[Slides](https://docs.google.com/presentation/d/1-v4bmNMN4jum0K5GtJRyldP4U9VZVrDH5BgU6ZW8g3I/)
 
 The modern web is tearing down the borders of the browser window and allows us to create so much more than just another website.
 This talk is a whirlwind tour of how 3D and virtual reality can be woven into entirely new applications that the web hasn’t seen yet. On top of interactive 3D web applications with WebGL we’ll go through the history of 3D on the web.
@@ -28,29 +32,19 @@ We will then explore the amazing superpowers that Virtual Reality is currently b
 
 This talk is accompanied by use case demonstrations along with a bit of live coding as the "frosting" on top.
 
-## Ten things you need to know about Application Management -- Mark Smalley
-
-An overview of the economically most significant phase of an application's lifecycle: everything that happens after the launch of release 1.0. Covering strategy to operations and back, referencing the ASL 2 framework, and exploring these ten statements and more:
-1. An application is software that people and things use to support ‘something’ in the real world
-2. The application lifecycle starts with identification of needs and ends with decommissioning
-3. 40% of IT costs are application related, 80% of which occur after initial development
-4. ‘ALM’ always refers to longer-term planning and policy-making and sometimes also to all other application-related activities
-5. The difference between ‘Changes’ and ‘Projects’ is organization-specific
-6. 3 ‘occurrences’ of applications need to be managed: package, implementation, use
-7. Business IT ‘Alignment’ is a crucial but most challenging area
-8. Application decommissioning and other forms of rationalization are more challenging than development
-9. Hybrid application landscapes need differentiated approaches
-10. Determining application strategy is more about people than process
-
 ---
 
 ## Your Web Stack Would Betray You In An Instant -- Tim Perry
+
+[Video](https://www.youtube.com/watch?v=CDX_oVahNV0)
 
 Securely setting up a web stack today is a tricky balancing act, as you gingerly balance frameworks and services and tools all atop one another, ever higher, to get all mod cons happily running together safely and correctly. One security flaw though, and the whole pile tumbles down on you to throw your customer passwords to the world.
 
 In this talk we take a stroll down through a modern web stack and examine some recent major security breakages in each layer to see how they work and why. With any luck we can work out how to avoid this sort of thing in future too, when either using or building such tools, but if all else fails we can at least relax from all the careful balancing with a little schadenfreude.
 
 ## You're doing it wrong - Why your technology stack doesn't matter for your product's success -- Benjamin Reitzammer
+
+@benjamin
 
 When I get to talk to people about the product I'm working on, the first thing many if not most of them ask me about is the technology stack we use. Often followed by our process for making the decision for that specific stack in the first place.
 
@@ -67,6 +61,8 @@ I'll share practices, which you can apply at your workplace no matter if you're 
 ---
 
 ## An Abusive Relationship with AngularJS – About the Security Adventures with the "Super-Hero" Framework -- Mario Heiderich
+
+@0x6D6172696F
 
 Some voices claim that "Angular is what HTML would have been if it had been designed for building web applications". While this statement may or may not be true, is certainly accounts as one of the bolder ones a JavaScript web framework can ever issue. And where boldness is glistening like a German Bratwurst sausage in the evening sun, a critical review from a grumpy old security person shouldn’t be too far away.
 

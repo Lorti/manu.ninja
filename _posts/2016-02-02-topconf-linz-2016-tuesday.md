@@ -9,7 +9,7 @@ Today was the [second day](http://topconf.com/linz-2016/schedule/2016-02-02/) of
 
 ## Opening Keynote: One size does not fit all: Carving up stuff for fun and profit -- Stefan Tilkov
 
-@STilkov
+@stilkov
 
 (Micro-)services, bounded contexts, components, modules, classes, structs and records, procedures and functions – whatever structuring mechanism we’re talking about, a recurring challenge is to find the right size for things. Opposing forces influence our decisions from both technical and organizational perspectives, and strategies for finding a good balance are few and far between. Let’s take a closer look at what works, what doesn’t, and why.
 
