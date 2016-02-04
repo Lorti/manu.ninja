@@ -62,7 +62,7 @@ I'll share practices, which you can apply at your workplace no matter if you're 
 
 ## An Abusive Relationship with AngularJS – About the Security Adventures with the "Super-Hero" Framework -- Mario Heiderich
 
-@0x6D6172696F
+[Slides](http://de.slideshare.net/x00mario/an-abusive-relationship-with-angularjs)
 
 Some voices claim that "Angular is what HTML would have been if it had been designed for building web applications". While this statement may or may not be true, is certainly accounts as one of the bolder ones a JavaScript web framework can ever issue. And where boldness is glistening like a German Bratwurst sausage in the evening sun, a critical review from a grumpy old security person shouldn’t be too far away.
 

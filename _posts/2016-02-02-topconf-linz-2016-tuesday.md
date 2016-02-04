@@ -27,7 +27,7 @@ The battle may continue, but the web is definitely pushing back.
 
 ## Punishment Driven Development -- Louise Elliot
 
-@IvanaTerrorBull
+[Slides](http://de.slideshare.net/IvanaTerrorBull/punishment-driven-development)
 
 When things go wrong the first thing we do is find who is to blame and the second thing is to punish them. This talk deives into why humans have this tendency to blame and punish. It looks at real examples of punishment within the software world and the results which were achieved. These stories not only cover managers punishing team members but also punishment within teams and self-punishment. We are all guilty of some of the behaviours discussed.
 
