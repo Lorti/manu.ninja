@@ -13,7 +13,37 @@ categories: coding
 
 [Slides](https://speakerdeck.com/stilkov/carvin-up-stuff-for-fun-and-profit)
 
-(Micro-)services, bounded contexts, components, modules, classes, structs and records, procedures and functions – whatever structuring mechanism we’re talking about, a recurring challenge is to find the right size for things. Opposing forces influence our decisions from both technical and organizational perspectives, and strategies for finding a good balance are few and far between. Let’s take a closer look at what works, what doesn’t, and why.
+* People structure their code into smaller building blocks. (Micro-)services, components, modules, procedures...
+
+* The blocks have in common that they exist within an environment, have boundaries and dependencies, an implementation and an interface.
+
+* "How big shall each individual piece be?" -- "Just make things the right size."
+
+* The same programming task can be solved with several pages of code or just a few lines.
+
+* David Parnas proposes that "one begins [to decompose a system] with a list of difficult design decisions or design decisions that are likely to change. Each module is then designed to hide such a decision from the others."
+
+* _Separation of Concerns_ and the _Single Responsibility Principle_ tell us to "separate separate things" and "join things that belong together."
+
+* Bob Martin says a module "should only have one reason to change," while at the same time "an axis of change is only an axis of change if the changes actually occur."
+
+* Indicators of strong cohesion are simplicity, a single stakeholder, only one reason to change and that the module doesn't get split but used as a whole.
+
+* Indicators of weak cohesion are that the code is hard to understand and difficult to explain, obviously divisible, has many stakeholders, many reasons to change and is often used only partially.
+
+* Isolated development teams are not a good reason for separation.
+
+* Do not forget about the application environment when designing your building blocks.
+
+* _What works:_ Being explicit about your meta-model. _What doesn't:_ Mentioning the word "meta-model".
+
+* _What works:_ Separating macro and micro decisions. _What doesn't:_ Over-regulating everything.
+
+* _What works:_ Trusting your gut and making a good guess. _What doesn't:_ Fleeing into technicalities.
+
+* _What works:_ Use organization and its use cases as level 0 driver. _What doesn't:_ Center around technical commonality.
+
+* _What works:_ Prepare to be wrong on every level. _What doesn't:_ Aim for perfection and stubbornly stick to it.
 
 
 
@@ -22,15 +52,25 @@ categories: coding
 [Slides](https://speakerdeck.com/philnash/the-web-is-getting-pushy-topconf-linz)
 
 * The browsers have implemented technologies that already work (as in "Does this make sense?") for native apps, like geolocation, accelerometer or peer-to-peer video chat.
+
 * You may look at native apps as a testing ground for future web technologies, if you want.
+
 * One major advantage of native apps are currently push notifications.
+
 * Notifications are supported by major browsers. The status for Edge is "Under Consideration".
+
 * Service Workers are only supported in the latest Chrome, Firefox and Opera. The status for Safari is unknown. The status for Edge is "Under Consideration".
+
 * Push Notifications are only supported in the latest Chrome and Firefox. The Safari implementation is non-standard, Opera has it "on the roadmap" and Edge has it "Under Consideration".
+
 * Implementation status can be checked on [jakearchibald.github.io/isserviceworkerready](https://jakearchibald.github.io/isserviceworkerready/) and [status.modern.ie](https://dev.windows.com/en-us/microsoft-edge/platform/status/).
+
 * Demo is listening for the `#topconfpush` hashtag and then pushing a notification.
+
 * Code for the live demo is available on [github.com/philnash/the-web-is-getting-pushy](https://github.com/philnash/the-web-is-getting-pushy).
+
 * It is possible to push notifications to your users via your web app, but try to follow the lessons learned in native apps over the last few years and don't overdo it.
+
 * There is now a nice tutorial over at [Google Developers](https://developers.google.com/web/fundamentals/getting-started/push-notifications).
 
 
@@ -131,9 +171,3 @@ This talk will have a stern, very stern look at AngularJS in particular and shed
 Beware that we won’t stop at glancing at the code itself, investigating security best practices, and verifying compatibility and other common things that contribute to robust security (or lack thereof). We will cross the moral border and see if the AngularJS team could notice rogue bug tickets. A pivotal question that everyone is wondering about is: Have they successfully kept evil minds like yours truly speaker here from introducing new security bugs into the code base?
 
 This talk is a reckoning with a modern JavaScript framework that promises a lot and keeps even more, not necessarily for the best for developers and users. We will conclude in deriving a general lesson learnt and hopefully agree that progress doesn't invariably mean an enhancement.
-
-
-
-## Hacking robot dinosaurs -- Lucy Rogers
-
-"Come and hack our dinosaurs" – how could I resist a request like this? How I tamed dinosaurs and can train anyone to keep them under control.
