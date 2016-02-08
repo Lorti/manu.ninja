@@ -98,11 +98,17 @@ Having remotes on the team enables you to hire for talent and not for availabili
 
 
 
-## JSON-API -- The ultimate anti-bikeshedding weapon -- Henning Glatter-Götz
+## JSON API -- The ultimate anti-bikeshedding weapon -- Henning Glatter-Götz
 
 [Slides](https://speakerdeck.com/hglattergotz/how-json-api-can-bring-sanity-to-your-php-apis)
 
-APIs are everywhere: many return JSON and are RESTful or even provide hypermedia controls, but chances are they do not adhere to any standard. Essentially they all speak a different language that has to be learned for each specific provider. Wouldn’t it be great if there was a sane specification that lets you standardize your API? Something around which the community can build tools so you don’t have to reinvent the wheel over and over again? In this talk I will introduce the JSON-API specification and explain how it can benefit you on your next API project.
+* [JSON API](http://jsonapi.org/) is a specification for building APIs in JSON.
+
+* `Content-Type: application/vnd.api+json` is registered with the IANA.
+
+* It specifies content negotiation, document structure, fetching data (including pagination), CRUD, query parameters and errors.
+
+* Standardization tremendously helps with tooling. Libraries for the most popular languages already exist.
 
 
 
