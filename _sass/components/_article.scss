@@ -59,7 +59,12 @@
     }
 
     ol, ul {
+        padding-left: 1.375em;
         @include baseline(null, 0, 1, true);
+
+        ol, ul {
+            margin-left: 1.375em;
+        }
     }
 
     iframe {

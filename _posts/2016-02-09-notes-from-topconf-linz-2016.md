@@ -110,7 +110,7 @@ categories: coding
 * There is a [Developer Happiness Questionnaire](https://blog.cto.hiv/developer-happiness-questionnaire) based the book [First, Break All The Rules](http://www.gallup.com/press/176069/first-break-rules-world-greatest-managers-differently.aspx) that helps you collect feedback from your colleagues.
 
 
-## JSON API -- The ultimate anti-bikeshedding weapon -- Henning Glatter-Götz
+## JSON API -- The ultimate anti-bikeshedding weapon -- Henning Glatter&#8209;Götz
 
 [Slides](https://speakerdeck.com/hglattergotz/how-json-api-can-bring-sanity-to-your-php-apis)
 
