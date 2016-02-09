@@ -5,7 +5,7 @@ date:   2016-02-09
 categories: coding
 ---
 
-[Topconf Linz 2016](http://topconf.com/linz-2016/) was a a great conference with charming people and inspiring talks. I am looking forward to next year and hope events like this will help put Linz on the map and attract more international attendees and speakers. Here are my notes from the talks that I have seen.
+[Topconf Linz 2016](http://topconf.com/linz-2016/) was a a great conference with charming people and inspiring talks. I am looking forward to next year and hope events like this will help put Linz on the map and attract more international attendees and speakers. Here are my notes from some of the talks that I have seen.
 
 
 
@@ -13,7 +13,7 @@ categories: coding
 
 [Slides](https://speakerdeck.com/stilkov/carvin-up-stuff-for-fun-and-profit)
 
-* People structure their code into smaller building blocks. (Micro-)services, components, modules, procedures...
+* People structure their code into smaller building blocks. (Micro-)services, components, modules, procedures…
 
 * The blocks have in common that they exist within an environment, have boundaries and dependencies, an implementation and an interface.
 
@@ -27,9 +27,9 @@ categories: coding
 
 * Bob Martin says a module "should only have one reason to change," while at the same time "an axis of change is only an axis of change if the changes actually occur."
 
-* Indicators of strong cohesion are simplicity, a single stakeholder, only one reason to change and that the module doesn't get split but used as a whole.
+* Indicators of strong cohesion are _simplicity,_ _a single stakeholder,_ _one reason to change_ and that the module doesn't get split but _used as a whole._
 
-* Indicators of weak cohesion are that the code is hard to understand and difficult to explain, obviously divisible, has many stakeholders, many reasons to change and is often used only partially.
+* Indicators of weak cohesion are that the code is _hard to understand_ and _difficult to explain,_ _obviously divisible,_ has _many stakeholders,_ _many reasons to change_ and is often _used only partially._
 
 * Isolated development teams are not a good reason for separation.
 
@@ -57,17 +57,13 @@ categories: coding
 
 * One major advantage of native apps are currently push notifications.
 
-* Notifications are supported by major browsers. The status for Edge is "Under Consideration".
+* Browser Support
+    * _Notifications_ are supported by major browsers. The status for Edge is "Under Consideration".
+    * _Service Workers_ are only supported in the latest Chrome, Firefox and Opera. The status for Safari is unknown. The status for Edge is "Under Consideration".
+    * _Push Notifications_ are only supported in the latest Chrome and Firefox. The Safari implementation is non-standard, Opera has it "on the roadmap" and Edge has it "Under Consideration".
+    * Implementation status can be checked on [jakearchibald.github.io/isserviceworkerready](https://jakearchibald.github.io/isserviceworkerready/) and [status.modern.ie](https://dev.windows.com/en-us/microsoft-edge/platform/status/).
 
-* Service Workers are only supported in the latest Chrome, Firefox and Opera. The status for Safari is unknown. The status for Edge is "Under Consideration".
-
-* Push Notifications are only supported in the latest Chrome and Firefox. The Safari implementation is non-standard, Opera has it "on the roadmap" and Edge has it "Under Consideration".
-
-* Implementation status can be checked on [jakearchibald.github.io/isserviceworkerready](https://jakearchibald.github.io/isserviceworkerready/) and [status.modern.ie](https://dev.windows.com/en-us/microsoft-edge/platform/status/).
-
-* Demo is listening for the `#topconfpush` hashtag and then pushing a notification.
-
-* Code for the live demo is available on [github.com/philnash/the-web-is-getting-pushy](https://github.com/philnash/the-web-is-getting-pushy).
+* Demo is listening for the `#topconfpush` hashtag and then pushing a notification. The code is available on [github.com/philnash/the-web-is-getting-pushy](https://github.com/philnash/the-web-is-getting-pushy).
 
 * It is possible to push notifications to your users via your web app, but try to follow the lessons learned in native apps over the last few years and don't overdo it.
 
@@ -79,14 +75,27 @@ categories: coding
 
 [Slides](http://de.slideshare.net/IvanaTerrorBull/punishment-driven-development)
 
-When things go wrong the first thing we do is find who is to blame and the second thing is to punish them. This talk deives into why humans have this tendency to blame and punish. It looks at real examples of punishment within the software world and the results which were achieved. These stories not only cover managers punishing team members but also punishment within teams and self-punishment. We are all guilty of some of the behaviours discussed.
+* _Bonuses_ are a punishment tool and may weaken the performance of your team.
 
-This is aimed at everyone involved in software development. After the talk attendees will understand:
+* _Narcissim of small differences:_ The odd man out may be invaluable to your success with his differing views.
 
-- Why we tend to blame and punish others.
-- The impact of self-blame.
-- The unintended (but predictable) results from punishment.
-- The alternatives to punishment, which get real results.
+* _Hansei:_ Acknowledge your mistakes and learn from them.
+
+* _Kaizen:_ It is often easier to change yourself than to change others.
+
+* There is an area in your brain responsible for blame and punishment, called the [dorsolateral prefrontal cortex](http://dx.doi.org/10.1016/j.neuron.2015.08.023).
+
+* Punishment Driven Development Manifesto
+    * Finding out who is to blame _over working collaboratively_
+    * Retribution _over improving the process_
+    * Punishing mistakes _over avoiding future mistakes_
+    * Venting emotions _over achieving goals_
+
+* People Driven Development Manifesto
+    * Respecting people _over controlling people_
+    * Celebrating mistakes _over punishing mistakes_
+    * Putting yourself in their place _over putting others in their place_
+    * Changing your behaviour _over changing another's behaviour_
 
 
 
@@ -94,8 +103,11 @@ This is aimed at everyone involved in software development. After the talk atten
 
 [Slides](https://docs.google.com/presentation/d/1wOsTthhK1rgmSYl6ZChHzSTD3hkMjmlkfZKnlgQtU94)
 
-Having remotes on the team enables you to hire for talent and not for availability. From my recent positions I learned that it is critical to encode remote work in every team members work habits-even if they are working on location. In this talk I would like to show you how I've set up my teams in the past and what I did to integrate remotes in our physical office (yes, we still have one).
+* The three most important challenges when working with a distributed team are [the missing watercooler](https://blog.cto.hiv/working-remote-fix-the-missing-watercooler),_ [quality time](https://blog.cto.hiv/working-remote-quality-together-time) together and [celebrating successes](https://blog.cto.hiv/working-remote-celebrate-successes).
 
+* _ProTips:_ Always have a communication fallback ready, define a communication escalation process, everybody should work remotely (at least some days a week), plan every hour when meeting in person and send everyone a cake once in a while.
+
+* There is a [Developer Happiness Questionnaire](https://blog.cto.hiv/developer-happiness-questionnaire) based the book [First, Break All The Rules](http://www.gallup.com/press/176069/first-break-rules-world-greatest-managers-differently.aspx) that helps you collect feedback from your colleagues.
 
 
 ## JSON API -- The ultimate anti-bikeshedding weapon -- Henning Glatter-Götz
@@ -109,18 +121,6 @@ Having remotes on the team enables you to hire for talent and not for availabili
 * It specifies content negotiation, document structure, fetching data (including pagination), CRUD, query parameters and errors.
 
 * Standardization tremendously helps with tooling. Libraries for the most popular languages already exist.
-
-
-
-## Show me your office and I'll tell you how productive you are! -- Thomas Turner
-
-http://ideenbewegen.at/
-
-Different kinds of work need different environment. This seems to be logical, though many companies miss to support their employees with an optimized, supporting office-concept.
-
-Due to studies 50-90% of employees are dissatisfied with their personell job-situation. Key-factors are bad work-climate, low efficiency, slow communication, high stress-level and low comfort factor.
-
-Why and how should CEOs and managers think about their work-culture and office-structure? Why will innovation be supported by new and different rooms? This firsthand report of a reference project, the middle- and long-term conclusions will answer these and many more questions and will give you a lot to think.
 
 
 
