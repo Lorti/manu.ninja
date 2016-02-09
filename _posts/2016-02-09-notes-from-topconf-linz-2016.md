@@ -126,9 +126,13 @@ categories: coding
 
 ## HTTP/2: Current Status -- Simone Bordet
 
-[Video](https://www.youtube.com/watch?v=QpLtBftqM04)
+[Slides](http://de.slideshare.net/SimoneBordet/http2-and-java-current-status)
 
-HTTP 2.0 is supposed to be the next big thing for the web, after the overwhelming success of HTTP 1.1. In this keynote we will examine the HTTP 2.0 protocol, what is the status of its specification, what features does it offer over HTTP 1.1, and how websites can benefit (in speed and money) from it. Finally, we will explore the status of HTTP 2.0 support in the Java platform, finishing up with a demo of new HTTP 2.0 features.
+* _Why?_ HTTP/1.1 is an inefficient, old protocol for serving single pages. Web developers are hacking around its limitations and browser vendors break recommendations to make their browsers fast. "Better HTTP means more money!"
+
+* _How?_ HTTP/2 is a binary protocol based on frames. It offers multiplexed streams, compressed headers, request prioritization and pushing of correlated resources to reduce round-trips. TLS is mandatory for browsers but server-to-server communication may be unencrypted.
+
+* _When?_ The protocol is specified in [RFC 7540](https://tools.ietf.org/html/rfc7540). Browser vendors have already implemented it and major websites are using HTTP/2 already.
 
 
 
@@ -146,19 +150,19 @@ In this talk, we’ll take a look at some very traditional computer science and 
 
 [Slides](https://docs.google.com/presentation/d/1-v4bmNMN4jum0K5GtJRyldP4U9VZVrDH5BgU6ZW8g3I/)
 
-The modern web is tearing down the borders of the browser window and allows us to create so much more than just another website.
-This talk is a whirlwind tour of how 3D and virtual reality can be woven into entirely new applications that the web hasn’t seen yet. On top of interactive 3D web applications with WebGL we’ll go through the history of 3D on the web.
-In addition we’ll see how we can unlock the powers of the GPU thanks to GLSL.
+* WebGL is ready to be used, especially via one of the excellent libraries like [three.js](http://threejs.org/).
 
-We will then explore the amazing superpowers that Virtual Reality is currently bringing to the web and teleport us to places we can’t go.
+* [Archilogic](http://about.archilogic.com/) builds real-time architectural visualization for the web. Another example for good use of WebGL is the article [The Dawn Wall](http://www.nytimes.com/interactive/2015/01/09/sports/el-capitan-2d-image.html?_r=0) by The New York Times.
 
-This talk is accompanied by use case demonstrations along with a bit of live coding as the "frosting" on top.
+* The same visual perception tricks as in game engines help us improve performance: Light maps, normal maps, level of detail, asynchronous asset loading…
+
+* WebVR is currently being standardized, but there is a [polyfill](https://github.com/borismus/webvr-boilerplate) for Cardboard and Oculus available.
 
 
 
 ## Your Web Stack Would Betray You In An Instant -- Tim Perry
 
-[Video](https://www.youtube.com/watch?v=CDX_oVahNV0)
+[Slides](http://pimterry.github.io/Your-Web-Stack-Would-Betray-You-In-An-Instant)
 
 Securely setting up a web stack today is a tricky balancing act, as you gingerly balance frameworks and services and tools all atop one another, ever higher, to get all mod cons happily running together safely and correctly. One security flaw though, and the whole pile tumbles down on you to throw your customer passwords to the world.
 
