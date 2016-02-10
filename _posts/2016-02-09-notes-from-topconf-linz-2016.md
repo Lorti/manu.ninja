@@ -140,9 +140,17 @@ categories: coding
 
 [Slides](https://speakerdeck.com/csswizardry/css-for-software-engineers-for-css-developers)
 
-Depending on where you draw your measurements from, the first programming languages for use on ‘modern’ electric computers were designed in the ’40s and ’50s. CSS, on the other hand, is a mere adolescent—born in 1996, it’s just 18 years old. This means that software engineers have had over four decades’ head start on us: we should be listening to a lot more of what they have to say.
+* The first programming languages were written in the 1950s. We should use existing programming paradigms and apply them to our stylesheets.
 
-In this talk, we’ll take a look at some very traditional computer science and software engineering paradigms and how we can steal, bend, borrow, and reimplement them when writing our CSS. Writing CSS like software engineers so that we can become better CSS developers.
+* _Don't Repeat Yourself_ is not about duplicated output, therefore argumentless mixins can be valid in certain cases.
+
+* _Single Source of Truth_, the _Single Responsibility Principle_, _Separation of Concerns_, _Immutability_ and the _Open/Closed Principle_ can all be applied to CSS.
+
+* Mutation is particularly common in CSS and leads to unpredictable outcomes and unexpected side effects.
+
+* Deeply nested or qualified selectors increase _Cyclomatic Complexity_.
+
+* Proper scoping of selectors can improve _Orthogonality_, which is inherently difficult CSS. Can you reorder your `@import` statements?
 
 
 
@@ -164,9 +172,19 @@ In this talk, we’ll take a look at some very traditional computer science and 
 
 [Slides](http://pimterry.github.io/Your-Web-Stack-Would-Betray-You-In-An-Instant)
 
-Securely setting up a web stack today is a tricky balancing act, as you gingerly balance frameworks and services and tools all atop one another, ever higher, to get all mod cons happily running together safely and correctly. One security flaw though, and the whole pile tumbles down on you to throw your customer passwords to the world.
+* Your greatest weakness is (probably) not your code, but in your _web framework_, _programming language_, _web server_, _database_ or _network infrastructure._
 
-In this talk we take a stroll down through a modern web stack and examine some recent major security breakages in each layer to see how they work and why. With any luck we can work out how to avoid this sort of thing in future too, when either using or building such tools, but if all else fails we can at least relax from all the careful balancing with a little schadenfreude.
+* Always be ready to update your web stack, so you can benefit from the latest security updates.
+
+* Fear user input in any format and be as restrictive as possible ([CVE-2013-0156](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0156)).
+
+* Value best practices. If you see automated tests failing, please report it ([CVE-2011-3189](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-3189)).
+
+* Keep internal errors secret from your end users ([CVE-2015-2080](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2080)).
+
+* Isolate your components from themselves and everyone else ([CVE-2013-1899](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1899)).
+
+* Avoid complexity, as it makes security flaws hard to find ([CVE-2015-5477](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5477)).
 
 
 
@@ -174,10 +192,10 @@ In this talk we take a stroll down through a modern web stack and examine some r
 
 [Slides](http://de.slideshare.net/x00mario/an-abusive-relationship-with-angularjs)
 
-Some voices claim that "Angular is what HTML would have been if it had been designed for building web applications". While this statement may or may not be true, is certainly accounts as one of the bolder ones a JavaScript web framework can ever issue. And where boldness is glistening like a German Bratwurst sausage in the evening sun, a critical review from a grumpy old security person shouldn’t be too far away.
+* Sandbox bypasses exist for every version of AngularJS, including 1.5.0.
 
-This talk will have a stern, very stern look at AngularJS in particular and shed light on the security aspects of this ever-popular tool. Did the super-hero framework do everything right and follow its own super-heroic principles? Does AngularJS increase or rather decrease the attack surface of a web application? How does AngularJS play along with the Content Security Policy, and was it a good idea to combine this kind of security with futuristic feature creep? And what about AngularJS version 2.0?
+* _Content Security Policy_ can be bypassed when applications use Google's CDN. If it is whitelisted a collision check implemented in AngularJS 1.2.15 enables a downgrade attack.
 
-Beware that we won’t stop at glancing at the code itself, investigating security best practices, and verifying compatibility and other common things that contribute to robust security (or lack thereof). We will cross the moral border and see if the AngularJS team could notice rogue bug tickets. A pivotal question that everyone is wondering about is: Have they successfully kept evil minds like yours truly speaker here from introducing new security bugs into the code base?
+* Mario was able to attack the code base itself by issuing a [pull request](https://github.com/angular/angular.js/issues/10779) for an apparent "bug", enabling cross-site scripting via the `attributeName` and `attributeType` SVG attributes.
 
-This talk is a reckoning with a modern JavaScript framework that promises a lot and keeps even more, not necessarily for the best for developers and users. We will conclude in deriving a general lesson learnt and hopefully agree that progress doesn't invariably mean an enhancement.
+* AngularJS (especially old versions) extends the attack surface dramatically. Many sites still use older versions, as updating is unnecessary difficult, largely due frequent API changes.
