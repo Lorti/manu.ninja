@@ -140,7 +140,7 @@ categories: coding
 
 [Slides](https://speakerdeck.com/csswizardry/css-for-software-engineers-for-css-developers)
 
-* The first programming languages were written in the 1950s. We should use existing programming paradigms and apply them to our stylesheets.
+* The first programming languages were written in the 1950s. We should honor existing programming paradigms and apply them to our stylesheets.
 
 * _Don't Repeat Yourself_ is not about duplicated output, therefore argumentless mixins can be valid in certain cases.
 
@@ -148,9 +148,9 @@ categories: coding
 
 * Mutation is particularly common in CSS and leads to unpredictable outcomes and unexpected side effects.
 
-* Deeply nested or qualified selectors increase _Cyclomatic Complexity_.
+* Deeply nested or qualified selectors increase _Cyclomatic Complexity._
 
-* Proper scoping of selectors can improve _Orthogonality_, which is inherently difficult CSS. Can you reorder your `@import` statements?
+* Proper scoping of selectors can improve _Orthogonality,_ which is inherently difficult in CSS. Can you reorder your `@import` statements?
 
 
 
@@ -172,7 +172,7 @@ categories: coding
 
 [Slides](http://pimterry.github.io/Your-Web-Stack-Would-Betray-You-In-An-Instant)
 
-* Your greatest weakness is (probably) not your code, but in your _web framework_, _programming language_, _web server_, _database_ or _network infrastructure._
+* Your greatest weakness is (probably) not your code, but your _web framework_, _programming language_, _web server_, _database_ or _network infrastructure._
 
 * Always be ready to update your web stack, so you can benefit from the latest security updates.
 
@@ -192,10 +192,10 @@ categories: coding
 
 [Slides](http://de.slideshare.net/x00mario/an-abusive-relationship-with-angularjs)
 
+* AngularJS extends the attack surface dramatically. Many sites still use older versions, as updating is unnecessary difficult, largely due to frequent API changes.
+
 * Sandbox bypasses exist for every version of AngularJS, including 1.5.0.
 
 * _Content Security Policy_ can be bypassed when applications use Google's CDN. If it is whitelisted a collision check implemented in AngularJS 1.2.15 enables a downgrade attack.
 
 * Mario was able to attack the code base itself by issuing a [pull request](https://github.com/angular/angular.js/issues/10779) for an apparent "bug", enabling cross-site scripting via the `attributeName` and `attributeType` SVG attributes.
-
-* AngularJS (especially old versions) extends the attack surface dramatically. Many sites still use older versions, as updating is unnecessary difficult, largely due frequent API changes.
