@@ -5,7 +5,7 @@ date:   2016-02-09
 categories: coding
 ---
 
-[Topconf Linz 2016](http://topconf.com/linz-2016/) was a a great conference with charming people and inspiring talks. I am looking forward to next year and hope events like this will help put Linz on the map and attract more international attendees and speakers. Here are my notes from some of the talks that I have seen.
+[Topconf Linz 2016](http://topconf.com/linz-2016/) was a a great conference with charming people and inspiring talks. I am looking forward to next year and hope events like this will help put Linz on the map and attract more international attendees and speakers. Here are my notes from the talks that I have seen.
 
 
 
@@ -15,17 +15,15 @@ categories: coding
 
 * People structure their code into smaller building blocks. (Micro-)services, components, modules, procedures…
 
-* The blocks have in common that they exist within an environment, have boundaries and dependencies, an implementation and an interface.
-
 * "How big shall each individual piece be?" -- "Just make things the right size."
 
 * The same programming task can be solved with several pages of code or just a few lines.
 
-* David Parnas proposes that "one begins [to decompose a system] with a list of difficult design decisions or design decisions that are likely to change. Each module is then designed to hide such a decision from the others."
+* _David Parnas_ proposes that "one begins [to decompose a system] with a list of difficult design decisions or design decisions that are likely to change. Each module is then designed to hide such a decision from the others."
 
 * _Separation of Concerns_ and the _Single Responsibility Principle_ tell us to "separate separate things" and "join things that belong together."
 
-* Bob Martin says a module "should only have one reason to change," while at the same time "an axis of change is only an axis of change if the changes actually occur."
+* _Robert Martin_ says a module "should only have one reason to change," while at the same time "an axis of change is only an axis of change if the changes actually occur."
 
 * Indicators of strong cohesion are _simplicity,_ _a single stakeholder,_ _one reason to change_ and that the module doesn't get split but _used as a whole._
 
@@ -33,7 +31,7 @@ categories: coding
 
 * Isolated development teams are not a good reason for separation.
 
-* Do not forget about the application environment when designing your building blocks.
+* Try not to forget about the application environment when designing your building blocks.
 
 * _What works:_ Being explicit about your meta-model. _What doesn't:_ Mentioning the word "meta-model".
 
@@ -51,21 +49,21 @@ categories: coding
 
 [Slides](https://speakerdeck.com/philnash/the-web-is-getting-pushy-topconf-linz)
 
-* The browsers have implemented technologies that already work (as in "Does this make sense?") for native apps, like geolocation, accelerometer or peer-to-peer video chat.
-
-* You may look at native apps as a testing ground for future web technologies, if you want.
-
-* One major advantage of native apps are currently push notifications.
+* Browser vendors have implemented technologies that already work (as in "Does this make sense?") for native apps. If you want, you may look at native apps as a testing ground for future web technologies.
 
 * Browser Support
+
     * _Notifications_ are supported by major browsers. The status for Edge is "Under Consideration".
+
     * _Service Workers_ are only supported in the latest Chrome, Firefox and Opera. The status for Safari is unknown. The status for Edge is "Under Consideration".
+
     * _Push Notifications_ are only supported in the latest Chrome and Firefox. The Safari implementation is non-standard, Opera has it "on the roadmap" and Edge has it "Under Consideration".
+
     * Implementation status can be checked on [jakearchibald.github.io/isserviceworkerready](https://jakearchibald.github.io/isserviceworkerready/) and [status.modern.ie](https://dev.windows.com/en-us/microsoft-edge/platform/status/).
 
 * Demo is listening for the `#topconfpush` hashtag and then pushing a notification. The code is available on [github.com/philnash/the-web-is-getting-pushy](https://github.com/philnash/the-web-is-getting-pushy).
 
-* It is possible to push notifications to your users via your web app, but try to follow the lessons learned in native apps over the last few years and don't overdo it.
+* It is possible to push notifications to your users via your web app, but try to follow the lessons learned over the last few years.
 
 * There is now a nice tutorial over at [Google Developers](https://developers.google.com/web/fundamentals/getting-started/push-notifications).
 
@@ -86,15 +84,23 @@ categories: coding
 * There is an area in your brain responsible for blame and punishment, called the [dorsolateral prefrontal cortex](http://dx.doi.org/10.1016/j.neuron.2015.08.023).
 
 * Punishment Driven Development Manifesto
+
     * Finding out who is to blame _over working collaboratively_
+
     * Retribution _over improving the process_
+
     * Punishing mistakes _over avoiding future mistakes_
+
     * Venting emotions _over achieving goals_
 
 * People Driven Development Manifesto
+
     * Respecting people _over controlling people_
+
     * Celebrating mistakes _over punishing mistakes_
+
     * Putting yourself in their place _over putting others in their place_
+
     * Changing your behaviour _over changing another's behaviour_
 
 
@@ -103,11 +109,11 @@ categories: coding
 
 [Slides](https://docs.google.com/presentation/d/1wOsTthhK1rgmSYl6ZChHzSTD3hkMjmlkfZKnlgQtU94)
 
-* The three most important challenges when working with a distributed team are [the missing watercooler](https://blog.cto.hiv/working-remote-fix-the-missing-watercooler),_ [quality time](https://blog.cto.hiv/working-remote-quality-together-time) together and [celebrating successes](https://blog.cto.hiv/working-remote-celebrate-successes).
+* The three most important challenges when working with a distributed team are the [missing watercooler](https://blog.cto.hiv/working-remote-fix-the-missing-watercooler), [quality time](https://blog.cto.hiv/working-remote-quality-together-time) and [celebrating successes](https://blog.cto.hiv/working-remote-celebrate-successes).
 
 * _ProTips:_ Always have a communication fallback ready, define a communication escalation process, everybody should work remotely (at least some days a week), plan every hour when meeting in person and send everyone a cake once in a while.
 
-* There is a [Developer Happiness Questionnaire](https://blog.cto.hiv/developer-happiness-questionnaire) based the book [First, Break All The Rules](http://www.gallup.com/press/176069/first-break-rules-world-greatest-managers-differently.aspx) that helps you collect feedback from your colleagues.
+* There is a [Developer Happiness Questionnaire](https://blog.cto.hiv/developer-happiness-questionnaire) based on the book [First, Break All The Rules](http://www.gallup.com/press/176069/first-break-rules-world-greatest-managers-differently.aspx) that helps you collect feedback from your colleagues.
 
 
 ## JSON API -- The ultimate anti-bikeshedding weapon -- Henning Glatter&#8209;Götz
@@ -118,7 +124,7 @@ categories: coding
 
 * `Content-Type: application/vnd.api+json` is registered with the IANA.
 
-* It specifies content negotiation, document structure, fetching data (including pagination), CRUD, query parameters and errors.
+* It specifies _content negotiation,_ _document structure,_ _fetching data_ (including pagination), _CRUD,_ _query parameters_ and _errors._
 
 * Standardization tremendously helps with tooling. Libraries for the most popular languages already exist.
 
