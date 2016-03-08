@@ -5,9 +5,13 @@ date:   2016-03-15
 categories: coding
 ---
 
+Pinterest, Google Images and lots of image-heavy sites lazy-load their content. They also calculate the dominant color of each image to use as a placeholder. This post presents a few methods to do the same.
+
 ![](/images/pinterest-placeholders.gif)
 
-Pinterest sets the style of the wrapper to `background: #1e1f20;`.
+<!-- https://jmperezperez.com/medium-image-progressive-loading-placeholder/ -->
+
+The basic concept is to use a tiny `blank.gif`{:.html} as `src` attribute and replace it with the correct image after the page has fully loaded. The `blank.gif`{:.html} can also be set as a Base64-encoded Data URI to save a request.
 
 ~~~ html
 <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
@@ -15,13 +19,41 @@ Pinterest sets the style of the wrapper to `background: #1e1f20;`.
      alt="Ghost In The Shell">
 ~~~
 
-You can also use a different Base64-encoded placeholder for each image.
+Pinterest then sets the style of the wrapper to `background: #1e1f20;`{:.css} and shows the image with `opacity: 1;`{:.css} when it has loaded. They could therefore easily animate the transition, but right now they don't.
 
 ## Finding the Dominant Color of an Image
 
-The [quantization](http://www.graphicsmagick.org/quantize.html) of GraphicsMagick or ImageMagick is usually sufficient, but if you want a really sophisticated result you should think about using [k-means clustering](http://charlesleifer.com/blog/using-python-and-k-means-to-find-the-dominant-colors-in-images/).
+Finding the dominant colors of an image is a science in itself and you can indulge in clustering algorithms and for example write your own [k-means clustering](http://charlesleifer.com/blog/using-python-and-k-means-to-find-the-dominant-colors-in-images/). If you want a simpler solution the [quantization](http://www.graphicsmagick.org/quantize.html) of GraphicsMagick or ImageMagick is usually sufficient.
+
+~~~ bash
+brew install graphicsmagick
+npm install gm
+~~~
+
+~~~ js
+var gm = require('gm');
+
+gm('test.jpg')
+    .resize(100, 100)
+    .colors(1)
+    .toBuffer('RGB', function (error, buffer) {
+        console.log(buffer.slice(0, 3));
+    });
+~~~
+
+~~~ php
+<?php
+
+$image = new Imagick('test.jpg'));
+$image->resizeImage(100, 100, Imagick::FILTER_GAUSSIAN, 1);
+$image->quantizeImage(1, Imagick::COLORSPACE_LAB, 0, false, false);
+$image->setFormat('RGB');
+echo substr(bin2hex($image), 0, 6);
+~~~
 
 ## Deep Dive into GIFs and Base64 Data URIs
+
+You can also use a different Base64-encoded placeholder for each image.
 
 Blank GIF, which is 43 bytes:
 
@@ -61,12 +93,9 @@ data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACAA==
 
 ## Node.js Snippets
 
-~~~ bash
-brew install graphicsmagick
-npm install gm
-~~~
-
 ~~~ js
+var gm = require('gm');
+
 var header = new Buffer('474946383961', 'hex');
 var logicalScreenDescriptor = new Buffer('01000100800100', 'hex');
 var imageDescriptor = new Buffer('2c000000000100010000', 'hex');
@@ -93,6 +122,8 @@ data:image/gif;base64,R0lGODlhAQABAIABAEdJRgAAACwAAAAAAQABAAACAkQBAA==
 ~~~
 
 ~~~ js
+var gm = require('gm');
+
 gm('test.jpg')
     .resize(3, 3)
     .toBuffer('GIF', function (error, buffer) {
