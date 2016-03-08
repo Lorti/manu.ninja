@@ -17,32 +17,99 @@ Pinterest sets the style of the wrapper to `background: #1e1f20;`.
 
 You can also use a different Base64-encoded placeholder for each image.
 
+## Finding the Dominant Color of an Image
+
+The [quantization](http://www.graphicsmagick.org/quantize.html) of GraphicsMagick or ImageMagick is usually sufficient, but if you want a really sophisticated result you should think about using [k-means clustering](http://charlesleifer.com/blog/using-python-and-k-means-to-find-the-dominant-colors-in-images/).
+
+## Deep Dive into GIFs and Base64 Data URIs
+
 Blank GIF, which is 43 bytes:
 
 ~~~
-data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==
-47 49 46 38 39 61 // Header
-01 00 01 00 80 00 00 // Logical Screen Descriptor
-FF FF FF 00 00 00 // Global Color Table
-21 F9 04 00 00 00 00 00 // Graphics Control Extension
+47 49 46 38 39 61             // Header
+01 00 01 00 80 00 00          // Logical Screen Descriptor
+FF FF FF 00 00 00             // Global Color Table
+21 F9 04 00 00 00 00 00       // Graphics Control Extension
 2C 00 00 00 00 01 00 01 00 00 // Image Descriptor
-02 02 44 01 00 // Image Data
-3B // Trailer
+02 02 44 01 00                // Image Data
+3B                            // Trailer
+data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==
 ~~~
 
 Tiny GIF, which is only 34 bytes:
 
 ~~~
-data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACwAAAAAAQABAAACAkQBAA==
-47 49 46 38 39 61 // Header
-01 00 01 00 80 01 00 // Logical Screen Descriptor
-FF FF FF 00 00 00 // Global Color Table
+47 49 46 38 39 61             // Header
+01 00 01 00 80 01 00          // Logical Screen Descriptor
+FF FF FF 00 00 00             // Global Color Table
 2C 00 00 00 00 01 00 01 00 00 // Image Descriptor
-02 02 44 01 00 // Image Data
+02 02 44 01 00                // Image Data
+data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACwAAAAAAQABAAACAkQBAA==
 ~~~
 
-## Reference
+How did Pinterest get a GIF with only 26 bytes? Turns out that you can remove the global color table and the LZW-encoded image data as well. Browsers then just assume a color, which is usually black.
+
+~~~
+data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=
+~~~
+
+Pinterest does not remove the trailer. On the one hand Photoshop, GIMP and possible some browsers report an _Unexpected End of File_ error if there is no trailer present. On the other hand adding it back in does not increase the size of the Base64 string. Why? A Base64 string's length is always a multiple of 4 bytes. The equals symbol is used as a padding at the end of the string. So if you remove the trailer the Base64 string will end in `AA==` but still have 26 bytes.
+
+~~~
+data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACAA==
+~~~
+
+## Node.js Snippets
+
+~~~ bash
+brew install graphicsmagick
+npm install gm
+~~~
+
+~~~ js
+var header = new Buffer('474946383961', 'hex');
+var logicalScreenDescriptor = new Buffer('01000100800100', 'hex');
+var imageDescriptor = new Buffer('2c000000000100010000', 'hex');
+var imageData = new Buffer('0202440100', 'hex');
+
+gm('test.jpg')
+    .resize(100, 100)
+    .colors(1)
+    .toBuffer('RGB', function (error, buffer) {
+        var gif = [
+            header,
+            logicalScreenDescriptor,
+            buffer.slice(0, 3),
+            new Buffer([0, 0, 0]),
+            imageDescriptor,
+            imageData
+        ];
+        console.log('data:image/gif;base64,' + Buffer.concat(gif).toString('base64'));
+    });
+~~~
+
+~~~ html
+data:image/gif;base64,R0lGODlhAQABAIABAEdJRgAAACwAAAAAAQABAAACAkQBAA==
+~~~
+
+~~~ js
+gm('test.jpg')
+    .resize(3, 3)
+    .toBuffer('GIF', function (error, buffer) {
+        console.log('data:image/gif;base64,' + buffer.toString('base64'));
+    });
+~~~
+
+~~~ html
+data:image/gif;base64,R0lGODlhAwACAPIFAD1KI0JSIWp2WXOIj4WVlYicngAAAAAAACH5BAAAAAAALAAAAAADAAIAAAMESDUSkAA7
+~~~
+
+## References
+
+[What’s In A GIF](http://www.matthewflickinger.com/lab/whatsinagif/bits_and_bytes.asp)
 
 [The Tiniest GIF Ever](http://probablyprogramming.com/2009/03/15/the-tiniest-gif-ever)
 
-[What’s In A GIF][http://www.matthewflickinger.com/lab/whatsinagif/bits_and_bytes.asp]
+[GIF File Format Summary](http://www.fileformat.info/format/gif/egff.htm)
+
+[GraphicsMagick for node.js](http://aheckmann.github.io/gm/)
