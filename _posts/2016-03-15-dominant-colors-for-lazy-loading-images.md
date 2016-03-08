@@ -5,11 +5,9 @@ date:   2016-03-15
 categories: coding
 ---
 
-Pinterest, Google Images and lots of image-heavy sites lazy-load their content. They also calculate the dominant color of each image to use as a placeholder. This post presents a few methods to do the same.
+Pinterest, Google Images and lots of image-heavy sites lazy-load their content. They also calculate the dominant color of each image to use as a placeholder. This post presents a few methods to do the same and helps you understand the GIF file format to make the most of data URIs.
 
 ![](/images/pinterest-placeholders.gif)
-
-<!-- https://jmperezperez.com/medium-image-progressive-loading-placeholder/ -->
 
 The basic concept is to use a tiny `blank.gif`{:.html} as `src` attribute and replace it with the correct image after the page has fully loaded. The `blank.gif`{:.html} can also be set as a Base64-encoded Data URI to save a request.
 
@@ -23,37 +21,44 @@ Pinterest then sets the style of the wrapper to `background: #1e1f20;`{:.css} an
 
 ## Finding the Dominant Color of an Image
 
-Finding the dominant colors of an image is a science in itself and you can indulge in clustering algorithms and for example write your own [k-means clustering](http://charlesleifer.com/blog/using-python-and-k-means-to-find-the-dominant-colors-in-images/). If you want a simpler solution the [quantization](http://www.graphicsmagick.org/quantize.html) of GraphicsMagick or ImageMagick is usually sufficient.
+Finding the dominant colors of an image requires clustering of points in three-dimensional space. I initially planned to indulge in clustering algorithms and write my own [k-means clustering](http://charlesleifer.com/blog/using-python-and-k-means-to-find-the-dominant-colors-in-images/) in JavaScript, but after installing GraphicsMagick for decoding image files of various formats on the server I decided to put this plan off to another day and simply use the [color quantization](http://www.graphicsmagick.org/quantize.html) of GraphicsMagick.
 
-~~~ bash
-brew install graphicsmagick
-npm install gm
-~~~
+You are of course free to compare the results of even more sophisticated algorithms and choose the one that is to your liking, but If you want a simpler solution the color quantization of GraphicsMagick or ImageMagick is usually sufficient.
+
+### Node.js
+
+The following snippet shows you how to use the `gm` npm package for finding the dominant color. It is a good idea to resize the image first to soften compression artifacts. This will also speed up the quantization as there is less data to process -- quantization of a 12 megapixel image (iPhone 6s) takes 13-17 seconds in my benchmarks, whereas first resizing it reduces the time to 3-5 seconds.
 
 ~~~ js
 var gm = require('gm');
 
 gm('test.jpg')
-    .resize(100, 100)
+    .resize(250, 250)
     .colors(1)
     .toBuffer('RGB', function (error, buffer) {
         console.log(buffer.slice(0, 3));
     });
 ~~~
 
+![](/images/dominant-colors.jpg)
+
+### PHP
+
+The same can of course be accomplished with the `imagick` extension in PHP. I do know that a `gmagick` extension exists but the former was already installed on my server.
+
 ~~~ php
 <?php
 
 $image = new Imagick('test.jpg'));
-$image->resizeImage(100, 100, Imagick::FILTER_GAUSSIAN, 1);
+$image->resizeImage(250, 250, Imagick::FILTER_GAUSSIAN, 1);
 $image->quantizeImage(1, Imagick::COLORSPACE_LAB, 0, false, false);
 $image->setFormat('RGB');
 echo substr(bin2hex($image), 0, 6);
 ~~~
 
-## Deep Dive into GIFs and Base64 Data URIs
+## Deep Dive into GIFs and Base64-encoded Data URIs
 
-You can also use a different Base64-encoded placeholder for each image.
+Let's say you have calculated the dominant colors for all your images and your lazy-loading is working smoothly. You can now go a step further and use a different Base64-encoded placeholder for each image, so that you don't need wrappers and the `img` element itself can be its placeholder. To do this you have to either create lots of GIFs and store them somewhere or create them on the fly, which is what I'd like to explain in this section.
 
 Blank GIF, which is 43 bytes:
 
@@ -91,7 +96,7 @@ Pinterest does not remove the trailer. On the one hand Photoshop, GIMP and possi
 data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACAA==
 ~~~
 
-## Node.js Snippets
+## Node.js
 
 ~~~ js
 var gm = require('gm');
@@ -121,6 +126,10 @@ gm('test.jpg')
 data:image/gif;base64,R0lGODlhAQABAIABAEdJRgAAACwAAAAAAQABAAACAkQBAA==
 ~~~
 
+## Tiny Thumbnails
+
+<!-- https://jmperezperez.com/medium-image-progressive-loading-placeholder/ -->
+
 ~~~ js
 var gm = require('gm');
 
@@ -134,6 +143,8 @@ gm('test.jpg')
 ~~~ html
 data:image/gif;base64,R0lGODlhAwACAPIFAD1KI0JSIWp2WXOIj4WVlYicngAAAAAAACH5BAAAAAAALAAAAAADAAIAAAMESDUSkAA7
 ~~~
+
+![](/images/tiny-thumbnails.jpg)
 
 ## References
 
