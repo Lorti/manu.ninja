@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Dominant Colors for Lazy-Loading Images
-date:   2016-03-15
+date:   2016-03-09
 categories: coding
 ---
 
@@ -60,7 +60,7 @@ echo substr(bin2hex($image), 0, 6);
 
 Let's say you have calculated the dominant colors for all your images and your lazy-loading is working smoothly. You can now go a step further and use a different Base64-encoded placeholder for each image, so that you don't need wrappers and the `img` element itself can be its placeholder. To do this you have to either create lots of GIFs and store them somewhere or create them on the fly, which is what I'd like to explain in this section.
 
-Blank GIF, which is 43 bytes:
+If you fire up Photoshop, create a file with 1 × 1 pixels in a single color and hit _Save For Web_ you get a GIF which is exactly 43 bytes. I have labeled the binary data in the following snippet for you.
 
 ~~~
 47 49 46 38 39 61             // Header
@@ -70,10 +70,12 @@ FF FF FF 00 00 00             // Global Color Table
 2C 00 00 00 00 01 00 01 00 00 // Image Descriptor
 02 02 44 01 00                // Image Data
 3B                            // Trailer
+~~~
+~~~ bash
 data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==
 ~~~
 
-Tiny GIF, which is only 34 bytes:
+If you go back to the first snippet in this article you'll notice that the Base64-encoded data URI is a lot longer than Pinterests's. The graphics control extension and the trailer are actually optional. So if you remove them you get a tiny GIF, which is only 34 bytes.
 
 ~~~
 47 49 46 38 39 61             // Header
@@ -81,22 +83,26 @@ Tiny GIF, which is only 34 bytes:
 FF FF FF 00 00 00             // Global Color Table
 2C 00 00 00 00 01 00 01 00 00 // Image Descriptor
 02 02 44 01 00                // Image Data
+~~~
+~~~ bash
 data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACwAAAAAAQABAAACAkQBAA==
 ~~~
 
 How did Pinterest get a GIF with only 26 bytes? Turns out that you can remove the global color table and the LZW-encoded image data as well. Browsers then just assume a color, which is usually black.
 
-~~~
+~~~ bash
 data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=
 ~~~
 
-Pinterest does not remove the trailer. On the one hand Photoshop, GIMP and possible some browsers report an _Unexpected End of File_ error if there is no trailer present. On the other hand adding it back in does not increase the size of the Base64 string. Why? A Base64 string's length is always a multiple of 4 bytes. The equals symbol is used as a padding at the end of the string. So if you remove the trailer the Base64 string will end in `AA==` but still have 26 bytes.
+The last thing I want to mention is that Pinterest does not remove the trailer. On the one hand Photoshop, GIMP and possible some browsers report an _Unexpected End of File_ error if there is no trailer present. On the other hand adding it back in does not increase the size of the Base64 string. Why? A Base64 string's length is always a multiple of 4 bytes. The equals symbol is used as a padding at the end of the string. So if you remove the trailer the Base64 string will end in `AA==` but still have 26 bytes.
 
-~~~
+~~~ bash
 data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACAA==
 ~~~
 
-## Node.js
+## Creating Tiny Single-Colored GIFs
+
+The following snippet takes the above knowledge and creates data URIs in the dominant color of a given image. You can achieve the same in PHP by using the `pack`{:.php} and `base64_encode`{:.php} functions.
 
 ~~~ js
 var gm = require('gm');
@@ -107,7 +113,7 @@ var imageDescriptor = new Buffer('2c000000000100010000', 'hex');
 var imageData = new Buffer('0202440100', 'hex');
 
 gm('test.jpg')
-    .resize(100, 100)
+    .resize(250, 250)
     .colors(1)
     .toBuffer('RGB', function (error, buffer) {
         var gif = [
@@ -128,7 +134,9 @@ data:image/gif;base64,R0lGODlhAQABAIABAEdJRgAAACwAAAAAAQABAAACAkQBAA==
 
 ## Tiny Thumbnails
 
-<!-- https://jmperezperez.com/medium-image-progressive-loading-placeholder/ -->
+You can now lazy-load your images and show a tiny GIF in the dominant color as a placeholder, which is embedded in your HTML as a Base64-encoded data URI. The last thing I want to show you is how easily you can now implement the placeholders [Medium](https://jmperezperez.com/medium-image-progressive-loading-placeholder/) is using.
+
+If you resize your image to 3 × 3 pixels and remove the color quantization you get a data URI that is only a bit longer than the single-colored `blank.gif`{:.html} but gives you more of a thumbnail for your image. If you then resize your thumbnail to the image dimensions you may have to use `filter: blur(…);` to soften artifacts but you can see in the image below that Chrome does an excellent job in upscaling tiny thumbnails.
 
 ~~~ js
 var gm = require('gm');
@@ -145,6 +153,8 @@ data:image/gif;base64,R0lGODlhAwACAPIFAD1KI0JSIWp2WXOIj4WVlYicngAAAAAAACH5BAAAAA
 ~~~
 
 ![](/images/tiny-thumbnails.jpg)
+
+That's all for now. I would love to hear your feedback on this article!
 
 ## References
 
