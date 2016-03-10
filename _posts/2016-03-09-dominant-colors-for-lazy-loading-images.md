@@ -154,7 +154,7 @@ data:image/gif;base64,R0lGODlhAwACAPIFAD1KI0JSIWp2WXOIj4WVlYicngAAAAAAACH5BAAAAA
 
 ![](/images/tiny-thumbnails.jpg)
 
-That's all for now. I would love to hear your feedback on this article!
+That's all for now. If you like this article please share or retweet. I'd also love to hear your feedback and will answer any questions.
 
 ## References
 
