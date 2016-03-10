@@ -3,6 +3,7 @@ layout: post
 title:  Dominant Colors for Lazy-Loading Images
 date:   2016-03-09
 categories: coding
+socialMediaThumbnail: /images/tiny-thumbnails.jpg
 ---
 
 Pinterest, Google Images and lots of image-heavy sites lazy-load their content. They also calculate the dominant color of each image to use as a placeholder. This post presents a few methods to do the same and helps you understand the GIF file format to make the most of data URIs.
