@@ -4,7 +4,7 @@ url: "https://manu.ninja"
 email: office@manuelwieser.com
 
 markdown: kramdown
-highlighter: false
+highlighter: ""
 
 sass:
   style: compressed

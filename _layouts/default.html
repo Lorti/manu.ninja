@@ -1,3 +1,7 @@
+---
+layout: compress
+---
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -57,21 +61,24 @@
         {% include footer.html %}
         {% include person.html %}
 
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        {% if jekyll.environment == 'production' %}
 
-            ga('create', 'UA-68912237-1', 'auto');
-            ga('send', 'pageview');
-        </script>
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+                ga('create', 'UA-68912237-1', 'auto');
+                ga('send', 'pageview');
+            </script>
+
+        {% endif %}
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
         <script>
-            $inlined = document.querySelectorAll('pre code, .Article-content p code, .Article-content li code');
-            for (var i = 0; i < $inlined.length; i++) {
-                hljs.highlightBlock($inlined[i])
+            $code = document.querySelectorAll('pre code, .Article-content p code, .Article-content li code');
+            for (var i = 0; i < $code.length; i++) {
+                hljs.highlightBlock($code[i])
             }
         </script>
 

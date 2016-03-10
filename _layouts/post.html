@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+
 <article class="Article" itemscope itemtype="http://schema.org/BlogPosting">
 
     {% if page.thumbnail %}
@@ -27,19 +28,23 @@ layout: default
         {{ content }}
     </div>
 
-    <div id="disqus_thread"></div>
+    {% if jekyll.environment == 'production' %}
 
-    <script>
-        us_config = function () {
-            this.page.url = document.querySelector('link[rel="canonical"]').href;
-            this.page.identifier = '{{ page.slug }}';
-        };
-        (function () {
-            var d = document, s = d.createElement('script');
-            s.src = '//manuninja.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    </script>
+        <div id="disqus_thread"></div>
+
+        <script>
+            us_config = function () {
+                this.page.url = document.querySelector('link[rel="canonical"]').href;
+                this.page.identifier = '{{ page.slug }}';
+            };
+            (function () {
+                var d = document, s = d.createElement('script');
+                s.src = '//manuninja.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+
+    {% endif %}
 
 </article>
