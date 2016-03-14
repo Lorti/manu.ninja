@@ -26,6 +26,12 @@ layout: default
 
     <div class="Article-content">
         {{ content }}
+
+        {% if page.external %}
+            <p class="Article-link">
+                <a href="{{ page.external }}">Read more…</a>
+            </p>
+        {% endif page.external %}
     </div>
 
     {% if jekyll.environment == 'production' %}

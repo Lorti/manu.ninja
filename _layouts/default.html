@@ -27,7 +27,12 @@ layout: compress
               href="{{ '/feed.xml' | prepend: site.baseurl | prepend: site.url }}"/>
 
         <meta name="google-site-verification" content="ksUOGNNttZF4FJuFdVLzSvvTEJyh5Leip6UsFAElMSc">
-        <meta name="robots" content="index, follow">
+
+        {% if page.external %}
+            <meta name="robots" content="none">
+        {% else %}
+            <meta name="robots" content="index, follow">
+        {% endif %}
 
         <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
         <meta property="og:description" content="{% if page.summary %}{{ page.summary | strip_html | strip_newlines | truncate: 160 }} {% elsif page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
