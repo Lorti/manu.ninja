@@ -157,6 +157,11 @@ data:image/gif;base64,R0lGODlhAwACAPIFAD1KI0JSIWp2WXOIj4WVlYicngAAAAAAACH5BAAAAA
 
 That's all for now. If you like this article please share or retweet. I'd also love to hear your feedback and will answer any questions.
 
+<div class="Panel">
+    <h3 class="Panel-heading">WordPress Plugin <small>(Updated April 4, 2016)</small></h3>
+    <p class="Panel-body">I’m in the midst of writing a WordPress plugin which uses the above concepts. I will put it on GitHub and open it for feedback and pull requests once it has passed its initial review by the WordPress team.</p>
+</div>
+
 ## References
 
 [What’s In A GIF](http://www.matthewflickinger.com/lab/whatsinagif/bits_and_bytes.asp)
