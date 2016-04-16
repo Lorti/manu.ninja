@@ -9,7 +9,7 @@ Functional Reactive Programming is currently one of the hottest paradigms in the
 
 This post shows my solutions as a complete beginner to RxJS so if you notice something odd please leave a message in the comments. If you want to use code snippets in your own game feel free to copy and paste, but please link your solution so I can maybe see a different approach to some problems.
 
-The code is available on <https://github.com/Lorti/rxjs-breakout> and you can play the game below. First focus the iFrame and then use your arrow keys. Yup, doesn't work on mobile, but so did the original Cab! There is sound as well, so be wary not to shock your colleagues.
+The code is available on [GitHub](https://github.com/Lorti/rxjs-breakout) and you can play the game below. First focus the iFrame and then use your arrow keys. Yup, doesn't work on mobile, but so did the original Cab! There is sound as well, so be wary not to shock your colleagues.
 
 <p data-height="480" data-theme-id="0" data-slug-hash="JXpgBb" data-default-tab="result" data-user="Lorti" class='codepen'></p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
@@ -43,6 +43,10 @@ const input$ = Rx.Observable
 
 ## Paddle Stream
 
+Equipped with the input stream from the previous snippet we can now create a stream that returns the position of the paddle according to the player's actions. We combine the ticker with the input stream and recalculate the position on each tick. The ticker itself is shown in the next section.
+
+The pure function in the scan operator first moves the paddle based on the elapsed time since the last frame (`ticker.deltaTime`{:.js}) and then clamps the value to the boundaries of our canvas.
+
 ~~~ js
 const paddle$ = ticker$
     .withLatestFrom(input$)
@@ -56,6 +60,8 @@ const paddle$ = ticker$
 ~~~
 
 ## Ticker Stream
+
+The ticker is a simple stream that tries to give us roughly 60 ticks per second. Each tick is mapped to the current time so that we can recalculate and return the delta time.
 
 ~~~ js
 const ticker$ = Rx.Observable
@@ -74,6 +80,8 @@ const ticker$ = Rx.Observable
 
 ## Game Stream
 
+This is one of the most straightforward streams in this implementation. It combines all of the games state and the observer feeds it to the update function. The `sample` operator is used to clamp our game at 60 fps. If we would'nt do this the game would speed up as soon as the player moves the paddle. It's a weird behaviour, you should try it out. Lastly, the `takeWhile` operator checks if the player lost or won the game and completes the observable.
+
 ~~~ js
 Rx.Observable
     .combineLatest(ticker$, paddle$, objects$)
@@ -85,6 +93,8 @@ Rx.Observable
 ~~~
 
 ## Objects Stream
+
+@todo
 
 ~~~ js
 const INITIAL_OBJECTS = {
@@ -154,6 +164,10 @@ const objects$ = ticker$
 
 ## Make your browser beep with the Web Audio API
 
+Have you ever used the Web Audio API? I haven't up until now and it is great fun. The frequency formula in the observer is taken right from [Wikipedia](https://en.wikipedia.org/wiki/Piano_key_frequencies). It converts piano key numbers to frequencies. This way I can think about tones in a familiar way. Key 40 is Middle C and I can go up and down from there.
+
+A sound is played each time the ball hits the paddle, a wall or a brick. The higher up the brick the higher the pitch. My browser seemed to complain about playing too many sounds when I hit multiple bricks at once so I just sampled the observable to the beep's length.
+
 ~~~ js
 const audio = new (window.AudioContext || window.webkitAudioContext)();
 const beeper = new Rx.Subject();
@@ -171,12 +185,10 @@ const beep$ = beeper.sample(100).subscribe((key) => {
 });
 ~~~
 
-The formula is taken right from [Wikipedia](https://en.wikipedia.org/wiki/Piano_key_frequencies). It converts piano key numbers to frequencies. This way I can think about tones in a familiar way. Key 40 is Middle C and I can go up and down from there.
-
 ## Passing you the ball
 
-Improvements
-Pull Requests
-Misunderstanding on my part?
+This concludes an explanation of my RxJS Breakout implementation. Do you have suggestions for improving it? Have you noticed a misunderstanding of RxJS on my part? If so please comment below or open a pull request on [GitHub](https://github.com/Lorti/rxjs-breakout).
 
-I have yet to try out [Cycle.js](http://cycle.js.org/), maybe as soon as there is a [Canvas Driver](https://github.com/cyclejs/core/issues/157). I've been told it is an interesting alternative to React and built on top of RxJS.
+This game has been an interesting learning experience for me. To get into Functional Reactive Programming you have to let go of certain paradigms wired into your brain. I have yet to try out [Cycle.js](http://cycle.js.org/), maybe as soon as there is a [Canvas Driver](https://github.com/cyclejs/core/issues/157). I've been told it is an interesting alternative to React and built on top of RxJS.
+
+If you liked this article, please consider [sharing](https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fmanu.ninja%2Ffunctional-reactive-game-programming-rxjs-breakout&amp;text=Functional%20Reactive%20Game%20Programming%20%E2%80%93%20RxJS%20Breakout&amp;tw_p=tweetbutton&amp;url=https%3A%2F%2Fmanu.ninja%2Ffunctional-reactive-game-programming-rxjs-breakout&amp;via=manuelwieser) it with your followers.
