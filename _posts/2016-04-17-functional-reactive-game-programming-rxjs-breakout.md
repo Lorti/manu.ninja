@@ -62,7 +62,7 @@ const paddle$ = ticker$
 
 ## Ticker Stream
 
-The ticker is a simple stream that seeks to to give us roughly 60 ticks per second. Each tick is mapped to the current time so that we can recalculate and return the delta time, which we use throughout the example to smoothly update positions.
+The ticker is a simple stream that seeks to give us roughly 60 ticks per second. Each tick is mapped to the current time so that we can recalculate and return the delta time, which we use throughout the example to smoothly update positions.
 
 ~~~ js
 const ticker$ = Rx.Observable
@@ -81,7 +81,7 @@ const ticker$ = Rx.Observable
 
 ## Game Stream
 
-This is one of the most straightforward streams in our implementation. It combines all of the games state and the observer then feeds it to the update function. The `sample` operator is used to clamp our game at 60 fps. If we would'nt do this the game would speed up as soon as the player moves the paddle. It's a weird behaviour, you should definitely try it out and see what happens. Lastly, the `takeWhile` operator checks if the player lost or won the game and completes the observable.
+This is one of the most straightforward streams in our implementation. It combines all of the games state and the observer then feeds it to the update function. The `sample` operator is used to clamp our game at 60 fps. If we wouldn't do this, the game would speed up as soon as the player moves the paddle. It's a weird behaviour, you should definitely try it out and see what happens. Lastly, the `takeWhile` operator checks if the player lost or won the game and completes the observable.
 
 ~~~ js
 Rx.Observable
