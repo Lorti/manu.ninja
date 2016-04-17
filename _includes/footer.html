@@ -1,7 +1,7 @@
 <footer class="Footer">
     <div class="Column">
 
-        {% if page.title %}
+        {% if page.path contains '_posts' %}
             {% include related.html %}
         {% endif %}
 
