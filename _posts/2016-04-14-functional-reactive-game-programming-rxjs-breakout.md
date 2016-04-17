@@ -94,7 +94,7 @@ Rx.Observable
 
 ## Objects Stream
 
-@todo
+It is called objects stream in my example but it also holds the game's score, because the score depends on the number of bricks left. The stream returns a new object containing the ball's and the bricks' properties in each update cycle. The initial object holds a ball in the center of the stream, a lot of bricks and a score of `0`{:.js}.
 
 ~~~ js
 const INITIAL_OBJECTS = {
@@ -112,6 +112,8 @@ const INITIAL_OBJECTS = {
     score: 0
 };
 ~~~
+
+The more interesting part is the function that calculates the game's new state. It moves the ball according to its previous velocity vector and then checks for any collisions that might have happened, whether it be with a brick, the paddle, a wall or the floor. We change the direction of the ball if it hits something and store the collisions to play the correct sound and check whether the ball hit the floor, as this tells us that the player has lost.
 
 ~~~ js
 const objects$ = ticker$
@@ -164,7 +166,7 @@ const objects$ = ticker$
 
 ## Make your browser beep with the Web Audio API
 
-Have you ever used the Web Audio API? I haven't up until now and it is great fun. The frequency formula in the observer is taken right from [Wikipedia](https://en.wikipedia.org/wiki/Piano_key_frequencies). It converts piano key numbers to frequencies. This way I can think about tones in a familiar way. Key 40 is Middle C and I can go up and down from there.
+Have you ever used the Web Audio API? I haven't up until now and it is great fun. The frequency formula in the observer is taken right from [Wikipedia](https://en.wikipedia.org/wiki/Piano_key_frequencies). It converts piano key numbers to frequencies. This way we can think about tones in a familiar way. Key 40 is Middle C and we can go up and down from there.
 
 A sound is played each time the ball hits the paddle, a wall or a brick. The higher up the brick the higher the pitch. My browser seemed to complain about playing too many sounds when I hit multiple bricks at once so I just sampled the observable to the beep's length.
 
