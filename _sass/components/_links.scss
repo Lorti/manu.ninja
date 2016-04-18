@@ -8,9 +8,51 @@
 }
 
 .Links-item {
+    position: relative;
+}
+
+.Links-link {
     display: block;
     margin-top: -1px;
     border-top: 1px solid lightgray;
     padding-top: .6875em;
     padding-bottom: .6875em;
+}
+
+.Links-meta {
+    @include baseline(10px);
+
+    position: absolute;
+    top: 50%;
+    right: 0;
+
+    line-height: 1em;
+    margin-top: -.5em;
+
+    letter-spacing: .25em;
+    text-transform: uppercase;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    a:hover,
+    a:active {
+        color: $hover-color;
+    }
+
+    a:after {
+        content: ',';
+    }
+
+    a:last-child:after {
+        content: normal;
+    }
+}
+
+@media (max-width: 640px) {
+    .Links-meta {
+        display: none;
+    }
 }
