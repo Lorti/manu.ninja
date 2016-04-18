@@ -3,8 +3,11 @@ layout: default
 title: Coding
 permalink: /coding/
 ---
-{% for post in site.posts %}
-    {% if post.categories contains 'coding' %}
-        {% include listing.html %}
-    {% endif %}
-{% endfor %}
+
+<div class="Column">
+    {% for post in site.posts %}
+        {% if post.categories contains 'coding' %}
+            {% include listing.html %}
+        {% endif %}
+    {% endfor %}
+</div>

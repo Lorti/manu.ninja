@@ -24,11 +24,11 @@ $base-line-height: 	1.375;
         line-height: $line-height;
     }
 
-    @if $margin-top > 0 {
+    @if $margin-top != 0 {
         margin-top: $margin * $margin-top + em;
     }
 
-    @if $margin-bottom > 0 {
+    @if $margin-bottom != 0 {
         margin-bottom: $margin * $margin-bottom + em;
     }
 

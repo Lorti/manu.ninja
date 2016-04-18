@@ -3,8 +3,11 @@ layout: default
 title: Games
 permalink: /games/
 ---
-{% for post in site.posts %}
-    {% if post.categories contains 'games' %}
-        {% include listing.html %}
-    {% endif %}
-{% endfor %}
+
+<div class="Column">
+    {% for post in site.posts %}
+        {% if post.categories contains 'games' %}
+            {% include listing.html %}
+        {% endif %}
+    {% endfor %}
+</div>
