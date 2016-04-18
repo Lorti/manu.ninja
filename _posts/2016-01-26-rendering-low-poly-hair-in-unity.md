@@ -4,7 +4,6 @@ title:  Rendering Low-Poly Hair in Unity
 date:   2016-01-26
 categories: [coding, games]
 thumbnail: /images/unity-hair-rendering-thumbnail.jpg
-round: true
 ---
 
 This article leads you through my experience a few weeks ago. Let's say you have modeled and textured hair for your low-poly character and want to drop it into Unity. After importing your mesh you play with the different rendering modes of the default material and come to the conclusion that they all give you unsatisfactory results. You then settle on the Cutout rendering mode and cringe while noticing the backface culling, causing most of your hair mesh to disappear.

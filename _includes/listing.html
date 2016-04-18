@@ -26,10 +26,12 @@
     </div>
     <div class="Article-content">
 
-        {% if post.thumbnail %}
-            <div class="Grid Grid--withGutter">
-                <div class="Grid-cell u-size4of5">
-        {% endif %}
+        {% comment %}
+            {% if post.thumbnail %}
+                <div class="Grid Grid--withGutter">
+                    <div class="Grid-cell u-size4of5">
+            {% endif %}
+        {% endcomment %}
 
         {% if post.summary %}
             <p>{{ post.summary }}</p>
@@ -43,16 +45,18 @@
             </a>
         </p>
 
-        {% if post.thumbnail %}
+        {% comment %}
+            {% if post.thumbnail %}
+                    </div>
+                    <div class="Grid-cell u-size1of5">
+                        <a href="{{ post.url }}">
+                            <img class="Article-thumbnail {% if post.round %}u-round{% endif %}" src="{{ post.thumbnail }}">
+                            <meta itemprop="image" content="{{ post.thumbnail | prepend: site.url }}">
+                        </a>
+                    </div>
                 </div>
-                <div class="Grid-cell u-size1of5">
-                    <a href="{{ post.url }}">
-                        <img class="Article-thumbnail {% if post.round %}u-round{% endif %}" src="{{ post.thumbnail }}">
-                        <meta itemprop="image" content="{{ post.thumbnail | prepend: site.url }}">
-                    </a>
-                </div>
-            </div>
-        {% endif %}
+            {% endif %}
+        {% endcomment %}
 
     </div>
 </article>
