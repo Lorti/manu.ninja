@@ -27,6 +27,14 @@ layout: default
     <div class="Article-content">
         {{ content }}
 
+        {% if page.sharing %}
+            <p>
+                If you liked this article, please consider
+                <a href="https://twitter.com/intent/tweet?original_referer={{ page.url | prepend: site.url | url_escape }}&amp;text={{ page.title | url_escape }}&amp;tw_p=tweetbutton&amp;url={{ page.url | prepend: site.url | url_escape }}&amp;via=manuelwieser">sharing</a>
+                it with your followers.
+            </p>
+        {% endif %}
+
         {% if page.external %}
             <p class="Article-link">
                 <a href="{{ page.external }}">Read more…</a>

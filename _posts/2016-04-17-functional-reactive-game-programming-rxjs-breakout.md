@@ -4,6 +4,7 @@ title:  Functional Reactive Game Programming – RxJS Breakout
 date:   2016-04-17
 categories: [coding, games]
 thumbnail: /images/rxjs-breakout.png
+sharing: true
 ---
 
 Functional Reactive Programming is currently one of the hottest paradigms in the JavaScript community. I played with RxJS over the last couple of weeks and decided that there is no better way to dive into it than recreating a classic game. Computer games infamously store a lot of external state and my goal was to model everything as streams without relying on a single external state variable.
@@ -193,5 +194,3 @@ const beep$ = beeper.sample(100).subscribe((key) => {
 This concludes the explanation of my RxJS Breakout implementation. Do you have suggestions for improving it? Have you noticed a misunderstanding of RxJS on my part? If so please comment below or open a pull request on [GitHub](https://github.com/Lorti/rxjs-breakout).
 
 This game has been an interesting learning experience for me. To get into Functional Reactive Programming you have to let go of certain paradigms wired into your brain. I have yet to try out [Cycle.js](http://cycle.js.org/), maybe as soon as there is a [Canvas Driver](https://github.com/cyclejs/core/issues/157). I've been told it is an interesting alternative to React and built on top of RxJS.
-
-If you liked this article, please consider [sharing](https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fmanu.ninja%2Ffunctional-reactive-game-programming-rxjs-breakout&amp;text=Functional%20Reactive%20Game%20Programming%20%E2%80%93%20RxJS%20Breakout&amp;tw_p=tweetbutton&amp;url=https%3A%2F%2Fmanu.ninja%2Ffunctional-reactive-game-programming-rxjs-breakout&amp;via=manuelwieser) it with your followers.
