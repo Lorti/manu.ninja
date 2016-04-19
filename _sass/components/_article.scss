@@ -99,6 +99,14 @@
         font-size: .8125em;
     }
 
+    del {
+        opacity: .5;
+    }
+
+    ins {
+        text-decoration: none;
+    }
+
     blockquote {
         color: hsl(0, 0, 35%);
         padding: 0 1.375em;
