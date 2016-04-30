@@ -24,22 +24,29 @@ You may have seen Andre Staltz's tutorial gist [The introduction to Reactive Pro
 
 We are not only interested in the keys themselves but in how long the key is being hold down. If the player holds the left key pressed the paddle has to move to the left and vice versa.
 
-In the first step we create an observable that returns all keyboard events as a stream. Then in the next step we filter the events so that the stream only returns the `keyup`{:.js} and `keydown`{:.js} events of the left and right arrow keys. We then scan the stream and return a one-dimensional direction vector -- which sounds sophisticated but is really just a value of `-1`{:.js}, `0`{:.js} or `1`{:.js}, indicating where the paddle should be heading.
+<del>In the first step we create an observable that returns all keyboard events as a stream. Then in the next step we filter the events so that the stream only returns the `keyup`{:.js} and `keydown`{:.js} events of the left and right arrow keys. We then scan the stream and return a one-dimensional direction vector -- which sounds sophisticated but is really just a value of `-1`{:.js}, `0`{:.js} or `1`{:.js}, indicating where the paddle should be heading.</del>
+
+<ins>In the first step we create an observable that transform all `keydown` events to a one-dimensional direction vector -- which sounds sophisticated but is really just a value of `-1`{:.js}, `0`{:.js} or `1`{:.js}, indicating where the paddle should be heading. We then merge the first observable with a second observable that listens to all `keyup` events and resets the vector to `0`{:.js} as soon as the player lifts his finger.
+
+<ins>(Thanks to [John Lindquist](https://twitter.com/johnlindquist) for pointing out this simpler approach in the comments!)</ins>
 
 The last thing we have to take care of is that the initial Observable returns a `keydown`{:.js} event every few milliseconds while you're holding the key. The `distinctUntilChanged()`{:.js} operator enables us to push a new element down the stream only if the element is different than the one before.
 
 ~~~ js
 const input$ = Rx.Observable
     .merge(
-        Rx.Observable.fromEvent(document, 'keydown'),
-        Rx.Observable.fromEvent(document, 'keyup')
+        Rx.Observable.fromEvent(document, 'keydown', event => {
+            switch (event.keyCode) {
+                case PADDLE_KEYS.left:
+                    return -1;
+                case PADDLE_KEYS.right:
+                    return 1;
+                default:
+                    return 0;
+            }
+        }),
+        Rx.Observable.fromEvent(document, 'keyup', event => 0)
     )
-    .filter(event => event.keyCode === PADDLE_KEYS.left || event.keyCode === PADDLE_KEYS.right)
-    .scan((direction, event) => {
-        if (event.type === 'keyup') return 0;
-        if (event.keyCode === PADDLE_KEYS.left) return -1;
-        if (event.keyCode === PADDLE_KEYS.right) return 1;
-    }, 0)
     .distinctUntilChanged();
 ~~~
 
@@ -82,15 +89,12 @@ const ticker$ = Rx.Observable
 
 ## Game Stream
 
-This is one of the most straightforward streams in our implementation. It combines all of the games state and the observer then feeds it to the update function. The `sample` operator is used to clamp our game at 60 fps. If we wouldn't do this, the game would speed up as soon as the player moves the paddle. It's a weird behaviour, you should definitely try it out and see what happens. Lastly, the `takeWhile` operator checks if the player lost or won the game and completes the observable.
+This is one of the most straightforward streams in our implementation. It combines all of the games state and the observer then feeds it to the update function. The `sample` operator is used to clamp our game at 60 fps. If we wouldn't do this, the game would speed up as soon as the player moves the paddle. It's a weird behaviour, you should definitely try it out and see what happens. <del>Lastly, the `takeWhile` operator checks if the player lost or won the game and completes the observable.</del> <ins>If the player has destroyed all the bricks or the ball hit the floor the update function calls `dispose` on our subscription and ends the game.</ins>
 
 ~~~ js
-Rx.Observable
+const game = Rx.Observable
     .combineLatest(ticker$, paddle$, objects$)
     .sample(TICKER_INTERVAL)
-    .takeWhile((actors) => {
-        return !over(actors);
-    })
     .subscribe(update);
 ~~~
 
@@ -175,7 +179,7 @@ A sound is played each time the ball hits the paddle, a wall or a brick. The hig
 ~~~ js
 const audio = new (window.AudioContext || window.webkitAudioContext)();
 const beeper = new Rx.Subject();
-const beep$ = beeper.sample(100).subscribe((key) => {
+beeper.sample(100).subscribe((key) => {
 
     let oscillator = audio.createOscillator();
     oscillator.connect(audio.destination);
