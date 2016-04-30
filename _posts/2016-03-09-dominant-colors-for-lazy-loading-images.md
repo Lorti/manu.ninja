@@ -52,7 +52,7 @@ The same can of course be accomplished with the `imagick` extension in PHP. I do
 
 $image = new Imagick('test.jpg'));
 $image->resizeImage(250, 250, Imagick::FILTER_GAUSSIAN, 1);
-$image->quantizeImage(1, Imagick::COLORSPACE_LAB, 0, false, false);
+$image->quantizeImage(1, Imagick::COLORSPACE_RGB, 0, false, false);
 $image->setFormat('RGB');
 echo substr(bin2hex($image), 0, 6);
 ~~~
@@ -158,7 +158,7 @@ data:image/gif;base64,R0lGODlhAwACAPIFAD1KI0JSIWp2WXOIj4WVlYicngAAAAAAACH5BAAAAA
 That's all for now. If you like this article please share or retweet. I'd also love to hear your feedback and will answer any questions.
 
 <div class="Panel">
-    <h3 class="Panel-heading">WordPress Plugin <small>(Updated April 11, 2016)</small></h3>
+    <h3 class="Panel-heading">WordPress Plugin</h3>
     <p class="Panel-body">
         I’ve started working on a WordPress plugin called <a href="https://wordpress.org/plugins/dominant-colors-lazy-loading/">Dominant Colors Lazy Loading</a> which uses the above concepts. The code is on <a href="https://github.com/Lorti/dominant-colors-lazy-loading-wordpress-plugin">GitHub</a> and I'd very much appreciate your feedback and pull requests. The plugin is currently in its early stages but I plan on adding several features which are outlined in the repository.
     </p>
