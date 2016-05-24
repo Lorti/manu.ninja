@@ -9,7 +9,7 @@ WebGL 3D Model Viewer Using three.js
 
 <div class="FlexEmbed">
     <div class="FlexEmbed-ratio FlexEmbed-ratio--16by9">
-        <iframe class="FlexEmbed-content" src="/files/webgl-3d-model-viewer-using-three.js"></iframe>
+        <iframe class="FlexEmbed-content" src="/files/webgl-3d-model-viewer-using-three-js"></iframe>
     </div>
 </div>
 
