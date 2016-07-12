@@ -4,6 +4,7 @@ title:  WebGL 3D Model Viewer Using three.js
 date:   2016-06-30
 categories: [art, coding, games]
 summary: You can create a WebGL 3D model viewer in just a few lines of code using three.js. This tutorial shows you all you need to get started. The final code is on GitHub and you can see the viewer in action showing a low-poly model that I made for an unfinished Space Western game.
+thumbnail: /images/webgl-3d-model-viewer.jpg
 sharing: true
 ---
 
@@ -15,7 +16,7 @@ You can create a WebGL 3D model viewer in just a few lines of code using [three.
     </div>
 </div>
 
-You may want to open the above [WebGL 3D model viewer][example] to see it full screen and toggle three-point lighting by pressing the `L` key.
+You may want to open the above [WebGL 3D model viewer][example] to experience it full screen and toggle three-point lighting by pressing the `L` key.
 
 ## What do you need?
 
@@ -103,7 +104,7 @@ function render() {
 
 ## Camera
 
-The first thing we do in our `init()` function is to create a [perspective camera](http://threejs.org/docs/#Reference/Cameras/PerspectiveCamera). The arguments are sensible defaults. If your model is very large you may have to adjust the last two arguments, which are the frustum near plane and frustum far plane. They basically state that nothing nearer than one unit and nothing farther than a thousand units will be rendered.
+The first thing we do in our `init()` function is creating a [perspective camera](http://threejs.org/docs/#Reference/Cameras/PerspectiveCamera). The arguments are sensible defaults. If your model is very large you may have to adjust the last two arguments, which are the frustum near plane and frustum far plane. They basically state that nothing nearer than one unit and nothing farther than a thousand units will be rendered.
 
 ~~~ js
 camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
@@ -112,7 +113,7 @@ camera.position.z = 3;
 
 ## Scene
 
-A scene holds your camera(s), lights and models, as it would do in real life. The code below adds a white [ambient light](http://threejs.org/docs/#Reference/Lights/AmbientLight) which illuminates the whole scene and without any shading.
+A scene holds your camera(s), lights and models, as it would do in real life. The code below adds a white [ambient light](http://threejs.org/docs/#Reference/Lights/AmbientLight) which illuminates the whole scene without any shading.
 
 ~~~ js
 scene = new THREE.Scene();
@@ -122,7 +123,7 @@ scene.add(ambient);
 
 ## Lighting
 
-Do you want your viewer to have more sophisticated lighting? It is very easy to add [three-point lighting](https://en.wikipedia.org/wiki/Three-point_lighting) to your scene using [directional lights](http://threejs.org/docs/#Reference/Lights/DirectionalLight). You should dim the ambient light by setting the second argument to `0.25` or remove it altogether to see the effect.
+Do you want your scene to have more sophisticated lighting? It's very easy to add [three-point lighting](https://en.wikipedia.org/wiki/Three-point_lighting) to your scene using [directional lights](http://threejs.org/docs/#Reference/Lights/DirectionalLight). You should dim the ambient light by setting the second argument to `0.25` or remove it altogether to see the effect.
 
 ~~~ js
 keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(30, 100%, 75%)'), 1.0);
@@ -174,7 +175,7 @@ mtlLoader.load('female-croupier-2013-03-26.mtl', function (materials) {
 
 ## Renderer
 
-Up until now, nothing is rendered onto the canvas. We have to create a [renderer](http://threejs.org/docs/#Reference/Renderers/WebGLRenderer) and add it as a child of our empty element. The render loop itself is an infinite loop calling itself at 60 frames per second using `window.requestAnimationFrame()`. It updates the controls that we are adding in the next step and tells the renderer to render the scene using our only camera.
+Up until now, nothing is rendered onto the canvas. We have to create a [renderer](http://threejs.org/docs/#Reference/Renderers/WebGLRenderer) and add it as a child of our container element. The render loop itself is an infinite loop calling itself at 60 frames per second using `window.requestAnimationFrame()`. It updates the controls that we are going to add in the next step and tells the renderer to render the scene using our only camera.
 
 ~~~ js
 renderer = new THREE.WebGLRenderer();
