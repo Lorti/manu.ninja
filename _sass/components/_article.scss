@@ -119,8 +119,8 @@
         border-left: 1px solid lightgray;
     }
 
-    li code,
-    p code {
+    li > code,
+    p > code {
         display: inline;
         padding: .25em;
         white-space: nowrap;

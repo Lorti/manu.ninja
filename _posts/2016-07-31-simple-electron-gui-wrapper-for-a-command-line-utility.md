@@ -10,6 +10,8 @@ sharing: true
 This post summarizes my experience building a simple Electron app. It guides you through providing a GUI for a command-line utility. It also provides a succinct overview of the few things you really need to know when you are just getting started.
  
  The source code of the finished [Sprite Animation Generator](https://github.com/karriereat/sprite-animation-generator) -- which we'll be building -- is available on Github, as well as the source code of the original [command-line utility](https://github.com/karriereat/animation-strip-generator).
+  
+![](/images/sprite-animation-generator.png)
 
 
 
@@ -19,7 +21,7 @@ Electron enables you to build cross-platform desktop applications using Chromium
 
 
 
-## What is Electron a great fit for?
+## Why use Electron?
 
 There are compelling reasons for [building a desktop application rather than a web application](https://medium.com/@collinmathilde/why-desktop-apps-are-making-a-comeback-5b4eb0427647). But in my case the reason for choosing Electron was that it let's you build a graphical user interface just by using web technologies.
 
@@ -44,14 +46,13 @@ At karriere.at we experimented with sprite animations as an alternative to anima
 }
 </style>
 
-This is why I had created a Node.js [command-line utility](https://github.com/karriereat/animation-strip-generator) for creating sprite animations from image sequences.
-
-
+This is why I wrote a Node.js [command-line utility](https://github.com/karriereat/animation-strip-generator) for creating sprite animations from image sequences.
+    
 ~~~ bash
-animation-strip-generator test/input test/output --name bell --fps 30
+animation-strip-generator example/input example/output --name bell --fps 30
 ~~~
 
-The above command will read the image sequence from `test/input` and create a strip at `test/input/bell.png`. The strip is then pushed through [pngquant](https://pngquant.org/) for compression. You also get the necessary CSS styles for the sprite animation.
+The above command will read the image sequence from `example/input`{:.bash} and create a strip at `example/input/bell.png`{:.bash}. The strip is then pushed through [pngquant](https://pngquant.org/) for compression. You also get the necessary CSS styles for the sprite animation.
 
 ![](/images/karriere.at-bell.png)
 
@@ -72,43 +73,143 @@ This worked great, but in reality designers tend to avoid the Mac OS X Terminal 
 
 
 ## The basic structure of an Electron app
-http://electron.atom.io/docs/tutorial/quick-start/
-https://github.com/electron/electron-quick-start
 
-`package.json`
-`main.js`
-`index.html`
+I highly recommend that you read the [Quick Start](http://electron.atom.io/docs/tutorial/quick-start/) tutorial on the official page. It will tell you that you only need three files to get started:
 
-~~~ bash
-npm install electron-prebuilt --save-dev
-./node_modules/.bin/electron .
-~~~
+* A `package.json`{:.bash} with at least a `name`, `version`{:.bash} and `main`{:.bash} property. Electron will load an `index.js`{:.bash} file if there is no `main`{:.bash} specified.
+* A `main.js`{:.bash} which requires the `electron`{:.bash} module and runs the main process of your app. It creates web pages by creating `BrowserWindow`{:.bash} instances, each of which have their own renderer process.
+* An `index.html`{:.bash} file. This file can include scripts that run in the renderer process. You have access to Node.js APIs in web pages, so you can do things you wouldn't be able to in a normal browser sandbox.
+
+You should have a look at the files in the [Electron Quick Start](https://github.com/electron/electron-quick-start) repository, which you can clone an play around with. The bare minimum you have to write is as follows:
+
+1. Create a `package.json`{:.bash} with the mentioned properties and add a pre-compiled Electron binary via `npm install electron-prebuilt --save-dev`{:.bash}.
+
+        {
+            "name": "app",
+            "version": "0.1.0",
+            "main": "main.js",
+            "devDependencies": {
+                "electron-prebuilt": "^1.2.0"
+            }
+        }
+2. Create a `main.js`{:.bash} and import `app`{:.bash} and `BrowserWindow`{:.bash} from the Electron API.
+
+        const { app, BrowserWindow } = require('electron');
+        let win;
+        function createWindow() {
+            win = new BrowserWindow({ width: 800, height: 600 });
+            win.loadURL(`file://${__dirname}/index.html`);
+        }
+        app.on('ready', createWindow);
+3. Create an `index.html`. The title will be used as your window’s title.
+
+        <!doctype html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>App</title>
+        </head>
+        <body>
+            You can use Node.js <script>document.write(process.versions.node)</script> in here!
+        </body>
+        </html>
+4. Start your app with `./node_modules/.bin/electron .`{:.bash} or add an npm script in your `package.json`{:.bash} and start your app via `npm start`{:.bash}.
+        
+        {
+            "name": "app",
+            "version": "0.1.0",
+            "main": "main.js",
+            "scripts": {
+                "start": "electron ."
+            },
+            "devDependencies": {
+                "electron-prebuilt": "^1.2.0"
+            }
+        }
+
 
 
 
 ## What the API offers you
-https://github.com/electron/electron-api-demos
-http://electron.atom.io/docs/api/
 
+Developing an Electron app is basically requiring and using what the [Electron API](http://electron.atom.io/docs/api/) offers. The rest is familiar browser and Node.js coding.
 
+To get an overview of what is possible download the [Electron API Demos](https://github.com/electron/electron-api-demos) app, which demonstrates the most important features of the API. You can control your application's life cycle, create and control browser windows, create native application menus and context menus or even add a tray icon to the system’s notification area.
 
-## Communication between processes
-http://electron.atom.io/docs/api/ipc-main/
-http://electron.atom.io/docs/api/ipc-renderer/
-
-The `ipcMain` and `ipcRenderer` modules are instances of the standard Node.js `EventEmitter` class. They can be used to communicate asynchronously between the main process and the renderer process.
+For the Sprite Animation Generator I had to use the `app`, `BrowserWindow`, `ipcMain`, `ipcRenderer`, `remote` and `dialog` modules.
 
 
 
 ## Building an interface
-CSS
-Foundation
-![](/images/sprite-animation-generator.png)
+
+Building an interface in Electron is just using your existing HTML/CSS skills. This means you have all the freedom you have in a web application, but at the same time your app won't look and feel native, if this is a concern to you. I have simply used the latest Foundation framework to speed things up.
+
+
+
+## Communication between processes
+
+The `ipcMain` and `ipcRenderer` modules are instances of the standard Node.js `EventEmitter` class. They can be used to communicate asynchronously between the main process and the renderer process. In the Sprite Animation Generator the main process listens for form submission and then executes the `generator` function.
+
+~~~
+const { ..., ipcMain } = require('electron');
+const generator = require('animation-strip-generator');
+
+function handleSubmission() {
+    ipcMain.on('did-submit-form', (event, argument) => {
+        const { source, destination, name, fps } = argument;
+        generator(source, destination, name, fps).then(
+            success => {
+                console.log(success);
+                event.sender.send('processing-did-succeed', /^(.*?.html)/m.exec(success)[1]);
+            },
+            error => {
+                console.log(error);
+                event.sender.send('processing-did-fail', error);
+            }
+        );
+    });
+}
+
+app.on('ready', () => {
+    createWindow();
+    handleSubmission();
+});
+~~~
+
+The renderer process collects data from existing form elements and submits it via an event to the main process. I have skipped the selection of DOM elements -- they are stored in the `buttons` and `inputs` variables.
+
+~~~
+const { ..., ipcRenderer } = require('electron');
+
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    ipcRenderer.send('did-submit-form', {
+        source: inputs.source.value,
+        destination: inputs.destination.value,
+        name: inputs.name.value,
+        fps: inputs.fps.value,
+    });
+});
+~~~
 
 
 
 ## File dialogs
-http://electron.atom.io/docs/api/dialog/
+
+The renderer process in Electron is not allowed to call native GUI APIs, as this can be very dangerous. Therefore GUI modules are only available in the main process. You have to send an event and ask the main process to perform GUI operations. To make this simpler Electron provides a `remote` module.
+
+The buttons labeled "Choose Directory" both have an event listener that displays a file dialog via the `dialog` module. The dialog where the user is prompted to select a destination folder also uses the `showOpenDialog()` function with an additional `createDirectory` property.
+
+~~~
+buttons.source.addEventListener('click', () => {
+    const directory = dialog.showOpenDialog({
+        properties: ['openDirectory'],
+    });
+    if (directory) {
+        inputs.source.value = directory;
+    }
+});
+~~~
 
 
 
