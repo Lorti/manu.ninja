@@ -148,7 +148,7 @@ Building an interface in Electron is just using your existing HTML/CSS skills. T
 
 ## Communication between processes
 
-The `ipcMain` and `ipcRenderer` modules are instances of the standard Node.js `EventEmitter` class. They can be used to communicate asynchronously between the main process and the renderer process. In the Sprite Animation Generator the main process listens for form submission and then executes the `generator` function.
+The `ipcMain` and `ipcRenderer` modules are instances of the standard Node.js `EventEmitter` class. They can be used to communicate asynchronously between the main process and the renderer process. In the Sprite Animation Generator the main process listens for form submission and then executes the `generator` function. It returns an event to the renderere process on success and failure, so the user can be notified.
 
 ~~~
 const { ..., ipcMain } = require('electron');
@@ -160,7 +160,7 @@ function handleSubmission() {
         generator(source, destination, name, fps).then(
             success => {
                 console.log(success);
-                event.sender.send('processing-did-succeed', /^(.*?.html)/m.exec(success)[1]);
+                event.sender.send('processing-did-succeed', success);
             },
             error => {
                 console.log(error);
@@ -176,7 +176,7 @@ app.on('ready', () => {
 });
 ~~~
 
-The renderer process collects data from existing form elements and submits it via an event to the main process. I have skipped the selection of DOM elements -- they are stored in the `buttons` and `inputs` variables.
+The renderer process collects data from existing form elements and submits it via an event to the main process. I have skipped the selection of DOM elements -- they are referenced in the `buttons` and `inputs` objects. Have a look at the [Sprite Animation Generator](https://github.com/karriereat/sprite-animation-generator) repository for the full source code.
 
 ~~~
 const { ..., ipcRenderer } = require('electron');
@@ -214,35 +214,43 @@ buttons.source.addEventListener('click', () => {
 
 
 ## Distribution
-https://github.com/electron-userland/electron-packager
 
-Package and distribute your Electron app with OS-specific bundles (.app, .exe etc) via JS or CLI
+If your app is finished you can use [Electron Packager](https://github.com/electron-userland/electron-packager) to package and distribute your app. Add it to your dependencies with `npm install electron-packager --save-dev`{:.bash} and execute it once with `./node_modules/.bin/electron-packager ./ --all`{:.bash}. This will generate packages for all platforms and architectures Electron can handle and may take a few minutes.
 
-~~~ bash
-./node_modules/.bin/electron-packager ./ --all`
+I have added an npm script that only builds Mac OS X and Windows x64 packages. The `--prune`{:.bash} flag tells Electron Packager to prune unnecessary files, like npm modules that are listed as `devDependencies`{:.bash}. Be sure to add a `productName`{:.bash} field in your `package.json`. This is be the name that Electron Packager uses for your app.
+
+~~~
+{
+  "name": "sprite-animation-generator",
+  "productName": "Sprite Animation Generator",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-packager ./ --platform=darwin,win32 --arch=x64 --prune --overwrite"
+  },
+  "dependencies": {
+    "animation-strip-generator": "https://github.com/karriereat/animation-strip-generator.git#master"
+  },
+  "devDependencies": {
+    "electron-packager": "^7.3.0",
+    "electron-prebuilt": "^1.2.0"
+  }
+}
 ~~~
 
+This is all you need to create an app you can send to your friends and colleagues. If you want to publish an app you should use [Electron Builder](https://github.com/electron-userland/electron-builder), which is a complete solution to build installers. It uses the Electron Packer under the hood and deals with additional concerns like icons, code signing, version management and updating your apps automatically.
+
+
+
+## Conclusion
+
+Working with Electron is fun and entertaining, once you have grasped the underlying concepts. Using Electron does not come without problems, though. The most commonly mentioned is the large size of application packages. This is the size of the Sprite Animation Generator apps Electron Packager builds:
 
 * 146,2 MB on Mac OS X (55,3 MB when compressed for distribution)
 * 160,4 MB on Windows (64,8 MB when compressed for distribution)
 
-https://github.com/electron-userland/electron-builder
-Complete solution to build ready for distribution and 'auto update' Electron App installers
-uses the packager under the hood and deals with additional concerns like icons, installers and updating your apps automatically
+Another problem I have encountered is working with third-party binaries, as I have tried to bundle ImageMagick in my Sprite Animation Generator. Eventually I gave up and used [jimp](https://github.com/oliver-moran/jimp), which is entirely written in JavaScript, as I don't want our designers to install dependencies before using this or other tools in the future.
 
+If you want to dive deeper into creating desktop applications with Electron have a look at [Awesome Electron](https://github.com/sindresorhus/awesome-electron), a list of useful resources by Sindre Sorhus. It also features a list of open-source apps. I find them immensely valuable, as you can read the code and see how the Electron API can be used in real-life. You also see different ways of structuring your app, from simple projects to large projects like Atom.
 
-
-## Problems
-precompiled third-party binaries like ImageMagick
-stay with JavaScript dependencies, so your designers don't have to install dependencies
-environment variables
-sandbox outside of App Store on Mac OS X
-large application
-
-
-
-## Further reading
-https://github.com/sindresorhus/awesome-electron
-
-alternatives
-http://nwjs.io/
+Electron is of course not the only framework that allows you to build desktop applications with web technologies. A popular alternative is [NW.js](http://nwjs.io/) and there are also commercial contenders like [Tint](https://www.trueinteractions.com/index.html).
