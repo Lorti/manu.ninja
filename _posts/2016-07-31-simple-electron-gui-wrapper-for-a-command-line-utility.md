@@ -30,7 +30,7 @@ This has been done with other tools like [ImageOptim](https://imageoptim.com/mac
 
 At [karriere.at](http://www.karriere.at/) we experimented with sprite animations as an alternative to animating SVGs with CSS. This way we can shift a bit of workload from the programmers to the designers, while also giving the designers much more creative freedom. 
 
-One of my colleagues created a bell animation in After Effects and we then searched the web for a tool that would allow her to create a CSS sprite animation, which we didn't find. Most of the tools were concerned with packing icons for traditional icon sprites.
+One of my colleagues, [Daniela Schmid](https://twitter.com/schmidxdaniela), created a bell animation in After Effects and we then searched the web for a tool that would allow her to create a CSS sprite animation, which we didn't find. Most of the tools were concerned with packing icons for traditional icon sprites.
 
 <p id="bell"></p>
 
