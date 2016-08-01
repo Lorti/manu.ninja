@@ -160,7 +160,7 @@ That's all for now. If you like this article please share or retweet. I'd also l
 <div class="Panel">
     <h3 class="Panel-heading">WordPress Plugin</h3>
     <p class="Panel-body">
-        I’ve started working on a WordPress plugin called <a href="https://wordpress.org/plugins/dominant-colors-lazy-loading/">Dominant Colors Lazy Loading</a> which uses the above concepts. The code is on <a href="https://github.com/Lorti/dominant-colors-lazy-loading-wordpress-plugin">GitHub</a> and I'd very much appreciate your feedback and pull requests. The plugin is currently in its early stages but I plan on adding several features which are outlined in the repository.
+        I’ve started working on a WordPress plugin called <a href="https://wordpress.org/plugins/dominant-colors-lazy-loading/">Dominant Colors Lazy Loading</a> which uses the above concepts. The code is on <a href="https://github.com/Lorti/dominant-colors-lazy-loading-wordpress-plugin">GitHub</a> and I'd very much appreciate your feedback and pull requests.
     </p>
 </div>
 
