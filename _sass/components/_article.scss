@@ -102,7 +102,17 @@
     }
 
     code {
+        display: inline;
+        padding: .25em;
+        white-space: nowrap;
         font-size: .8125em;
+    }
+
+    pre code {
+        display: block;
+        padding: .5em;
+        white-space: pre;
+        overflow-x: auto;
     }
 
     del {
@@ -117,15 +127,6 @@
         color: hsl(0, 0, 35%);
         padding: 0 1.375em;
         border-left: 1px solid lightgray;
-    }
-
-    li > code,
-    p > code,
-    p > del > code,
-    p > ins > code {
-        display: inline;
-        padding: .25em;
-        white-space: nowrap;
     }
 }
 
