@@ -3,7 +3,7 @@ layout: post
 title:  “Why Do You Need so Many Developers?”
 date:   2015-11-17
 categories: coding
-external: http://www.karriere.at/dev-blog/article/view/viele-entwickler-homepage
+external: http://dev.karriere.at/a/viele-entwickler-homepage
 sitemap: false
 ---
 
