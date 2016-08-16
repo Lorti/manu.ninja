@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Inline SVG or: How I Learned to Stop Worrying and Love gzip"
-date:   2016-08-10
+title:  Inline SVG – How I Learned to Stop Worrying and Love gzip
+date:   2016-08-17
 categories: coding
 sharing: true
 ---
@@ -14,36 +14,42 @@ Don't Overthink It (Flexbox) Grids
 state-of-the-art and best practice implementations have some shortcomings
 -->
 
+What If I told you, that you can inline all of your SVG icons and stop worrying about the alternatives? In this article I suggest that you make your life easier by embracing gzip and replacing all of your `<use>` references.
 
-## Status of implementation options and their problems
+The web community has switched from [sprite sheets](http://alistapart.com/article/sprites) to [icon fonts](https://24ways.org/2011/displaying-icons-with-fonts-and-data-attributes) to [SVG icon systems](https://24ways.org/2014/an-overview-of-svg-sprite-creation-techniques/) all in only ten years. We have done this for the sake of user experience, while sometimes putting developer happiness aside and maybe over-engineering the basic task of displaying an image.
 
-* `<img>` and `<picture>` does not let you manipulate your icons.
+While using SVG icons has many benefits -- like them being small, flexible and sharp -- we still have to deal with annoyances and browser inconsistencies and often depend on authoring/build pipelines of various complexity. What are some of the popular implementation options and the problems you might have already encountered?
 
-* Using as a background image limits manipulation options and Base64-encoded SVGs are often larger than the original.
+* `<img>` and `<picture>` do not let you manipulate your icons.
+
+* `background-image: url(...)`{:.css} limits manipulation options and Base64-encoded SVGs are often larger than the original.
 
 * `<iframe>`, `<embed>` and `<object>` do not let you style your SVG directly and add a significant overhead to your site when used several times.
 
 * Putting your SVG code inline saves an HTTP request but the image won't get cached by the browser.
 
-* Sprites using <symbol> and <use> are one of my favorites but they add overhead via the explicit references and if you use them on a landing page you will either have to create a specific set for it in the build process or load icons you don't need on the page, adding to the overhead.
+* Sprites using `<symbol>` and `<use>` are one of my favorites but they add overhead via the explicit references you will either have to create different sets for different sites in the build process or load icons you don't need on the page, adding to the overhead.
 
-* Sprites come with additional problems, you still need a fallback for external references like `xlink:href="path/to/icons.svg#icon"` in all versions of Internet Explorer and the first version of Edge.
+* Sprites come with additional problems, as you still need a fallback for external references in the style of `xlink:href="path/to/icons.svg#icon"` in all versions of Internet Explorer and early versions of Edge.
 
 * Sprites have to be hidden or they will take up space on the page. Hiding and referencing leads to various implementation-specific problems. Have yourself a good time and spend a day with `<defs>`, `<symbol>`, `<use>` and [linear gradients](https://bugzilla.mozilla.org/show_bug.cgi?id=353575) in Firefox.
 
-* You also have to use fragment identifiers that may clash with IDs and you require a build step in which you have to either manually define which icons should be grouped into a set or try to determine the icons your individual pages depend on. This has become a problem for us when switching to webpack and npm scripts for our build process in a current project. It also undermines the idea of independent front-end components, as icon sprites have to be already present on a page to be used. There are ways to request the sprite from within the component but this approach is far from elegant.
+* You have to use fragment identifiers for `xlink:href`{:.html}, meaning you have to be careful with ID attributes.
+ 
+* You require a build step in which you have to either manually define which icons should be grouped into a set or try to determine the icons your individual pages depend on.<br>
+This has become a problem for us when switching to webpack and npm scripts for our build process in a current project. It also undermines the idea of independent front-end components, as icon sprites have to be already present on a page to be used. There are ways to request the sprite from within the component but this approach is far from elegant.
 
-* People have also begun to borrow methods from font loading like storing sprites in the local storage for better performance, which further complicates the matter.
+* People have begun to borrow methods from font loading like [storing sprites in the local storage](http://osvaldas.info/caching-svg-sprite-in-localstorage) for better performance, which I think is great but further complicates the matter.
 
-* Having all these different implementation options and quirks has to be a nightmare for newcomers to web development.
+* Having all these different implementation options and quirks has to be a nightmare for newcomers to web development. [Stay hungry, stay foolish!](https://www.youtube.com/watch?v=UF8uR6Z6KLc)
 
-This is just an excerpt of the things that come to my head right away that I have experienced in the last years. Which is why I want to suggest a radically simpler approach in this article. I am now in favor of inlining SVG as it saves you a lot of headaches, it is the easiest to manipulate and may not even require a build process in certain projects, given that your SVG icons are optimized already.
+This is just an excerpt of the things that come to my head right away and that I have experienced in the last years. Which is why I want to suggest a radically simpler approach. I'm in favor of inlining SVG as it saves you a lot of headaches, is the easiest to manipulate and may not even require a build process in certain projects, given that your SVG icons are already optimized.
 
-This of course means to relinquish browser caching. But in my opinion the ease of implementation and that only the icons actually present on a page will be sent makes up for it, especially on initial load.
+This of course means to relinquish browser caching. But in my opinion the ease of implementation and that you only send the icons actually present on a page makes up for it, especially on initial page load.
 
 
 
-## gzip experiment using an existing icon set
+## Applying gzip to a prototypal SVG icon system
 
 What enables us to get rid of sprites, build processes and implementation-specific problems is our old friend gzip.
 
@@ -57,52 +63,52 @@ The way LZ77 works can be compared to what you do manually when using `<use>` in
 
 * `duplicates.html` contains each of the 223 SVG icons inlined in the HTML, 10 times in a row.
 
-* `some-duplicates.html` contains each of the 223 SVG icons inlined in the HTML, with 4 icons repeated 20 times.
+* `realistic.html` contains each of the 223 SVG icons inlined in the HTML, with 4 icons repeated 20 times.
 
 ```
 html
  68168 open-iconic-references.html
  59903 open-iconic-inline.html
 594522 open-iconic-duplicates.html
- 86985 open-iconic-some-duplicates.html
+ 86985 open-iconic-realistic.html
 
 html-gzip-1
  17884 open-iconic-references.html.gz
  14461 open-iconic-inline.html.gz
 139610 open-iconic-duplicates.html.gz
- 15334 open-iconic-some-duplicates.html.gz
+ 15334 open-iconic-realistic.html.gz
 
 html-gzip-6
  14986 open-iconic-references.html.gz
  11517 open-iconic-inline.html.gz
 104971 open-iconic-duplicates.html.gz
- 12135 open-iconic-some-duplicates.html.gz
+ 12135 open-iconic-realistic.html.gz
 
 minified
  68167 open-iconic-references.min.html
  59003 open-iconic-inline.min.html
 585522 open-iconic-duplicates.min.html
- 85525 open-iconic-some-duplicates.min.html
+ 85525 open-iconic-realistic.min.html
 
 minified-gzip-1
  17888 open-iconic-references.min.html.gz
  14323 open-iconic-inline.min.html.gz
 138102 open-iconic-duplicates.min.html.gz
- 15213 open-iconic-some-duplicates.min.html.gz
+ 15213 open-iconic-realistic.min.html.gz
 
 minified-gzip-6
  14990 open-iconic-references.min.html.gz
  11424 open-iconic-inline.min.html.gz
 103887 open-iconic-duplicates.min.html.gz
- 12029 open-iconic-some-duplicates.min.html.gz
+ 12029 open-iconic-realistic.min.html.gz
 ```
 
 <table>
     <tr>
         <th></th>
-        <th>Minified HTML</th>
-        <th>gzip -1<br>(nginx Default)</th>
-        <th>gzip -6<br>(CLI Default)</th>
+        <th>Minified</th>
+        <th>gzip -1</th>
+        <th>gzip -6</th>
     </tr>
     <tr>
         <td>References</td>
@@ -123,14 +129,14 @@ minified-gzip-6
         <td>103887</td>
     </tr>
     <tr>
-        <td>Some Duplicates</td>
+        <td>Realistic</td>
         <td>85525</td>
         <td>15213</td>
         <td>12029</td>
     </tr>
 </table>
 
-The icons in `some-duplicates.html` were selected to have different "representative" lengths, similar to what might be used on a real page – most of the icons once, and few of the icons often.
+The icons in `realistic.html` were selected to have different "representative" lengths, similar to what might be used on a real page – most of the icons once, and few of the icons often.
 
 ```
 <svg class="icon" width="8" height="8" viewBox="0 0 8 8">
@@ -157,6 +163,11 @@ Another tip is to make sure the ordering of your attributes is the same througho
 
 You should of course test this for your project and if it also applies to you. Different prerequisites lead to different results.
 
+Benfits of this approach:
+
+*
+
+Don't overthink it
 stop worrying
 
 can be compared to Hugo Giraudel's [conclusion](https://www.sitepoint.com/avoid-sass-extend/) about `@include` versus `@extend` in Sass
@@ -167,3 +178,5 @@ If you are still not convinced take a a look at GitHub's source code and marvel 
 ```
 <svg aria-hidden="true" class="octicon octicon-bell" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M14 12v1H0v-1l.73-.58c.77-.77.81-2.55 1.19-4.42C2.69 3.23 6 2 6 2c0-.55.45-1 1-1s1 .45 1 1c0 0 3.39 1.23 4.16 5 .38 1.88.42 3.66 1.19 4.42l.66.58H14zm-7 4c1.11 0 2-.89 2-2H5c0 1.11.89 2 2 2z"></path></svg>
 ```
+
+Have I missed something? Do you feel there's a flaw in this logic? I'm happy to discuss your thoughts about this approach. 
