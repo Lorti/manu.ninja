@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Inline SVG – How I Learned to Stop Worrying and Love gzip
-date:   2016-08-17
+date:   2016-08-28
 categories: coding
 sharing: true
 ---
@@ -11,11 +11,6 @@ What If I told you, that you can inline all of your SVG icons and stop worrying 
 The web community has switched from [sprite sheets](http://alistapart.com/article/sprites) to [icon fonts](https://24ways.org/2011/displaying-icons-with-fonts-and-data-attributes) to [SVG icon systems](https://24ways.org/2014/an-overview-of-svg-sprite-creation-techniques/) all in only ten years. We have done this for the sake of user experience, while sometimes putting developer happiness aside and maybe over-engineering the basic task of displaying an image.
 
 While using SVG icons has many benefits -- like them being small, flexible and sharp -- we still have to deal with annoyances and browser inconsistencies and depend on authoring/build pipelines of various complexity. What are the implementation options and the problems you might have already encountered?
-
-<!--
-## Implementation options and their shortcomings
-> There's always a catch.
--->
 
 * `<img>`{:.html} and `<picture>`{:.html} do not let you manipulate your icons.
 
@@ -104,13 +99,6 @@ minified-gzip-6
 
 The icons in `realistic.html`{:.bash} were selected to have different "representative" lengths, similar to what might be used on a real page – most of the icons once, and few of the icons often.
 
-The byte sizes show a few interesting things.
-
-* gzip -6 around 3 KB smaller than gzip -1
-* changes from normal to minified HTML can be neglected
-* reusing icons that are already present on a page only adds a small amount of data
-* you should be able to serve your HTML in under 14,6 KB with ease, transferring all of your data in [TCP's initial window](https://tools.ietf.org/html/rfc6928), ergo your first round-trip
-
 ~~~ html
 <svg class="icon" width="8" height="8" viewBox="0 0 8 8">
     <path d="M0 0v1h8v-1h-8zm2 2v1h6v-1h-6zm-2 2v1h8v-1h-8zm2 2v1h6v-1h-6z"/>
@@ -128,7 +116,14 @@ The byte sizes show a few interesting things.
 </svg>
 ~~~
 
-The compression level can be set via the `DeflateCompressionLevel` directive in Apache [mod_deflate](http://httpd.apache.org/docs/current/mod/mod_deflate.html) and the `gzip_comp_level` directive in nginx' [ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) module.
+What you can see in the prior `ls -l *`{:.bash} output is that the byte sizes show a few interesting things.
+
+* `gzip -6`{:.bash} is around 3 KB smaller than `gzip -1`{:.bash}, so you should play with the compression level.
+* The difference between normal and minified HTML can be neglected, as the icons are already optimized.
+* Reusing icons that are already present on a page only adds a small amount of data.
+* You should be able to serve your HTML in under 14,2 KB easily, transferring all of your data in [TCP's initial window](https://tools.ietf.org/html/rfc6928).
+
+The compression level can be set via the `DeflateCompressionLevel`{:.bash} directive in Apache [mod_deflate](http://httpd.apache.org/docs/current/mod/mod_deflate.html) and the `gzip_comp_level`{:.bash} directive in nginx' [ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) module.
 
 Another tip is to make sure the ordering of your attributes is the same throughout your page. This makes it easier for gzip to repeat the string by reducing the entropy in your data.
 
