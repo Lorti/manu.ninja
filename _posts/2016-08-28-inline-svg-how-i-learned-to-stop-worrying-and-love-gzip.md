@@ -10,6 +10,8 @@ What If I told you, that you can inline all of your SVG icons and stop worrying 
 
 The web community has switched from [sprite sheets](http://alistapart.com/article/sprites) to [icon fonts](https://24ways.org/2011/displaying-icons-with-fonts-and-data-attributes) to [SVG icon systems](https://24ways.org/2014/an-overview-of-svg-sprite-creation-techniques/) all in only ten years. We have done this for the sake of user experience, while sometimes putting developer happiness aside and maybe over-engineering the basic task of displaying an image.
 
+![](/images/general-buck-turgidson.gif)
+
 While using SVG icons has many benefits -- like them being small, flexible and sharp -- we still have to deal with annoyances and browser inconsistencies and depend on authoring/build pipelines of various complexity. What are the implementation options and the problems you might have already encountered?
 
 * `<img>`{:.html} and `<picture>`{:.html} do not let you manipulate your icons.
@@ -33,7 +35,7 @@ This has become a problem for us when switching to webpack and npm scripts for o
 
 * People have begun to borrow methods from font loading like [storing sprites in the local storage](http://osvaldas.info/caching-svg-sprite-in-localstorage) for better performance, which I think is great but further complicates the matter.
 
-* Having all these different implementation options and quirks has to be a nightmare for newcomers to web development. [Stay hungry, stay foolish!](https://www.youtube.com/watch?v=UF8uR6Z6KLc)
+* Having all these different implementation options and quirks has to be a nightmare for newcomers to web development.
 
 This is just an excerpt of the things that come to my head right away and that I have experienced in the last years. I don't want to diminish existing solutions and the "shoulders of giants" I've myself sat on. I solely want to suggest a radically simpler approach. I'm in favor of inlining SVG as it saves you a lot of headaches, is the easiest to manipulate and may not even require a build process in certain projects, given that your SVG icons are already optimized.
 
@@ -131,18 +133,15 @@ Another tip is to make sure the ordering of your attributes is the same througho
 
 ## Conclusion
 
-You should of course test this for your project and if it also applies to you. Different prerequisites lead to different results.
+You should of course test this for your project and if it also applies to you. Different prerequisites lead to different results. But I hope that you see the benefits of this approach.
 
-Benefits of this approach:
+* You can stop worrying and just SVG icons as creatively as you'd like.
+* You are keeping it simple by using a "Don't overthink it" approach.
+* You can serve your "critical icons" in your first request.
 
-* stop worrying
-* Don't overthink it
-* "critical icons" in your first request
+In some ways this solution can be compared to Hugo Giraudel's [conclusion](https://www.sitepoint.com/avoid-sass-extend/) about `@include`{:.css} versus `@extend`{:.css} in Sass. gzip eliminates the alleged disadvantage of printing the same CSS declarations repeatedly.
 
-can be compared to Hugo Giraudel's [conclusion](https://www.sitepoint.com/avoid-sass-extend/) about `@include`{:.css} versus `@extend`{:.css} in Sass
-
-
-If you are still not convinced take a a look at GitHub's source code and marvel at their "octicons!"
+If you are still not convinced take a a look at GitHub's source code and marvel at their "octicons"!
 
 ~~~ html
 <svg aria-hidden="true" class="octicon octicon-bell" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M14 12v1H0v-1l.73-.58c.77-.77.81-2.55 1.19-4.42C2.69 3.23 6 2 6 2c0-.55.45-1 1-1s1 .45 1 1c0 0 3.39 1.23 4.16 5 .38 1.88.42 3.66 1.19 4.42l.66.58H14zm-7 4c1.11 0 2-.89 2-2H5c0 1.11.89 2 2 2z"></path></svg>
