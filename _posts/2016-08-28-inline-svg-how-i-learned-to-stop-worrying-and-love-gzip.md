@@ -3,6 +3,7 @@ layout: post
 title:  Inline SVG – How I Learned to Stop Worrying and Love gzip
 date:   2016-08-28
 categories: coding
+thumbnail: /images/general-buck-turgidson.gif
 sharing: true
 ---
 
@@ -88,7 +89,7 @@ minified
 
 minified-gzip-1
  17888 open-iconic-references.min.html.gz
- 14323 open-iconic-inline.min.html.gz     # 3,656 smaller than referenced icons
+ 14323 open-iconic-inline.min.html.gz     # 3,656 bytes smaller than referenced icons
 138102 open-iconic-duplicates.min.html.gz
  15213 open-iconic-realistic.min.html.gz  # 6.2 % larger (890 bytes) than all inlined icons
 
@@ -144,7 +145,9 @@ In some ways this solution can be compared to Hugo Giraudel's [conclusion](https
 If you are still not convinced take a a look at GitHub's source code and marvel at their "octicons"!
 
 ~~~ html
-<svg aria-hidden="true" class="octicon octicon-bell" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M14 12v1H0v-1l.73-.58c.77-.77.81-2.55 1.19-4.42C2.69 3.23 6 2 6 2c0-.55.45-1 1-1s1 .45 1 1c0 0 3.39 1.23 4.16 5 .38 1.88.42 3.66 1.19 4.42l.66.58H14zm-7 4c1.11 0 2-.89 2-2H5c0 1.11.89 2 2 2z"></path></svg>
+<svg aria-hidden="true" class="octicon octicon-bell" height="16" version="1.1" viewBox="0 0 14 16" width="14">
+    <path d="M14 12v1H0v-1l.73-.58c.77-.77.81-2.55 1.19-4.42C2.69 3.23 6 2 6 2c0-.55.45-1 1-1s1 .45 1 1c0 0 3.39 1.23 4.16 5 .38 1.88.42 3.66 1.19 4.42l.66.58H14zm-7 4c1.11 0 2-.89 2-2H5c0 1.11.89 2 2 2z"></path>
+</svg>
 ~~~
 
 Have I missed something? Do you feel there's a flaw in this logic? I'm happy to discuss your thoughts about this approach. 
