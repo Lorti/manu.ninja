@@ -11,34 +11,34 @@ What If I told you, that you can inline all of your SVG icons and stop worrying 
 
 The web community has switched from [sprite sheets](http://alistapart.com/article/sprites) to [icon fonts](https://24ways.org/2011/displaying-icons-with-fonts-and-data-attributes) to [SVG icon systems](https://24ways.org/2014/an-overview-of-svg-sprite-creation-techniques/) all in only ten years. We have done this for the sake of user experience, while sometimes putting developer happiness aside and maybe over-engineering the basic task of displaying an image.
 
-![](/images/general-buck-turgidson.gif)
-
 While using SVG icons has many benefits -- like them being small, flexible and sharp -- we still have to deal with annoyances and browser inconsistencies and depend on authoring/build pipelines of various complexity. What are the implementation options and the problems you might have already encountered?
 
 * `<img>`{:.html} and `<picture>`{:.html} do not let you manipulate your icons.
 
 * `background-image: url(...)`{:.css} limits manipulation options and Base64-encoded SVGs are often larger than the original.
 
-* `<iframe>`{:.html}, `<embed>`{:.html} and `<object>`{:.html} do not let you style your SVG directly and add a significant overhead to your site when used several times.
+* `<iframe>`{:.html}, `<embed>`{:.html} and `<object>`{:.html} do not let you style your SVGs directly and add a significant overhead to your site when used several times.
 
-* Putting your SVG code inline saves an HTTP request but the image won't get cached by the browser.
+* Putting your SVGs inline saves one or many HTTP requests but the images won't get cached by the browser.
 
-* Sprites using `<symbol>`{:.html} and `<use>`{:.html} are one of my favorites but they add overhead via the explicit references you will either have to create different sets for different sites in the build process or load icons you don't need on the page, adding to the overhead.
+* Sprites using `<symbol>`{:.html} and `<use>`{:.html} are one of my favorites but they add overhead via explicit references. You will also have to create different sets for different sites in the build process or load icons you don't need on the page, adding to the overhead.
 
 * Sprites come with additional problems, as you still need a fallback for external references in the style of `xlink:href="path/to/icons.svg#icon"`{:.html} in all versions of Internet Explorer and early versions of Edge.
 
 * Sprites have to be hidden or they will take up space on the page. Hiding and referencing leads to various implementation-specific problems. Have yourself a good time and spend a day with `<defs>`{:.html}, `<symbol>`{:.html}, `<use>`{:.html} and [linear gradients](https://bugzilla.mozilla.org/show_bug.cgi?id=353575) in Firefox.
 
-* You have to use fragment identifiers for `xlink:href`{:.html}, meaning you have to be careful with ID attributes.
+* You have to use fragment identifiers for `xlink:href`{:.html}, meaning you have to be careful with IDs.
  
 * You require a build step in which you have to either manually define which icons should be grouped into a set or try to determine the icons your individual pages depend on.<br>
-This has become a problem for us when switching to webpack and npm scripts for our build process in a current project. It also undermines the idea of independent front-end components, as icon sprites have to be already present on a page to be used. There are ways to request the sprite from within the component but this approach is far from elegant.
+This has become a problem for us when switching to _webpack_ and npm scripts for our build process in a current project. It also undermines the idea of independent front-end components, as icon sprites have to be already present on a page to be used. There are ways to request the sprite from within the components but this approach is far from elegant.
 
 * People have begun to borrow methods from font loading like [storing sprites in the local storage](http://osvaldas.info/caching-svg-sprite-in-localstorage) for better performance, which I think is great but further complicates the matter.
 
 * Having all these different implementation options and quirks has to be a nightmare for newcomers to web development.
 
-This is just an excerpt of the things that come to my head right away and that I have experienced in the last years. I don't want to diminish existing solutions and the "shoulders of giants" I've myself sat on. I solely want to suggest a radically simpler approach. I'm in favor of inlining SVG as it saves you a lot of headaches, is the easiest to manipulate and may not even require a build process in certain projects, given that your SVG icons are already optimized.
+![](/images/general-buck-turgidson.gif)
+
+This is just an excerpt of the things that come to my head right away and that I have experienced in the last years. I don't want to diminish existing solutions. I solely want to suggest a radically simpler approach, which you might add to your inventory and consider for your next project. I'm in favor of inlining SVG as it saves you a lot of headaches, is the easiest to manipulate and may not even require a build process in certain projects, given that your SVG icons are already optimized.
 
 This of course means to relinquish browser caching. But in my opinion the ease of implementation and that you only send the icons actually present on a page makes up for it, especially on initial page load.
 
@@ -50,7 +50,7 @@ What enables us to get rid of sprites, build processes and implementation-specif
 
 gzip is based on LZ77 and Huffman coding, which you may have heard of as the DEFLATE algorithm. LZ77 replaces repeated occurences of data with references and Huffman coding assigns shorter codes to frequent characters. 
 
-The way LZ77 works can be compared to what you do manually when using `<use>`{:.html} in your HTML. Why not let gzip do the work for you? The more often a string of characters is repeated the better gzip compression gets. So after encoding gzip has created a SVG "sprite" with references for us of just the icons that are present on our page.
+The way LZ77 works can be compared to what you do manually when using `<use>`{:.html} in your HTML. Why not let gzip do the work for you? The more often a string of characters is repeated the better gzip compression gets. So after encoding gzip has created a SVG "sprite" with references of just the icons that are present on our page.
 
 To test this assumption I have created four example files and put them through `gzip -1`{:.bash}, being the default compression level of nginx, and `gzip -6`{:.bash}, being the default of the command line utility.
 
@@ -134,15 +134,16 @@ Another tip is to make sure the ordering of your attributes is the same througho
 
 ## Conclusion
 
-You should of course test this for your project and if it also applies to you. Different prerequisites lead to different results. But I hope that you see the benefits of this approach.
+You should of course test this for your project and if it also applies to you. Different prerequisites lead to different results. If you are happy with your current solutions and it fits you, please keep it. Although for your next project I hope that you see and consider the benefits of this approach.
 
-* You can stop worrying and just SVG icons as creatively as you'd like.
+* You can stop worrying and just use icons as creatively as you'd like.
 * You are keeping it simple by using a "Don't overthink it" approach.
 * You can serve your "critical icons" in your first request.
+* You don't have to determine what icons are included in your set.
 
 In some ways this solution can be compared to Hugo Giraudel's [conclusion](https://www.sitepoint.com/avoid-sass-extend/) about `@include`{:.css} versus `@extend`{:.css} in Sass. gzip eliminates the alleged disadvantage of printing the same CSS declarations repeatedly.
 
-If you are still not convinced take a a look at GitHub's source code and marvel at their "octicons"!
+If you are still not convinced take a a look at [GitHub's source code](view-source:https://github.com/) and marvel at their "octicons"!
 
 ~~~ html
 <svg aria-hidden="true" class="octicon octicon-bell" height="16" version="1.1" viewBox="0 0 14 16" width="14">
@@ -150,4 +151,4 @@ If you are still not convinced take a a look at GitHub's source code and marvel 
 </svg>
 ~~~
 
-Have I missed something? Do you feel there's a flaw in this logic? I'm happy to discuss your thoughts about this approach. 
+Have I missed something? Do you feel there's a flaw in this logic? Do you wildly oppose my suggestions? I'm happy to discuss your thoughts about this approach. 
