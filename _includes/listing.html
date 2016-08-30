@@ -18,9 +18,17 @@
         {% endif %}
 
         <p class="Article-date">
-            <time itemprop="datePublished" datetime="{{ page.date | date: '%Y-%m-%d' }}">
-                {{ page.date | date: '%b %-d, %Y' }}
+            <time itemprop="datePublished" datetime="{{ post.date | date: '%Y-%m-%d' }}">
+                {{ post.date | date: '%b %-d, %Y' }}
             </time>
+            {% capture time %}{{ post.content | number_of_words | divided_by: 240 }}{% endcapture %}
+            {% if time != '0' %}
+                &middot; {{ time | pluralize: 'Minute', 'Minutes' }}
+                / {{ post.content | number_of_words  | thousands_separated }} Words
+            {% else %}
+                &middot; ½ Minute
+                / {{ post.content | number_of_words }} Words
+            {% endif %}
         </p>
 
     </div>
