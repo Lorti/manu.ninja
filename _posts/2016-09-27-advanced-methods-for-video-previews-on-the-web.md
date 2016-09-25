@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  2 Methods for Video Previews on the Web
-date:   2016-09-25
+title:  Advanced Methods for Video Previews on the Web
+date:   2016-09-27
 categories: coding
 sharing: true
 ---
@@ -14,36 +14,27 @@ sharing: true
 
 
 
-## Showing a few seconds of the original video
+## Showing 4 seconds of the original video
 
 ~~~ bash
-ffmpeg -i big_buck_bunny_720p_h264.mov \
-       -vf "trim=271:275,scale=320:-1,setpts=PTS-STARTPTS" -t 4 -sws_flags gauss \
+ffmpeg -i video.mp4 \
+       -vf "trim='start=4\:31:duration=4',scale=320:-1,setpts=PTS-STARTPTS" -t 4 -sws_flags gauss \
        -vcodec libx264 -preset medium -crf 31  \
-       -an -y big_buck_bunny_720p_h264_preview.mp4
+       -an -y preview.mp4
 ~~~
 
 <video width="320" height="180" autoplay controls preload="auto" loop>
     <source src="https://manu.ninja/files/big_buck_bunny_720p_h264_preview.mp4" type="video/mp4">
 </video>
 
-~~~ bash
-ffmpeg -i big_buck_bunny_720p_h264.mov \
-       -vf "trim='start=4\:31:duration=4',scale=320:-1,setpts=PTS-STARTPTS" -t 4 -sws_flags gauss \
-       -vcodec libx264 -preset medium -crf 31  \
-       -an -y big_buck_bunny_720p_h264_preview.mp4
-~~~
-
-[CodePen](http://codepen.io/Lorti/pen/RGABNa)
-
 <p data-height="340" data-theme-id="light" data-slug-hash="RGABNa" data-default-tab="result" data-user="Lorti" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/Lorti/pen/RGABNa/">Video Thumbnails</a> by Manuel Wieser (<a href="http://codepen.io/Lorti">@Lorti</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 
 ~~~ html
 <a href="https://manu.ninja/">
-    <img width="320" height="180" src="https://manu.ninja/files/big_buck_bunny_720p_h264_preview.jpg">
+    <img width="320" height="180" src="preview.jpg">
     <video width="320" height="180" preload="auto" loop="loop">
-        <source src="https://manu.ninja/files/big_buck_bunny_720p_h264_preview.mp4" type="video/mp4">
+        <source src="preview.mp4" type="video/mp4">
     </video>
 </a>
 ~~~
@@ -56,13 +47,15 @@ const videos = document.querySelectorAll('video');
 });
 ~~~
 
-## Showing a few frames of the original video
+
+
+## Showing 4 frames of the original video
 
 ~~~ bash
-ffmpeg -i big_buck_bunny_720p_h264.mov \
-        -vf "select=gt(scene\,0.75),scale=320:-1,tile=4x1" -vframes 1 thumbnail.png \
-&& /usr/local/Cellar/imagemagick/6.9.5-10/bin/convert thumbnail.png -quality 75% big_buck_bunny_720p_h264_slides.jpg \
-&& rm thumbnail.png
+ffmpeg -i video.mp4 \
+        -vf "select=gt(scene\,0.75),scale=320:-1,tile=4x1" -vframes 1 slides.png \
+&& convert slides.png -quality 75% slides.jpg \
+&& rm slides.png
 ~~~
 
 ![](https://manu.ninja/files/big_buck_bunny_720p_h264_slides.jpg)
@@ -72,8 +65,8 @@ ffmpeg -i big_buck_bunny_720p_h264.mov \
 
 ~~~ html
 <a href="https://manu.ninja/">
-    <img class="thumbnail" width="320" height="180" src="https://manu.ninja/files/big_buck_bunny_720p_h264_preview.jpg">
-    <img class="slides" src="https://manu.ninja/files/big_buck_bunny_720p_h264_slides.jpg">
+    <img class="thumbnail" width="320" height="180" src="preview.jpg">
+    <img class="slides" width="1280" height="180" src="slides.jpg">
 </a>
 ~~~
 
