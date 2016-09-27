@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Advanced Methods for Previewing Video on the Web
+title:  Boost User Engagement with Animated Video Previews
 date:   2016-09-27
 categories: coding
 sharing: true
@@ -21,6 +21,15 @@ ffmpeg -i video.mp4 \
        -vcodec libx264 -preset medium -crf 31  \
        -an -y preview.mp4
 ~~~
+
+* `-vf`{:.bash} sets the filtergraph, which in this case consists of three operations, separated by commas.
+    * `trim='start=4\:31:duration=4'`{:.bash} trims the video starting at 00:04:31 and ending at 00:04:35. The colon has to be escaped because colons separate parameters in the [filtergraph syntax](https://ffmpeg.org/ffmpeg-all.html#Filtergraph-syntax-1).
+    * `scale=320:-1`{:.bash} scales the video proportionally to a width of 320 pixels.
+    * `setpts=PTS-STARTPTS`{:.bash} changes the presentation timestamp of all frames, so that the trimmed video starts at 00:04:31 of the original.
+* `-t 4`{:.bash} tells FFmpeg to stop writing to the output after its duration reaches the specified value.
+* `-sws_flags gauss`{:.bash} sets the [scaling algorithm](https://ffmpeg.org/ffmpeg-all.html#Scaler-Options).
+* `-vcodec libx264 -preset medium -crf 31`{:.bash} tells FFmpeg to use the x264 encoder with medium [encoding speed](https://trac.ffmpeg.org/wiki/Encode/H.264#a2.Chooseapreset) and a [constant quality](https://trac.ffmpeg.org/wiki/Encode/H.264#a1.ChooseaCRFvalue) of 31. This is relatively low, resulting in a tiny file of 51.1 KB.
+* `-an`{:.bash} disables audio and `-y`{:.bash} overwrites the output file without asking.
 
 <video width="320" height="180" autoplay controls preload="auto" loop>
     <source src="/files/big_buck_bunny_720p_h264_preview.mp4" type="video/mp4">
@@ -46,8 +55,15 @@ const videos = document.querySelectorAll('video');
 });
 ~~~
 
+
+
 ### Further thoughts about this approach
 
+* play them always as a "cover", on hover or on focus
+* difficult to choose times
+* you might want to write an editor or let users add timecodes in your cms
+* It's worth noting that this type of work is a current topic of research so again, it may produce imperfect results.
+* will not play on some mobile devices
 
 
 
@@ -59,6 +75,12 @@ ffmpeg -i video.mp4 \
 && convert slides.png -quality 75% slides.jpg \
 && rm slides.png
 ~~~
+
+* `-vf`{:.bash} sets the filtergraph, which in this case consists of three operations, separated by commas.
+    * `select=gt(scene\,0.75)'`{:.bash} selects frames to pass to the output. The condition in this case is that current frame introduces a new scene with a probability of 75%.
+    * `scale=320:-1`{:.bash} scales the video proportionally to a width of 320 pixels.
+    * `tile=4x1`{:.bash} layouts several successive frames in a grid.
+* `convert slides.png -quality 75% slides.jpg`{:.bash} uses ImageMagick to properly convert the slides to a JPEG with 40.8 KB.
 
 ![](/files/big_buck_bunny_720p_h264_slides.jpg)
 
@@ -98,4 +120,18 @@ a:hover .slides {
 }
 ~~~
 
+
+
 ### Further thoughts about this approach
+
+* uses css instead of videos
+* scene detection is not perfect
+* will work on mobile
+* very flexible, you can show as many or as few as you like
+
+
+
+## Why?
+
+http://bombbomb.com/blog/video-play-rate-animated-preview-feature/
+https://blog.embed.ly/create-striking-video-previews-with-animated-covers-abd8995c127a#.38jlhwgjo
