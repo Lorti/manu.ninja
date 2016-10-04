@@ -20,8 +20,9 @@ If you want to trim your source file to a video snippet of a few seconds you hav
 
 ~~~ bash
 ffmpeg -i video.mp4 \
-       -vf "trim='start=4\:31:duration=4',scale=320:-1,setpts=PTS-STARTPTS" -t 4 -sws_flags gauss \
+       -vf "trim='start=4\:31:duration=4',scale=320:-1,setpts=PTS-STARTPTS" -sws_flags gauss \
        -vcodec libx264 -preset medium -crf 31  \
+       -movflags +faststart \
        -an -y preview.mp4
 ~~~
 
@@ -37,11 +38,11 @@ ffmpeg -i video.mp4 \
     
     * `setpts=PTS-STARTPTS`{:.bash} changes the presentation timestamp of all frames, so that the trimmed video starts at 00:04:31 of the original.
     
-* `-t 4`{:.bash} tells FFmpeg to stop writing to the output after its duration reaches the specified value.
-
 * `-sws_flags gauss`{:.bash} sets the [scaling algorithm](https://ffmpeg.org/ffmpeg-all.html#Scaler-Options) to Gaussian.
 
 * `-vcodec libx264 -preset medium -crf 31`{:.bash} tells FFmpeg to use the x264 encoder with medium [encoding speed](https://trac.ffmpeg.org/wiki/Encode/H.264#a2.Chooseapreset) and a [constant quality](https://trac.ffmpeg.org/wiki/Encode/H.264#a1.ChooseaCRFvalue) of 31. This is relatively low, resulting in a tiny file of 51.1 KB.
+
+* `-movflags +faststart`{:.bash} moves all metadata to the beginning of the file.
 
 * `-an`{:.bash} disables audio and `-y`{:.bash} overwrites the output file without asking.
 
