@@ -7,13 +7,15 @@ sharing: true
 thumbnail: /images/pull-to-refresh.png
 ---
 
-pull to refresh design pattern on Android implemented with SVG elements, SVG filters, CSS animation and JavaScript animation
+Pull-to-refresh is a touchscreen gesture used in many mobile applications. This article shows a way of creating a simple pull-to-refresh animation using web technologies. The animation has seven different parts implemented with SVG, CSS and JavaScript.
 
 ![](/images/pull-to-refresh.gif)
 
-The motion design for this animation is not mine, but the Behance link I had saved now returns a 404 page. If you know the motion designer or have stumbled accross my original inspiration please tell me so in the comments.
+Pull-to-refresh first appeared in the Tweetie app in 2008, which was later aquired by Twitter. The company now owns a [patent](https://www.google.com/patents/US20100199180) regarding the design pattern. This hasn't stopped developers from using it ubiquitously, as Twitter agreed to "only use his patent defensively".
 
-analysing the different parts, on the bottom of the page is a live CodePen for trying the pull to refresh animation 
+The motion design for this animation isn't mine, but the link I've saved returns a 404 page. If you know the motion designer or have stumbled across my original inspiration please tell me so in the comments.
+
+The following sections explain the different parts of the animation. You can try the final pull-to-refresh animation in a live CodePen at the end of the article.
 
 ![](/images/pull-to-refresh.png)
 
