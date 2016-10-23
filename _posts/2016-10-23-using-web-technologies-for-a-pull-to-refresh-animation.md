@@ -23,9 +23,9 @@ The following sections explain the different parts of the animation. You can try
 
 The interaction consists of grabbing, dragging and releasing. Therefore event listeners for the start, drag and end of the pull-to-refresh gesture are added. 
 
-The drag listener lets the user pull until a certain threshold via listening to `e.clientY || e.changedTouches[0].clientY`{:.js}. If the user lifts her finger or releases her mouse button before the threshold the card returns to its initial position. If the users pulls further than the threshold the card gets bend.
+The drag listener lets the user pull until a certain threshold via listening to `e.clientY || e.changedTouches[0].clientY`{:.js}. If the user lifts their finger or releases their mouse button before the threshold the card returns to its initial position. If the users pulls further than the threshold the card gets bend.
 
-This continues to a second threshold which starts rest of the animation. While the animation is playing all event listeners are removed, so no unforeseen things can happen.
+This continues to a second threshold which starts the rest of the animation. While the animation is playing all event listeners are removed, so no unforeseen things can happen.
 
 ## Bending the card
 
@@ -160,7 +160,7 @@ The end of the loading process is signaled by a "bubble burst" of the progress i
 
 ## Closing animation
 
-The closing animation is used at the end of the animation or if the users lifts her finger or releases her mouse button before triggering the animation.
+The closing animation is used at the end of the animation or if the users lifts their finger or releases their mouse button before triggering the animation.
 
 ``` js
 const progress = timestamp - start;
