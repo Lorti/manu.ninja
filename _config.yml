@@ -4,7 +4,9 @@ url: "https://manu.ninja"
 email: office@manuelwieser.com
 
 markdown: kramdown
-highlighter: ""
+kramdown:
+  auto_ids: true
+  syntax_highlighter: null
 
 sass:
   style: compressed

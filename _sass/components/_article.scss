@@ -103,6 +103,20 @@
         @include baseline(18px, 2, 1);
     }
 
+    h2,
+    h3 {
+        a {
+            text-decoration: none;
+        }
+        svg {
+            display: inline-block;
+            width: .8em;
+            height: .8em;
+            fill: currentColor;
+            vertical-align: -1px;
+        }
+    }
+
     code {
         display: inline;
         padding: .25em;
