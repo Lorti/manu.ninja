@@ -14,6 +14,8 @@ he called for automation of his process, so I went and over-engineered it in the
 
 ## Creating pixels using radial gradients
 
+![© Nina Geometrieva](/images/radial-gradient-horizontal.jpg)
+
 first thought was re-creating pixels with radial gradients
 I even created a script automating the process, but Will Wallace beat me to sharing this idea with the world
 [Blurground](https://codepen.io/wiiiiilllllll/post/blurground)
@@ -79,6 +81,7 @@ Promise.all([dominant, colors])
     });
 ~~~
 
+{% raw %}
 ~~~ html
 <!doctype html>
 <html>
@@ -107,10 +110,12 @@ Promise.all([dominant, colors])
 </body>
 </html>
 ~~~
+{% endraw %}
 
-INSERT IMAGE
+## Creating linear gradients with equal-width stops
 
-## Automating generation of linear gradients with equal-width stops
+![](/images/linear-gradient-ben-briggs.jpg)
+![](/images/linear-gradient-horizontal.jpg)
 
 second thought was automating the color retrieval process, but I did not want to just slice the image in four quarters
 Ben Briggs beat me to writing a npm module on this exact topic
@@ -178,18 +183,25 @@ Jimp.read(input, (err, image) => {
 linear-gradient(90deg, #023d33 0%, #036357 25%, #91aaa5 50%, #cdcfd5 75%)
 ~~~
 
-INSERT IMAGE
 
-## Automatic generation of linear gradients with variable-width stops
+## Creating center-weighted linear gradients with variable-width stops
+
+![](/images/improved-gradient-misty.jpg)
+![](/images/improved-gradient-meeting.jpg)
 
 I still wanted to pursue my „intelligent algorithm“ idea
 my idea was to smoothen and quantize the image, so that you can get an image with the largest color areas
 this would then have to be flattened to a single strip, which already is our linear gradient
 the final step is to take n of the largest color areas in the strip and create a linear gradient for usage in CSS
 
+![](/images/improved-gradient-kapadokya.jpg)
+
 there is no quantization in Jimp, so I searched for an implementation of the NeuQuant algorithm
 neuquant-js by Daniel Perez Alvarez is a fork of a fork of Johan Nordberg’s gif.js
 I thought about implementing and opening a pull request for Jimp, but upon discovering that the most popular pure JavaScript GIF library is not an npm module I have just implemented what I need for my algorithm
+
+![](/images/improved-gradient-mountains.jpg)
+![](/images/improved-gradient-christmas.jpg)
 
 ~~~ js
 const Jimp = require('jimp');
@@ -297,12 +309,8 @@ Jimp.read(input, (err, image) => {
 linear-gradient(90deg, #043630 9.77%, #02554b 33.79%, #c4c6dd 67.97%, #c4c6dd 95.31%)
 ~~~
 
-INSERT IMAGE
-
 ## Conclusion
 the approach is not always favorable, it is center-weighted though and can return better results, depending on the image itself
 you can use any of the three scripts and keep the gradients that work best for you
-
-INSERT IMAGE(S)
 
 and if Oliver Moran wants me to incorporate Devon Govett’s gif-stream and neuqnat into Jimp, I’d be happy to do it
