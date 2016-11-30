@@ -4,11 +4,12 @@ title:  Thoughts on Linear Gradients That Resemble Images
 date:   2016-11-30
 categories: coding
 sharing: true
+thumbnail: /images/thoughts-on-linear-gradients-that-resemble-images.jpg
 ---
 
 Harry Roberts wrote an article about improving perceived loading time
 [Improving Perceived Performance with Multiple Background Images](http://csswizardry.com/2016/10/improving-perceived-performance-with-multiple-background-images/)
-a topic which is dear to me, as one can see in my dominant colors lazy-loading article
+a topic which is dear to me, as one can see in my [Dominant Colors for Lazy-Loading Images](https://manu.ninja/dominant-colors-for-lazy-loading-images) article
 „until there’s a way to reliably automate this“ 
 he called for automation of his process, so I went and over-engineered it in the past month
 
@@ -202,6 +203,9 @@ I thought about implementing and opening a pull request for Jimp, but upon disco
 
 ![](/images/improved-gradient-mountains.jpg)
 ![](/images/improved-gradient-christmas.jpg)
+
+![](/images/gradient-concept-quantized.gif)
+![](/images/gradient-concept-strip.gif)
 
 ~~~ js
 const Jimp = require('jimp');
