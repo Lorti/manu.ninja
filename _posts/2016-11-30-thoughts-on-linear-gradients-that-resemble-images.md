@@ -12,13 +12,13 @@ When Harry Roberts posted [Improving Perceived Performance with Multiple Backgro
 
 ## Creating pixels using radial gradients
 
-My first thought was re-creating pixels with radial gradients. I created a script for automating the process, which calculates the radial gradients on the left out of the source material.
+My first thought was re-creating pixels with radial gradients. I wrote a script for automating the process, which calculates the radial gradients you can see on the left from the source material on the right.
 
 ![© Nina Geometrieva](/images/radial-gradient-horizontal.jpg)
 
-Rendering multiple radial gradients is computationally expensive though and without proper blending modes the quality of the result will always depend on how you order your gradients. Therefore it should probably not be used on a real project. 
+Rendering multiple radial gradients is computationally expensive and without proper blending modes the quality of the result will always depend on the order of your gradients. Therefore it should probably not be used on a real project. 
 
-Will Wallace then beat me to sharing the concept with the world. Will created a [Blurground](https://codepen.io/wiiiiilllllll/post/blurground) Sass function and manually picked the colors with Photoshop's eyedropper tool. If you don't want to use the eyedropper you can use the script below and play around with the idea.
+Will Wallace then beat me to sharing the concept with the world. Will created a [Blurground](https://codepen.io/wiiiiilllllll/post/blurground) Sass function and manually picked the colors with Photoshop's eyedropper tool. If you don't want to use the eyedropper you may use my script and play around with the idea.
 
 ~~~ js
 const gm = require('gm');
@@ -114,12 +114,12 @@ Promise.all([dominant, colors])
 
 My second thought was automating the color retrieval process for Harry's concept. Though I wanted to detect the optimal color stop positions instead of just slicing the image in four quarters. 
 
-Ben Briggs then beat me to writing an npm module that "provides a gradient fallback for an image that loosely resembles the original." Ben hat created a cool [PostCSS plugin](https://github.com/ben-eb/postcss-resemble-image), so I decided to amend his plugin.
+Meanwhile Ben Briggs created a [PostCSS plugin](https://github.com/ben-eb/postcss-resemble-image) that "provides a gradient fallback for an image that loosely resembles the original." I decided to amend his plugin instead of publishing another npm package, containing just the algorithm.
  
 ![](/images/linear-gradient-ben-briggs.jpg)
 ![](/images/linear-gradient-horizontal.jpg)
 
-Ben had used [Paper.js](https://www.npmjs.com/package/paper) to pick colors, which depends on a few non-JavaScript packages. This complicates setup of the plugin and lengthens builds times. Together we managed to replace `asset-resolver`, `image-size` and `paper` with a single dependency to [Jimp](https://github.com/oliver-moran/jimp), making the plugin a Node.js-only solution. I recommend using the plugin, but if you don't use PostCSS you can also use the script below in your builds.
+Ben had used [Paper.js](https://www.npmjs.com/package/paper) to pick colors, which depends on a few non-JavaScript packages. This complicates setup of the plugin and lengthens builds times. Together we've replaced `asset-resolver`, `image-size` and `paper` with a single dependency to [Jimp](https://github.com/oliver-moran/jimp), making the plugin a Node.js-only solution. I recommend using the plugin, but if you don't use PostCSS you can also use the script below in your builds.
 
 ~~~ js
 const Jimp = require('jimp');
@@ -177,24 +177,25 @@ Jimp.read(input, (err, image) => {
 
 ## Creating center-weighted linear gradients with variable-width stops
 
-I still wanted to pursue my „intelligent algorithm“ idea. The approach was to smoothen and quantize the image, so that you get an image with only the largest color areas. This would then have to be flattened to a single strip, which already resembles the final gradient. The last step is to take _n_ of the largest color areas in the strip and use their color and position for the gradient stops.
+I still wanted to pursue my „intelligent algorithm“ idea. The approach was to smoothen and quantize the image, so you can find the largest color areas. The simplified image then has to be flattened to a single strip, which already resembles the final gradient. The last step is to take _n_ of the largest color areas in the strip and use their color and position for the gradient stops.
 
 ![](/images/gradient-concept-quantized.gif)
 ![](/images/gradient-concept-strip.gif)
 ![](/images/improved-gradient-misty.jpg)
 
-You see the result of this approach in the center, compared to the previous algorithm on the left. In the actual algorithm I've also discovered, that resizing the image to a height of 4 pixels prior to quantization helps putting more weight on the center of images. 
-
-This effect is evident on the hot air balloon in the Kapadokya photograph. There are also a few more comparisons below, showing that the result is not always distinctly better. 
+You can see the result in the middle, compared to the previous algorithm on the left. I've also discovered that resizing the image to a height of four pixels prior to quantization helps putting more weight on the center of images. This effect is evident on the hot air balloon in the Kapadokya photograph.
 
 ![](/images/improved-gradient-kapadokya.jpg)
+
+There are a few more comparisons below, showing that the result is not always distinctly better, but similar to the simpler approach.
+ 
 ![](/images/improved-gradient-meeting.jpg)
 ![](/images/improved-gradient-mountains.jpg)
 ![](/images/improved-gradient-christmas.jpg)
 
-Implementing the algorithm was easy, but there is no quantization in Jimp, so I had searched for an implementation of the NeuQuant algorithm. In the script below I use [neuquant-js](https://github.com/unindented/neuquant-js) by Daniel Perez Alvarez, which is a fork of a fork of Johan Nordberg’s [gif.js](https://github.com/jnordberg/gif.js).
+Implementing the algorithm was easy, but there is no quantization in Jimp, so I had to search for an implementation of the [NeuQuant](http://members.ozemail.com.au/~dekker/NEUQUANT.HTML) algorithm. In the script below [neuquant-js](https://github.com/unindented/neuquant-js) by Daniel Perez Alvarez is used, being a fork of a fork of Johan Nordberg’s [gif.js](https://github.com/jnordberg/gif.js).
 
-I thought about implementing and opening a pull request for Jimp, but upon discovering that the most popular pure JavaScript GIF library is not an npm module I have just implemented what I need for the algorithm.
+I thought about opening a pull request for Jimp, but upon discovering that the most popular pure JavaScript GIF library is not an npm module I've just implemented what I need for the algorithm.
 
 ~~~ js
 const Jimp = require('jimp');
@@ -301,6 +302,6 @@ Jimp.read(input, (err, image) => {
 
 ## Conclusion
 
-You have seen three approaches, of which only two are feasible for production. The examples show that the third algorithm is not always favorable, it is center-weighted though and can return better results, depending on the image itself. You can use any of the three scripts and keep the gradients that work best for you.
+You have seen three approaches, two of which are feasible for production. The examples show that the third algorithm is not always superior -- it is center-weighted though and can return better results, depending on the image itself. You can run any of the three scripts and keep the gradients that work best for you.
 
 I may also start incorporating Devon Govett’s [gif-stream](https://github.com/devongovett/gif-stream) and [neuquant](https://github.com/devongovett/neuquant) into Jimp. If that's something people want and Oliver Moran endorses, I’d be happy to do it.
