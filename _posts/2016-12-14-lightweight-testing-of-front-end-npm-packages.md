@@ -6,10 +6,26 @@ categories: coding
 sharing: true
 ---
 
+This tutorial shows how to use npm for Front-End JavaScript and writing lightweight automated tests with Browserify, Tape and Sinon. It also examines transpiling it with Babel, npm hooks and using npm privately without publishing your package.
+
 ## Using npm for Front-End JavaScript
+
+A few years ago Bower was widely used for front-end package management. Almost everything of what makes Bower great can be done via npm, as it uses a flat dependency graph since the third version.
+
+<blockquote class="twitter-tweet" data-align="center"><p lang="en" dir="ltr">With NPM 3 there is no valid reason for people to keep using Bower anymore other than inertia. It&#39;s *good* for front-end deps now.</p>&mdash; Dan Abramov (@dan_abramov) <a href="https://twitter.com/dan_abramov/status/654406112180047872">14. Oktober 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+npm on the other hand was initally developed for the Node.js ecosystem, not with front-end packages in mind. With the advent of Browserify and webpack this has changed, as we can now simply `require`{:.js} modules and use them in our front-end.
+
+Also you almost certainly have npm and a `package.json`{:.bash} in your existing projects, so installing bower (via npm) and creating a separate `bower.json`{:.bash} makes things more complicated.
+
+You will now find a complete example package, which illustrates how to use npm for front-end code and how to get started with automated tests for front-end JavaScript in a few lines of code.
 
 ## Simple form tracking with Google Analytics
 
+The examplary front-end npm package for this tutorial is a form tracker using Google Analytics. When setting the custom `data-event`{:.html} attribute on a form it sends an event to Google Analytics. The value of the attribute are the event category and event action, separated by a comma.
+
+### package.json
 ~~~ json
 {
   "name": "form-tracking",
@@ -18,6 +34,7 @@ sharing: true
 }
 ~~~
 
+### main.js
 ~~~ js
 function submit(e) {
     e.preventDefault();
@@ -50,14 +67,16 @@ function init() {
 export default init;
 ~~~
 
-## Transpiling to 2011's JavaScript with Babel
+## Transpiling to ES5 with Babel
 
+The prior code is written in ES6, as can be seen by the `const`{:.js} and `export`{:.js} statements. To ensure the best compatiblity with browsers we can transpile it to older JavaScript with Babel. For this we add `babel-cli`{:.bash} and `babel-preset-es2015`{:.bash} as dependencies and add a short `.babelrc`{:.bash} file.
+
+### package.json
 ~~~ json
 {
   "name": "form-tracking",
   "version": "0.1.0",
   "description": "Track form submission by specifying a `data-event` attribute on forms.",
-  "main": "dist/main.js",
   "devDependencies": {
     "babel-cli": "^6.5.1",
     "babel-preset-es2015": "^6.18.0",
@@ -65,6 +84,7 @@ export default init;
 }
 ~~~
 
+### .babelrc
 ~~~ json
 {
   "presets": [
@@ -73,11 +93,9 @@ export default init;
 }
 ~~~
 
-~~~ bash
-npm install
-./node_modules/.bin/babel main.js
-~~~
+After `npm install`{:.bash} and we can test Babel by writing `./node_modules/.bin/babel main.js`{:.bash} and it will output the ES5 result, which should work in any popular browser being used today.
 
+### Output
 ~~~ js
 'use strict';
 
@@ -115,7 +133,11 @@ function init() {
 exports.default = init;
 ~~~
 
-## Using the prepublish hook to automate transpiling
+## Using npm hooks to automate transpiling
+
+You can specify various [hooks](https://docs.npmjs.com/misc/scripts) in your `package.json`{:.bash}. If you need to perform operations on your package before it is used you should use a `prepublish`{:.bash} script. This script is run before the package is published to the npm registry and on `npm install`{:.bash}, when called without any arguments.
+
+At this point it may be beneficial to sort the project into a `src`{:.bash}, `test`{:.bash}, and `dist`{:.bash} folder. 
 
 ~~~ bash
 ├── dist
@@ -128,6 +150,9 @@ exports.default = init;
 └── package.json
 ~~~
 
+We can then add `"main": "dist/main.js"`{:.json} to our `package.json` to specify the script that should be used when we `import` or `require` the package. `babel src/main.js --out-file dist/main.js`{:.bash} is our `prepublish`{:.bash} hook, reading from `src/main.js`{:.bash} and writing to `dist/main.js`{:.bash}.
+
+### package.json
 ~~~ json
 {
   "name": "form-tracking",
@@ -146,6 +171,15 @@ exports.default = init;
 
 ## Testing in a browser environment with Browserify, Tape and Sinon
 
+The last question is how to test your front-end code automatically. The lightweight `tape` offers the ability to write unit tests for Node.js, outputting the results in Test Anything Protocol format. It provides a simple interface to write assertions like `t.equal(actual, expected, message)` and plan how many assertions should be run.
+
+For testing our form tracking we further need `tape-run`, enabling us to run our test in a browser environment. Otherwise we would have no `document.body` to add our form to. To run our code in a browser enviroment we first need to bundle it, though. Browserify bundles our imported packages and transforms the result to ES5 using Babel via Babelify.
+
+[Sinon](http://sinonjs.org/) is then used to mock the Google Analytics library, as we don't want to send real events. We can create a test spy, that resembles a function, but doesn't really do anything. The spy enables us to test, whether the `ga()` gets called by our script. We can also compare the arguments used while calling `ga()` to our expected category and action.
+
+The last package `tap-spec` takes the Test Anything Protocol output and changes it to look like Mocha's spec reporter, which is just a personal preference. You could even have your results printed as Nyan Cat's rainbow with `tap-nyan`.
+
+### package.json
 ~~~ json
 {
   "name": "form-tracking",
@@ -169,6 +203,7 @@ exports.default = init;
 }
 ~~~
 
+### test/main.js
 ~~~ js
 import test from 'tape';
 import { spy } from 'sinon';
@@ -198,6 +233,7 @@ test('Tracking', (t) => {
 });
 ~~~
 
+### Output
 ~~~ bash
 
   Tracking
@@ -213,3 +249,5 @@ test('Tracking', (t) => {
   duration:  3.4s
 
 ~~~
+
+Remember that you are not obliged to publish your packages to the npm registry. You can use any [Git URL as a dependency](https://docs.npmjs.com/files/package.json#git-urls-as-dependencies), for example from your private GitHub repositories or your company's internal GitLab repositories.

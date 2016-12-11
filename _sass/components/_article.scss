@@ -90,7 +90,8 @@
         @include baseline($base-font-size, 2, 2, true);
     }
 
-    .speakerdeck-iframe {
+    .speakerdeck-iframe,
+    .twitter-tweet {
         margin-top: 1.375em !important;
         margin-bottom: 1.375em !important;
     }
