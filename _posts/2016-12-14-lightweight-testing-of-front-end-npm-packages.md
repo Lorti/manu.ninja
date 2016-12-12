@@ -6,20 +6,23 @@ categories: coding
 sharing: true
 ---
 
-This tutorial shows how to use npm for Front-End JavaScript and writing lightweight automated tests with Browserify, Tape and Sinon. It also examines transpiling it with Babel, npm hooks and using npm privately without publishing your package.
+This tutorial shows how to use npm for front-end JavaScript package management and writing lightweight automated tests with Browserify, Tape and Sinon. It also examines transpiling with Babel, handling npm hooks and using npm privately without publishing your package.
 
 ## Using npm for Front-End JavaScript
 
-A few years ago Bower was widely used for front-end package management. Almost everything of what makes Bower great can be done via npm, as it uses a flat dependency graph since the third version.
+A few years ago Bower introduced developers to front-end package management. Almost everything of what made Bower great can also be done with npm, especially since it now uses a flat dependency graph.
 
-<blockquote class="twitter-tweet" data-align="center"><p lang="en" dir="ltr">With NPM 3 there is no valid reason for people to keep using Bower anymore other than inertia. It&#39;s *good* for front-end deps now.</p>&mdash; Dan Abramov (@dan_abramov) <a href="https://twitter.com/dan_abramov/status/654406112180047872">14. Oktober 2015</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-align="center">
+    <p lang="en">With npm 3 there is no valid reason for people to keep using Bower anymore other than inertia. It’s good for front-end deps now.</p>
+    <a href="https://twitter.com/dan_abramov/status/654406112180047872">Dan Abramov</a>
+</blockquote>
+<!--<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>-->
 
-npm on the other hand was initally developed for the Node.js ecosystem, not with front-end packages in mind. With the advent of Browserify and webpack this has changed, as we can now simply `require`{:.js} modules and use them in our front-end.
+npm was initally developed for the Node.js ecosystem, not with front-end packages in mind. This has changed with module-bundling tools like Browserify and webpack. We can now simply `import`{:.js} or `require`{:.js} modules and use them in our front-end.
 
-Also you almost certainly have npm and a `package.json`{:.bash} in your existing projects, so installing bower (via npm) and creating a separate `bower.json`{:.bash} makes things more complicated.
+It is likely that you already have a `package.json`{:.bash} file for npm in your existing projects. Installing Bower and creating a separate `bower.json`{:.bash} would increase complexity.
 
-You will now find a complete example package, which illustrates how to use npm for front-end code and how to get started with automated tests for front-end JavaScript in a few lines of code.
+Which is why you will now find a complete example package illustrating how to use npm for front-end packages and how to easily set up automated tests for JavaScript that is dependant on a browser environment.
 
 ## Simple form tracking with Google Analytics
 
