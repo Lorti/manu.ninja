@@ -4,9 +4,14 @@ title:  Lightweight Testing of Front-End npm Packages
 date:   2016-12-14
 categories: coding
 sharing: true
+thumbnail: /images/form-tracking-test-results.png
 ---
 
-This tutorial shows how to use npm for front-end JavaScript package management and writing lightweight automated tests with Browserify, Tape and Sinon. It also examines transpiling with Babel, handling npm hooks and using npm privately without publishing your package.
+1. Zeiten kontrollieren
+2. Pronomen kontrollieren
+3. Korrekturlesen
+
+This tutorial explains using npm for front-end JavaScript package management and writing lightweight automated tests with Browserify, Tape and Sinon. It also features transpiling with Babel, handling npm hooks and using npm privately without publishing your package.
 
 ## Using npm for Front-End JavaScript
 
@@ -18,7 +23,7 @@ A few years ago Bower introduced developers to front-end package management. Alm
 </blockquote>
 <!--<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>-->
 
-npm was initally developed for the Node.js ecosystem, not with front-end packages in mind. This has changed with module-bundling tools like Browserify and webpack. We can now simply `import`{:.js} or `require`{:.js} modules and use them in our front-end.
+npm was initally developed for the Node.js ecosystem, not with front-end packages in mind. This has changed with module-bundling tools like Browserify and webpack. We can now simply `import`{:.js} or `require()`{:.js} modules and use them in our front-end.
 
 It is likely that you already have a `package.json`{:.bash} file for npm in your existing projects. Installing Bower and creating a separate `bower.json`{:.bash} would increase complexity.
 
@@ -26,7 +31,7 @@ Which is why you will now find a complete example package illustrating how to us
 
 ## Simple form tracking with Google Analytics
 
-The examplary front-end npm package for this tutorial is a form tracker using Google Analytics. When setting the custom `data-event`{:.html} attribute on a form it sends an event to Google Analytics. The value of the attribute are the event category and event action, separated by a comma.
+The example front-end npm package for this tutorial is a form tracker using Google Analytics. When setting the custom `data-event`{:.html} attribute on a form it sends an event to Google Analytics. The value of the `data-event`{:.html} attribute is a comma-separated string containing the event category and event action.
 
 ### package.json
 ~~~ json
@@ -72,7 +77,7 @@ export default init;
 
 ## Transpiling to ES5 with Babel
 
-The prior code is written in ES6, as can be seen by the `const`{:.js} and `export`{:.js} statements. To ensure the best compatiblity with browsers we can transpile it to older JavaScript with Babel. For this we add `babel-cli`{:.bash} and `babel-preset-es2015`{:.bash} as dependencies and add a short `.babelrc`{:.bash} file.
+The prior code is written in ES6, as can be seen by the `const`{:.js} and `export`{:.js} statements. To ensure compatiblity with older browsers we can transpile it to ES5 with Babel. For this you have to add `babel-cli`{:.bash} and `babel-preset-es2015`{:.bash} as dependencies and set up a short `.babelrc`{:.bash} configuration file.
 
 ### package.json
 ~~~ json
@@ -96,9 +101,8 @@ The prior code is written in ES6, as can be seen by the `const`{:.js} and `expor
 }
 ~~~
 
-After `npm install`{:.bash} and we can test Babel by writing `./node_modules/.bin/babel main.js`{:.bash} and it will output the ES5 result, which should work in any popular browser being used today.
+After running `npm install`{:.bash} you can test Babel by typing `./node_modules/.bin/babel main.js`{:.bash} and it will output the ES5 result, which should work in any popular browser being used today.
 
-### Output
 ~~~ js
 'use strict';
 
@@ -138,7 +142,7 @@ exports.default = init;
 
 ## Using npm hooks to automate transpiling
 
-You can specify various [hooks](https://docs.npmjs.com/misc/scripts) in your `package.json`{:.bash}. If you need to perform operations on your package before it is used you should use a `prepublish`{:.bash} script. This script is run before the package is published to the npm registry and on `npm install`{:.bash}, when called without any arguments.
+You can specify various [hooks](https://docs.npmjs.com/misc/scripts) in your `package.json`{:.bash}. If you need to perform operations on your package before it's being used you should specify a `prepublish`{:.bash} script. That script is run before your package is published to the npm registry and on `npm install`{:.bash}, when called without any arguments. This makes it a good fit for automating the transpiling you did in the previous section.
 
 At this point it may be beneficial to sort the project into a `src`{:.bash}, `test`{:.bash}, and `dist`{:.bash} folder. 
 
@@ -153,7 +157,9 @@ At this point it may be beneficial to sort the project into a `src`{:.bash}, `te
 └── package.json
 ~~~
 
-We can then add `"main": "dist/main.js"`{:.json} to our `package.json` to specify the script that should be used when we `import` or `require` the package. `babel src/main.js --out-file dist/main.js`{:.bash} is our `prepublish`{:.bash} hook, reading from `src/main.js`{:.bash} and writing to `dist/main.js`{:.bash}.
+You can then add `"main": "dist/main.js"`{:.json} to your `package.json`{:.bash} to specify the script that should be called when you `import`{:.js} or `require()`{:.js} the package. 
+
+Finally `babel src/main.js --out-file dist/main.js`{:.bash} is your `prepublish`{:.bash} hook, reading from `src/main.js`{:.bash} and writing to `dist/main.js`{:.bash}.
 
 ### package.json
 ~~~ json
@@ -179,8 +185,6 @@ The last question is how to test your front-end code automatically. The lightwei
 For testing our form tracking we further need `tape-run`, enabling us to run our test in a browser environment. Otherwise we would have no `document.body` to add our form to. To run our code in a browser enviroment we first need to bundle it, though. Browserify bundles our imported packages and transforms the result to ES5 using Babel via Babelify.
 
 [Sinon](http://sinonjs.org/) is then used to mock the Google Analytics library, as we don't want to send real events. We can create a test spy, that resembles a function, but doesn't really do anything. The spy enables us to test, whether the `ga()` gets called by our script. We can also compare the arguments used while calling `ga()` to our expected category and action.
-
-The last package `tap-spec` takes the Test Anything Protocol output and changes it to look like Mocha's spec reporter, which is just a personal preference. You could even have your results printed as Nyan Cat's rainbow with `tap-nyan`.
 
 ### package.json
 ~~~ json
@@ -236,7 +240,8 @@ test('Tracking', (t) => {
 });
 ~~~
 
-### Output
+The last package `tap-spec` takes the Test Anything Protocol output and changes it to look like Mocha's spec reporter, which is just a personal preference. You could even have your results printed as Nyan Cat's rainbow with `tap-nyan`.
+
 ~~~ bash
 
   Tracking
@@ -253,4 +258,4 @@ test('Tracking', (t) => {
 
 ~~~
 
-Remember that you are not obliged to publish your packages to the npm registry. You can use any [Git URL as a dependency](https://docs.npmjs.com/files/package.json#git-urls-as-dependencies), for example from your private GitHub repositories or your company's internal GitLab repositories.
+That was all you need for thoroughly tested front-end npm packages. Remember that you are not obliged to publish your packages to the npm registry, though. You can list any [Git URL as a dependency](https://docs.npmjs.com/files/package.json#git-urls-as-dependencies), for example your private GitHub repositories or your company's internal GitLab repositories.
