@@ -21,9 +21,9 @@ A few years ago Bower introduced developers to front-end package management. Alm
 
 npm was initally developed for the Node.js ecosystem, not with front-end packages in mind. This has changed with module-bundling tools like Browserify and webpack. We can now simply `import`{:.no-highlight} or `require()`{:.no-highlight} modules and use them in our front-end.
 
-It is likely that you already have a `package.json`{:.no-highlight} file for npm in your existing projects. Installing Bower and creating a separate `bower.json`{:.no-highlight} would increase complexity.
+It is likely that you already have a `package.json`{:.no-highlight} file for npm in your existing projects. Installing Bower and creating a separate `bower.json`{:.no-highlight} likely increases the complexity of your project.
 
-Which is why you will now find a complete example package illustrating how to use npm for front-end packages and how to easily set up automated tests for JavaScript that is dependant on a browser environment.
+Which is why we'll now examin an example package, illustrating how to use npm for front-end packages and how to easily set up automated tests for JavaScript that is dependant on a browser environment.
 
 ## Simple form tracking with Google Analytics
 
@@ -138,7 +138,7 @@ exports.default = init;
 
 ## Using npm hooks to automate transpiling
 
-You can specify various scripts in your `package.json`{:.no-highlight}. If you need to perform operations on your package before it's being used you should specify a [prepublish](https://docs.npmjs.com/misc/scripts#common-uses) hook. That code is run before your package is published to the npm registry and on `npm install`{:.no-highlight}, when called without any arguments. This makes it a good fit for automating the transpiling you did in the previous section.
+You can specify various scripts in your `package.json`{:.no-highlight}. If you need to perform operations on your package before it's being used you should specify a [prepublish](https://docs.npmjs.com/misc/scripts#common-uses) hook. That code runs before your package is published to the npm registry and on `npm install`{:.no-highlight}, when called without any arguments. This makes it a good fit for automating the transpiling we did in the previous section.
 
 At this point it may be beneficial to sort the project into a `src`{:.no-highlight}, `test`{:.no-highlight}, and `dist`{:.no-highlight} folder. 
 
@@ -153,9 +153,9 @@ At this point it may be beneficial to sort the project into a `src`{:.no-highlig
 └── package.json
 ~~~
 
-You can then add `"main": "dist/main.js"`{:.no-highlight} to your `package.json`{:.no-highlight} to specify the script that should be called when you `import`{:.no-highlight} or `require()`{:.no-highlight} the form tracking package. 
+We can then add `"main": "dist/main.js"`{:.no-highlight} to your `package.json`{:.no-highlight} to specify the script that should be called when you `import`{:.no-highlight} or `require()`{:.no-highlight} the form tracking package. 
 
-Finally `babel src/main.js --out-file dist/main.js`{:.no-highlight} is your prepublish hook, reading from `src/main.js`{:.no-highlight} and writing to `dist/main.js`{:.no-highlight}.
+Finally `babel src/main.js --out-file dist/main.js`{:.no-highlight} is our prepublish hook, reading from `src/main.js`{:.no-highlight} and writing to `dist/main.js`{:.no-highlight}.
 
 <figure>
 <figcaption>package.json</figcaption>
@@ -176,7 +176,7 @@ Finally `babel src/main.js --out-file dist/main.js`{:.no-highlight} is your prep
 
 ## Testing in a browser environment with Browserify, tape and Sinon
 
-You now have your project set up and want to confirm that everything is working correctly. This last section therefore deals with how to test your front-end code automatically. You will utilize [Browserify](http://browserify.org/), [tape](https://github.com/substack/tape) and [Sinon](http://sinonjs.org/), with the help of `babelify`{:.no-highlight}, `tape-run`{:.no-highlight} and `tap-spec`{:.no-highlight}.
+We now have our project set up and want to confirm that everything is working correctly. This last section therefore deals with how to test your front-end code automatically. We'll utilize [Browserify](http://browserify.org/), [tape](https://github.com/substack/tape) and [Sinon](http://sinonjs.org/), with the help of `babelify`{:.no-highlight}, `tape-run`{:.no-highlight} and `tap-spec`{:.no-highlight}.
 
 <figure>
 <figcaption>package.json</figcaption>
@@ -206,19 +206,19 @@ You can find [`test/main.js`{:.no-highlight}](#test/main.js) after my descriptio
 
 ### Browserify
 
-[Browserify](http://browserify.org/) bundles our imported packages, tape and Sinon, and combines them with our `src/main.js`. Additionally we can transform the result to ES5. Babelify, a Browserify plugin, can be set with the transform flag as in `browserify test/main.js -t [ babelify ]`{:.no-highlight}. This way we can write our test in ES6 as we did our actual form tracking. 
+[Browserify](http://browserify.org/) bundles our imported packages, tape and Sinon, and combines them with our `src/main.js`. Additionally we can transform the result to ES5. Babelify, a Browserify plugin, can be activated with the transform flag as in `browserify test/main.js -t [ babelify ]`{:.no-highlight}. This way we can write our test in ES6 as we did our actual form tracking. 
 
-You can of course do the same with [webpack](https://webpack.js.org/), but Browserify needs less configuration. If you want you can now convert the test script, copy it in your browser and look at the [Test Anything Protocol](http://testanything.org/) output, which brings us to tape.
+You can of course do the same with [webpack](https://webpack.js.org/), but Browserify needs less configuration. If you want you can now convert the test script, copy it into your browser's console and look at the [TAP](http://testanything.org/) output -- which brings us to tape.
 
 ### tape
 
-The lightweight [tape](https://github.com/substack/tape) offers the ability to write unit tests for Node.js, outputting the result in [TAP](http://testanything.org/) format. It provides a simple interface for writing assertions like `t.equal(actual, expected, message)`{:.js} and planning how many assertions should be run. If you read the code you'll find it to be clear and to the point.
+The lightweight [tape](https://github.com/substack/tape) offers the ability to write unit tests for Node.js, outputting the result in [TAP](http://testanything.org/) format. It provides a simple interface for writing assertions like `t.equal(actual, expected, message)`{:.js} and planning how many assertions should be run. If you read the code you'll find it to be clear and straightforward.
 
 For testing our form tracking we further want to pipe the Browserify output to [tape-run](https://github.com/juliangruber/tape-run), enabling us to automatically run our test in a browser environment. You can run the test in any browser by specifying the `--browser`{:.no-highlight} flag. Per default it will fire up Electron.
 
 ### Sinon
 
-We use [Sinon](http://sinonjs.org/) to mock the Google Analytics library, as we don't want to send real events. The simplest tool it has to offer is a [spy](http://sinonjs.org/docs/#spies). A spy allows us to test whether the `ga()`{:.js} function gets called by our script, without the function having to actually do anything. We can also compare the arguments used upon calling `ga()`{:.js} to our expected category and action. Be sure to check out the Sinon [documentation](http://sinonjs.org/docs/) and learn what else it has to offer.
+We can use [Sinon](http://sinonjs.org/) to mock the Google Analytics library, as we don't want to send real events. The simplest tool it has to offer is a [spy](http://sinonjs.org/docs/#spies). A spy allows us to test whether the `ga()`{:.js} function gets called by our script, without the function having to actually do anything. We can also compare the arguments used when calling `ga()`{:.js} to our expected category and action. Be sure to check out the Sinon [documentation](http://sinonjs.org/docs/) and learn what else it has to offer.
 
 <figure id="test/main.js">
 <figcaption>test/main.js</figcaption>
