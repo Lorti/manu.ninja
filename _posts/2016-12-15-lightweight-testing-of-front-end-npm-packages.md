@@ -1,17 +1,13 @@
 ---
 layout: post
 title:  Lightweight Testing of Front-End npm Packages
-date:   2016-12-14
+date:   2016-12-15
 categories: coding
 sharing: true
 thumbnail: /images/form-tracking-test-results.png
 ---
 
-1. Zeiten kontrollieren
-2. Pronomen kontrollieren
-3. Korrekturlesen
-
-This tutorial explains using npm for front-end JavaScript package management and writing lightweight automated tests with Browserify, Tape and Sinon. It also features transpiling with Babel, handling npm hooks and using npm privately without publishing your package.
+This tutorial explains using npm for front-end JavaScript package management and writing lightweight automated tests with Browserify, tape and Sinon. It also features transpiling with Babel, handling npm hooks and using npm privately without publishing your package.
 
 ## Using npm for Front-End JavaScript
 
@@ -142,7 +138,7 @@ exports.default = init;
 
 ## Using npm hooks to automate transpiling
 
-You can specify various [hooks](https://docs.npmjs.com/misc/scripts) in your `package.json`{:.no-highlight}. If you need to perform operations on your package before it's being used you should specify a `prepublish`{:.no-highlight} script. That script is run before your package is published to the npm registry and on `npm install`{:.no-highlight}, when called without any arguments. This makes it a good fit for automating the transpiling you did in the previous section.
+You can specify various scripts in your `package.json`{:.no-highlight}. If you need to perform operations on your package before it's being used you should specify a [prepublish](https://docs.npmjs.com/misc/scripts#common-uses) hook. That code is run before your package is published to the npm registry and on `npm install`{:.no-highlight}, when called without any arguments. This makes it a good fit for automating the transpiling you did in the previous section.
 
 At this point it may be beneficial to sort the project into a `src`{:.no-highlight}, `test`{:.no-highlight}, and `dist`{:.no-highlight} folder. 
 
@@ -157,9 +153,9 @@ At this point it may be beneficial to sort the project into a `src`{:.no-highlig
 └── package.json
 ~~~
 
-You can then add `"main": "dist/main.js"`{:.no-highlight} to your `package.json`{:.no-highlight} to specify the script that should be called when you `import`{:.no-highlight} or `require()`{:.no-highlight} the package. 
+You can then add `"main": "dist/main.js"`{:.no-highlight} to your `package.json`{:.no-highlight} to specify the script that should be called when you `import`{:.no-highlight} or `require()`{:.no-highlight} the form tracking package. 
 
-Finally `babel src/main.js --out-file dist/main.js`{:.no-highlight} is your `prepublish`{:.no-highlight} hook, reading from `src/main.js`{:.no-highlight} and writing to `dist/main.js`{:.no-highlight}.
+Finally `babel src/main.js --out-file dist/main.js`{:.no-highlight} is your prepublish hook, reading from `src/main.js`{:.no-highlight} and writing to `dist/main.js`{:.no-highlight}.
 
 <figure>
 <figcaption>package.json</figcaption>
@@ -178,9 +174,9 @@ Finally `babel src/main.js --out-file dist/main.js`{:.no-highlight} is your `pre
 }</code></pre>
 </figure>
 
-## Testing in a browser environment with Browserify, Tape and Sinon
+## Testing in a browser environment with Browserify, tape and Sinon
 
-You now have your project set up and want to confirm that everything is working correctly. This last section therefore deals with how to test your front-end code automatically. You will utilize [Browserify](http://browserify.org/), [Tape](https://github.com/substack/tape) and [Sinon](http://sinonjs.org/), with the help of `babelify`{:.no-highlight}, `tape-run`{:.no-highlight} and `tap-spec`{:.no-highlight}.
+You now have your project set up and want to confirm that everything is working correctly. This last section therefore deals with how to test your front-end code automatically. You will utilize [Browserify](http://browserify.org/), [tape](https://github.com/substack/tape) and [Sinon](http://sinonjs.org/), with the help of `babelify`{:.no-highlight}, `tape-run`{:.no-highlight} and `tap-spec`{:.no-highlight}.
 
 <figure>
 <figcaption>package.json</figcaption>
@@ -206,21 +202,25 @@ You now have your project set up and want to confirm that everything is working 
 }</code></pre>
 </figure>
 
+You can find [`test/main.js`{:.no-highlight}](#test/main.js) after my description of the tools. Before you continue reading you might want to create the file, read the test and run `npm test`{:.no-highlight} to see the results.
+
 ### Browserify
 
-[Browserify](http://browserify.org/) bundles our imported packages -- Tape, Sinon and our `src/main.js` -- and transforms the result to ES5 using Babelify. Babelify is a Browserify plugin, which can be set with the transform flag as in `browserify test/main.js -t [ babelify ]`{:.no-highlight}. This way we can write our test in ES6 as we did our actual form tracking. You can of course do the same with webpack, but Browserify needs less configuration in this case.
+[Browserify](http://browserify.org/) bundles our imported packages, tape and Sinon, and combines them with our `src/main.js`. Additionally we can transform the result to ES5. Babelify, a Browserify plugin, can be set with the transform flag as in `browserify test/main.js -t [ babelify ]`{:.no-highlight}. This way we can write our test in ES6 as we did our actual form tracking. 
 
-### Tape
+You can of course do the same with [webpack](https://webpack.js.org/), but Browserify needs less configuration. If you want you can now convert the test script, copy it in your browser and look at the [Test Anything Protocol](http://testanything.org/) output, which brings us to tape.
 
-The lightweight [Tape](https://github.com/substack/tape) offers the ability to write unit tests for Node.js, outputting the results in Test Anything Protocol format. It provides a simple interface to write assertions like `t.equal(actual, expected, message)`{:.no-highlight} and plan how many assertions should be run.
+### tape
 
-For testing our form tracking we further need `tape-run`{:.no-highlight}, enabling us to run our test in a browser environment. Otherwise we would have no `document.body`{:.no-highlight} to add our form to. For this we simply pipe the Browserify output to `tape-run`. You can run the test in any browser by specifying the `--browser` flag, per default it will fire up Electron.
+The lightweight [tape](https://github.com/substack/tape) offers the ability to write unit tests for Node.js, outputting the result in [TAP](http://testanything.org/) format. It provides a simple interface for writing assertions like `t.equal(actual, expected, message)`{:.js} and planning how many assertions should be run. If you read the code you'll find it to be clear and to the point.
+
+For testing our form tracking we further want to pipe the Browserify output to [tape-run](https://github.com/juliangruber/tape-run), enabling us to automatically run our test in a browser environment. You can run the test in any browser by specifying the `--browser`{:.no-highlight} flag. Per default it will fire up Electron.
 
 ### Sinon
 
-[Sinon](http://sinonjs.org/) is then used to mock the Google Analytics library, as we don't want to send real events. We can create a test spy, that resembles a function, but doesn't really do anything. The spy enables us to test, whether the `ga()`{:.no-highlight} gets called by our script. We can also compare the arguments used while calling `ga()`{:.no-highlight} to our expected category and action. Be sure to check out the Sinon documentation and learn what else it has to offer.
+We use [Sinon](http://sinonjs.org/) to mock the Google Analytics library, as we don't want to send real events. The simplest tool it has to offer is a [spy](http://sinonjs.org/docs/#spies). A spy allows us to test whether the `ga()`{:.js} function gets called by our script, without the function having to actually do anything. We can also compare the arguments used upon calling `ga()`{:.js} to our expected category and action. Be sure to check out the Sinon [documentation](http://sinonjs.org/docs/) and learn what else it has to offer.
 
-<figure>
+<figure id="test/main.js">
 <figcaption>test/main.js</figcaption>
 <pre><code>import test from 'tape';
 import { spy } from 'sinon';
@@ -250,7 +250,7 @@ test('Tracking', (t) => {
 });</code></pre>
 </figure>
 
-The last package `tap-spec` takes the Test Anything Protocol output and changes it to look like Mocha's spec reporter, which is just a personal preference. You could even have your results printed as Nyan Cat's rainbow with `tap-nyan`. If you now run `npm test` it will output the result of our test and its four `t.assertion(…)` statements.
+The last package [tap-spec](https://github.com/scottcorgan/tap-spec) takes the TAP output and changes it to look like Mocha's spec reporter, which is just a personal preference. You could even have your results printed as Nyan Cat's rainbow with many of the available [formatters](https://github.com/sindresorhus/awesome-tap#javascript). If you now run `npm test`{:.no-highlight} it will output the result of our test and its four assertions.
 
 ~~~ bash
 
