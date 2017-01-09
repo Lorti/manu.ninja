@@ -146,7 +146,7 @@ If you want to further enhance your scene you might want to upgrade the directio
 
 ## Model
 
-The `MTLLoader` and `OBJLoader` are pretty self-explanatory. They both require a file path and a callback function. If you want to translate, rotate or scale your object simply assign a `new THREE.Vector3(x, y, z)` to the specific property of your object or use some of the functions listed in the [Object3D](http://threejs.org/docs/#Reference/Core/Object3D) documentation.
+The `MTLLoader` and `OBJLoader` are pretty self-explanatory. They both require a file path and a callback function. If you want to translate, rotate or scale your object simply change the properties listed in the [Object3D](http://threejs.org/docs/#Reference/Core/Object3D) documentation. You can do so by setting the x, y and z values of the [Vector3](https://threejs.org/docs/api/math/Vector3.html) independently or with the `set(x, y, z)` method.
 
 You can safely omit the two filter settings as I have needed them for the pixelated look of my model to keep the texture sharp. You can read about [texture filtering](http://threejs.org/docs/#Reference/Textures/Texture) in the three.js documentation.
 
