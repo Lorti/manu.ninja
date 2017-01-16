@@ -304,4 +304,11 @@ Jimp.read(input, (err, image) => {
 
 You have seen three approaches, two of which are feasible for production. The examples show that the third algorithm is not always superior -- it is center-weighted though and can return better results, depending on the image itself. You can run any of the three scripts and keep the gradients that work best for you.
 
+<div class="Panel">
+    <h3 class="Panel-heading">resemble-image</h3>
+    <p class="Panel-body">
+        I’ve published the <a href="https://www.npmjs.com/package/resemble-image">resemble-image</a> Node.js package in January 2017. It contains the algorithms <code>getEqualWidthStops</code> and <code>getVariableWidthStops</code> as described in this article, each of which provides you with color stops for a gradient that loosely resembles the original image.
+    </p>
+</div>
+
 I may also start incorporating Devon Govett’s [gif-stream](https://github.com/devongovett/gif-stream) and [neuquant](https://github.com/devongovett/neuquant) into Jimp. If that's something people want and Oliver Moran endorses, I’d be happy to do it.
