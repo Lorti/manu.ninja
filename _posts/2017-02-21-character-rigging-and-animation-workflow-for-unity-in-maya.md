@@ -1,11 +1,15 @@
 ---
 layout: post
 title:  Character Rigging and Animation Workflow for Unity in Maya
-date:   2017-02-15
+date:   2017-02-21
 categories: [art, games]
 thumbnail: /images/raptor.jpg
 sharing: true
 ---
+
+This article highlights pitfalls I’ve come across while animating a character in Autodesk Maya. They often surface when you export your model to `.fbx` format for real-time applications such as Unity. Learn from my mistakes and read the following sections on rigging, animating and exporting.
+
+I talk about specific problems I had when creating my cartoon velociraptor. The following rendering from the Unity viewport shows you the creature referred to in the examples.
 
 <style>
 .Article-content img {
@@ -13,10 +17,6 @@ sharing: true
     max-height: 480px;
 }
 </style>
-
-This article highlights pitfalls I’ve come across while animating a character in Autodesk Maya. They often surface when you export your model to `.fbx` format for real-time applications such as Unity. Learn from my mistakes and read the following sections on rigging, animating and exporting.
-
-I talk about specific problems I had when creating my cartoon velociraptor. The following rendering from the Unity viewport shows you the creature referred to in the examples.
 
 ![](/images/raptor.jpg)
 
