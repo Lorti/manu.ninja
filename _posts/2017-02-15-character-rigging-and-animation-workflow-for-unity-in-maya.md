@@ -14,9 +14,9 @@ sharing: true
 }
 </style>
 
-This article highlights a few pitfalls I’ve come across while animating a character in Autodesk Maya and exporting it in `.fbx` format to be used in real-time applications such as Unity. My learnings may be useful to you, so please read any of the three sections on rigging, animating or exporting you might find interesting.
+This article highlights pitfalls I’ve come across while animating a character in Autodesk Maya. They often surface when you export your model to `.fbx` format for real-time applications such as Unity. Learn from my mistakes and read the following sections on rigging, animating and exporting.
 
-I will talk about specific problems I had while creating my cartoon velociraptor. The following image taken from the Unity viewport shows you the creature character referred to in the examples.
+I talk about specific problems I had when creating my cartoon velociraptor. The following rendering from the Unity viewport shows you the creature referred to in the examples.
 
 ![](/images/raptor.jpg)
 
@@ -24,56 +24,58 @@ I will talk about specific problems I had while creating my cartoon velociraptor
 
 The majority of real-time applications support
 
-* solid animation (translation, scale, rotation),
-* skeleton-based animation (models rigged with bones)
-* and morph targets (transformed vertices), known as [Blend Shapes][] in Maya.
+* transform animation,
+* skeleton-based animation
+* and morph targets, known as [Blend Shapes][] in Maya.
 
-You should set a maximum of four influences when skinning via [Bind Smooth Skin][], as this is the most that Unity can handle. Sketchfab and other applications might handle less or more, but you should generally be safe if you use four influences.
+You should set at most four influences when skinning via [Bind Smooth Skin][]. This is the highest number of influences Unity can handle. Sketchfab and other applications might handle less or more, but you're generally safe if you use four influences.
 
-If you use constraints and deformers specific to a certain application you have to make sure that the exporter treats them correctly when baking the animation. I have not thought about that at first and created parts of the raptor rig with [Cluster][] deformers. The drool meshes are parented to the lower jaw controller, but the lowermost vertices of the drool meshes were members of two point sets controlled by Clusters. 
+If you use constraints and deformers specific to a certain application you have to make sure that the exporter understands them. They can pose a problem when baking the animation. I had not considered that and created parts of the velociraptor rig with [Cluster][] deformers. 
+
+The drool mesh is parented to the lower jaw controller. However, the bottom vertices of the drool meshes were members of two Clusters. This information does not get baked during the `.fbx` export. I had learned this fact only after animating the walk cycle. Then I had to redo this part of the rig with joints, transferring the animation.
 
 ![](/images/drool-joints-and-rig-controls.png)
 
-This information does not get baked during the `.fbx` export, which I had only learned after animating the walk cycle. So I had do redo this part of the rig with joints. With the help of the [Component Editor][] you are able to precisely set your skin weights, not having to flimsily paint your weights.
+You don't have to flimsily paint your weights, if you didn't know. With the help of the [Component Editor][] you are able to precisely set your skin weights.
+
+So I had learned to stick to joints, even for more complex animations and squash and stretch effects. Take for example this small character with the large head and beret. His mouth can be shrunk and grown for an exaggerated animation, all achieved with joints.
 
 ![](/images/squash-and-strech-head-rig.png)
 
-I had learned to stick to joints, even for more complex animations. An example are squash and stretch effects, like with the beret-wearing, big-headed character. His mouth can be shrunk and grown for an exaggerated animation, all achieved via joints.
-
 ## Animating
 
-If the model has multiple animations, you can create different files in the format `raptor@idle.fbx` or `raptor@walk.fbx`. Unity automatically imports all four files and collects the animation clips.
+If your model has many animations you can create files in the format `raptor@idle.fbx` or `raptor@walk.fbx`. Unity then imports all four files and collects the animation clips.
 
-For a better animation workflow in Maya and compatibility with Sketchfab all takes should be included in the same `.fbx` file. Why?
+However, you achieve a better animation workflow if you include all your takes in the same `.fbx` file. Plus, you get compatibility with Sketchfab. Why?
 
 * Unity won’t pollute your workspace with animation files. 
-* You don’t have to switch between different Maya instances, which can be daunting for your computer, or open a different file each time you want to tweak another animation clip.
+* You don’t have to switch between several Maya instances, which can  can be daunting for your computer. The alternative is to open another file each time you want to tweak an animation, which is frustrating.
 
 ![](https://docs.unity3d.com/uploads/Main/animation_at_naming.png)
 
-You can manage your animation clips in the [Trax Editor][], a feature which has been long available in Maya, but was somehow missing from Maya 2016 LT. The [Time Editor][], which was introduced in Maya 2017 and serves a similar purpose, has thankfully made its way to Maya LT 2017.
+You can manage your animation clips in the [Trax Editor][]. The feature has long been available in Maya, but was somehow missing from Maya LT. Luckily, Autodesk introduced the [Time Editor][] in Maya 2017. It serves a similar purpose and has made its way to Maya LT.
 
 ![](/images/trax-editor.png)
 
-Each clip holds the animation curves for a specific animation. You have to activate or deactivate a clip to see key ticks in the timeline and curves in the graph editor. Keys from other animation are hidden, allowing you to concentrate, use pre and post infinity cycles, and not having to reset your rig between clips, polluting your scene with curves and keys. This allows for a clean and hazzle-free animation experience.
+Each clip holds the animation curves for a specific animation. You have to activate or deactivate a clip to see key ticks in the timeline and curves in the graph editor. Keys from other animation are hidden, allowing you to concentrate on your task. You can use pre and post infinity cycles as you don't have to reset your rig between animations, polluting your scene with curves and keys. This allows for a clean and pleasant animation experience.
 
 ![](/images/graph-editor.png)
 
 ## Exporting
 
-Exporting your animations to `.fbx` can yield all sorts of problems, especially if your are stuck with older versions of Maya. Each time I had exported the raptor with the `.fbx` exporter in Maya 2012 I experienced some issues. The curves of both hands were not correctly resampled as euler interpolations during the animation baking process. This leads to animation glitches in Sketchfab. Unity can usually cleanup these curves, but you shouldn't count on it.
+Exporting your animations to `.fbx` can yield all sorts of problems, especially if your are stuck with older versions of Maya. Each time I had exported the raptor with the `.fbx` exporter in Maya 2012 I experienced issues. The exporter had problems resampling as Euler interpolations when baking the animation. This lead to animation glitches in Sketchfab, like jerking and twitching raptor hands. Unity can usually cleanup these curves, but you shouldn't count on it.
 
 ![](/images/resample-as-euler-interpolation-problems.png)
 
-Instead of manually cleaning the curves after each export I got the change to use Maya 2016 for a while and use the updated `.fbx` exporter, which handles rotations correctly. Which is where I've also discovered the  [Game Exporter][] feature, a tool you should definitely use, as it allows you to specify the key ranges for your clips.
+Instead of cleaning the curves by hand after each export I got the chance to use Maya 2016. This allowed me to use the updated `.fbx` exporter, which handles rotations without problems. Which is where I've also discovered the  [Game Exporter][] feature, a tool I can only recommend. It allows you to specify the key ranges for your clips.
 
 ![](/images/game-exporter.png)
 
-If you click on the cog in the lower right corner you'll open the usual `.fbx` settings. These haven't changed much since the first `.fbx` exporters, so the usual settings apply. You should check _Bake Animation_, _Resample All_, as well as _Deformed Models_ and _Skins_. Your animations should be exported correctly now, even if you uncheck all the other checkboxes present in the advanced settings.
+If you click on the cog wheel in the lower right corner you'll open the usual `.fbx` settings. These haven't changed much since the first `.fbx` exporters, so the usual settings apply. You should check _Bake Animation_, _Resample All_, as well as _Deformed Models_ and _Skins_. Given you don't want to study the advanced settings uncheck everything else. Your animations will still work.
 
 <!-- ![](/images/advanced-settings.png) -->
 
-As soon as the export was successful I've uploaded the raptor to Sketchfab, for showcasing the model and animations. If you are interested in using the raptor for your game visit [CGTrader][].  
+As soon as the export was successful I've uploaded the raptor to Sketchfab. It imported the clip ranges set in the Game Exporter and the animations look great. If you want to use the cartoon veliraptor for your game head over to [CGTrader][].
 
 <div class="FlexEmbed">
     <div class="FlexEmbed-ratio FlexEmbed-ratio--16by9">
@@ -81,7 +83,7 @@ As soon as the export was successful I've uploaded the raptor to Sketchfab, for 
     </div>
 </div>
 
-Hopefully some of these tips are helpful to you. Have you had similar or different problems with your rigs and animations? If so, please leave a comment with your tips, or,  if you have a problem with one of your rigs please feel free to ask, I'll be glad to help.
+I hope a few of these learnings are helpful to you. Have you had similar or different problems with your rigs and animations? If so, please leave a comment with your tips. Also, if you have a problem with one of your rigs please feel free to ask, I'll be glad to help.
 
 
 
