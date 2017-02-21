@@ -48,8 +48,8 @@ If your model has many animations you can create files in the format `raptor@idl
 
 However, you achieve a better animation workflow if you include all your takes in the same `.fbx` file. Plus, you get compatibility with Sketchfab. Why?
 
-* Unity won’t pollute your workspace with animation files. 
-* You don’t have to switch between several Maya instances, which can  can be daunting for your computer. The alternative is to open another file each time you want to tweak an animation, which is frustrating.
+* Unity won’t pollute your workspace with animation files.
+* You don’t have to switch between several Maya instances, which can be daunting for your computer. The alternative is to open another file each time you want to tweak an animation, which is frustrating.
 
 ![](https://docs.unity3d.com/uploads/Main/animation_at_naming.png)
 
@@ -83,15 +83,15 @@ As soon as the export was successful I've uploaded the raptor to Sketchfab. It i
     </div>
 </div>
 
-I hope a few of these learnings are helpful to you. Have you had similar or different problems with your rigs and animations? If so, please leave a comment with your tips. Also, if you have a problem with one of your rigs please feel free to ask, I'll be glad to help.
+I hope a few of these findings are helpful to you. Have you had similar or different problems with your rigs and animations? If so, please leave a comment with your tips. Also, if you have a problem with one of your rigs please feel free to ask, I'll be glad to help.
 
 
 
-[Blend Shapes]: https://knowledge.autodesk.com/guidref/MAYAUL/2016/learn-explore/GUID-B8853C3F-2997-4DC2-95A0-7C43E45888E4]
+[Blend Shapes]: https://knowledge.autodesk.com/guidref/MAYAUL/2016/learn-explore/GUID-B8853C3F-2997-4DC2-95A0-7C43E45888E4
 [Cluster]: https://knowledge.autodesk.com/guidref/MAYAUL/2016/learn-explore/GUID-B7C96FEA-C415-4927-8E02-396F0E837DE2
 [Component Editor]: https://knowledge.autodesk.com/guidref/MAYAUL/2015/learn-explore/Basics_Windows_and_Editors_Component_Editor
-[Bind Smooth Skin]: https://knowledge.autodesk.com/guidref/MAYAUL/2016/learn-explore/GUID-8DBA9E62-3854-4348-A0AD-1F981ECEA54F]
-[Trax Editor]: https://knowledge.autodesk.com/guidref/MAYAUL/2016/learn-explore/GUID-33C829F4-635C-4DEB-956C-6A54BEE1EC89]
-[Time Editor]: https://knowledge.autodesk.com/guidref/MAYAUL/2017/learn-explore/GUID-E4B5DB7D-7351-4561-BD8B-60AC9D48DDF6]
+[Bind Smooth Skin]: https://knowledge.autodesk.com/guidref/MAYAUL/2016/learn-explore/GUID-8DBA9E62-3854-4348-A0AD-1F981ECEA54F
+[Trax Editor]: https://knowledge.autodesk.com/guidref/MAYAUL/2016/learn-explore/GUID-33C829F4-635C-4DEB-956C-6A54BEE1EC89
+[Time Editor]: https://knowledge.autodesk.com/guidref/MAYAUL/2017/learn-explore/GUID-E4B5DB7D-7351-4561-BD8B-60AC9D48DDF6
 [Game Exporter]: https://knowledge.autodesk.com/guidref/MAYAUL/2016/learn-explore/GUID-2DB6E7B0-04B8-4585-91E9-7D64B02D0338
 [CGTrader]: https://www.cgtrader.com/3d-models/animals/dinosaur/velociraptor-16bc459b-4c90-4cce-ae1b-ddb6a84a71cf
