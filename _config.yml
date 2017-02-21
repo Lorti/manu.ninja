@@ -6,7 +6,8 @@ email: office@manuelwieser.com
 markdown: kramdown
 kramdown:
   auto_ids: true
-  syntax_highlighter: null
+  syntax_highlighter: nil
+highlighter: none
 
 sass:
   style: compressed
