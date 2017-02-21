@@ -73,8 +73,6 @@ Instead of cleaning the curves by hand after each export I got the chance to use
 
 If you click on the cog wheel in the lower right corner you'll open the usual `.fbx` settings. These haven't changed much since the first `.fbx` exporters, so the usual settings apply. You should check _Bake Animation_, _Resample All_, as well as _Deformed Models_ and _Skins_. Given you don't want to study the advanced settings uncheck everything else. Your animations will still work.
 
-<!-- ![](/images/advanced-settings.png) -->
-
 As soon as the export was successful I've uploaded the raptor to Sketchfab. It imported the clip ranges set in the Game Exporter and the animations look great. If you want to use the cartoon veliraptor for your game head over to [CGTrader][].
 
 <div class="FlexEmbed">
