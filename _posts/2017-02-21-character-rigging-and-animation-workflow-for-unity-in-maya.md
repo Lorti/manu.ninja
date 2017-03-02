@@ -67,7 +67,7 @@ Exporting your animations to `.fbx` can yield all sorts of problems, especially 
 
 ![](/images/resample-as-euler-interpolation-problems.png)
 
-Instead of cleaning the curves by hand after each export I got the chance to use Maya 2016. This allowed me to use the updated `.fbx` exporter, which handles rotations without problems. Which is where I've also discovered the  [Game Exporter][] feature, a tool I can only recommend. It allows you to specify the key ranges for your clips.
+I started cleaning the curves by hand, before getting a chance to use Maya LT 2017. This allowed me to use the updated `.fbx` exporter, which handles rotations without problems. Which is where I've also discovered the [Game Exporter][] feature, a tool I can only recommend. It allows you to specify the key ranges for your clips.
 
 ![](/images/game-exporter.png)
 
