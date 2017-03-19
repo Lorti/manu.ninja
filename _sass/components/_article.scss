@@ -67,8 +67,7 @@
         }
     }
 
-    iframe,
-    video {
+    iframe {
         display: block;
     }
 
@@ -78,6 +77,12 @@
         max-height: 768px;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    video {
+        display: block;
+        max-width: 100%;
+        height: auto;
     }
 
     blockquote,
