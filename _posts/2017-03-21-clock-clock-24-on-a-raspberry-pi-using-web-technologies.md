@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  Web Technology Clock Clock 24 on a Raspberry Pi
+title:  Clock Clock 24 on a Raspberry Pi Using Web Technologies
 date:   2017-03-21
 categories: [coding, art]
 thumbnail: /images/clock-clock-24.png
-summary: The original Clock Clock 24 is kinetic art by Humans since 1982. Twenty-four analog clocks form a large digital clock. Clever arrangement of the clock hands transforms the analog clocks into seven-segment displays. My girlfriend’s father stumpled upon this clock when looking for a new living room clock. At the time of writing you can buy the clock at $ 5,999.00 in the MoMA store. Thus I took the liberty and created a Clock Clock 24 homage with web technologies. My girlfriend and I then put the clock on a Raspberry Pi with a 3.5″ touchscreen. 
+summary: The original Clock Clock 24 is kinetic art by Humans since 1982. Twenty-four analog clocks form a large digital clock. Clever arrangement of the clock hands transforms the analog clocks into seven-segment displays. My girlfriend’s father stumpled upon this clock when looking for a new living room clock. At the time of writing you can buy the clock at $ 5,999.00 in the MoMA store. Thus I took the liberty and created a Clock Clock 24 homage with web technologies. My girlfriend and I then put the clock on a Raspberry Pi with a 3.5″ touch screen. 
 ---
 
-The original Clock Clock 24 is kinetic art by [Humans since 1982]. Twenty-four analog clocks form a large digital clock. Clever arrangement of the clock hands transforms the analog clocks into seven-segment displays. My girlfriend's father stumpled upon this clock when looking for a new living room clock. At the time of writing you can buy the clock at $ 5,999.00 in the [MoMA] store. Thus I took the liberty and created a [Clock Clock 24] homage with web technologies. My girlfriend and I then put the clock on a Raspberry Pi with a 3.5″ touchscreen. The following blog post explains how you can do that as well.
+The original Clock Clock 24 is kinetic art by [Humans since 1982]. Twenty-four analog clocks form a large digital clock. Clever arrangement of the clock hands transforms the analog clocks into seven-segment displays. My girlfriend's father stumpled upon this clock when looking for a new living room clock. At the time of writing you can buy the clock at $ 5,999.00 in the [MoMA] store. Thus I took the liberty and created a [Clock Clock 24] homage with web technologies. My girlfriend and I then put the clock on a Raspberry Pi with a 3.5″ touch screen. The following blog post explains how you can do that as well.
 
 <video width="990" height="430" autoplay controls preload="auto" loop>
     <source src="/images/clock-clock-24.mp4" type="video/mp4">
@@ -81,11 +81,11 @@ The original clock has more sophisticated animations, though. The owner can choo
 <p data-height="700" data-theme-id="0" data-slug-hash="XpQewQ" data-default-tab="result" data-user="Lorti" data-embed-version="2" data-pen-title="Clock Clock 24" class="codepen">See the Pen <a href="http://codepen.io/Lorti/pen/XpQewQ/">Clock Clock 24</a> by Manuel Wieser (<a href="http://codepen.io/Lorti">@Lorti</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-## Clock Clock 24 on a Raspberry Pi with a 3.5″ touchscreen
+## Clock Clock 24 on a Raspberry Pi with a 3.5″ touch screen
 
 The motivation for this project was that my girlfriend's parents were looking for a new living room clock. As Wolfgang's birthday was nearing, we thought about ways to display the clock on a budget, as a fun gadget. This is when my girlfriend had the idea of hooking up a Raspberry Pi to a display. 
 
-At first we thought about a used HDMI display, but we then found the <a rel="nofollow" href="https://www.amazon.de/gp/product/B01JRUH0CY/ref=as_li_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B01JRUH0CY&linkCode=as2&tag=manuninja-21">Elegoo 3.5″ touchscreen</a> which costs around $ 25. You connect it to the GPIO of the Raspberry Pi, where it also draws its power from.
+At first we thought about a used HDMI display, but we then found the <a rel="nofollow" href="https://www.amazon.de/gp/product/B01JRUH0CY/ref=as_li_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B01JRUH0CY&linkCode=as2&tag=manuninja-21">Elegoo 3.5″ touch screen</a> which costs around $ 25. You connect it to the GPIO of the Raspberry Pi, where it also draws its power from.
 
 <img src="http://ir-de.amazon-adsystem.com/e/ir?t=manuninja-21&l=as2&o=3&a=B01JRUH0CY" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
@@ -102,4 +102,4 @@ If you liked this article, please consider [sharing] it with your followers. And
 [Clock Clock 24]: http://cc24.g01l.eu/
 [Images]: https://github.com/goodtft/LCD-show/wiki/Images-Download-address
 [MoMA]: https://store.moma.org/museum/moma/ProductDisplay_Clock-Clock-24-_10451_10001_238891_-1_26663_11551
-[sharing]: https://twitter.com/intent/tweet?original_referer=https://manu.ninja/clock-clock-24-on-a-raspberry-pi&text=Web%Technology%20Clock%20Clock%2024%20on%20a%20Raspberry%20Pi&tw_p=tweetbutton&url=https://manu.ninja/web-technology-clock-clock-24-on-a-raspberry-pi&via=manuelwieser
+[sharing]: https://twitter.com/intent/tweet?original_referer=https://manu.ninja/clock-clock-24-on-a-raspberry-pi&text=Clock%20Clock%2024%20on%20a%20Raspberry%20Pi%20Using%20Web%20Technologies&tw_p=tweetbutton&url=https://manu.ninja/clock-clock-24-on-a-raspberry-pi-using-web-technologies&via=manuelwieser
