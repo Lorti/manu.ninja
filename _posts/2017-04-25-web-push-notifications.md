@@ -24,6 +24,22 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis consequuntu
 
 ## Demonstration
 
+* `applicationServerKey`
+* Service Worker 
+* Subscription 
+* Subscription Object 
+* Push Message
+
+* webpush.generateVAPIDKeys()
+* navigator.serviceWorker.register()
+* serviceWorkerRegistration.pushManager.subscribe()
+* subscription.toJSON()
+* webpush.sendNotification()
+
+[Web Push]
+
+[GitHub]
+
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis consequuntur ducimus et molestiae nisi quos sint? Accusantium blanditiis consequuntur delectus dignissimos doloribus, ducimus ea exercitationem fuga hic illum in inventore ipsa ipsum minima molestias nihil nulla officia quaerat repudiandae saepe unde, veritatis voluptas voluptatem? Ducimus ea illo illum quia vel.
 
 ## Browser Support
@@ -39,6 +55,10 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis consequuntu
 | [Push API] | ✅ | ✅ | 🔜 | ❌
 | [Notifications API] | ✅ | ✅ | ✅ | ✅
 | [Web Push Protocol] | ✅ | ✅ | ✅ | ❌
+
+[Platform Status Service Worker]
+
+[Platform Status Push API]
 
 ### Operating Systems
 
@@ -58,6 +78,10 @@ Safari
 
 ## Conclusion
 
+[GitHub]
+
+[Slides]
+
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis consequuntur ducimus et molestiae nisi quos sint? Accusantium blanditiis consequuntur delectus dignissimos doloribus, ducimus ea exercitationem fuga hic illum in inventore ipsa ipsum minima molestias nihil nulla officia quaerat repudiandae saepe unde, veritatis voluptas voluptatem? Ducimus ea illo illum quia vel.
 
 ![](/images/web-push-notifications.png)
@@ -76,3 +100,5 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis consequuntu
 [Push API]: https://developer.mozilla.org/en-US/docs/Web/API/Push_API
 [Notifications API]: https://developer.mozilla.org/de/docs/Web/API/Notifications_API
 [Web Push Protocol]: https://tools.ietf.org/html/rfc8030
+
+[Web Push]: https://github.com/web-push-libs/web-push
