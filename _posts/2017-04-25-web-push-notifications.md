@@ -30,6 +30,14 @@ How do push notifications on the open web work?
 
 ![](/images/web-push-notifications-technological-overview.gif)
 
+1. A device downloads your web app containing an already created public key, referred to in scripts as the `applicationServerKey`. Your web app installs a service worker.
+1. During the subscription flow the browser contacts the messaging server to create a new subscription and returns it to the app. You don't need to know the URL of the message server. Each browser vendor manages it's own message server for its browser.
+1. After the subscription flow, your app passes a subscription object back to your app server.
+1. At some later point, your app server sends a message to the messaging server.
+1. The messaging server forwards your message to the recipient.
+
+
+
 ## Demonstration
 
 Clone the code on [GitHub] and follow the instructions in the [video] below or do the following:
@@ -38,9 +46,9 @@ Clone the code on [GitHub] and follow the instructions in the [video] below or d
 1. `npm start`
 1. Enable push notifications and copy the subscription object that appears.
 1. Update the subscription object in `server.js` file with your own subscription object.
-5. Run `node server.js` to send a push notification.
+1. Run `node server.js` to send a push notification.
 
-<video id="video" width="1280" height="720" autoplay controls preload="auto" loop>
+<video id="video" width="1280" height="720" controls>
     <source src="/images/web-push-notifications.mp4" type="video/mp4">
 </video>
 
@@ -50,13 +58,14 @@ Clone the code on [GitHub] and follow the instructions in the [video] below or d
 
 What is happening?
 
-`applicationServerKey`
-[Web Push] `webpush.generateVAPIDKeys()`
+The `applicationServerKey` is part of the Voluntary Application Server Identification for Web Push ([VAPID]) specification. It let's the push service identify your application server. The easiest way to create this public/private key pair is to use a library like [Web Push]. Its `webpush.generateVAPIDKeys()` function returns an object with a `publicKey` and a `privateKey` property. If you want to create your keys simply uncomment the four lines at the top of [server.js](https://github.com/Lorti/web-push-notifications/blob/master/server.js#L3) in my example.
 
-Service Worker 
+
+
+Service Worker
 `navigator.serviceWorker.register()`
 
-Subscription 
+Subscription
 `serviceWorkerRegistration.pushManager.subscribe()`
 
 Subscription Object 
@@ -67,42 +76,43 @@ Push Message
 
 
 
-
-
-
-
 ## Browser Support
 
 ### Technologies
 
-|---
+Microsoft [Platform Status Service Worker] [Platform Status Push API]
+
 || Chrome | Firefox | Edge | Safari
 |-|:-:|:-:|:-:|:-:
-| [Service Worker] |  | ✅ | 🔜 | ❌
+| [Service Worker] | ✅ | ✅ | 🔜 | ❌
 | [Push API] | ✅ | ✅ | 🔜 | ❌
 | [Notifications API] | ✅ | ✅ | ✅ | ✅
 | [Web Push Protocol] | ✅ | ✅ | ✅ | ❌
 
-[Platform Status Service Worker]
 
-[Platform Status Push API]
 
 ### Operating Systems
 
-Chrome
-: Windows, macOS, Linux and Android
+still iOS not supported
 
-Firefox
-: Windows, macOS, Linux and Android
-
-Edge
-: Windows, Windows Mobile
-
-Safari
-: macOS via Apple’s non-standard implementation, iOS not supported
-
-
-
+<table>
+    <tr>
+        <th>Chrome</th>
+        <td>Windows, macOS, Linux and Android</td>
+    </tr>
+    <tr>
+        <th>Firefox</th>
+        <td>Windows, macOS, Linux and Android</td>
+    </tr>
+    <tr>
+        <th>Edge</th>
+        <td>Windows, Windows Mobile</td>
+    </tr>
+    <tr>
+        <th>Safari</th>
+        <td>macOS (via Apple’s non-standard implementation)</td>
+    </tr>
+</table>
 
 
 
@@ -116,10 +126,9 @@ If you want to go deeper into push notifications read the [Web Fundamentals](htt
 
 
 
-
-
 [RFC 8030]: https://tools.ietf.org/html/rfc8030
 [Web Push Protocol]: https://tools.ietf.org/html/rfc8030
+[VAPID]: https://tools.ietf.org/html/draft-ietf-webpush-vapid
 
 [GitHub]: https://github.com/Lorti/web-push-notifications
 [Slides]: https://speakerdeck.com/lorti/web-push-notifications

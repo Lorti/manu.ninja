@@ -90,6 +90,7 @@
     img,
     figure,
     pre,
+    table,
     video,
     .FlexEmbed,
     .Panel,
@@ -162,6 +163,12 @@
         color: hsl(0, 0, 35%);
         padding: 0 1.375em;
         border-left: 1px solid lightgray;
+    }
+
+    td, th {
+        border: 1px solid lightgray;
+        padding: .5rem;
+        text-align: left;
     }
 }
 
