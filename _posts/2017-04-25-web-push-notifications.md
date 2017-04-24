@@ -30,11 +30,11 @@ How do push notifications on the open web work?
 
 ![](/images/web-push-notifications-technological-overview.gif)
 
-1. A device downloads your web app containing an already created public key, referred to in scripts as the `applicationServerKey`. Your web app installs a service worker.
-1. During the subscription flow the browser contacts the messaging server to create a new subscription and returns it to the app. You don't need to know the URL of the message server. Each browser vendor manages it's own message server for its browser.
-1. After the subscription flow, your app passes a subscription object back to your app server.
-1. At some later point, your app server sends a message to the messaging server.
-1. The messaging server forwards your message to the recipient.
+1. A user downloads your web application containing a public key, referred to in scripts as the `applicationServerKey`. Your app installs a service worker.
+1. During the subscription flow the browser requests a subscription from the messaging server. Each browser vendor has it's own message server, but you don't have to tell your browser which URL to call.
+1. Your app sends the subscription object to your server.
+1. Your server sends a message to the messaging service.
+1. The messaging service forwards your message to the recipient.
 
 
 
@@ -56,23 +56,136 @@ Clone the code on [GitHub] and follow the instructions in the [video] below or d
 
 ## Explanation
 
-What is happening?
+What is happening? You should clone the code from [GitHub] and read it. I will just highlight the most important parts, without error handling or feature detection. The full code is production-ready though, if you add the missing parts that depend on your stack.
+
+### Voluntary Application Server Identification for Web Push
 
 The `applicationServerKey` is part of the Voluntary Application Server Identification for Web Push ([VAPID]) specification. It let's the push service identify your application server. The easiest way to create this public/private key pair is to use a library like [Web Push]. Its `webpush.generateVAPIDKeys()` function returns an object with a `publicKey` and a `privateKey` property. If you want to create your keys simply uncomment the four lines at the top of [server.js](https://github.com/Lorti/web-push-notifications/blob/master/server.js#L3) in my example.
 
+``` js
+const webpush = require('web-push');
 
+const vapidKeys = webpush.generateVAPIDKeys();
+console.log(vapidKeys.publicKey);
+console.log(vapidKeys.privateKey);
+process.exit();
+``` 
 
-Service Worker
-`navigator.serviceWorker.register()`
+The following code snippets are from the `push.js` module and run on the client.
 
-Subscription
-`serviceWorkerRegistration.pushManager.subscribe()`
+### Service Worker
 
-Subscription Object 
-`subscription.toJSON()`
+The next step is to install a service worker with `navigator.serviceWorker.register()`. This will fail if your site is not `localhost` or has a valid HTTPS certificate. When testing you can get around the HTTPS restriction by checking the "Enable Service Workers over HTTP (when toolbox is open)" option in the Firefox Devtools options. You can also use the `--unsafely-treat-insecure-origin-as-secure` flag when you open Chrome via the command line, if you need to test HTTP URLs.
 
-Push Message
-`webpush.sendNotification()`
+``` js
+navigator.serviceWorker.register('/service-worker.js')
+    .then((registration) => {
+        init();
+    });
+```
+
+``` js
+function init() {
+    navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
+        serviceWorkerRegistration.pushManager.getSubscription()
+            .then((subscription) => {
+                // Do we already have a push message subscription?
+                if (subscription) {
+                    sendSubscriptionToServer(subscription);
+                }
+            });
+    });
+};
+```
+
+### Subscribing to the Push Messaging Service
+
+You should of course ask the user for permission, if he wants to allow notifications for your page. This is handled in more detail in the actual code. The following example should just give you an idea.
+
+If the service worker registration is successful you can access its `pushManager` object. `serviceWorkerRegistration.pushManager.subscribe()` returns a promise with a valid subscription if successful. You don't have to care about the messaging service itself. Chrome will return a subscription with a Google endpoint wheres Firefox will return a subscription with a Mozilla endpoint. This is the beauty of a standards-based approach.
+
+``` js
+function subscribe() {
+    Notification.requestPermission().then((result) => {
+        if (result === 'granted') {
+            const options = {
+                userVisibleOnly: true,
+                applicationServerKey: buildApplicationServerKey(),
+            };
+            navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
+                serviceWorkerRegistration.pushManager.subscribe(options)
+                    .then((subscription) => {
+                        sendSubscriptionToServer(subscription);
+                    });
+            });
+            
+        }
+    }):
+}
+```
+
+Depending on how you have generated your `applicationServerKey` you might have to convert it from one Base64 variant to another. The variants differ in the last two characters used, and the character used for padding. `buildApplicationServerKey()` converts characters 62 and 63 from the `-_`{:.no-highlight} pair to the `+/`{:.no-highlight} pair.
+
+``` js
+function buildApplicationServerKey() {
+    const base64 = 'BE8PyI95I_jBIfb_LTS_nkUJnOwjLP2zAaGBSFEi3jmFJ3l5ox7-NtNqrVuyPL4Qmt4UxDI-YgwYI1sEMIpoU90=';
+    const rfc4648 = base64.replace(/-/g, '+').replace(/_/g, '/');
+    const characters = atob(rfc4648).split('').map(character => character.charCodeAt(0));
+    return new Uint8Array(characters);
+}
+```
+
+### Saving the Subscription Object
+
+The `sendSubscriptionToServer()` is a stub that you have to implement depending on your setup. You can call `subscription.toJSON()` on the subscription object to retrieve the endpoint and keys as strings. This you can save to your server, to send a user notifications later on. The example outputs the JSON to the page, so you can copy it to `server.js`.
+
+``` js
+function sendSubscriptionToServer(subscription) {
+    console.log(JSON.stringify(subscription.toJSON()));
+}
+```
+
+### Sending the Push Notification
+
+If you open `server.js` you will find few lines of code, thanks to the [Web Push] library. You have to copy the JSON output from before and call `webpush.sendNotification()`. This sends the notification to the messaging service, which itself will queue it and try to send it as soon as possible. For this to work your service worker has to be up and running.
+
+Why use a library? You'd have to create the Authorization (JWT), Crypto-Key and TTL headers yourself, as well as encrypt your payload.
+
+``` js
+const webpush = require('web-push');
+const subscription = {
+    endpoint: 'https://fcm.googleapis.com/fcm/send/...',
+    keys: {
+        p256dh: 'BHfHzdoRRiN7ZXvjzckj23Uk...',
+        auth: 'N9iezp-o35cV-8-FiyDjnQ==',
+    },
+};
+const notification = JSON.stringify({
+    title: 'manu.ninja',
+    body: 'I’ve just published “Web Push Notifications”.',
+};
+webpush.sendNotification(subscription, notification);
+```
+
+### Receiving the Push Notification
+
+The listens for various events from the push messaging service. The `push` event might have data attached. You can use the data to specify your notifications. The payload of your messagehas to be relatively small. If you need to send something large you can send what's called a "tickle": You use the push message as a signal to fetch data from one of your endpoints in the service worker. The payload has to be encrypted, which is good for privacy, but difficult to implement. Another point for using a library.
+
+``` js
+self.addEventListener('push', (event) => {
+    const data = event.data.json();
+    const title = data.title;
+    const options = {
+        body: data.body,
+        icon: 'https://pbs.twimg.com/profile_images/717346718870859776/vsyH7GEi.jpg',
+    };
+    event.waitUntil(
+        self.registration.showNotification(title, options),
+    );
+});
+```
+
+Et voilà!
 
 
 
@@ -80,7 +193,7 @@ Push Message
 
 ### Technologies
 
-Microsoft [Platform Status Service Worker] [Platform Status Push API]
+You can use the above code for Chrome and Firefox right away. The good thing is, Microsoft is catching up quickly. You can check the implementation status at [Platform Status Service Worker] and [Platform Status Push API]. Safari is missing all of the technologies necessary except for the Notifications API.
 
 || Chrome | Firefox | Edge | Safari
 |-|:-:|:-:|:-:|:-:
@@ -89,11 +202,9 @@ Microsoft [Platform Status Service Worker] [Platform Status Push API]
 | [Notifications API] | ✅ | ✅ | ✅ | ✅
 | [Web Push Protocol] | ✅ | ✅ | ✅ | ❌
 
-
-
 ### Operating Systems
 
-still iOS not supported
+Chrome and Firefox support web push notifications on all of their platforms. Edge will probably also support web push notifications on Windows Mobile, but at a market share of 1% this may not be what you are waiting for. The bad thing is, that Apple's not playing nice. Safari Push Notifications are available since Mavericks (OS X 10.9), but Apple uses a non-standard implementation and iOS is and will probably never be supported. If you want to support Safari you will have to follow the [Safari Push Notifications] guide.
 
 <table>
     <tr>
@@ -144,5 +255,7 @@ If you want to go deeper into push notifications read the [Web Fundamentals](htt
 
 [Notifications API]: https://developer.mozilla.org/de/docs/Web/API/Notifications_API
 [Notifications API Support]: http://caniuse.com/#feat=notifications
+
+[Safari Push Notifications]: https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/NotificationProgrammingGuideForWebsites/PushNotifications/PushNotifications.html
 
 [Web Push]: https://github.com/web-push-libs/web-push
