@@ -19,7 +19,7 @@ In the process of standardization implementations have changed over the years. U
 
 * [RFC 8030] – Generic Event Delivery Using HTTP Push
 * You can use the same code for Chrome and Firefox since mid 2016.
-* You no longer need a Firebase project, a `gcm_sender_id`, or an `Authorization` header. You no longer need a `manifest.json`, although you should for building a [Progressive Web App](https://developers.google.com/web/progressive-web-apps/).
+* You no longer need a Firebase project, a `gcm_sender_id`{:.bash} , or an `Authorization`{:.bash}  header. You no longer need a `manifest.json`{:.bash} , although you should for building a [Progressive Web App](https://developers.google.com/web/progressive-web-apps/).
 * Microsoft is co-authoring the RFC, so they will follow the standard.
 
 
@@ -30,7 +30,7 @@ How do push notifications on the open web work?
 
 ![](/images/web-push-notifications-technological-overview.gif)
 
-1. The user downloads your app containing a public key, called the `applicationServerKey`. Your app installs a service worker in the user's browser.
+1. The user downloads your app containing a public key, called the `applicationServerKey`{:.js}. Your app installs a service worker in the user's browser.
 1. During the subscription flow the browser requests a subscription from the messaging server. Each browser vendor has it's own messaging server, but your browsers knows which server to call.
 1. Your app sends the subscription object to your server.
 1. Your server sends a push notification to the messaging service.
@@ -56,11 +56,11 @@ Now that you've seen the flow please clone or download the code from [GitHub]. P
 
 ## Explanation
 
-What is happening? You should clone the code from [GitHub] and read it. I will just highlight the most important parts, without error handling or feature detection. The full code is production-ready though, if you add the missing parts that depend on your stack.
+What is happening? Please get the code from [GitHub] and read it. I will explain the most important parts, without error handling or feature detection. The full code is production-ready though, if you add the missing parts that depend on your stack.
 
 ### Voluntary Application Server Identification for Web Push
 
-The `applicationServerKey` is part of the Voluntary Application Server Identification for Web Push ([VAPID]) specification. It let's the push service identify your application server. The easiest way to create this public/private key pair is to use a library like [Web Push]. Its `webpush.generateVAPIDKeys()` function returns an object with a `publicKey` and a `privateKey` property. If you want to create your keys simply uncomment the four lines at the top of [server.js](https://github.com/Lorti/web-push-notifications/blob/master/server.js#L3) in my example.
+The `applicationServerKey`{:.js} is part of the Voluntary Application Server Identification for Web Push ([VAPID]) specification. It let's the push service identify your application server. The easiest way to create this public and private pair of keys is to use a library like [Web Push]. Its `webpush.generateVAPIDKeys()`{:.js} function returns an object with a `publicKey`{:.js} and a `privateKey`{:.js} property. If you want to create your keys simply uncomment the four lines at the top of [server.js](https://github.com/Lorti/web-push-notifications/blob/master/server.js#L3), which you've just checked out.
 
 ``` js
 const webpush = require('web-push');
@@ -71,11 +71,11 @@ console.log(vapidKeys.privateKey);
 process.exit();
 ``` 
 
-The following code snippets are from the `push.js` module and run on the client.
+The following code snippets are from the `push.js`{:.bash} module and run on the client.
 
 ### Service Worker
 
-The next step is to install a service worker with `navigator.serviceWorker.register()`. This will fail if your site is not `localhost` or has a valid HTTPS certificate. When testing you can get around the HTTPS restriction by checking the "Enable Service Workers over HTTP (when toolbox is open)" option in the Firefox Devtools options. You can also use the `--unsafely-treat-insecure-origin-as-secure` flag when you open Chrome via the command line, if you need to test HTTP URLs.
+The second step is to install a service worker with `navigator.serviceWorker.register()`{:.js}. This only works if your site is served on `localhost`{:.bash} or has a valid SSL certificate. For testing you can get around the HTTPS restriction by checking the _Enable Service Workers over HTTP (when toolbox is open)_ option in the Firefox developer tools. You can also start Chrome via command line and use the `--unsafely-treat-insecure-origin-as-secure` flag.
 
 ``` js
 navigator.serviceWorker.register('/service-worker.js')
@@ -100,9 +100,9 @@ function init() {
 
 ### Subscribing to the Push Messaging Service
 
-You should of course ask the user for permission, if he wants to allow notifications for your page. This is handled in more detail in the actual code. The following example should just give you an idea.
+You should of course ask the user's permission for showing notifications on your page. This is handled in more detail in the actual code. The following example serves to give you an idea by only handling `'granted'`{:.js}.
 
-If the service worker registration is successful you can access its `pushManager` object. `serviceWorkerRegistration.pushManager.subscribe()` returns a promise with a valid subscription if successful. You don't have to care about the messaging service itself. Chrome will return a subscription with a Google endpoint wheres Firefox will return a subscription with a Mozilla endpoint. This is the beauty of a standards-based approach.
+If the service worker registration is successful you can access its `pushManager`{:.js} object. `serviceWorkerRegistration.pushManager.subscribe()`{:.js} returns a promise with a valid subscription if successful. You don't have to care about the messaging service itself. Chrome will return a subscription with a Google endpoint wheres Firefox will return a subscription with a Mozilla endpoint. This is the beauty of a standards-based approach.
 
 ``` js
 function subscribe() {
@@ -124,7 +124,7 @@ function subscribe() {
 }
 ```
 
-Depending on how you have generated your `applicationServerKey` you might have to convert it from one Base64 variant to another. The variants differ in the last two characters used, and the character used for padding. `buildApplicationServerKey()` converts characters 62 and 63 from the `-_`{:.no-highlight} pair to the `+/`{:.no-highlight} pair.
+Depending on how you've generated your `applicationServerKey`{:.js} you might need to convert it from one Base64 variant to another. The variants differ in the last two characters and the padding character. `buildApplicationServerKey()`{:.js} converts characters 62 and 63 from the `-_`{:.no-highlight} pair to the `+/`{:.no-highlight} pair.
 
 ``` js
 function buildApplicationServerKey() {
@@ -137,7 +137,7 @@ function buildApplicationServerKey() {
 
 ### Saving the Subscription Object
 
-The `sendSubscriptionToServer()` is a stub that you have to implement depending on your setup. You can call `subscription.toJSON()` on the subscription object to retrieve the endpoint and keys as strings. This you can save to your server, to send a user notifications later on. The example outputs the JSON to the page, so you can copy it to `server.js`.
+The `sendSubscriptionToServer()`{:.js} function is a stub that you have to implement depending on your server. You can call `subscription.toJSON()`{:.js} on the subscription object to retrieve the endpoint and keys as strings. You have to save the subscription to send the user notifications later on. The example writes the JSON to the page itself, so you can copy it to `server.js`{:.bash}.
 
 ``` js
 function sendSubscriptionToServer(subscription) {
@@ -147,9 +147,9 @@ function sendSubscriptionToServer(subscription) {
 
 ### Sending the Push Notification
 
-If you open `server.js` you will find few lines of code, thanks to the [Web Push] library. You have to copy the JSON output from before and call `webpush.sendNotification()`. This sends the notification to the messaging service, which itself will queue it and try to send it as soon as possible. For this to work your service worker has to be up and running.
+If you open `server.js`{:.bash} you will find few lines of code, thanks to the [Web Push] library. You have to get a user's subscription, for example the JSON output from earlier, and call `webpush.sendNotification()`{:.js}. This sends the notification to the messaging service, which itself will queue it and try to send it as soon as possible. For this to work your service worker has to be up and running.
 
-Why use a library? You'd have to create the Authorization (JWT), Crypto-Key and TTL headers yourself, as well as encrypt your payload.
+Why use a library? You'd have to create the Authorization (JWT), Crypto-Key and TTL headers yourself, as well as encrypt your payload. There is a link at the end of the article if you are interested in the details.
 
 ``` js
 const webpush = require('web-push');
@@ -169,7 +169,9 @@ webpush.sendNotification(subscription, notification);
 
 ### Receiving the Push Notification
 
-The listens for various events from the push messaging service. The `push` event might have data attached. You can use the data to specify your notifications. The payload of your messagehas to be relatively small. If you need to send something large you can send what's called a "tickle": You use the push message as a signal to fetch data from one of your endpoints in the service worker. The payload has to be encrypted, which is good for privacy, but difficult to implement. Another point for using a library.
+The service worker listens for various events from the push messaging service. The `push`{:.js} event may have data attached. You can use the data to specify your notifications. The payload of your message has to be relatively small, though. If you need to send something large you can send what's called a "tickle": You use the push message as a signal to fetch data from your server in the service worker. 
+
+The payload has to be encrypted, which is good for privacy, but difficult to implement. Which again brings us to the benefits of using a library.
 
 ``` js
 self.addEventListener('push', (event) => {
@@ -193,7 +195,7 @@ Et voilà!
 
 ### Technologies
 
-You can use the above code for Chrome and Firefox right away. The good thing is, Microsoft is catching up quickly. You can check the implementation status at [Platform Status Service Worker] and [Platform Status Push API]. Safari is missing all of the technologies necessary except for the Notifications API.
+You can use the example code for Chrome and Firefox right away. The good thing is, Microsoft is catching up quickly. You can check the implementation status for [Service Workers][Platform Status Service Worker] and the [Push API][Platform Status Push API] for updates. Safari is missing all of the technologies necessary except for the Notifications API.
 
 || Chrome | Firefox | Edge | Safari
 |-|:-:|:-:|:-:|:-:
@@ -204,7 +206,7 @@ You can use the above code for Chrome and Firefox right away. The good thing is,
 
 ### Operating Systems
 
-Chrome and Firefox support web push notifications on all of their platforms. Edge will probably also support web push notifications on Windows Mobile, but at a market share of 1% this may not be what you are waiting for. The bad thing is, that Apple's not playing nice. Safari Push Notifications are available since Mavericks (OS X 10.9), but Apple uses a non-standard implementation and iOS is and will probably never be supported. If you want to support Safari you will have to follow the [Safari Push Notifications] guide.
+Google and Mozilla support web push notifications on all of their platforms. Edge will probably also support web push notifications on Windows Mobile, but at a market share of 1% it won't be your highest priority. The bad thing is, that Apple's not shown interest in the standard. Safari Push Notifications are available since Mavericks (OS X 10.9), but Apple uses a non-standard implementation and don't allow them on iOS. If you want to support Safari you will have to follow the [Safari Push Notifications] guide.
 
 <table>
     <tr>
@@ -233,7 +235,7 @@ Get the code at [GitHub] and poke around to understand what is happening. The [p
 
 ![](/images/web-push-notifications.png)
 
-If you want to go deeper into push notifications read the [Web Fundamentals](https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/) section on web push notifications by Joseph Medley. The [Slides] for my talk at Stahlstadt.js on March 27, 2017 are also online. 
+If you want to dive deeper into push notifications read the [Web Fundamentals](https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/) section on web push notifications by Joseph Medley. The [Slides] for my talk at Stahlstadt.js on March 27, 2017 are also online. 
 
 
 
