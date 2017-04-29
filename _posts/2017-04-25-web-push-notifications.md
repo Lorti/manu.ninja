@@ -7,19 +7,19 @@ thumbnail: /images/web-push-notifications.png
 sharing: true
 ---
 
-Engage and Retain Users with Push Notifications on the Web. It has become far easier for you in 2017. This tutorial shows you a complete working example to get you started. The final code is on [GitHub] and there's also a [video] demonstrating how you can send push notifications in under a minute.
+Developers use push notifications to engage and retain users. Unfortunately, sending push notifications on the open web was difficult in the past. It has become simpler in 2017. This tutorial shows you a complete working example to get you started. The final code is on [GitHub] and you'll find a [video] demonstrating how you can send your first push notification.
 
 
 
 ## What's new?
 
-Sendind push notifications was difficult in the past because you need a variety of new web technologies. It took some time before support for [Service Workers][Service Worker Support], [Notifications][Notifications API Support] and [Push][Push API Support], Google's and Mozilla's push messaging services and the urge to change to HTTPS was at a point where you can deliver push notifications to a significant amount of your users, not only a fraction.
+Sending push notifications is complicated because there's a variety of modern web technologies involved. It took time before support for [Service Workers][Service Worker Support], the [Notification][Notifications API Support] and [Push][Push API Support] APIs, Google's and Mozilla's push messaging services, as well as the appeal of switching to HTTPS were at a point where you can deliver push notifications to a significant amount of your users, not only a fraction.
 
-In the process of standardizing web push notifications implementations have changed over the years. In the past you had to write very different code for each platform to enable push notifications. There have been steps in the right direction to make development more pleasant. The most important news are the following:
+In the process of standardization implementations have changed over the years. Until recently you had to write very different code for each platform to enable push notifications. Luckily, there have been steps in the right direction to make development more pleasant. The most important news are the following:
 
 * [RFC 8030] – Generic Event Delivery Using HTTP Push
 * You can use the same code for Chrome and Firefox since mid 2016.
-* You no longer need a Firebase project, a `gcm_sender_id`, or an `Authorization` header. You no longer need a `manifest.json`.
+* You no longer need a Firebase project, a `gcm_sender_id`, or an `Authorization` header. You no longer need a `manifest.json`, although you should for building a [Progressive Web App](https://developers.google.com/web/progressive-web-apps/).
 * Microsoft is co-authoring the RFC, so they will follow the standard.
 
 
@@ -30,25 +30,25 @@ How do push notifications on the open web work?
 
 ![](/images/web-push-notifications-technological-overview.gif)
 
-1. A user downloads your web application containing a public key, referred to in scripts as the `applicationServerKey`. Your app installs a service worker.
-1. During the subscription flow the browser requests a subscription from the messaging server. Each browser vendor has it's own message server, but you don't have to tell your browser which URL to call.
+1. The user downloads your app containing a public key, called the `applicationServerKey`. Your app installs a service worker in the user's browser.
+1. During the subscription flow the browser requests a subscription from the messaging server. Each browser vendor has it's own messaging server, but your browsers knows which server to call.
 1. Your app sends the subscription object to your server.
-1. Your server sends a message to the messaging service.
-1. The messaging service forwards your message to the recipient.
+1. Your server sends a push notification to the messaging service.
+1. The messaging service forwards your push notification to the recipient.
 
 
 
 ## Demonstration
 
-Clone the code on [GitHub] and follow the instructions in the [video] below or do the following:
+Now that you've seen the flow please clone or download the code from [GitHub]. Please follow the steps below, which you can also watch in the [video].
 
-1. `npm install`
-1. `npm start`
+1. `npm install`{:.bash}
+1. `npm start`{:.bash}
 1. Enable push notifications and copy the subscription object that appears.
-1. Update the subscription object in `server.js` file with your own subscription object.
-1. Run `node server.js` to send a push notification.
+1. Update the subscription object in the `server.js`{:.bash} file with your own subscription object.
+1. Run `node server.js`{:.bash} to send a push notification.
 
-<video id="video" width="1280" height="720" controls>
+<video id="video" width="1280" height="720" autplay controls loop>
     <source src="/images/web-push-notifications.mp4" type="video/mp4">
 </video>
 
