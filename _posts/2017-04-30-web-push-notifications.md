@@ -48,7 +48,7 @@ Now that you've seen the flow please clone or download the code from [GitHub]. P
 1. Update the subscription object in the `server.js`{:.bash} file with your own subscription object.
 1. Run `node server.js`{:.bash} to send a push notification.
 
-<video id="video" width="1280" height="720" autplay controls loop>
+<video id="video" width="1280" height="720" autoplay controls loop>
     <source src="/images/web-push-notifications.mp4" type="video/mp4">
 </video>
 
