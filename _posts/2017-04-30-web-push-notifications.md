@@ -5,6 +5,7 @@ date:   2017-04-30
 categories: coding
 thumbnail: /images/web-push-notifications.png
 sharing: true
+summary: Developers use push notifications to engage and retain users. Unfortunately, sending push notifications on the open web was difficult in the past. It has become simpler in 2017. This tutorial shows you a complete working example to get you started. The final code is on GitHub and you'll find a video demonstrating how you can send your first push notification.
 ---
 
 Developers use push notifications to engage and retain users. Unfortunately, sending push notifications on the open web was difficult in the past. It has become simpler in 2017. This tutorial shows you a complete working example to get you started. The final code is on [GitHub] and you'll find a [video] demonstrating how you can send your first push notification.
@@ -19,19 +20,19 @@ In the process of standardization implementations have changed over the years. U
 
 * [RFC 8030] – Generic Event Delivery Using HTTP Push
 * You can use the same code for Chrome and Firefox since mid 2016.
-* You no longer need a Firebase project, a `gcm_sender_id`{:.bash} , or an `Authorization`{:.bash}  header. You no longer need a `manifest.json`{:.bash} , although you should for building a [Progressive Web App](https://developers.google.com/web/progressive-web-apps/).
+* You no longer need a Firebase project, a `gcm_sender_id`{:.bash} , or an `Authorization`{:.bash}  header. You no longer need a `manifest.json`{:.bash}, except for building a [Progressive Web App](https://developers.google.com/web/progressive-web-apps/).
 * Microsoft is co-authoring the RFC, so they will follow the standard.
 
 
 
 ## Technological Overview
 
-How do push notifications on the open web work?
+How do push notifications work on the open web?
 
 ![](/images/web-push-notifications-technological-overview.gif)
 
 1. The user downloads your app containing a public key, called the `applicationServerKey`{:.js}. Your app installs a service worker in the user's browser.
-1. During the subscription flow the browser requests a subscription from the messaging server. Each browser vendor has it's own messaging server, but your browsers knows which server to call.
+1. During the subscription flow the browser requests a subscription from the messaging server. Each browser vendor has it's own messaging server, but your browser knows which server to call.
 1. Your app sends the subscription object to your server.
 1. Your server sends a push notification to the messaging service.
 1. The messaging service forwards your push notification to the recipient.
@@ -40,7 +41,7 @@ How do push notifications on the open web work?
 
 ## Demonstration
 
-Now that you've seen the flow please clone or download the code from [GitHub]. Please follow the steps below, which you can also watch in the [video].
+Now that you've seen the flow please clone or download the code from [GitHub]. Then follow the steps below, which you can also watch in the [video].
 
 1. `npm install`{:.bash}
 1. `npm start`{:.bash}
@@ -56,7 +57,7 @@ Now that you've seen the flow please clone or download the code from [GitHub]. P
 
 ## Explanation
 
-What is happening? Please get the code from [GitHub] and read it. I will explain the most important parts, without error handling or feature detection. The full code is production-ready though, if you add the missing parts that depend on your stack.
+What is happening? I will explain the most important parts, without error handling or feature detection. The full code is production-ready, though, if you add the missing parts that depend on your stack.
 
 ### Voluntary Application Server Identification for Web Push
 
@@ -100,7 +101,7 @@ function init() {
 
 ### Subscribing to the Push Messaging Service
 
-You should of course ask the user's permission for showing notifications on your page. This is handled in more detail in the actual code. The following example serves to give you an idea by only handling `'granted'`{:.js}.
+You should of course ask the user's permission for showing notifications on your page. This is handled in more detail in the actual code. The following example gives you an idea by handling the `'granted'`{:.js} result.
 
 If the service worker registration is successful you can access its `pushManager`{:.js} object. `serviceWorkerRegistration.pushManager.subscribe()`{:.js} returns a promise with a valid subscription if successful. You don't have to care about the messaging service itself. Chrome will return a subscription with a Google endpoint wheres Firefox will return a subscription with a Mozilla endpoint. This is the beauty of a standards-based approach.
 
@@ -137,7 +138,7 @@ function buildApplicationServerKey() {
 
 ### Saving the Subscription Object
 
-The `sendSubscriptionToServer()`{:.js} function is a stub that you have to implement depending on your server. You can call `subscription.toJSON()`{:.js} on the subscription object to retrieve the endpoint and keys as strings. You have to save the subscription to send the user notifications later on. The example writes the JSON to the page itself, so you can copy it to `server.js`{:.bash}.
+The `sendSubscriptionToServer()`{:.js} function is a stub that you have to implement depending on your server. You can call `subscription.toJSON()`{:.js} on the subscription object to retrieve the endpoint and keys as strings. Save the subscription object to your database to send the user notifications later on. The example outputs the JSON to the page itself, so you can copy it to `server.js`{:.bash}.
 
 ``` js
 function sendSubscriptionToServer(subscription) {
@@ -147,9 +148,9 @@ function sendSubscriptionToServer(subscription) {
 
 ### Sending the Push Notification
 
-If you open `server.js`{:.bash} you will find few lines of code, thanks to the [Web Push] library. You have to get a user's subscription, for example the JSON output from earlier, and call `webpush.sendNotification()`{:.js}. This sends the notification to the messaging service, which itself will queue it and try to send it as soon as possible. For this to work your service worker has to be up and running.
+If you open `server.js`{:.bash}, you will find few lines of code, thanks to the [Web Push] library. You have to get a user's subscription object and call `webpush.sendNotification()`{:.js}. This sends the notification to the messaging service, which itself queues it and tries to send it as soon as possible. For this to work your service worker has to be up and running.
 
-Why use a library? You'd have to create the Authorization (JWT), Crypto-Key and TTL headers yourself, as well as encrypt your payload. There is a link at the end of the article if you are interested in the details.
+Why use a library? Otherwise, you wouldd have to create the Authorization (JWT), Crypto-Key and TTL headers yourself, as well as encrypt your payload. There is a link at the end of the article, if you are interested in the details.
 
 ``` js
 const webpush = require('web-push');
@@ -169,7 +170,7 @@ webpush.sendNotification(subscription, notification);
 
 ### Receiving the Push Notification
 
-The service worker listens for various events from the push messaging service. The `push`{:.js} event may have data attached. You can use the data to specify your notifications. The payload of your message has to be relatively small, though. If you need to send something large you can send what's called a "tickle": You use the push message as a signal to fetch data from your server in the service worker. 
+The service worker listens for various events from the push messaging service. The `push`{:.js} event may have data attached. You can use the data to specify your notifications. The payload of your message has to be relatively small, though. If you need to send more data you can send what's called a "tickle": You use the push message as a signal to fetch data from your server in the service worker. 
 
 The payload has to be encrypted, which is good for privacy, but difficult to implement. Which again brings us to the benefits of using a library.
 
@@ -195,7 +196,7 @@ Et voilà!
 
 ### Technologies
 
-You can use the example code for Chrome and Firefox right away. The good thing is, Microsoft is catching up quickly. You can check the implementation status for [Service Workers][Platform Status Service Worker] and the [Push API][Platform Status Push API] for updates. Safari is missing all of the technologies necessary except for the Notifications API.
+You can use the example code for Chrome and Firefox right away. The good news is, Edge is catching up quickly. You can check the platform status for [Service Workers][Platform Status Service Worker] and the [Push API][Platform Status Push API] for updates. Safari is missing all of the technologies necessary, except for the Notifications API.
 
 || Chrome | Firefox | Edge | Safari
 |-|:-:|:-:|:-:|:-:
@@ -206,7 +207,7 @@ You can use the example code for Chrome and Firefox right away. The good thing i
 
 ### Operating Systems
 
-Google and Mozilla support web push notifications on all of their platforms. Edge will probably also support web push notifications on Windows Mobile, but at a market share of 1% it won't be your highest priority. The bad thing is, that Apple's not shown interest in the standard. Safari Push Notifications are available since Mavericks (OS X 10.9), but Apple uses a non-standard implementation and don't allow them on iOS. If you want to support Safari you will have to follow the [Safari Push Notifications] guide.
+Google and Mozilla support web push notifications on all of their platforms. Microsoft will probably also support web push notifications on Windows Mobile, but at a market share of 1% it won't be your highest priority. Sadly, Apple's not shown interest in the standard. Safari Push Notifications are available since Mavericks (OS X 10.9), but Apple uses a non-standard implementation and doesn't allow them on iOS. If you want to support Safari, you will have to follow the [Safari Push Notifications] guide.
 
 <table>
     <tr>
@@ -231,11 +232,11 @@ Google and Mozilla support web push notifications on all of their platforms. Edg
 
 ## Conclusion
 
-Get the code at [GitHub] and poke around to understand what is happening. The [push.js](https://github.com/Lorti/web-push-notifications/blob/master/src/push.js) module is written in an events format so you might want to use it right away in your application with a few modifications. If you do so please mention me, leave a star on GitHub or tell your followers. 
+Get the code at [GitHub] and poke around to understand what's happening. The code is production-ready, if you add the missing parts that depend on your stack. The [push.js](https://github.com/Lorti/web-push-notifications/blob/master/src/push.js) module is written using events so you can plug it right into in your application with a few modifications. If you do so please mention me, leave a star on GitHub or tell your followers.
 
 ![](/images/web-push-notifications.png)
 
-If you want to dive deeper into push notifications read the [Web Fundamentals](https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/) section on web push notifications by Joseph Medley. The [Slides] for my talk at Stahlstadt.js on March 27, 2017 are also online. 
+If you want to dive deeper into push notifications, read the [Web Fundamentals](https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/) section on web push notifications by Joseph Medley. The [Slides] for my talk at Stahlstadt.js on March 27, 2017 are also online. 
 
 
 
