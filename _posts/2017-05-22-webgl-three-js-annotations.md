@@ -3,13 +3,13 @@ layout: post
 title:  WebGL/three.js Annotations
 date:   2017-05-22
 categories: coding
-thumbnail: /images/web-push-notifications.png
+thumbnail: /images/webgl-three-js-annotations.png
 sharing: true
 ---
 
 How can you add a comment box or annotation box to a WebGL object as seen on [Sketchfab][Dodo]?
 
-<p data-height="265" data-theme-id="0" data-slug-hash="Vbppap" data-default-tab="js,result" data-user="Lorti" data-embed-version="2" data-pen-title="WebGL Annotations (three.js)" class="codepen">See the Pen <a href="http://codepen.io/Lorti/pen/Vbppap/">WebGL Annotations (three.js)</a> by Manuel Wieser (<a href="http://codepen.io/Lorti">@Lorti</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<p data-height="480" data-theme-id="0" data-slug-hash="Vbppap" data-default-tab="result" data-user="Lorti" data-embed-version="2" data-pen-title="WebGL Annotations (three.js)" class="codepen">See the Pen <a href="http://codepen.io/Lorti/pen/Vbppap/">WebGL Annotations (three.js)</a> by Manuel Wieser (<a href="http://codepen.io/Lorti">@Lorti</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
 ## Setup
