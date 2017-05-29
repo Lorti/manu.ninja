@@ -5,14 +5,17 @@ date:   2017-05-22
 categories: coding
 thumbnail: /images/webgl-three-js-annotations.png
 sharing: true
+summary: How do you add a comment box or annotation box to a WebGL object as seen on Sketchfab? When using WebGL you can harness the power of one of the world's most versatile GUI layers, which is HTML, CSS and JavaScript.
 ---
 
-How can you add a comment box or annotation box to a WebGL object as seen on [Sketchfab][Dodo]?
+How do you add a comment box or annotation box to a WebGL object as seen on [Sketchfab][Dodo]? Engines usually provide a separate GUI layer, which consists of polygons and textures rendered after the game or visualization itself. Take a look at [Unity] or [Unreal Engine] for examples[<sup>1</sup>](#1). When using WebGL you can harness the power of one of the world's most versatile GUI layers, which is HTML, CSS and JavaScript.
 
 <p data-height="480" data-theme-id="0" data-slug-hash="Vbppap" data-default-tab="result" data-user="Lorti" data-embed-version="2" data-pen-title="WebGL Annotations (three.js)" class="codepen">See the Pen <a href="http://codepen.io/Lorti/pen/Vbppap/">WebGL Annotations (three.js)</a> by Manuel Wieser (<a href="http://codepen.io/Lorti">@Lorti</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
 ## Setup
+
+For this example we'll use a basic three.js setup as described in [WebGL 3D Model Viewer Using three.js], or any of the various three.js examples in the official repository. The object we'll annotate is a simple box with a width, height and depth of 500 units.
 
 ``` js
 const mesh = new THREE.Mesh(
@@ -28,6 +31,8 @@ scene.add(mesh);
 ```
 
 ## Screen Projection
+
+The annotation is glued to one of the corners, represented by `THREE.Vector3(250, 250, 250)`{:.js}.
 
 ``` js
 const vector = new THREE.Vector3(250, 250, 250);
@@ -116,4 +121,17 @@ line 160 in the JavaScript panel
 sprite.material.opacity = 0;
 ```
 
+
+
+## Footnotes
+
+1. <a name="1"></a>[CryEngine] even uses [Scaleform], a technology based on Flash, if you want to use those dusty ActionScript skills you have aquired years ago.
+
+
+
 [Dodo]: https://sketchfab.com/models/ad10226b4f7a451ea23920a556c72a90
+[Unity]: https://docs.unity3d.com/Manual/UISystem.html
+[Unreal Engine]: https://docs.unrealengine.com/latest/INT/Engine/UMG/
+[CryEngine]: http://docs.cryengine.com/display/SDKDOC4/User+Interface
+[Scaleform]: https://www.autodesk.com/products/scaleform/overview
+[WebGL 3D Model Viewer Using three.js]: https://manu.ninja/webgl-3d-model-viewer-using-three-js
