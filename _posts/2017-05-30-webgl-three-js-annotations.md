@@ -5,17 +5,19 @@ date:   2017-05-30
 categories: coding
 thumbnail: /images/webgl-three-js-annotations.png
 sharing: true
-summary: How do you add a comment box or annotation box to a WebGL object as seen on Sketchfab? When using WebGL you can harness the power of one of the world's most versatile GUI layers, which is HTML, CSS and JavaScript.
+summary: How do you add a comment box or annotation box to a WebGL object as seen on Sketchfab? This tutorial features a working example on CodePen and explains the essential code segments.
 ---
 
-How do you add a comment box or annotation box to a WebGL object as seen on [Sketchfab][Dodo]? Engines usually provide a separate GUI layer, which consists of polygons and textures rendered after the game or visualization itself. Take a look at [Unity] or [Unreal Engine] for examples[<sup>1</sup>](#1). When using WebGL you can harness the power of one of the world's most versatile GUI layers, which is HTML, CSS and JavaScript.
+How do you add a comment box or annotation box to a WebGL object as seen on [Sketchfab][Dodo]? This tutorial features a working example on [CodePen] and explains the essential code segments.
+
+Engines usually provide a separate UI layer, which consists of polygons and textures rendered after the game or visualization itself. Take a look at [Unity] or [Unreal Engine] for examples[<sup>1</sup>](#1). When you're in a browser you can harness the power of HTML, CSS and JavaScript, providing one of the world's most versatile UI layers. WebGL is good at handling geometry and transformations, but the browser itself is far better at handling typography and layout.
 
 <p data-height="480" data-theme-id="0" data-slug-hash="Vbppap" data-default-tab="result" data-user="Lorti" data-embed-version="2" data-pen-title="WebGL Annotations (three.js)" class="codepen">See the Pen <a href="http://codepen.io/Lorti/pen/Vbppap/">WebGL Annotations (three.js)</a> by Manuel Wieser (<a href="http://codepen.io/Lorti">@Lorti</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
 ## Setup
 
-For this example we'll use a basic three.js setup as described in [WebGL 3D Model Viewer Using three.js], or any of the various three.js examples in the official repository. The object we'll annotate is a simple box with a width, height and depth of 500 units.
+For this example we'll use a basic three.js setup as described in [WebGL 3D Model Viewer Using three.js]. You can also use any of the various three.js examples in the official repository[<sup>2</sup>](#2). The object we'll annotate is a simple box with a width, height and depth of 500 units.
 
 ``` js
 const mesh = new THREE.Mesh(
@@ -32,7 +34,9 @@ scene.add(mesh);
 
 ## Screen Projection
 
-The annotation is glued to one of the corners, represented by `THREE.Vector3(250, 250, 250)`{:.js}. To draw the annotation using DOM elements we have to project this point onto the screen. For this purpose three.js has a helper method `vector.project()`{:.js}. It converts the 3D coordinates to 2D coordinates between `-1`{:.js} and `1`{:.js}, `0`{:.js} being the center of the screen. 
+The annotation is glued to one of the boxes' corners, represented by `THREE.Vector3(250, 250, 250)`{:.js}. To draw the annotation using DOM elements we have to project this point to screen space. 
+
+For this purpose three.js has a helper method `vector.project()`{:.js}. It converts 3D coordinates to 2D coordinates between `-1`{:.js} and `1`{:.js}, `0`{:.js} being the center of the screen. These are called normalized device coordinates (NDCs) in computer graphics.  
 
 ``` js
 const vector = new THREE.Vector3(250, 250, 250);
@@ -48,18 +52,18 @@ annotation.style.top = `${vector.y}px`;
 annotation.style.left = `${vector.x}px`;
 ```
 
-You can use these coordinates to get the top and left offset relative to the `canvas`{:html} element. This is already enough to go ahead and style your annotations. There are a few adaptations you might want to consider, though.
+You can use these coordinates to get the top and left offset relative to the `canvas`{:html} element. This is already enough to go ahead and style your annotations. Although, there are a few possible modifications, which we'll discuss in the next sections.
 
 ## Transfer the Annotation Marker to WebGL/three.js
 
-Drawing the annotation box with HTML/CSS is great. You don't have to worry about typography and layout in WebGL. But you might want to have your marker as a 3D object, to accurately reflect the position you're annotating. To see this in action in my [CodePen]
+Drawing the annotation box with HTML/CSS is great. You don't have to worry about typography and layout in WebGL. But you might want to have your marker as a 3D object, to accurately reflect the position you're annotating. To see this in action in my [CodePen] please
 
 1. remove the `::before`{:.css} pseudo-element starting at line 20 of the CSS
 2. and display the 3D marker by removing `sprite.material.opacity = 0;`{:.js} in line 160 of the JavaScript.
 
 ### Draw the Annotation Marker on a 2D Canvas
 
-To display the annotation marker in your scene you'll have to create a texture that can be mapped to polygons. three.js can load the bitmap data of other canvases and convert it to WebGL textures. Therefore we'll draw a few shapes that look like the recently removed CSS pseudo-element[<sup>2</sup>](#2).
+To display the annotation marker in your scene you'll have to create a material that can be applied to geometry. three.js can load the bitmap data of other canvases and convert it to WebGL textures. Therefore we'll draw a few shapes that look like the recently removed CSS pseudo-element[<sup>3</sup>](#3).
 
 ``` js
 const canvas = document.getElementById('number');
@@ -90,7 +94,7 @@ ctx.fillText('1', x, y);
 
 ### Load the Annotation Marker in the 3D Scene
 
-A sprite is a plane that always faces towards the camera, which is exactly what we want for the annotation marker. You can load the texture by passing the canvas element to `THREE.CanvasTexture()`{:.js} and create a sprite material with `depthTest`{:.js} and `depthWrite`{:.js} set to `false`{:.js}. This will draw the marker always on top of your object.
+A sprite is a plane that always faces towards the camera, which is exactly what we want for the annotation marker. You can convert your drawing to a texture by passing the canvas element to `THREE.CanvasTexture`{:.js}, which is then used for a `THREE.SpriteMaterial`{:.js}. `depthTest`{:.js} and `depthWrite`{:.js} set to `false`{:.js}, which tells three.js to always draw the marker on top of the object.
 
 ``` js
 const numberTexture = new THREE.CanvasTexture(
@@ -114,7 +118,7 @@ scene.add(sprite);
 
 ## Fade the Annotation Marker when it's behind an Object
 
-Both the 2D and 3D annotation markers are drawn on top of the object. It is not obvious to the user if the marker is in front or behind the object. An elegant solution to this is to lower the opacity of the CSS pseudo-element or sprite when the annotation vector is farther from the camera than the objects center. This way the user still sees the marker but also knows, if it is behind the object.
+The 2D marker and 3D marker are both drawn on top of the object. It may not be obvious to the user if the marker is in front or behind the object. An elegant solution to that problem is to lower the opacity of the CSS pseudo-element or sprite when the annotation vector is farther from the camera than the objects center. This way the user still sees the marker at any time, but can easily tell if it's behind the object.
 
 ``` js
 const meshDistance = camera.position.distanceTo(mesh.position);
@@ -127,11 +131,12 @@ annotation.style.opacity = spriteBehindObject ? 0.25 : 1;
 
 ## Conclusion
 
-It is easy to display WebGL/three.js annotations in a browser by using each technology for what it does best: WebGL for rendering 3D content and HTML/CSS for rendering text. Look at my [CodePen] for the full code and leave a comment if you have further questions or suggestions.
+It's not difficult to display WebGL/three.js annotations in a browser when using each technology for it's strengths. Look at my [CodePen] for the full code and leave a comment if you have further questions or suggestions.
 
 ## Footnotes
 
 1. <a name="1"></a>[CryEngine] even uses [Scaleform], a technology based on Flash, if you want to use those dusty ActionScript skills you have aquired years ago.
+1. <a name="3"></a>You don't have to use three.js, the concepts apply to plain WebGL as well.
 1. <a name="2"></a>You can also draw a few markers in Photoshop, if you want. You might also consider creating a packed spritesheet for performance or animated markers.
 
 [Dodo]: https://sketchfab.com/models/ad10226b4f7a451ea23920a556c72a90
