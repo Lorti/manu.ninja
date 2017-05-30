@@ -125,11 +125,14 @@ sprite.material.opacity = spriteBehindObject ? 0.25 : 1;
 annotation.style.opacity = spriteBehindObject ? 0.25 : 1;
 ```
 
+## Conclusion
+
+It is easy to display WebGL/three.js annotations in a browser by using each technology for what it does best: WebGL for rendering 3D content and HTML/CSS for rendering text. Look at my [CodePen] for the full code and leave a comment if you have further questions or suggestions.
+
 ## Footnotes
 
 1. <a name="1"></a>[CryEngine] even uses [Scaleform], a technology based on Flash, if you want to use those dusty ActionScript skills you have aquired years ago.
-
-2. <a name="2"></a>You can also draw a few markers in Photoshop, if you want. You might also consider creating a packed spritesheet for performance or animated markers.
+1. <a name="2"></a>You can also draw a few markers in Photoshop, if you want. You might also consider creating a packed spritesheet for performance or animated markers.
 
 [Dodo]: https://sketchfab.com/models/ad10226b4f7a451ea23920a556c72a90
 [CodePen]: http://codepen.io/Lorti/pen/Vbppap/
