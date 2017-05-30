@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  WebGL/three.js Annotations
-date:   2017-05-22
+date:   2017-05-30
 categories: coding
 thumbnail: /images/webgl-three-js-annotations.png
 sharing: true
