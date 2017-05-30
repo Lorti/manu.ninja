@@ -56,10 +56,10 @@ You can use these coordinates to get the top and left offset relative to the `ca
 
 ## Transfer the Annotation Marker to WebGL/three.js
 
-Drawing the annotation box with HTML/CSS is great. You don't have to worry about typography and layout in WebGL. But you might want to have your marker as a 3D object, to accurately reflect the position you're annotating. To see this in action in my [CodePen] please
+Drawing the annotation box with HTML/CSS is great. You don't have to worry about typography and layout in WebGL. But you might want to have your marker as a 3D object, to accurately reflect the position you're annotating. To see this in action you only have to change minor things in my [CodePen]:
 
-1. remove the `::before`{:.css} pseudo-element starting at line 20 of the CSS
-2. and display the 3D marker by removing `sprite.material.opacity = 0;`{:.js} in line 160 of the JavaScript.
+1. Remove the `::before`{:.css} pseudo-element starting at line 20 of the CSS.
+2. Display the 3D marker by removing `sprite.material.opacity = 0;`{:.js} in line 160 of the JavaScript.
 
 ### Draw the Annotation Marker on a 2D Canvas
 
@@ -118,7 +118,7 @@ scene.add(sprite);
 
 ## Fade the Annotation Marker when it's behind an Object
 
-The 2D marker and 3D marker are both drawn on top of the object. It may not be obvious to the user if the marker is in front or behind the object. An elegant solution to that problem is to lower the opacity of the CSS pseudo-element or sprite when the annotation vector is farther from the camera than the objects center. This way the user still sees the marker at any time, but can easily tell if it's behind the object.
+The 2D marker and 3D marker are both drawn on top of the object. It may not be obvious to the user whether the marker is in front or behind the object. An elegant solution to that problem is to lower the opacity of the CSS pseudo-element or sprite when the annotation vector is farther from the camera than the objects center. This way the user still sees the marker at any time, but can easily tell if it's behind the object.
 
 ``` js
 const meshDistance = camera.position.distanceTo(mesh.position);
@@ -131,7 +131,7 @@ annotation.style.opacity = spriteBehindObject ? 0.25 : 1;
 
 ## Conclusion
 
-It's not difficult to display WebGL/three.js annotations in a browser when using each technology for it's strengths. Look at my [CodePen] for the full code and leave a comment if you have further questions or suggestions.
+It's not difficult to display WebGL/three.js annotations in a browser when using each technology for its strengths. Look at my [CodePen] for the full code and leave a comment if you have further questions or suggestions.
 
 ## Footnotes
 
