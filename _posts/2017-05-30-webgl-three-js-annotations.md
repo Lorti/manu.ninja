@@ -44,8 +44,8 @@ const canvas = renderer.domElement; // `renderer` is a THREE.WebGLRenderer
 
 vector.project(camera); // `camera` is a THREE.PerspectiveCamera
 
-vector.x = Math.round((1 + vector.x) * (canvas.width / window.devicePixelRatio) / 2);
-vector.y = Math.round((1 - vector.y) * (canvas.height / window.devicePixelRatio) / 2);
+vector.x = Math.round((0.5 + vector.x / 2) * (canvas.width / window.devicePixelRatio));
+vector.y = Math.round((0.5 - vector.y / 2) * (canvas.height / window.devicePixelRatio));
 
 const annotation = document.querySelector('.annotation');
 annotation.style.top = `${vector.y}px`;
