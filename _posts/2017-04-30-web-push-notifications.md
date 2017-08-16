@@ -150,7 +150,7 @@ function sendSubscriptionToServer(subscription) {
 
 If you open `server.js`{:.bash}, you will find few lines of code, thanks to the [Web Push] library. You have to get a user's subscription object and call `webpush.sendNotification()`{:.js}. This sends the notification to the messaging service, which itself queues it and tries to send it as soon as possible. For this to work your service worker has to be up and running.
 
-Why use a library? Otherwise, you wouldd have to create the Authorization (JWT), Crypto-Key and TTL headers yourself, as well as encrypt your payload. There is a link at the end of the article, if you are interested in the details.
+Why use a library? Otherwise, you would have to create the Authorization (JWT), Crypto-Key and TTL headers yourself, as well as encrypt your payload. There is a link at the end of the article, if you are interested in the details.
 
 ``` js
 const webpush = require('web-push');
