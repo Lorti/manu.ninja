@@ -11,7 +11,10 @@ Last year I played with RxJS to expand my programming horizon and learn about fu
 
 In this series of blog posts I will explain the most interesting parts of this project and share solutions to the problems I have encountered. Please revisit my blog in the following months if you are interested in using RxJS alongside three.js for games. You will find the full source code on [GitHub][Corsair], which you can fork and adapt or take as an inspiration for your own projects.
 
-[![](/images/corsair.jpg)][Corsair]
+<video width="720" height="480" autoplay preload="auto" loop>
+    <source src="/images/corsair.mp4" type="video/mp4">
+</video>
+<!-- ffmpeg -i corsair.mov -codec:v libx264 -preset slower -filter:v "crop=850:567:0:0" corsair.mp4 -->
 
 I have presented the current progress of this project at the [Stahlstadt.js] meetup on June 7. Then this year's great summer prevented me from writing about it. [The game already has about 500 lines of code at this stage][Corsair], which is why I have decided to start my first three-part blog post series:
  
