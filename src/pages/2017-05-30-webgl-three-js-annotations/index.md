@@ -1,7 +1,7 @@
 ---
 path: /webgl-three-js-annotations
 title:  WebGL/three.js Annotations
-date:   2017-05-30
+date:   "2017-05-30"
 categories: [art, coding, games]
 thumbnail: /images/webgl-three-js-annotations.png
 sharing: true
@@ -12,8 +12,8 @@ How do you add a comment box or annotation box to a WebGL object as seen on [Ske
 
 Engines usually provide a separate UI layer, which consists of polygons and textures rendered after the game or visualization itself. Take a look at [Unity] or [Unreal Engine] for examples[<sup>1</sup>](#1). When you're in a browser you can harness the power of HTML, CSS and JavaScript, providing one of the world's most versatile UI layers. WebGL is good at handling geometry and transformations, but the browser itself is far better at handling typography and layout.
 
-<p data-height="480" data-theme-id="0" data-slug-hash="Vbppap" data-default-tab="result" data-user="Lorti" data-embed-version="2" data-pen-title="WebGL Annotations (three.js)" class="codepen">See the Pen <a href="http://codepen.io/Lorti/pen/Vbppap/">WebGL Annotations (three.js)</a> by Manuel Wieser (<a href="http://codepen.io/Lorti">@Lorti</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+<iframe height='480' scrolling='no' title='WebGL Annotations (three.js)' src='//codepen.io/Lorti/embed/Vbppap/?height=480&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/Vbppap/'>WebGL Annotations (three.js)</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 ## Setup
 
