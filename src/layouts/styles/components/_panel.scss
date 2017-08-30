@@ -1,0 +1,18 @@
+.Panel {}
+
+.Panel-heading {
+    padding: .5em;
+    color: #fff;
+    background: #f58231;
+}
+
+h3.Panel-heading {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.Panel-body {
+    margin-bottom: 0;
+    border: 1px solid #f58231;
+    padding: .5em;
+}

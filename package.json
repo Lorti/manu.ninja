@@ -1,0 +1,39 @@
+{
+  "name": "manu.ninja",
+  "description": "manu.ninja is the personal blog of Manuel Wieser, where he talks about front-end development, web development, coding, games and digital art",
+  "version": "1.0.0",
+  "author": "Manuel Wieser <office@manuelwieser.com>",
+  "dependencies": {
+    "gatsby": "^1.6.5",
+    "gatsby-link": "^1.6.5",
+    "gatsby-plugin-google-analytics": "^1.0.1",
+    "gatsby-plugin-manifest": "^1.0.1",
+    "gatsby-plugin-offline": "^1.0.1",
+    "gatsby-plugin-react-helmet": "^1.0.1",
+    "gatsby-plugin-sass": "^1.0.8",
+    "gatsby-plugin-sharp": "^1.6.3",
+    "gatsby-remark-copy-linked-files": "^1.5.4",
+    "gatsby-remark-images": "^1.5.7",
+    "gatsby-remark-prismjs": "^1.2.4",
+    "gatsby-remark-responsive-iframe": "^1.4.5",
+    "gatsby-remark-smartypants": "^1.4.5",
+    "gatsby-source-filesystem": "^1.4.7",
+    "gatsby-transformer-remark": "^1.7.4",
+    "gatsby-transformer-sharp": "^1.6.2"
+  },
+  "license": "MIT",
+  "scripts": {
+    "dev": "gatsby develop",
+    "lint": "./node_modules/.bin/eslint --ext .js,.jsx --ignore-pattern public .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js'",
+    "develop": "gatsby develop",
+    "build": "gatsby build",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public",
+    "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js"
+  },
+  "devDependencies": {
+    "eslint": "^4.5.0",
+    "prettier": "^1.5.2"
+  }
+}
