@@ -19,7 +19,8 @@
     "gatsby-remark-smartypants": "^1.4.5",
     "gatsby-source-filesystem": "^1.4.7",
     "gatsby-transformer-remark": "^1.7.4",
-    "gatsby-transformer-sharp": "^1.6.2"
+    "gatsby-transformer-sharp": "^1.6.2",
+    "webfontloader": "^1.6.28"
   },
   "license": "MIT",
   "scripts": {

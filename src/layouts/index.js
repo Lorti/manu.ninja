@@ -2,8 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
+import WebFont from 'webfontloader';
 
 import './styles/index.scss'
+
+WebFont.load({
+  google: {
+    families: ['Lato:400,400italic', 'Oswald:300,700']
+  }
+});
 
 const Header = () => (
   <div
