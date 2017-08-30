@@ -8,15 +8,15 @@ export default function Template({
 }) {
   const { markdownRemark: post } = data // data.markdownRemark holds our post data
   return (
-    <div className="blog-post-container">
+    <div className="Column">
       <Helmet title={`Your Blog Name - ${post.frontmatter.title}`} />
-      <div className="blog-post">
-        <h1>{post.frontmatter.title}</h1>
+      <article className="Article">
+        <h1 className="Article-title">{post.frontmatter.title}</h1>
         <div
-          className="blog-post-content"
+          className="Article-content"
           dangerouslySetInnerHTML={{ __html: post.html }}
         />
-      </div>
+      </article>
     </div>
   )
 }
