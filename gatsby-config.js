@@ -50,6 +50,7 @@ module.exports = {
           }
         }
       `,
+        generator: 'Gatsby',
         feeds: [
           {
             serialize: ({ query: { site, allMarkdownRemark } }) => {
@@ -65,12 +66,7 @@ module.exports = {
             {
               allMarkdownRemark(
                 limit: 1000,
-                sort: { order: DESC, fields: [frontmatter___date] },
-                filter: {
-                  frontmatter: {
-                    draft: { ne: true }
-                  }
-                }
+                sort: { order: DESC, fields: [frontmatter___date] }
               ) {
                 edges {
                   node {
