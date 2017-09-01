@@ -3,9 +3,7 @@ import Helmet from 'react-helmet'
 
 import 'prismjs/themes/prism-okaidia.css'
 
-export default function Template({
-  data, // this prop will be injected by the GraphQL query we'll write in a bit
-}) {
+export default function Template({ data }) {
   const { markdownRemark: post } = data // data.markdownRemark holds our post data
   return (
     <div className="Column">
@@ -26,7 +24,7 @@ export const pageQuery = graphql`
     markdownRemark(frontmatter: { path: { eq: $path } }) {
       html
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "MMM DD, YYYY")
         path
         title
       }
