@@ -6,18 +6,63 @@ categories: [coding, games]
 thumbnail: /images/corsair.jpg
 ---
 
+This is the first part in a series on creating a game with RxJS 5, Immutable.js and three.js. We'll look into how to create a basic game loop, which serves as a starting point for further development of the game project.
+
+You can play with the game loop on [CodePen], or have a look at the full [Corsair] game, which we're going to develop in this series. All parts of the series are listed in [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js](functional-reactive-game-programming-rxjs-5-immutable-js-and-three-js), if you want to read them. Now let's dive right into it, by creating the first stream.
+
+## Creating an observable for the game's clock
+
+Import RxJS and Immutable.js via CDN or their npm packages.
+
 ``` js
+const state = {
+  time: performance.now(),
+  delta: 0,
+}
+
 const clock = Rx.Observable
-    .interval(0, Rx.Scheduler.animationFrame)
-    .map(() => ({
-        time: performance.now(),
-        delta: 1
-    }))
-    .scan((previous, current) => ({
-        time: current.time,
-        delta: current.time - previous.time
-    }));
+  .interval(0, Rx.Scheduler.animationFrame)
+  .scan((previous) => {
+      const time = performance.now();
+      return {
+          time,
+          delta: time - previous.time,
+      };
+  }, state);
+
+clock.subscribe((state) => {
+  document.body.innerHTML = `${Math.round(state.delta * 1000)}μs`;
+});
 ```
+
+<iframe height='265' scrolling='no' title='RxJS 5 Clock' src='//codepen.io/Lorti/embed/pWoeBN/?height=265&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/pWoeBN/'>RxJS 5 Clock</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+``` js
+const state = Immutable.fromJS({
+  time: performance.now(),
+  delta: 0,
+});
+
+const clock = Rx.Observable
+  .interval(0, Rx.Scheduler.animationFrame)
+  .scan((previous) => {
+      const time = performance.now();
+      return state.merge({
+          time,
+          delta: time - previous.get('time'),
+      });
+  }, state);
+
+clock.subscribe((state) => {
+  document.body.innerHTML = `${Math.round(state.get('delta') * 1000)}μs`;
+});
+```
+
+<iframe height='256' scrolling='no' title='RxJS 5/Immutable.js Clock' src='//codepen.io/Lorti/embed/rGNyvm/?height=265&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/rGNyvm/'>RxJS 5/Immutable.js Clock</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+
 
 ---
 
