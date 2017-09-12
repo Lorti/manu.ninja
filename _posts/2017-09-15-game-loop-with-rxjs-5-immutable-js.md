@@ -14,7 +14,7 @@ You can play with the game loop on [CodePen], or have a look at the full [Corsai
 
 Import RxJS and Immutable.js via CDN or their npm packages.
 
-``` js
+```js
 const state = {
   time: performance.now(),
   delta: 0,
@@ -35,10 +35,10 @@ clock.subscribe((state) => {
 });
 ```
 
-<iframe height='265' scrolling='no' title='RxJS 5 Clock' src='//codepen.io/Lorti/embed/pWoeBN/?height=265&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/pWoeBN/'>RxJS 5 Clock</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
+<iframe height='320' scrolling='no' title='RxJS 5 Clock' src='//codepen.io/Lorti/embed/pWoeBN/?height=320&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/pWoeBN/'>RxJS 5 Clock</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
-``` js
+```js
 const state = Immutable.fromJS({
   time: performance.now(),
   delta: 0,
@@ -59,12 +59,10 @@ clock.subscribe((state) => {
 });
 ```
 
-<iframe height='256' scrolling='no' title='RxJS 5/Immutable.js Clock' src='//codepen.io/Lorti/embed/rGNyvm/?height=265&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/rGNyvm/'>RxJS 5/Immutable.js Clock</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
+<iframe height='320' scrolling='no' title='RxJS 5/Immutable.js Clock' src='//codepen.io/Lorti/embed/rGNyvm/?height=320&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/rGNyvm/'>RxJS 5/Immutable.js Clock</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
-
-
----
+## Creating observables for events
 
 ```js
 const increaseButton = document.querySelector("#increase");
@@ -81,38 +79,31 @@ const inputElement = document.querySelector("#input");
 const input = Rx.Observable
     .fromEvent(inputElement, "input")
     .map(event => state => state.set("inputValue", event.target.value));
+```
 
-const clock = Rx.Observable
-    .interval(0, Rx.Scheduler.animationFrame)
-    .map(() => ({
-        time: performance.now(),
-        delta: 1
-    }))
-    .scan((previous, current) => ({
-        time: current.time,
-        delta: current.time - previous.time
-    }));
+## Update a single state store with multiple observables
 
-const initialState = Immutable.fromJS({
-    count: 0,
-    inputValue: ""
-});
-
+```js
 const state = Rx.Observable
     .merge(increase, decrease, input)
     .scan((state, changeFn) => changeFn(state), initialState);
+```
 
+## Lock update intervals to our clock's interval
+
+```js
 const loop = clock.withLatestFrom(state, (clock, state) => ({ clock, state }));
 
 loop.subscribe(({ clock, state }) => {
     document.querySelector("#count").innerHTML = state.get("count");
     document.querySelector("#hello").innerHTML = `Hello ${state.get("inputValue")}`;
 });
-
-loop.sampleTime(250, Rx.Scheduler.animationFrame).subscribe(({ clock }) => {
-    document.querySelector("#clock").innerHTML = `${Math.round(clock.delta * 1000)}μs`;
-});
 ```
+
+## References
+
+* [(Official) RxJS Tutorial](http://reactivex.io/rxjs/manual/tutorial.html)
+* [performance.now() on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now)
 
 [CodePen]: https://codepen.io/Lorti/pen/VbMavj
 [Corsair]: https://github.com/Lorti/corsair
