@@ -12,7 +12,11 @@ You can play with the game loop on [CodePen], or have a look at the full [Corsai
 
 ## Creating an observable for the game's clock
 
-Import RxJS and Immutable.js via CDN or their npm packages.
+Load RxJS and Immutable.js from a CDN, as in my CodePen examples, or install and import their npm packages.
+
+```js
+npm install immutable rxjs --save
+```
 
 ```js
 const state = {
@@ -89,6 +93,9 @@ const state = Rx.Observable
     .scan((state, changeFn) => changeFn(state), initialState);
 ```
 
+<iframe height='320' scrolling='no' title='RxJS 5 Event Observables' src='//codepen.io/Lorti/embed/oGbebN/?height=320&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/oGbebN/'>RxJS 5 Event Observables</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+
 ## Lock update intervals to our clock's interval
 
 ```js
@@ -100,7 +107,10 @@ loop.subscribe(({ clock, state }) => {
 });
 ```
 
-## References
+<iframe height='320' scrolling='no' title='Game Loop / Game State | RxJS 5 + Immutable.js' src='//codepen.io/Lorti/embed/VbMavj/?height=320&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/VbMavj/'>Game Loop / Game State | RxJS 5 + Immutable.js</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+## Further reading
 
 * [(Official) RxJS Tutorial](http://reactivex.io/rxjs/manual/tutorial.html)
 * [performance.now() on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now)
