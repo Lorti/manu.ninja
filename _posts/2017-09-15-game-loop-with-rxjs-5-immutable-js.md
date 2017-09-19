@@ -18,6 +18,19 @@ Load RxJS and Immutable.js from a CDN, as in my CodePen examples, or install and
 npm install immutable rxjs --save
 ```
 
+We'll first concentrate on RxJS itself, without using Immutable.js. The clock for our game should be a stream that constantly emits values, to keep the game running. To achieve this we use the `Observable.interval()` method, which returns an observable that emits an infinite sequence of numbers. 
+
+The method accepts a Scheduler, which we can use to emit a value on each animation frame. This equals to 60 fps, except for when computation is slow, for example on low battery or other processes that slow down your computer.
+
+```js
+const clock = Rx.Observable
+  .interval(0, Rx.Scheduler.animationFrame);
+```
+
+We can therefore not be sure, that exactly 16.667 ms have passed since the last value of our stream. This is where our clock's `delta` value comes in, telling us how much time has passed. This can then be used to adapt animations or interpolations in our game.
+ 
+The `scan()` operator is a perfect fit for our `delta` value. It applies an accumulator function to the stream and works similar to `reduce()` in plain JavaScript. To get an accurate value we use `performance.now()`. Unlike `Date.now()` the timestamps returned by `performance.now()` are not limited to one-millisecond resolution. Instead, they are accurate to five thousandths of a millisecond.
+
 ```js
 const state = {
   time: performance.now(),
@@ -33,14 +46,22 @@ const clock = Rx.Observable
           delta: time - previous.time,
       };
   }, state);
+```
 
+The clock stream is now a stream of objects containing the previous tick's `performance.now()` and a delta time in milliseconds as a floating-point number. We can now subscribe to our stream and print the delta time in microseconds.
+
+```js
 clock.subscribe((state) => {
   document.body.innerHTML = `${Math.round(state.delta * 1000)}μs`;
 });
 ```
 
-<iframe height='320' scrolling='no' title='RxJS 5 Clock' src='//codepen.io/Lorti/embed/pWoeBN/?height=320&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/pWoeBN/'>RxJS 5 Clock</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
+<iframe height='360' scrolling='no' title='RxJS 5 Clock' src='//codepen.io/Lorti/embed/pWoeBN/?height=360&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/pWoeBN/'>RxJS 5 Clock</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
+
+We can now introduce Immutable.js to the game's clock. Each value of this stream will be in an immutable collection, allowing us to optimize rendering by doing shallow checks on changed values. This will have a larger effect in the next part of this series, where we'll look at the game's whole state, which will also be an immutable collectio. To use Immutable.js in the game's clock three changes have to be made to the code. 
+
+First the initial state has to be an immutable collection, which can be created from a raw JavaScript object with `Immutable.fromJS()`. Second we have to return an immutable collection as our accumulation. This could also be done via `Immutable.fromJS()`, but I have decided to use the `merge()` function, demonstrating an Immutable.js operator. Third we have to use `get('time')` to get our immutable map's value at the specified key.
 
 ```js
 const state = Immutable.fromJS({
@@ -63,10 +84,12 @@ clock.subscribe((state) => {
 });
 ```
 
-<iframe height='320' scrolling='no' title='RxJS 5/Immutable.js Clock' src='//codepen.io/Lorti/embed/rGNyvm/?height=320&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/rGNyvm/'>RxJS 5/Immutable.js Clock</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
+<iframe height='360' scrolling='no' title='RxJS 5/Immutable.js Clock' src='//codepen.io/Lorti/embed/rGNyvm/?height=360&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/rGNyvm/'>RxJS 5/Immutable.js Clock</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ## Creating observables for events
+
+
 
 ```js
 const increaseButton = document.querySelector("#increase");
@@ -93,7 +116,7 @@ const state = Rx.Observable
     .scan((state, changeFn) => changeFn(state), initialState);
 ```
 
-<iframe height='320' scrolling='no' title='RxJS 5 Event Observables' src='//codepen.io/Lorti/embed/oGbebN/?height=320&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/oGbebN/'>RxJS 5 Event Observables</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
+<iframe height='360' scrolling='no' title='RxJS 5 Event Observables' src='//codepen.io/Lorti/embed/oGbebN/?height=360&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/oGbebN/'>RxJS 5 Event Observables</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ## Lock update intervals to our clock's interval
@@ -107,12 +130,13 @@ loop.subscribe(({ clock, state }) => {
 });
 ```
 
-<iframe height='320' scrolling='no' title='Game Loop / Game State | RxJS 5 + Immutable.js' src='//codepen.io/Lorti/embed/VbMavj/?height=320&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/VbMavj/'>Game Loop / Game State | RxJS 5 + Immutable.js</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
+<iframe height='360' scrolling='no' title='Game Loop / Game State | RxJS 5 + Immutable.js' src='//codepen.io/Lorti/embed/VbMavj/?height=360&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/VbMavj/'>Game Loop / Game State | RxJS 5 + Immutable.js</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ## Further reading
 
 * [(Official) RxJS Tutorial](http://reactivex.io/rxjs/manual/tutorial.html)
+* [Immutable.js](https://facebook.github.io/immutable-js/)
 * [performance.now() on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now)
 
 [CodePen]: https://codepen.io/Lorti/pen/VbMavj
