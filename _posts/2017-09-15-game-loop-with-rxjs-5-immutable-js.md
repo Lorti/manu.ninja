@@ -59,7 +59,7 @@ clock.subscribe((state) => {
 <iframe height='360' scrolling='no' title='RxJS 5 Clock' src='//codepen.io/Lorti/embed/pWoeBN/?height=360&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/pWoeBN/'>RxJS 5 Clock</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
-We can now introduce Immutable.js to the game's clock. Each value of this stream will be in an immutable collection, allowing us to optimize rendering by doing shallow checks on changed values. This will have a larger effect in the next part of this series, where we'll look at the game's whole state, which will also be an immutable collectio. To use Immutable.js in the game's clock three changes have to be made to the code. 
+We can now introduce Immutable.js to the game's clock. Each value of this stream will be in an immutable collection, allowing us to optimize rendering by doing shallow checks on changed values. This will have a larger effect in the next part of this series, where we'll look at the game's whole state, which will also be an immutable collection. To use Immutable.js in the game's clock three changes have to be made to the code. 
 
 First the initial state has to be an immutable collection, which can be created from a raw JavaScript object with `Immutable.fromJS()`. Second we have to return an immutable collection as our accumulation. This could also be done via `Immutable.fromJS()`, but I have decided to use the `merge()` function, demonstrating an Immutable.js operator. Third we have to use `get('time')` to get our immutable map's value at the specified key.
 
@@ -89,26 +89,41 @@ clock.subscribe((state) => {
 
 ## Creating observables for events
 
+Apart from the clock our game will have more than one stream of events. We will take a thorough look on a stream representing the game's state in the next part of this series. For now we will create three more streams to illustrate the concept of updating a single state store with multiple observables.
 
+Each of the streams sends values when an event happens. This can be the click on a button or the user entering text in an input field. To create these streams all you have to do is call `Observable.fromEvent()` and pass the event target and event name.
 
 ```js
 const increaseButton = document.querySelector("#increase");
 const increase = Rx.Observable
+    .fromEvent(increaseButton, "click");
+
+const decreaseButton = document.querySelector("#decrease");
+const decrease = Rx.Observable
+    .fromEvent(decreaseButton, "click");
+
+const inputElement = document.querySelector("#input");
+const input = Rx.Observable
+    .fromEvent(inputElement, "input");
+```
+
+## Update a single state store with multiple observables
+
+
+
+```js
+const increase = Rx.Observable
     .fromEvent(increaseButton, "click")
     .map(() => state => state.set("count", state.get("count") + 1));
 
-const decreaseButton = document.querySelector("#decrease");
 const decrease = Rx.Observable
     .fromEvent(decreaseButton, "click")
     .map(() => state => state.set("count", state.get("count") - 1));
 
-const inputElement = document.querySelector("#input");
 const input = Rx.Observable
     .fromEvent(inputElement, "input")
     .map(event => state => state.set("inputValue", event.target.value));
 ```
-
-## Update a single state store with multiple observables
 
 ```js
 const state = Rx.Observable
