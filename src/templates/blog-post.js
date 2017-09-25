@@ -1,10 +1,13 @@
 import React from 'react'
 import Helmet from 'react-helmet'
+import Link from 'gatsby-link'
+import Tags from '../components/tags'
 
 import 'prismjs/themes/prism-okaidia.css'
 
-export default function Template({ data }) {
-  const { markdownRemark: post } = data // data.markdownRemark holds our post data
+export default function Template({ data, pathContext }) {
+  const { markdownRemark: post } = data;
+  const { next, prev } = pathContext;
   return (
     <div className="Column">
       <Helmet title={`Your Blog Name - ${post.frontmatter.title}`} />
@@ -15,6 +18,16 @@ export default function Template({ data }) {
           dangerouslySetInnerHTML={{ __html: post.html }}
         />
       </article>
+      <Tags list={post.frontmatter.tags || []} />
+
+          {prev &&
+            <Link to={prev.frontmatter.path}>
+              {prev.frontmatter.title}
+            </Link>}
+          {next &&
+            <Link to={next.frontmatter.path}>
+              {next.frontmatter.title}
+            </Link>}
     </div>
   )
 }
@@ -27,6 +40,7 @@ export const pageQuery = graphql`
         date(formatString: "MMM DD, YYYY")
         path
         title
+        tags
       }
     }
   }
