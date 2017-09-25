@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Game Loop with RxJS 5/Immutable.js
-date:   2017-09-15
+date:   2017-09-26
 categories: [coding, games]
 thumbnail: /images/corsair.jpg
 ---
