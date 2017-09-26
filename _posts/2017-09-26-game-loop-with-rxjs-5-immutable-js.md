@@ -12,7 +12,7 @@ You can test the game loop on [CodePen], or take a look at the full [Corsair] ga
 
 Let's dive right into it by creating the first stream. We'll first concentrate on RxJS and afterwards add Immutable.js.
 
-## Creating an RxJS observable for the game's clock
+## Create an RxJS observable for the game's clock
 
 Load RxJS and Immutable.js from a CDN, as in the CodePen examples, or install and import their npm packages.
 
@@ -22,7 +22,7 @@ npm install immutable rxjs --save
 
 The clock for our game should be a stream that constantly emits values, keeping the game running. To achieve this we use the `Observable.interval()`{:.js} creation operator, which returns an observable that emits an infinite sequence of numbers. 
 
-The method accepts a Scheduler. We can pass `Scheduler.animationFrame` so that the stream emits a value on each animation frame. This equals to 60 fps, except for when computation is slow. That can be the case when your device is running on low battery or other processes slow down your computer.
+The method accepts a scheduler. We can pass `Scheduler.animationFrame` so that the stream emits a value on each animation frame. This equals to 60 fps, except for when computation is slow. That can be the case when your device is running on low battery or other processes slow down your computer.
 
 ```js
 const clock = Rx.Observable
@@ -61,11 +61,11 @@ clock.subscribe((state) => {
 <iframe height='360' scrolling='no' title='RxJS 5 Clock' src='//codepen.io/Lorti/embed/pWoeBN/?height=360&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/pWoeBN/'>RxJS 5 Clock</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
-## Using Immutable.js for the clock's values
+## Use Immutable.js for the clock's values
 
-We can now introduce Immutable.js to the game's clock. Each value of this stream will be in an immutable collection, allowing us to optimize rendering by doing shallow checks on changed values. This will have a larger effect in the next part of this series, where we'll look at the game's whole state, which will also be an immutable collection. To use Immutable.js in the game's clock three changes have to be made to the code.
+We can now introduce Immutable.js to the game's clock. Each value of the stream will be an immutable collection, allowing us to optimize rendering by doing shallow checks on changed values. This will have a larger effect in the next part of this series, where we'll look at the game's whole state, which will also be an immutable collection.
 
-First the initial state has to be an immutable collection, which can be created from a raw JavaScript object with `Immutable.fromJS()`{:.js}. Second we have to return an immutable collection as our accumulation. This could also be done via `Immutable.fromJS()`{:.js}, but I have decided to use the `merge()`{:.js} function, demonstrating an Immutable.js operator. Third we have to use `get('time')`{:.js} to get our immutable map's value at the specified key.
+To use Immutable.js in the game's clock three changes have to be made to the code. First, the initial state has to be an immutable collection, which can be created from a raw JavaScript object with `Immutable.fromJS()`{:.js}. Second, we have to return an immutable collection as our accumulation. This could also be done via `Immutable.fromJS()`{:.js}, but I have decided to use the `merge()`{:.js} function, demonstrating an Immutable.js operator. Third, we have to use `get('time')`{:.js} to get our immutable map's value at the specified key.
 
 ```js
 const state = Immutable.fromJS({
@@ -91,11 +91,11 @@ clock.subscribe((state) => {
 <iframe height='360' scrolling='no' title='RxJS 5/Immutable.js Clock' src='//codepen.io/Lorti/embed/rGNyvm/?height=360&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/rGNyvm/'>RxJS 5/Immutable.js Clock</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
-## Creating observables for events
+## Create observables for events
 
-Apart from the clock our game will have more than one stream of events. We will take a thorough look on a stream representing the game's state in the next part of this series. For now we will create three more streams to illustrate the concept of updating a single state store with multiple observables.
+Apart from the clock our game will have one or more additional streams for player input. We'll take a thorough look on a stream representing the game's state in the next part of this series. For now we'll create three more RxJS observables to illustrate the concept of updating a single state store via multiple observables.
 
-Each of the streams sends values when an event happens. This can be the click on a button or the user entering text in an input field. To create these streams all you have to do is call `Observable.fromEvent()`{:.js} and pass the event target and event name.
+Each of the event streams emits values when an event happens. This can be the click of a button or the user entering text into an input field. To create these streams all you have to do is call `Observable.fromEvent()`{:.js} and pass the event target and event name.
 
 ```js
 const increaseButton = document.querySelector("#increase");
@@ -113,7 +113,7 @@ const input = Rx.Observable
 
 ## Update a single state store with multiple observables
 
-We want our game to have a single state store. That means we have to write reducer functions that operate on that state. This can be achieved by mapping the values of the three streams to state-changing functions. They modify the state they are given and return an updated state. To change values in an Immutable.js collection we can use the methods `set()`{:.js} and `update()`{:.js} on our state.
+We want our game to have a single state store. That means we have to write reducer functions that operate on that state. This can be achieved by mapping the values of the three event streams to state-changing functions. They modify the state they are given and return an updated state. To change values in an Immutable.js collection we can use the methods `set()`{:.js} and `update()`{:.js} on our state object.
 
 ```js
 const increase = Rx.Observable
@@ -129,7 +129,9 @@ const input = Rx.Observable
     .map(event => state => state.set("inputValue", event.target.value));
 ```
 
-To get a single state from our three streams we can use the `Observable.merge()`{:.js} operator. It creates a stream that emits all values from the given input observables blended together. In our case the new observable is a stream of reducer functions. We can use the `Observable.scan()`{:.js} operator to call each reducer function on the current state. When a new reducer function arrives we call it and return the new state. This happens on every click or input event. We will further explore this concept in the next part of this series.
+The `Observable.merge()`{:.js} combination operator can be used to blend the streams together. It creates an observable that emits all values from all given input observables.
+
+In our case the new observable is a stream of reducer functions. We can use the `Observable.scan()`{:.js} operator to call each reducer function on the game's current state. Each time a new reducer function arrives we return an updated Immutable.js collection. This happens on every click or input event. We'll further explore this concept in the next part of this series, but you can already test it in the CodePen.
 
 ```js
 const state = Rx.Observable
@@ -140,11 +142,13 @@ const state = Rx.Observable
 <iframe height='360' scrolling='no' title='RxJS 5 Event Observables' src='//codepen.io/Lorti/embed/oGbebN/?height=360&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/oGbebN/'>RxJS 5 Event Observables</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
-## Lock update intervals to our clock's interval
+## Lock the update interval to the clock's interval
 
-The last thing we have to do is lock the game to our clock. The state stream we have created will output a value on each event. That event can be a click or an input. You might wnat to merge the game's clock as well. This means, however, that the state can change more often than 60 times per second. If you click the button twice the stream will emit about 62 values per second. Another problem is that now each emitted value is either an event or a clock tick.
+The last thing we should do is to lock the game to our clock. The state stream we've created outputs a value on each event. You might be inclined to merge the game's clock via `Observable.merge()` as well. However, doing so means the state can change more often than 60 times per second. If you click some buttons the stream will often emit 61+ values per second. 
 
-To limit the state changes to each animation frame, as we did with the scheduler for the clock, you can use the `Observable.withLatestFrom()`{:.js} combination operator. This will give you a stream of `{ clock, state }`{:.js} objects on each clock tick.
+Another problem is that each emitted value would either be a reducer function or a clock object, depending on the input stream that has most recently emitted a value.
+
+To limit the state changes to each animation frame, as we did with the scheduler for the clock, you can use the `Observable.withLatestFrom()`{:.js} combination operator. This will give you a stream of `{ clock, state }`{:.js} objects on each tick.
 
 ```js
 const loop = clock.withLatestFrom(state, (clock, state) => ({ clock, state }));
@@ -158,9 +162,9 @@ loop.subscribe(({ clock, state }) => {
 <iframe height='360' scrolling='no' title='Game Loop / Game State | RxJS 5 + Immutable.js' src='//codepen.io/Lorti/embed/VbMavj/?height=360&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/VbMavj/'>Game Loop / Game State | RxJS 5 + Immutable.js</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
-This now constitutes our game loop. We can subscribe to it and show the current state to the player, that is rendering the game or in the small counter example showing the current count.
+This finishes our game loop. You can also choose to merge the `(clock, state)` arguments into a single value in the project function of `Observable.withLatestFrom()`. Subscribing to the game loop now let's us show the current state to the player. That means rendering the game or simply showing the current count.
 
-If you've liked this article please return for the next part in the [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js] series. We will further explore the concept of using a single state store to represent the game's state.
+If you've liked this article please return for the next part of the [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js] series. We'll further explore the concept of using a single state store to represent the game's state by looking at everything [Corsair]'s state contains.
 
 ## Further reading
 
