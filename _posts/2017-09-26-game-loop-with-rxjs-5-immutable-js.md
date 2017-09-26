@@ -65,7 +65,7 @@ clock.subscribe((state) => {
 
 We can now introduce Immutable.js to the game's clock. Each value of the stream will be an immutable collection, allowing us to optimize rendering by doing shallow checks on changed values. This will have a larger effect in the next part of this series, where we'll look at the game's whole state, which will also be an immutable collection.
 
-To use Immutable.js in the game's clock three changes have to be made to the code. First, the initial state has to be an immutable collection, which can be created from a raw JavaScript object with `Immutable.fromJS()`{:.js}. Second, we have to return an immutable collection as our accumulation. This could also be done via `Immutable.fromJS()`{:.js}, but I have decided to use the `merge()`{:.js} function, demonstrating an Immutable.js operator. Third, we have to use `get('time')`{:.js} to get our immutable map's value at the specified key.
+To use Immutable.js in the game's clock three changes have to be made to the code. First, the initial state has to be an immutable collection, which can be created from a raw JavaScript object with `Immutable.fromJS()`{:.js}. Second, we have to return an immutable collection as our accumulation. This could also be done via `Immutable.fromJS()`{:.js}, but I have decided to use the `merge()`{:.js} function, demonstrating an Immutable.js operator. Finally, we have to use `get('time')`{:.js} to get our immutable map's value at the specified key.
 
 ```js
 const state = Immutable.fromJS({
