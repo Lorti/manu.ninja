@@ -8,28 +8,30 @@ thumbnail: /images/corsair.jpg
 
 This is the first part in a series on creating a game with RxJS 5, Immutable.js and three.js. We'll look into how to create a basic game loop, which serves as a starting point for further development of the game project.
 
-You can play with the game loop on [CodePen], or have a look at the full [Corsair] game, which we're going to develop in this series. All parts of the series are listed in [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js], if you want to read them. Now let's dive right into it, by creating the first stream.
+You can test the game loop on [CodePen], or take a look at the full [Corsair] game, which we're going to develop in this series. All parts of the series will be listed in my [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js], if you want to read them.  
 
-## Creating an observable for the game's clock
+Let's dive right into it by creating the first stream. We'll first concentrate on RxJS and afterwards add Immutable.js.
 
-Load RxJS and Immutable.js from a CDN, as in my CodePen examples, or install and import their npm packages.
+## Creating an RxJS observable for the game's clock
+
+Load RxJS and Immutable.js from a CDN, as in the CodePen examples, or install and import their npm packages.
 
 ```js
 npm install immutable rxjs --save
 ```
 
-We'll first concentrate on RxJS itself, without using Immutable.js. The clock for our game should be a stream that constantly emits values, to keep the game running. To achieve this we use the `Observable.interval()`{:.js} method, which returns an observable that emits an infinite sequence of numbers. 
+The clock for our game should be a stream that constantly emits values, keeping the game running. To achieve this we use the `Observable.interval()`{:.js} creation operator, which returns an observable that emits an infinite sequence of numbers. 
 
-The method accepts a Scheduler, which we can use to emit a value on each animation frame. This equals to 60 fps, except for when computation is slow, for example on low battery or other processes that slow down your computer.
+The method accepts a Scheduler. We can pass `Scheduler.animationFrame` so that the stream emits a value on each animation frame. This equals to 60 fps, except for when computation is slow. That can be the case when your device is running on low battery or other processes slow down your computer.
 
 ```js
 const clock = Rx.Observable
   .interval(0, Rx.Scheduler.animationFrame);
 ```
 
-We can therefore not be sure, that exactly 16.667 ms have passed since the last value of our stream. This is where our clock's `delta`{:.js} value comes in, telling us how much time has passed. This can then be used to adapt animations or interpolations in our game.
- 
-The `scan()`{:.js} operator is a perfect fit for our `delta`{:.js} value. It applies an accumulator function to the stream and works similar to `reduce()`{:.js} in plain JavaScript. To get an accurate value we use `performance.now()`{:.js}. Unlike `Date.now()`{:.js} the timestamps returned by `performance.now()`{:.js} are not limited to one-millisecond resolution. Instead, they are accurate to five thousandths of a millisecond.
+Therefore we can't be sure that exactly 16.667 ms have passed since the last value of our stream. This is where our clock's `delta`{:.js} value comes in, telling us exactly how much time has passed. This can then be used to slow down or speed up animations and adapt interpolations in our game.
+
+The `scan()`{:.js} transformation operator is a perfect fit for our `delta`{:.js} value. It applies an accumulator function to the stream and works similar to `reduce()`{:.js} in plain JavaScript. To get an accurate measurement we have to use `performance.now()`{:.js}. Unlike `Date.now()`{:.js} the timestamps returned by `performance.now()`{:.js} are not limited to one-millisecond resolution. Instead, they are accurate to five thousandths of a millisecond.
 
 ```js
 const state = {
@@ -48,7 +50,7 @@ const clock = Rx.Observable
   }, state);
 ```
 
-The clock stream is now a stream of objects containing the previous tick's `performance.now()`{:.js} and a delta time in milliseconds as a floating-point number. We can now subscribe to our stream and print the delta time in microseconds.
+The clock observable is now a stream of objects containing the previous tick's `performance.now()`{:.js} and a delta time in milliseconds as a floating-point number. If we subscribe to our stream we can print the delta time in microseconds.
 
 ```js
 clock.subscribe((state) => {
@@ -59,7 +61,9 @@ clock.subscribe((state) => {
 <iframe height='360' scrolling='no' title='RxJS 5 Clock' src='//codepen.io/Lorti/embed/pWoeBN/?height=360&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/pWoeBN/'>RxJS 5 Clock</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
-We can now introduce Immutable.js to the game's clock. Each value of this stream will be in an immutable collection, allowing us to optimize rendering by doing shallow checks on changed values. This will have a larger effect in the next part of this series, where we'll look at the game's whole state, which will also be an immutable collection. To use Immutable.js in the game's clock three changes have to be made to the code. 
+## Using Immutable.js for the clock's values
+
+We can now introduce Immutable.js to the game's clock. Each value of this stream will be in an immutable collection, allowing us to optimize rendering by doing shallow checks on changed values. This will have a larger effect in the next part of this series, where we'll look at the game's whole state, which will also be an immutable collection. To use Immutable.js in the game's clock three changes have to be made to the code.
 
 First the initial state has to be an immutable collection, which can be created from a raw JavaScript object with `Immutable.fromJS()`{:.js}. Second we have to return an immutable collection as our accumulation. This could also be done via `Immutable.fromJS()`{:.js}, but I have decided to use the `merge()`{:.js} function, demonstrating an Immutable.js operator. Third we have to use `get('time')`{:.js} to get our immutable map's value at the specified key.
 
