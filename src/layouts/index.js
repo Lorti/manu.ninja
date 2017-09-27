@@ -4,6 +4,8 @@ import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
 import WebFont from 'webfontloader';
 
+import Banner from '../components/Banner';
+
 import './styles/index.scss'
 
 const Header = () => (
@@ -54,6 +56,9 @@ class TemplateWrapper extends React.Component {
           ]}
         />
         <Header />
+        <div className="Column">
+            <Banner />
+        </div>
         <div
           style={{
             margin: '0 auto',
