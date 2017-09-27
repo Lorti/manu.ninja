@@ -17,7 +17,7 @@ In this series of blog posts I will explain the most interesting parts of this p
 
 I have presented the current progress of this project at the [Stahlstadt.js] meetup on June 7. Then this year's great summer prevented me from writing about it. [The game already has about 500 lines of code at this stage][Corsair], which is why I have decided to start my first three-part blog post series:
  
- * Game Loop with RxJS 5/Immutable.js _(scheduled for September)_
+ * [Game Loop with RxJS 5/Immutable.js](/game-loop-with-rxjs-5-immutable-js)
  * Game State with RxJS 5/Immutable.js _(scheduled for October)_
  * Game Graphics with WebGL/three.js and Lazy-Loading of 3D Models _(scheduled for November)_
  
