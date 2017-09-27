@@ -8,35 +8,6 @@ import Banner from '../components/Banner';
 
 import './styles/index.scss'
 
-const Header = () => (
-  <div
-    style={{
-      background: 'rebeccapurple',
-      marginBottom: '1.45rem',
-    }}
-  >
-    <div
-      style={{
-        margin: '0 auto',
-        maxWidth: 960,
-        padding: '1.45rem 1.0875rem',
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: 'white',
-            textDecoration: 'none',
-          }}
-        >
-          Gatsby
-        </Link>
-      </h1>
-    </div>
-  </div>
-)
-
 class TemplateWrapper extends React.Component {
   componentDidMount() {
     WebFont.load({
@@ -55,18 +26,10 @@ class TemplateWrapper extends React.Component {
             { name: 'keywords', content: 'sample, something' },
           ]}
         />
-        <Header />
         <div className="Column">
             <Banner />
         </div>
-        <div
-          style={{
-            margin: '0 auto',
-            maxWidth: 960,
-            padding: '0px 1.0875rem 1.45rem',
-            paddingTop: 0,
-          }}
-        >
+        <div className="Column">
           {this.props.children()}
         </div>
       </div>
