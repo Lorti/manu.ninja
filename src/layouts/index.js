@@ -5,6 +5,7 @@ import Helmet from 'react-helmet'
 import WebFont from 'webfontloader';
 
 import Banner from '../components/Banner';
+import Footer from '../components/Footer';
 
 import './styles/index.scss'
 
@@ -31,6 +32,9 @@ class TemplateWrapper extends React.Component {
         </div>
         <div className="Column">
           {this.props.children()}
+        </div>
+        <div className="Column">
+            <Footer />
         </div>
       </div>
     )
