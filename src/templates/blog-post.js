@@ -7,8 +7,8 @@ import Tags from '../components/tags'
 import 'prismjs/themes/prism-okaidia.css'
 
 export default function Template({ data, pathContext }) {
-  const { markdownRemark: post } = data;
-  const { next, prev, related } = pathContext;
+  const { markdownRemark: post } = data
+  const { next, prev, related } = pathContext
   return (
     <div className="Column">
       <Helmet title={`Your Blog Name - ${post.frontmatter.title}`} />
@@ -21,14 +21,8 @@ export default function Template({ data, pathContext }) {
         />
       </article>
       <Related posts={related || []} />
-      {prev &&
-        <Link to={prev.frontmatter.path}>
-          {prev.frontmatter.title}
-        </Link>}
-      {next &&
-        <Link to={next.frontmatter.path}>
-          {next.frontmatter.title}
-        </Link>}
+      {prev && <Link to={prev.frontmatter.path}>{prev.frontmatter.title}</Link>}
+      {next && <Link to={next.frontmatter.path}>{next.frontmatter.title}</Link>}
     </div>
   )
 }

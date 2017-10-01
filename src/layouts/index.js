@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
-import WebFont from 'webfontloader';
+import WebFont from 'webfontloader'
 
-import Banner from '../components/Banner';
-import Footer from '../components/Footer';
+import Banner from '../components/Banner'
+import Footer from '../components/Footer'
 
 import './styles/index.scss'
 
@@ -13,9 +13,9 @@ class TemplateWrapper extends React.Component {
   componentDidMount() {
     WebFont.load({
       google: {
-        families: ['Lato:400,400italic', 'Oswald:300,700']
-      }
-    });
+        families: ['Lato:400,400italic', 'Oswald:300,700'],
+      },
+    })
   }
   render() {
     return (
@@ -28,13 +28,11 @@ class TemplateWrapper extends React.Component {
           ]}
         />
         <div className="Column">
-            <Banner />
+          <Banner />
         </div>
+        <div className="Column">{this.props.children()}</div>
         <div className="Column">
-          {this.props.children()}
-        </div>
-        <div className="Column">
-            <Footer />
+          <Footer />
         </div>
       </div>
     )

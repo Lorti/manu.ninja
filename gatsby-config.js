@@ -1,8 +1,9 @@
 module.exports = {
   siteMetadata: {
     title: 'manu.ninja | Frond-End Development, Games and Digital Art',
-    description: 'manu.ninja is the personal blog of Manuel Wieser, where he talks about front-end development, web development, coding, games and digital art',
-    siteUrl: 'https://manu.ninja'
+    description:
+      'manu.ninja is the personal blog of Manuel Wieser, where he talks about front-end development, web development, coding, games and digital art',
+    siteUrl: 'https://manu.ninja',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -22,7 +23,7 @@ module.exports = {
             resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 960,
-              linkImagesToOriginal: false
+              linkImagesToOriginal: false,
             },
           },
           'gatsby-remark-responsive-iframe',
@@ -59,8 +60,8 @@ module.exports = {
                   description: edge.node.excerpt,
                   url: site.siteMetadata.siteUrl + edge.node.frontmatter.path,
                   custom_elements: [{ 'content:encoded': edge.node.html }],
-                });
-              });
+                })
+              })
             },
             query: `
             {
@@ -82,10 +83,10 @@ module.exports = {
               }
             }
           `,
-            output: '/feed.xml'
-          }
-        ]
-      }
+            output: '/feed.xml',
+          },
+        ],
+      },
     },
     {
       resolve: 'gatsby-plugin-google-analytics',
@@ -120,4 +121,4 @@ module.exports = {
     'gatsby-plugin-sitemap',
     'gatsby-plugin-offline',
   ],
-};
+}
