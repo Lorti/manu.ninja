@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="Grid-cell u-size1of5">
           <img
             className="Footer-image u-sizeFull u-round"
-            src="/images/manu.jpg"
+            src="/manu.jpg"
             alt="Manuel Wieser"
           />
         </div>

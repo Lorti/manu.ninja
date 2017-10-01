@@ -12,9 +12,14 @@ export default function Template({ data, pathContext }) {
   return (
     <div className="Column">
       <Helmet title={`Your Blog Name - ${post.frontmatter.title}`} />
-      <Tags list={post.frontmatter.tags || []} />
       <article className="Article">
-        <h1 className="Article-title">{post.frontmatter.title}</h1>
+        <div className="Article-header u-textCenter">
+            <Tags list={post.frontmatter.tags || []} />
+            <h1 className="Article-title">{post.frontmatter.title}</h1>
+            <p className="Article-date">
+                <time>{post.frontmatter.date}</time>
+            </p>
+        </div>
         <div
           className="Article-content"
           dangerouslySetInnerHTML={{ __html: post.html }}

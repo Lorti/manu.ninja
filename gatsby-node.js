@@ -92,8 +92,8 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
         path: node.frontmatter.path,
         component: blogPostTemplate,
         context: {
-          prev,
-          next,
+        //   prev,
+        //   next,
           related,
         },
       })

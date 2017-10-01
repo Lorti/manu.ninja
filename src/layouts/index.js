@@ -30,7 +30,7 @@ class TemplateWrapper extends React.Component {
         <div className="Column">
           <Banner />
         </div>
-        <div className="Column">{this.props.children()}</div>
+        {this.props.children()}
         <div className="Column">
           <Footer />
         </div>

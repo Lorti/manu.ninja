@@ -3,12 +3,10 @@ import Link from 'gatsby-link'
 
 export default function Tags({ list = [] }) {
   return (
-    <ul>
+    <p className="Article-category">
       {list.map(tag => (
-        <li key={tag}>
-          <Link to={`/tags/${tag}`}>{tag}</Link>
-        </li>
+        <Link to={`/tags/${tag}`}>{tag}</Link>
       ))}
-    </ul>
+    </p>
   )
 }
