@@ -77,12 +77,24 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
         posts.forEach(({ node }, index) => {
           const prev = index === 0 ? false : posts[index - 1].node;
           const next = index === posts.length - 1 ? false : posts[index + 1].node;
+          const related = [];
+          posts.forEach((post) => {
+              if (node.frontmatter.path !== post.node.frontmatter.path) {
+                  const matches = node.frontmatter.tags.filter((tag) => {
+                      return post.node.frontmatter.tags.includes(tag);
+                  });
+                  if (matches) {
+                      related.push(post);
+                  }
+              }
+          });
           createPage({
             path: node.frontmatter.path,
             component: blogPostTemplate,
             context: {
               prev,
-              next
+              next,
+              related
             }
           });
         });

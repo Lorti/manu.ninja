@@ -7,11 +7,14 @@ import 'prismjs/themes/prism-okaidia.css'
 
 export default function Template({ data, pathContext }) {
   const { markdownRemark: post } = data;
-  const { next, prev } = pathContext;
+  const { next, prev, related } = pathContext;
   return (
     <div className="Column">
       <Helmet title={`Your Blog Name - ${post.frontmatter.title}`} />
       <article className="Article">
+          {related.map(({node}) =>
+            <li>{node.frontmatter.title}</li>
+          )}
         <h1 className="Article-title">{post.frontmatter.title}</h1>
         <div
           className="Article-content"
@@ -19,7 +22,6 @@ export default function Template({ data, pathContext }) {
         />
       </article>
       <Tags list={post.frontmatter.tags || []} />
-
           {prev &&
             <Link to={prev.frontmatter.path}>
               {prev.frontmatter.title}
