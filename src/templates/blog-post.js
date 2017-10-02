@@ -4,6 +4,8 @@ import Link from 'gatsby-link'
 import Related from '../components/related'
 import Tags from '../components/tags'
 
+import getReadingLength from '../utils/length'
+
 import 'prismjs/themes/prism-okaidia.css'
 
 export default function Template({ data, pathContext }) {
@@ -14,11 +16,15 @@ export default function Template({ data, pathContext }) {
       <Helmet title={`Your Blog Name - ${post.frontmatter.title}`} />
       <article className="Article">
         <div className="Article-header u-textCenter">
-            <Tags list={post.frontmatter.tags || []} />
-            <h1 className="Article-title">{post.frontmatter.title}</h1>
-            <p className="Article-date">
-                <time>{post.frontmatter.date}</time>
-            </p>
+          <Tags list={post.frontmatter.tags || []} />
+          <h1 className="Article-title">{post.frontmatter.title}</h1>
+          <p className="Article-date">
+            <time datetime={new Date(post.frontmatter.date).toISOString()}>
+              {post.frontmatter.date}
+            </time>
+            &nbsp;&middot;&nbsp;
+            {getReadingLength(post.html)}
+          </p>
         </div>
         <div
           className="Article-content"

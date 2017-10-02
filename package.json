@@ -23,7 +23,9 @@
     "gatsby-source-filesystem": "^1.5.1",
     "gatsby-transformer-remark": "^1.7.12",
     "gatsby-transformer-sharp": "^1.6.6",
-    "webfontloader": "^1.6.28"
+    "striptags": "^3.1.0",
+    "webfontloader": "^1.6.28",
+    "wordcount": "^1.1.1"
   },
   "license": "MIT",
   "scripts": {
