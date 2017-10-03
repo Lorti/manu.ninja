@@ -13,7 +13,7 @@ class TemplateWrapper extends React.Component {
   componentDidMount() {
     WebFont.load({
       google: {
-        families: ['Lato:400,400italic', 'Oswald:300,700'],
+        families: ['Lato:400,400italic,700', 'Oswald:300,700'],
       },
     })
   }

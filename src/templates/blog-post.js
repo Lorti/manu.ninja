@@ -5,6 +5,7 @@ import Related from '../components/related'
 import Tags from '../components/tags'
 
 import getReadingLength from '../utils/length'
+import addHeadingLinks from '../utils/headings'
 
 import 'prismjs/themes/prism-okaidia.css'
 
@@ -28,7 +29,7 @@ export default function Template({ data, pathContext }) {
         </div>
         <div
           className="Article-content"
-          dangerouslySetInnerHTML={{ __html: post.html }}
+          dangerouslySetInnerHTML={{ __html: addHeadingLinks(post.html) }}
         />
       </article>
       <Related posts={related || []} />
