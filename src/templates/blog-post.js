@@ -13,10 +13,10 @@ import 'prismjs/themes/prism-okaidia.css'
 
 export default function Template({ data, pathContext }) {
   const { markdownRemark: post } = data
-  const { next, prev, related } = pathContext
+  const { related } = pathContext
   return (
     <div className="Column">
-      <Helmet title={`Your Blog Name - ${post.frontmatter.title}`} />
+      <Helmet title={`${post.frontmatter.title} | manu.ninja`} />
       <article className="Article">
         <div className="Article-header u-textCenter">
           <Tags list={post.frontmatter.tags || []} />
@@ -36,8 +36,6 @@ export default function Template({ data, pathContext }) {
       </article>
       <Disqus identifier={post.frontmatter.path} />
       <Related posts={related || []} />
-      {prev && <Link to={prev.frontmatter.path}>{prev.frontmatter.title}</Link>}
-      {next && <Link to={next.frontmatter.path}>{next.frontmatter.title}</Link>}
     </div>
   )
 }

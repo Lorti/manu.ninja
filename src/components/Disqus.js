@@ -17,11 +17,10 @@ class Disqus extends React.Component {
       window.DISQUS.reset({ reload: true })
       return
     }
-    const identifier = this.props.identifier;
+    const identifier = this.props.identifier
     window.disqus_config = function() {
       this.page.url = document.querySelector('link[rel="canonical"]').href
       this.page.identifier = identifier
-      console.log(this.page);
     }
     const script = document.createElement('script')
     script.src = '//manuninja.disqus.com/embed.js'

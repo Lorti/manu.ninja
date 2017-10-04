@@ -18,14 +18,12 @@ class TemplateWrapper extends React.Component {
     })
   }
   render() {
+    const meta = this.props.data.site.siteMetadata
     return (
       <div>
         <Helmet
-          title="Gatsby Default Starter"
-          meta={[
-            { name: 'description', content: 'Sample' },
-            { name: 'keywords', content: 'sample, something' },
-          ]}
+          title={meta.title}
+          meta={[{ name: 'description', content: meta.description }]}
         />
         <div className="Column">
           <Banner />
@@ -44,3 +42,14 @@ TemplateWrapper.propTypes = {
 }
 
 export default TemplateWrapper
+
+export const pageQuery = graphql`
+  query LayoutQuery {
+    site {
+      siteMetadata {
+        title
+        description
+      }
+    }
+  }
+`
