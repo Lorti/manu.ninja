@@ -30,7 +30,7 @@ module.exports = {
           'gatsby-remark-prismjs',
           'gatsby-remark-copy-linked-files',
           'gatsby-remark-smartypants',
-        //   'gatsby-remark-autolink-headers',
+          //   'gatsby-remark-autolink-headers',
         ],
       },
     },
@@ -92,6 +92,12 @@ module.exports = {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
         trackingId: 'YOUR_GOOGLE_ANALYTICS_TRACKING_ID',
+      },
+    },
+    {
+      resolve: `gatsby-plugin-canonical-urls`,
+      options: {
+        siteUrl: `https://manu.ninja`,
       },
     },
     {

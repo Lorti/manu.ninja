@@ -1,6 +1,8 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
+
+import Disqus from '../components/disqus'
 import Related from '../components/related'
 import Tags from '../components/tags'
 
@@ -20,7 +22,7 @@ export default function Template({ data, pathContext }) {
           <Tags list={post.frontmatter.tags || []} />
           <h1 className="Article-title">{post.frontmatter.title}</h1>
           <p className="Article-date">
-            <time datetime={new Date(post.frontmatter.date).toISOString()}>
+            <time dateTime={new Date(post.frontmatter.date).toISOString()}>
               {post.frontmatter.date}
             </time>
             &nbsp;&middot;&nbsp;
@@ -32,6 +34,7 @@ export default function Template({ data, pathContext }) {
           dangerouslySetInnerHTML={{ __html: addHeadingLinks(post.html) }}
         />
       </article>
+      <Disqus identifier={post.frontmatter.path} />
       <Related posts={related || []} />
       {prev && <Link to={prev.frontmatter.path}>{prev.frontmatter.title}</Link>}
       {next && <Link to={next.frontmatter.path}>{next.frontmatter.title}</Link>}

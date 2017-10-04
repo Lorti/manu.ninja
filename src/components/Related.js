@@ -1,11 +1,7 @@
 import React from 'react'
-import Helmet from 'react-helmet'
-
 import Link from 'gatsby-link'
 
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1)
-}
+import mapTag from '../utils/tags.js'
 
 export default function Related({ posts = [] }) {
   return (
@@ -14,23 +10,23 @@ export default function Related({ posts = [] }) {
       <ul>
         {posts.map(post => {
           return (
-            <li className="Links-item">
+            <li key={post.node.frontmatter.path} className="Links-item">
               <span className="Links-meta">
                 {post.node.frontmatter.tags.map(tag => {
                   return (
-                    <Link to={`/tags/${tag}`}>
-                      {capitalizeFirstLetter(tag)}
+                    <Link key={tag} to={`/tags/${tag}`}>
+                      {mapTag(tag)}
                     </Link>
                   )
                 })}
               </span>
-              <a
+              <Link
                 className="Links-link u-truncated"
-                href={post.node.frontmatter.path}
+                to={post.node.frontmatter.path}
                 target={post.node.frontmatter.external && '_blank'}
               >
                 {post.node.frontmatter.title}
-              </a>
+              </Link>
             </li>
           )
         })}
