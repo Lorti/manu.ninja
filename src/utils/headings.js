@@ -1,7 +1,5 @@
 import cheerio from 'cheerio'
 
-// TODO Why do this yourself when there's `gatsby-remark-autolink-headers`?
-
 export default function(html) {
   const $ = cheerio.load(html)
   $('h2, h3').each(function() {

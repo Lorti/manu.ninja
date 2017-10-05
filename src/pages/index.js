@@ -2,6 +2,8 @@ import React from 'react'
 import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
 
+import excerpt from '../utils/excerpt'
+
 export default function Index({ data }) {
   const { edges: posts } = data.allMarkdownRemark
   return (
@@ -15,7 +17,7 @@ export default function Index({ data }) {
                 <Link to={post.frontmatter.path}>{post.frontmatter.title}</Link>
               </h1>
               <h2>{post.frontmatter.date}</h2>
-              <p>{post.excerpt}</p>
+              <p>{excerpt(post.html)}</p>
             </div>
           )
         })}
@@ -28,7 +30,7 @@ export const pageQuery = graphql`
     allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
       edges {
         node {
-          excerpt(pruneLength: 250)
+          html
           id
           frontmatter {
             title
