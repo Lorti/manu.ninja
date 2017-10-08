@@ -40,7 +40,7 @@ const createTagPages = (createPage, edges) => {
 exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators
 
-  const blogPostTemplate = path.resolve(`src/templates/blog-post.js`)
+  const blogPostTemplate = path.resolve(`src/templates/post.js`)
 
   return graphql(`
     {
@@ -73,8 +73,6 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     createTagPages(createPage, posts)
 
     posts.forEach(({ node }, index) => {
-      const prev = index === 0 ? false : posts[index - 1].node
-      const next = index === posts.length - 1 ? false : posts[index + 1].node
       let related = []
       posts.forEach(post => {
         if (node.frontmatter.path !== post.node.frontmatter.path) {
@@ -92,8 +90,6 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
         path: node.frontmatter.path,
         component: blogPostTemplate,
         context: {
-          //   prev,
-          //   next,
           related,
         },
       })
