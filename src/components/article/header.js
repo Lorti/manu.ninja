@@ -1,18 +1,19 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
 
 import readingLength from '../../utils/length'
 import mapTag from '../../utils/tags'
 
-function Title({ frontmatter, link }) {
-  if (link && frontmatter.external) {
+function Title({ frontmatter, forListing }) {
+  if (forListing && frontmatter.external) {
     return (
       <a href={frontmatter.external} target="_blank">
         {frontmatter.title}
       </a>
     )
   }
-  if (link && frontmatter.path) {
+  if (forListing && frontmatter.path) {
     return <Link to={frontmatter.path}>{frontmatter.title}</Link>
   }
   return <span>{frontmatter.title}</span>
@@ -30,15 +31,17 @@ function Tags({ tags }) {
   )
 }
 
-export default function Header({ post, link }) {
+export default function Header({ post, forListing }) {
   const { html, frontmatter } = post
   const { date, tags } = frontmatter
   return (
     <div className="Article-header u-textCenter">
       <Tags tags={tags} />
+
       <h1 className="Article-title">
-        <Title frontmatter={frontmatter} link={link} />
+        <Title frontmatter={frontmatter} forListing={forListing} />
       </h1>
+
       <p className="Article-date">
         <time dateTime={new Date(date).toISOString()}>{date}</time>
         &nbsp;&middot;&nbsp;
@@ -46,4 +49,9 @@ export default function Header({ post, link }) {
       </p>
     </div>
   )
+}
+
+Header.propTypes = {
+  post: PropTypes.object,
+  forListing: PropTypes.bool,
 }

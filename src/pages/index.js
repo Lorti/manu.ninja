@@ -2,10 +2,9 @@ import React from 'react'
 import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
 
-import Header from '../components/article/header'
 import Introduction from '../components/Introduction'
-
-import excerpt from '../utils/excerpt'
+import Header from '../components/article/header'
+import Content from '../components/article/content'
 
 export default function Index({ data }) {
   const { edges: posts } = data.allMarkdownRemark
@@ -18,14 +17,8 @@ export default function Index({ data }) {
           .map(({ node: post }) => {
             return (
               <div className="blog-post-preview" key={post.id}>
-                <Header post={post} link={true} />
-                <h1>
-                  <Link to={post.frontmatter.path}>
-                    {post.frontmatter.title}
-                  </Link>
-                </h1>
-                <h2>{post.frontmatter.date}</h2>
-                <p>{excerpt(post.html)}</p>
+                <Header post={post} forListing={true} />
+                <Content post={post} forListing={true} />
               </div>
             )
           })}

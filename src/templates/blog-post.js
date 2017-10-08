@@ -3,13 +3,10 @@ import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 
 import Header from '../components/article/header'
+import Content from '../components/article/content'
 
 import Disqus from '../components/disqus'
 import Related from '../components/related'
-
-import headingLinks from '../utils/headings'
-
-import 'prismjs/themes/prism-okaidia.css'
 
 export default function Template({ data, pathContext }) {
   const { markdownRemark: post } = data
@@ -19,10 +16,7 @@ export default function Template({ data, pathContext }) {
       <Helmet title={`${post.frontmatter.title} | manu.ninja`} />
       <article className="Article">
         <Header post={post} />
-        <div
-          className="Article-content"
-          dangerouslySetInnerHTML={{ __html: headingLinks(post.html) }}
-        />
+        <Content post={post} />
       </article>
       <Disqus identifier={post.frontmatter.path} />
       <Related posts={related || []} />

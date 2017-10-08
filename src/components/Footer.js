@@ -4,6 +4,8 @@ import Link from 'gatsby-link'
 export default function Footer() {
   return (
     <footer className="Footer">
+      <hr />
+
       <div className="Grid Grid--withGutter">
         <div className="Grid-cell u-size1of5">
           <img
