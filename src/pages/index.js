@@ -14,10 +14,10 @@ export default function Index({ data }) {
       <div className="Column">
         {posts.map(({ node: post }) => {
           return (
-            <div className="Article" key={post.id}>
+            <article className="Article" key={post.id}>
               <Header post={post} forListing={true} />
               <Content post={post} forListing={true} />
-            </div>
+            </article>
           )
         })}
       </div>
