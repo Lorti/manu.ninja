@@ -71,12 +71,12 @@ module.exports = {
               ) {
                 edges {
                   node {
-                    excerpt
                     html
+                    excerpt
                     frontmatter {
                       title
-                      date
                       path
+                      date
                     }
                   }
                 }
@@ -104,12 +104,12 @@ module.exports = {
       resolve: 'gatsby-plugin-manifest',
       options: {
         lang: 'en',
-        name: 'manu.ninja',
+        name: 'manu.ninja | Frond-End Development, Games and Digital Art',
+        short_name: 'manu.ninja',
         description:
           'manu.ninja is the personal blog of Manuel Wieser, where he talks about front-end development, web development, coding, games and digital art',
-        short_name: 'manu.ninja',
-        display: 'minimal-ui',
-        orientation: 'portrait',
+        display: 'standalone',
+        start_url: '/?utm_source=homescreen',
         theme_color: '#f58231',
         background_color: '#fff',
         icons: [
@@ -117,11 +117,6 @@ module.exports = {
             // Everything in '/static' will be copied to an equivalent directory in '/public'.
             src: '/favicons/android-chrome-192x192.png',
             sizes: '192x192',
-            type: 'image/png',
-          },
-          {
-            src: '/favicons/android-chrome-512x512.png',
-            sizes: '512x512',
             type: 'image/png',
           },
         ],

@@ -2,7 +2,7 @@
 path: /webgl-three-js-annotations
 title:  WebGL/three.js Annotations
 date:   "2017-05-30"
-tags: [art, coding, games]
+categories: [art, coding, games]
 thumbnail: /images/webgl-three-js-annotations.png
 sharing: true
 summary: How do you add a comment box or annotation box to a WebGL object as seen on Sketchfab? This tutorial features a working example on CodePen and explains the essential code segments.
@@ -34,9 +34,9 @@ scene.add(mesh);
 
 ## Screen Projection
 
-The annotation is glued to one of the boxes' corners, represented by `THREE.Vector3(250, 250, 250)`. To draw the annotation using DOM elements we have to project this point to screen space. 
+The annotation is glued to one of the boxes' corners, represented by `THREE.Vector3(250, 250, 250)`. To draw the annotation using DOM elements we have to project this point to screen space.
 
-For this purpose three.js has a helper method `vector.project()`. It converts 3D coordinates to 2D coordinates between `-1` and `1`, `0` being the center of the screen. These are called normalized device coordinates (NDCs) in computer graphics.  
+For this purpose three.js has a helper method `vector.project()`. It converts 3D coordinates to 2D coordinates between `-1` and `1`, `0` being the center of the screen. These are called normalized device coordinates (NDCs) in computer graphics.
 
 ``` js
 const vector = new THREE.Vector3(250, 250, 250);

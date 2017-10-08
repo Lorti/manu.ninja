@@ -1,37 +1,35 @@
 const path = require('path')
 
-const createTagPages = (createPage, edges) => {
-  const tagTemplate = path.resolve(`src/templates/tags.js`)
+const createCategories = (createPage, edges) => {
+  const template = path.resolve(`src/templates/category.js`)
   const posts = {}
 
   edges.forEach(({ node }) => {
-    if (node.frontmatter.tags) {
-      node.frontmatter.tags.forEach(tag => {
-        if (!posts[tag]) {
-          posts[tag] = []
+    if (node.frontmatter.categories) {
+      node.frontmatter.categories.forEach(category => {
+        if (!posts[category]) {
+          posts[category] = []
         }
-        posts[tag].push(node)
+        posts[category].push(node)
       })
     }
   })
 
   createPage({
-    path: '/tags',
-    component: tagTemplate,
+    path: '/categories',
+    component: template,
     context: {
       posts,
     },
   })
 
-  Object.keys(posts).forEach(tagName => {
-    const post = posts[tagName]
+  Object.keys(posts).forEach(category => {
     createPage({
-      path: `/tags/${tagName}`,
-      component: tagTemplate,
+      path: `/categories/${category}`,
+      component: template,
       context: {
         posts,
-        post,
-        tag: tagName,
+        category,
       },
     })
   })
@@ -40,7 +38,7 @@ const createTagPages = (createPage, edges) => {
 exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators
 
-  const blogPostTemplate = path.resolve(`src/templates/post.js`)
+  const template = path.resolve(`src/templates/post.js`)
 
   return graphql(`
     {
@@ -50,14 +48,13 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       ) {
         edges {
           node {
-            excerpt(pruneLength: 250)
-            html
             id
+            html
             frontmatter {
-              date
               path
               title
-              tags
+              date
+              categories
             }
           }
         }
@@ -70,14 +67,14 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 
     const posts = result.data.allMarkdownRemark.edges
 
-    createTagPages(createPage, posts)
+    createCategories(createPage, posts)
 
     posts.forEach(({ node }, index) => {
       let related = []
       posts.forEach(post => {
         if (node.frontmatter.path !== post.node.frontmatter.path) {
-          const matches = node.frontmatter.tags.filter(tag => {
-            return post.node.frontmatter.tags.includes(tag)
+          const matches = node.frontmatter.categories.filter(category => {
+            return post.node.frontmatter.categories.includes(category)
           })
           const score = matches.length
           if (score) {
@@ -88,7 +85,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       related = related.sort((a, b) => b.score - a.score)
       createPage({
         path: node.frontmatter.path,
-        component: blogPostTemplate,
+        component: template,
         context: {
           related,
         },

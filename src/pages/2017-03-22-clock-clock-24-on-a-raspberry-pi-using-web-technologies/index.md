@@ -2,9 +2,9 @@
 path: /clock-clock-24-on-a-raspberry-pi-using-web-technologies
 title:  Clock Clock 24 on a Raspberry Pi using Web Technologies
 date:   2017-03-22
-tags: [coding, art]
+categories: [coding, art]
 thumbnail: /images/clock-clock-24.png
-summary: The original Clock Clock 24 is kinetic art by Humans since 1982. Twenty-four analog clocks form a large digital clock. Clever arrangement of the clock hands transforms the analog clocks into seven-segment displays. My girlfriend’s father stumpled upon this clock when looking for a new living room clock. At the time of writing you can buy the clock at $ 5,999.00 in the MoMA store. Thus I took the liberty and created a Clock Clock 24 homage with web technologies. My girlfriend and I then put the clock on a Raspberry Pi. 
+summary: The original Clock Clock 24 is kinetic art by Humans since 1982. Twenty-four analog clocks form a large digital clock. Clever arrangement of the clock hands transforms the analog clocks into seven-segment displays. My girlfriend’s father stumpled upon this clock when looking for a new living room clock. At the time of writing you can buy the clock at $ 5,999.00 in the MoMA store. Thus I took the liberty and created a Clock Clock 24 homage with web technologies. My girlfriend and I then put the clock on a Raspberry Pi.
 ---
 
 The original Clock Clock 24 is kinetic art by [Humans since 1982]. Twenty-four analog clocks form a large digital clock. Clever arrangement of the clock hands transforms the analog clocks into seven-segment displays. My girlfriend's father stumpled upon this clock when looking for a new living room clock. At the time of writing you can buy the clock at $ 5,999.00 in the [MoMA] store. Thus I took the liberty and created a [Clock Clock 24] homage with web technologies. My girlfriend and I then put the clock on a Raspberry Pi.
@@ -15,7 +15,7 @@ The original Clock Clock 24 is kinetic art by [Humans since 1982]. Twenty-four a
 
 ## Clock Clock 24 with HTML, CSS and JavaScript
 
-The analog clocks are SVGs made up of a clock face and two shapes for the clock hands. The `--small-hand`{:.css} and `--large-hand`{:.css} variables drive the `transform`{:.css}/`transition`{:.css} animation. 
+The analog clocks are SVGs made up of a clock face and two shapes for the clock hands. The `--small-hand`{:.css} and `--large-hand`{:.css} variables drive the `transform`{:.css}/`transition`{:.css} animation.
 
 ``` css
 .clock {
@@ -83,7 +83,7 @@ The original clock has more sophisticated animations, though. The owner can choo
 
 ## Clock Clock 24 on a Raspberry Pi with a 3.5″ touchscreen
 
-The motivation for this project was that my girlfriend's parents were looking for a new living room clock. As Wolfgang's birthday was nearing, we thought about ways to display the clock on a budget, as a fun gadget. This is when my girlfriend had the idea of hooking up a Raspberry Pi to a display. 
+The motivation for this project was that my girlfriend's parents were looking for a new living room clock. As Wolfgang's birthday was nearing, we thought about ways to display the clock on a budget, as a fun gadget. This is when my girlfriend had the idea of hooking up a Raspberry Pi to a display.
 
 At first we thought about a used HDMI display, but we then found the <a rel="nofollow" href="https://www.amazon.de/gp/product/B01JRUH0CY/ref=as_li_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B01JRUH0CY&linkCode=as2&tag=manuninja-21">Elegoo 3.5″ touchscreen</a> which costs around $ 25. You connect it to the GPIO of the Raspberry Pi, where it also draws its power from.
 

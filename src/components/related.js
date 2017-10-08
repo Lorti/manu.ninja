@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'gatsby-link'
 
-import mapTag from '../utils/tags.js'
+import mapTag from '../utils/taxonomy.js'
 
 export default function Related({ posts = [] }) {
   return (
@@ -12,10 +12,10 @@ export default function Related({ posts = [] }) {
           return (
             <li key={post.node.frontmatter.path} className="Links-item">
               <span className="Links-meta">
-                {post.node.frontmatter.tags.map(tag => {
+                {post.node.frontmatter.categories.map(category => {
                   return (
-                    <Link key={tag} to={`/tags/${tag}`}>
-                      {mapTag(tag)}
+                    <Link key={category} to={`/categories/${category}`}>
+                      {mapTag(category)}
                     </Link>
                   )
                 })}
