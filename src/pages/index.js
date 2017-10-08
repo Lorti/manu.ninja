@@ -12,16 +12,14 @@ export default function Index({ data }) {
     <div>
       <Introduction />
       <div className="Column">
-        {posts
-          .filter(post => post.node.frontmatter.title.length > 0)
-          .map(({ node: post }) => {
-            return (
-              <div className="blog-post-preview" key={post.id}>
-                <Header post={post} forListing={true} />
-                <Content post={post} forListing={true} />
-              </div>
-            )
-          })}
+        {posts.map(({ node: post }) => {
+          return (
+            <div className="Article" key={post.id}>
+              <Header post={post} forListing={true} />
+              <Content post={post} forListing={true} />
+            </div>
+          )
+        })}
       </div>
     </div>
   )
