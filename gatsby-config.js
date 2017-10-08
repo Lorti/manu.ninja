@@ -55,11 +55,11 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.edges.map(edge => {
-                return Object.assign({}, edge.node.frontmatter, {
-                  description: edge.node.excerpt,
-                  url: site.siteMetadata.siteUrl + edge.node.frontmatter.path,
-                  custom_elements: [{ 'content:encoded': edge.node.html }],
+              return allMarkdownRemark.edges.map(({ node: post }) => {
+                return Object.assign({}, post.frontmatter, {
+                  description: post.excerpt,
+                  url: site.siteMetadata.siteUrl + post.frontmatter.path,
+                  custom_elements: [{ 'content:encoded': post.html }],
                 })
               })
             },
@@ -91,7 +91,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
-        trackingId: 'YOUR_GOOGLE_ANALYTICS_TRACKING_ID',
+        trackingId: 'UA-68912237-1',
       },
     },
     {
@@ -103,12 +103,15 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'GatsbyJS',
-        short_name: 'GatsbyJS',
-        start_url: '/',
-        background_color: '#f7f0eb',
-        theme_color: '#a2466c',
+        lang: 'en',
+        name: 'manu.ninja',
+        description:
+          'manu.ninja is the personal blog of Manuel Wieser, where he talks about front-end development, web development, coding, games and digital art',
+        short_name: 'manu.ninja',
         display: 'minimal-ui',
+        orientation: 'portrait',
+        theme_color: '#f58231',
+        background_color: '#fff',
         icons: [
           {
             // Everything in '/static' will be copied to an equivalent directory in '/public'.
