@@ -21,10 +21,14 @@ class TemplateWrapper extends React.Component {
     const meta = this.props.data.site.siteMetadata
     return (
       <div>
-        <Helmet
-          title={meta.title}
-          meta={[{ name: 'description', content: meta.description }]}
-        />
+        <Helmet>
+          <title>{meta.title}</title>
+          <meta name="description" content={meta.description} />
+          <meta
+            name="google-site-verification"
+            content="ksUOGNNttZF4FJuFdVLzSvvTEJyh5Leip6UsFAElMSc"
+          />
+        </Helmet>
         <div className="Column">
           <Banner />
         </div>

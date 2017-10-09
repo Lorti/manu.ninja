@@ -9,13 +9,13 @@ import mapTag from '../utils/taxonomy'
 export default function Category({ pathContext }) {
   const { posts, category } = pathContext
   if (category) {
-    const list = posts[category];
+    const list = posts[category]
     return (
       <div className="Column">
         <h1>
           {mapTag(category)} ({list.length})
         </h1>
-        {list.map((post) => {
+        {list.map(post => {
           return (
             <article className="Article" key={post.id}>
               <Header post={post} forListing={true} />
@@ -34,7 +34,9 @@ export default function Category({ pathContext }) {
           const count = posts[category].length
           return (
             <li key={category}>
-              <Link to={`/categories/${category}`}>{mapTag(category)} ({count})</Link>
+              <Link to={`/categories/${category}`}>
+                {mapTag(category)} ({count})
+              </Link>
             </li>
           )
         })}
