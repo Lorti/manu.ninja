@@ -55,6 +55,8 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
               title
               date
               categories
+              external
+              summary
             }
           }
         }

@@ -22,7 +22,6 @@ export default function Template({ data, pathContext }) {
         {post.frontmatter.external && <meta name="robots" content="none" />}
       </Helmet>
       <article className="Article">
-        <h1>{post.frontmatter.external}</h1>
         <Header post={post} />
         <Content post={post} />
       </article>
@@ -41,6 +40,8 @@ export const pageQuery = graphql`
         path
         categories
         date(formatString: "MMM DD, YYYY")
+        external
+        summary
       }
     }
   }
