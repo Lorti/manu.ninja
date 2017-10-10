@@ -24,6 +24,10 @@ export default function Template({ data, pathContext }) {
         title={`${post.frontmatter.title} | manu.ninja`}
         description={description}
         pageUrl={`${site.siteMetadata.siteUrl}${post.frontmatter.path}`}
+        imageUrl={
+          post.frontmatter.thumbnail &&
+          `${site.siteMetadata.siteUrl}${post.frontmatter.thumbnail}`
+        }
       />
       <article className="Article">
         <Header post={post} />
@@ -36,7 +40,7 @@ export default function Template({ data, pathContext }) {
 }
 
 export const pageQuery = graphql`
-  query BlogPostByPath($path: String!) {
+  query PostQuery($path: String!) {
     site {
       siteMetadata {
         siteUrl
@@ -49,6 +53,7 @@ export const pageQuery = graphql`
         path
         categories
         date(formatString: "MMM DD, YYYY")
+        thumbnail
         external
         summary
       }

@@ -51,10 +51,11 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
             id
             html
             frontmatter {
-              path
               title
-              date
+              path
               categories
+              date
+              thumbnail
               external
               summary
             }
