@@ -6,6 +6,7 @@ import WebFont from 'webfontloader'
 
 import Banner from '../components/Banner'
 import Footer from '../components/Footer'
+import Meta from '../components/meta'
 
 import './styles/index.scss'
 
@@ -22,13 +23,20 @@ class TemplateWrapper extends React.Component {
     return (
       <div>
         <Helmet>
-          <title>{meta.title}</title>
-          <meta name="description" content={meta.description} />
           <meta
             name="google-site-verification"
             content="ksUOGNNttZF4FJuFdVLzSvvTEJyh5Leip6UsFAElMSc"
           />
+          <link href="//cdnjs.cloudflare.com" rel="dns-prefetch" />
+          <link href="//fonts.googleapis.com" rel="dns-prefetch" />
+          <link href="//fonts.gstatic.com" rel="dns-prefetch" />
+          <link href="//www.google-analytics.com" rel="dns-prefetch" />
         </Helmet>
+        <Meta
+          title={meta.title}
+          description={meta.description}
+          pageUrl={meta.siteUrl}
+        />
         <div className="Column">
           <Banner />
         </div>
@@ -53,6 +61,7 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         description
+        siteUrl
       }
     }
   }

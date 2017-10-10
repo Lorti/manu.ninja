@@ -6,21 +6,25 @@ import Header from '../components/article/header'
 import Content from '../components/article/content'
 
 import Disqus from '../components/disqus'
+import Meta from '../components/meta'
 import Related from '../components/related'
 
 import excerpt from '../utils/excerpt'
 
 export default function Template({ data, pathContext }) {
-  const { markdownRemark: post } = data
+  const { site, markdownRemark: post } = data
   const { related } = pathContext
   const description = post.frontmatter.summary || excerpt(post.html)
   return (
     <div className="Column">
       <Helmet>
-        <title>{`${post.frontmatter.title} | manu.ninja`}</title>
-        <meta name="description" content={description} />
         {post.frontmatter.external && <meta name="robots" content="none" />}
       </Helmet>
+      <Meta
+        title={`${post.frontmatter.title} | manu.ninja`}
+        description={description}
+        pageUrl={`${site.siteMetadata.siteUrl}${post.frontmatter.path}`}
+      />
       <article className="Article">
         <Header post={post} />
         <Content post={post} />
@@ -33,6 +37,11 @@ export default function Template({ data, pathContext }) {
 
 export const pageQuery = graphql`
   query BlogPostByPath($path: String!) {
+    site {
+      siteMetadata {
+        siteUrl
+      }
+    }
     markdownRemark(frontmatter: { path: { eq: $path } }) {
       html
       frontmatter {
