@@ -36,6 +36,7 @@ class TemplateWrapper extends React.Component {
           title={meta.title}
           description={meta.description}
           pageUrl={meta.siteUrl}
+          imageUrl={`${meta.siteUrl}/share.png`}
         />
         <div className="Column">
           <Banner />

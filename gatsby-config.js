@@ -115,7 +115,7 @@ module.exports = {
         icons: [
           {
             // Everything in '/static' will be copied to an equivalent directory in '/public'.
-            src: '/favicons/android-chrome-192x192.png',
+            src: '/icon-192x192.png',
             sizes: '192x192',
             type: 'image/png',
           },
