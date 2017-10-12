@@ -37,6 +37,9 @@ export const pageQuery = graphql`
             path
             categories
             date(formatString: "MMM DD, YYYY")
+            thumbnail
+            external
+            summary
           }
         }
       }
