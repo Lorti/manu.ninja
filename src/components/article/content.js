@@ -5,8 +5,6 @@ import Link from 'gatsby-link'
 import excerpt from '../../utils/excerpt'
 import headingLinks from '../../utils/headings'
 
-import 'prismjs/themes/prism-okaidia.css'
-
 function ContentContent({ html, summary }) {
   if (summary) {
     return <p>{summary}</p>
