@@ -126,20 +126,22 @@
         }
     }
 
-    //code {
-    //    display: inline;
-    //    padding: .25em;
-    //    white-space: nowrap;
-    //    font-size: .8125em;
-    //    background: #f8f8f8;
-    //}
-    //
-    //pre code {
-    //    display: block;
-    //    padding: .5em;
-    //    white-space: pre;
-    //    overflow-x: auto;
-    //}
+    pre,
+    code {
+      line-height: inherit;
+    }
+
+    code {
+      font-size: .875em;
+    }
+
+    :not(pre) > code {
+       white-space: nowrap;
+    }
+
+    pre code {
+       overflow-x: auto;
+    }
 
     figcaption {
         padding: .5em;
