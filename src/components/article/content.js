@@ -7,9 +7,9 @@ import headingLinks from '../../utils/headings'
 
 function ContentContent({ html, summary }) {
   if (summary) {
-    return <p>{summary}</p>
+    return <p dangerouslySetInnerHTML={{ __html: summary }} />
   }
-  return <p>{excerpt(html)}</p>
+  return <p dangerouslySetInnerHTML={{ __html: excerpt(html) }} />
 }
 
 function ContentLink({ external, path }) {

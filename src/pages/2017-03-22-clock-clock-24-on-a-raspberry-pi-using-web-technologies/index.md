@@ -15,7 +15,7 @@ The original Clock Clock 24 is kinetic art by [Humans since 1982]. Twenty-four a
 
 ## Clock Clock 24 with HTML, CSS and JavaScript
 
-The analog clocks are SVGs made up of a clock face and two shapes for the clock hands. The `--small-hand`{:.css} and `--large-hand`{:.css} variables drive the `transform`{:.css}/`transition`{:.css} animation.
+The analog clocks are SVGs made up of a clock face and two shapes for the clock hands. The `--small-hand` and `--large-hand` variables drive the `transform`/`transition` animation.
 
 ``` css
 .clock {
@@ -34,7 +34,7 @@ The analog clocks are SVGs made up of a clock face and two shapes for the clock 
 }
 ```
 
-I made two helper functions `hourToDegrees()`{:.js} and `minuteToDegrees()`{:.js} to let myself think in clock positions instead of degrees. These are then used to set a single analog clock with the `setHands()`{:.js} function. The small hand moves clockwise and the large hand counterclockwise for a more interesting animation.
+I made two helper functions `hourToDegrees()` and `minuteToDegrees()` to let myself think in clock positions instead of degrees. These are then used to set a single analog clock with the `setHands()` function. The small hand moves clockwise and the large hand counterclockwise for a more interesting animation.
 
 ``` js
 function setHands(id, hour, minute) {
@@ -93,7 +93,7 @@ At first we thought about a used HDMI display, but we then found the <a rel="nof
 
 Unfortunately the drivers weren't compatible with the latest Raspbian. Save yourself from installation hassles and use the [Images] the producer has uploaded on GitHub. The touchscreen is also slightly slower than a regular display, resulting in a less smooth animation.
 
-What's left is disabling Raspbian's default power saving feature. It turns the display off after ten minutes. Open `/etc/lightdm/lightdm.conf`{:.bash} with an editor and look for the heading `[SeatDefaults]`{:.bash}. It should have a `#xserver-command=X`{:.bash} line, which you have to change to `xserver-command=X -s 0 -dpms`{:.bash}. The last flag disables DPMS (Display Power Management Signaling). After a `sudo reboot`{:.bash} the Raspberry Pi's display stays on and shows the Clock Clock 24.
+What's left is disabling Raspbian's default power saving feature. It turns the display off after ten minutes. Open `/etc/lightdm/lightdm.conf` with an editor and look for the heading `[SeatDefaults]`. It should have a `#xserver-command=X` line, which you have to change to `xserver-command=X -s 0 -dpms`. The last flag disables DPMS (Display Power Management Signaling). After a `sudo reboot` the Raspberry Pi's display stays on and shows the Clock Clock 24.
 
 My girlfriend then built a cardboard case for the Clock Clock 24 and we gave it as a gift to Wolfgang. The above photographs come from Wolfgang himself, so I guess he was pleased.
 
