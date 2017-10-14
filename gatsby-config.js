@@ -162,8 +162,7 @@ module.exports = {
           return [].concat(posts, pages).map(path => {
             return {
               url: site.siteMetadata.siteUrl + path,
-              changefreq: `daily`,
-              priority: 0.7,
+              lastmodISO: new Date().toISOString(),
             }
           })
         },
