@@ -37,67 +37,15 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     {
-      resolve: `gatsby-plugin-feed`,
+      resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        query: `
-        {
-          site {
-            siteMetadata {
-              title
-              description
-              siteUrl
-              site_url: siteUrl
-            }
-          }
-        }
-      `,
-        generator: 'Gatsby',
-        feeds: [
-          {
-            serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.edges.map(({ node: post }) => {
-                return Object.assign({}, post.frontmatter, {
-                  description: post.excerpt,
-                  url: site.siteMetadata.siteUrl + post.frontmatter.path,
-                  custom_elements: [{ 'content:encoded': post.html }],
-                })
-              })
-            },
-            query: `
-            {
-              allMarkdownRemark(
-                limit: 1000,
-                sort: { order: DESC, fields: [frontmatter___date] }
-              ) {
-                edges {
-                  node {
-                    html
-                    excerpt
-                    frontmatter {
-                      title
-                      path
-                      date
-                    }
-                  }
-                }
-              }
-            }
-          `,
-            output: '/feed.xml',
-          },
-        ],
+        siteUrl: `https://manu.ninja`,
       },
     },
     {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
         trackingId: 'UA-68912237-1',
-      },
-    },
-    {
-      resolve: `gatsby-plugin-canonical-urls`,
-      options: {
-        siteUrl: `https://manu.ninja`,
       },
     },
     {
@@ -122,7 +70,105 @@ module.exports = {
         ],
       },
     },
-    'gatsby-plugin-sitemap',
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        generator: 'Gatsby',
+        feeds: [
+          {
+            serialize: ({ query: { site, allMarkdownRemark } }) => {
+              return allMarkdownRemark.edges.map(({ node: post }) => {
+                return Object.assign({}, post.frontmatter, {
+                  description: post.excerpt,
+                  url: site.siteMetadata.siteUrl + post.frontmatter.path,
+                  custom_elements: [{ 'content:encoded': post.html }],
+                })
+              })
+            },
+            query: `
+              {
+                allMarkdownRemark(
+                  limit: 1000,
+                  sort: { order: DESC, fields: [frontmatter___date] }
+                ) {
+                  edges {
+                    node {
+                      html
+                      excerpt
+                      frontmatter {
+                        title
+                        path
+                        date
+                      }
+                    }
+                  }
+                }
+              }
+            `,
+            output: '/feed.xml',
+          },
+        ],
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                siteUrl
+              }
+            }
+            allMarkdownRemark {
+              edges {
+                node {
+                  frontmatter {
+                    path
+                    external
+                  }
+                }
+              }
+            }
+            allSitePage(filter: {component: {regex: "/(category|pages)/" }}) {
+              edges {
+                node {
+                  path
+                  component
+                }
+              }
+            }
+          }
+        `,
+        serialize: ({ site, allMarkdownRemark, allSitePage }) => {
+          const posts = allMarkdownRemark.edges
+            .filter(edge => !edge.node.external)
+            .map(edge => edge.node.frontmatter.path)
+
+          const pages = allSitePage.edges.map(edge => edge.node.path)
+
+          return [].concat(posts, pages).map(path => {
+            return {
+              url: site.siteMetadata.siteUrl + path,
+              changefreq: `daily`,
+              priority: 0.7,
+            }
+          })
+        },
+      },
+    },
     'gatsby-plugin-offline',
   ],
 }
