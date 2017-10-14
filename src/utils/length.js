@@ -1,12 +1,16 @@
 import stripTags from 'striptags'
 import wordCount from 'wordcount'
 
+function sanitizeComments(html) {
+  return html.replace(/(<!--|-->)/g, '');
+}
+
 function getWords(html) {
-  return wordCount(stripTags(html))
+  return wordCount(stripTags(sanitizeComments(html)))
 }
 
 function getMinutes(words) {
-  return Math.round(words / 240)
+  return Math.floor(words / 240)
 }
 
 function separateThousands(number) {
@@ -17,7 +21,7 @@ export default function(html) {
   const words = getWords(html)
   const minutes = getMinutes(words)
   let string = ''
-  if (minutes === 0) {
+  if (!minutes) {
     string = '½ Minute'
   } else {
     string = `${separateThousands(minutes)}`
