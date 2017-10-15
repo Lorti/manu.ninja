@@ -2,7 +2,7 @@ import stripTags from 'striptags'
 import wordCount from 'wordcount'
 
 function sanitizeComments(html) {
-  return html.replace(/(<!--|-->)/g, '');
+  return html.replace(/(<!--|-->)/g, '')
 }
 
 function getWords(html) {

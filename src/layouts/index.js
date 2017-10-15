@@ -7,6 +7,7 @@ import WebFont from 'webfontloader'
 import Banner from '../components/Banner'
 import Footer from '../components/Footer'
 import Meta from '../components/meta'
+import Person from '../components/schema/person'
 
 import './styles/index.scss'
 
@@ -45,6 +46,7 @@ class TemplateWrapper extends React.Component {
         <div className="Column">
           <Footer />
         </div>
+        <Person imageUrl={`${meta.siteUrl}/manu.jpg`} />
       </div>
     )
   }
