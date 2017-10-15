@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Schema({ imageUrl }) {
+export default function Person({ imageUrl }) {
   return (
     <script type="application/ld+json">
       {JSON.stringify({
@@ -18,7 +18,6 @@ export default function Schema({ imageUrl }) {
         address: {
           '@type': 'PostalAddress',
           addressCountry: 'Austria',
-          addressLocality: 'Linz',
         },
         email: 'office@manuelwieser.com',
         url: [
