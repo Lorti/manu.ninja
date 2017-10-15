@@ -19,18 +19,18 @@ module.exports = {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
-          {
-            resolve: 'gatsby-remark-images',
-            options: {
-              maxWidth: 960,
-              linkImagesToOriginal: false,
-            },
-          },
-          'gatsby-remark-responsive-iframe',
+          // 'gatsby-remark-autolink-headers',
+          // 'gatsby-remark-copy-linked-files',
+          // {
+          //   resolve: 'gatsby-remark-images',
+          //   options: {
+          //     maxWidth: 960,
+          //     linkImagesToOriginal: false,
+          //   },
+          // },
           'gatsby-remark-prismjs',
-          'gatsby-remark-copy-linked-files',
+          'gatsby-remark-responsive-iframe',
           'gatsby-remark-smartypants',
-          //   'gatsby-remark-autolink-headers',
         ],
       },
     },
