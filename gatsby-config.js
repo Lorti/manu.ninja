@@ -19,7 +19,10 @@ module.exports = {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
+          // Keep this in `package.json`, as we'll use it's `github-slugger` dependency.
           // 'gatsby-remark-autolink-headers',
+
+          // Find a way to handle (relative) social media images and use these packages.
           // 'gatsby-remark-copy-linked-files',
           // {
           //   resolve: 'gatsby-remark-images',
@@ -28,6 +31,7 @@ module.exports = {
           //     linkImagesToOriginal: false,
           //   },
           // },
+
           'gatsby-remark-prismjs',
           'gatsby-remark-responsive-iframe',
           'gatsby-remark-smartypants',
@@ -65,6 +69,21 @@ module.exports = {
             // Everything in '/static' will be copied to an equivalent directory in '/public'.
             src: '/icon-192x192.png',
             sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: '/icon-256x256.png',
+            sizes: '256x256',
+            type: 'image/png',
+          },    
+          {
+            src: '/icon-384x384.png',
+            sizes: '384x384',
+            type: 'image/png',
+          },
+          {
+            src: '/icon-512x512.png',
+            sizes: '512x512',
             type: 'image/png',
           },
         ],
