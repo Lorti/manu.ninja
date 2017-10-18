@@ -12,9 +12,11 @@ export default function Category({ pathContext }) {
     const list = posts[category]
     return (
       <div className="Column">
-        <h1>
-          {mapTag(category)} ({list.length})
-        </h1>
+        <div className="Taxonomy">
+          <h1 className="Taxonomy__heading u-textCenter">
+            <strong>{mapTag(category)}</strong> ({list.length} Articles)
+          </h1>
+        </div>
         {list.map(post => {
           return (
             <article className="Article" key={post.id}>
@@ -28,19 +30,21 @@ export default function Category({ pathContext }) {
   }
   return (
     <div className="Column">
-      <h1>Categories</h1>
-      <ul className="Column">
-        {Object.keys(posts).map(category => {
-          const count = posts[category].length
-          return (
-            <li key={category}>
-              <Link to={`/categories/${category}`}>
-                {mapTag(category)} ({count})
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
+      <div className="Taxonomy">
+        <h1 className="Taxonomy__heading">Categories</h1>
+        <ul>
+          {Object.keys(posts).map(category => {
+            const count = posts[category].length
+            return (
+              <li key={category}>
+                <Link to={`/categories/${category}`}>
+                  {mapTag(category)} ({count})
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
     </div>
   )
 }
