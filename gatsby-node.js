@@ -54,7 +54,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
               title
               path
               categories
-              date
+              date(formatString: "MMM DD, YYYY")
               thumbnail
               external
               summary

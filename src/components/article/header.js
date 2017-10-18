@@ -43,7 +43,8 @@ export default function Header({ post, forListing }) {
       </h1>
 
       <p className="Article-date">
-        <time dateTime={new Date(date).toISOString()}>{date}</time> &middot;{' '}
+        <time dateTime={new Date(date).toISOString()}>{date}</time>
+        {' '}&middot;{' '}
         {readingLength(html)}
       </p>
     </div>
