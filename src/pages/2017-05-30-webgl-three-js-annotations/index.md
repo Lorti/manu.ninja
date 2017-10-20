@@ -1,7 +1,7 @@
 ---
 path: /webgl-three-js-annotations
-title:  WebGL/three.js Annotations
-date:   "2017-05-30"
+title: WebGL/three.js Annotations
+date: 2017-05-30
 categories: [art, coding, games]
 thumbnail: /images/webgl-three-js-annotations.png
 sharing: true
