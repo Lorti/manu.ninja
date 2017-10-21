@@ -83,50 +83,53 @@ I highly recommend that you read the [Quick Start](http://electron.atom.io/docs/
 You should have a look at the files in the [Electron Quick Start](https://github.com/electron/electron-quick-start) repository, which you can clone and play around with. The bare minimum you have to write is as follows:
 
 1. Create a `package.json` with the properties mentioned before and add a pre-compiled Electron binary via `npm install electron-prebuilt --save-dev`.
-
-        {
-            "name": "app",
-            "version": "0.1.0",
-            "main": "main.js",
-            "devDependencies": {
-                "electron-prebuilt": "^1.2.0"
-            }
+    ~~~ json
+    {
+        "name": "app",
+        "version": "0.1.0",
+        "main": "main.js",
+        "devDependencies": {
+            "electron-prebuilt": "^1.2.0"
         }
+    }
+    ~~~
 2. Create a `main.js` and import `app` and `BrowserWindow` from the Electron API.
-
-        const { app, BrowserWindow } = require('electron');
-        let win;
-        function createWindow() {
-            win = new BrowserWindow({ width: 800, height: 600 });
-            win.loadURL(`file://${__dirname}/index.html`);
-        }
-        app.on('ready', createWindow);
+    ~~~ js
+    const { app, BrowserWindow } = require('electron');
+    let win;
+    function createWindow() {
+        win = new BrowserWindow({ width: 800, height: 600 });
+        win.loadURL(`file://${__dirname}/index.html`);
+    }
+    app.on('ready', createWindow);
+    ~~~
 3. Create an `index.html`. The title will be used as your window’s title.
-
-        <!doctype html>
-        <html>
-        <head>
-            <meta charset="UTF-8">
-            <title>App</title>
-        </head>
-        <body>
-            You can use Node.js <script>document.write(process.versions.node)</script> in here!
-        </body>
-        </html>
+    ~~~ html
+    <!doctype html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>App</title>
+    </head>
+    <body>
+        You can use Node.js <script>document.write(process.versions.node)</script> in here!
+    </body>
+    </html>
+    ~~~
 4. Start your app with `./node_modules/.bin/electron .` or add an npm script in your `package.json` and start your app via `npm start`.
-
-        {
-            "name": "app",
-            "version": "0.1.0",
-            "main": "main.js",
-            "scripts": {
-                "start": "electron ."
-            },
-            "devDependencies": {
-                "electron-prebuilt": "^1.2.0"
-            }
+    ~~~ json
+    {
+        "name": "app",
+        "version": "0.1.0",
+        "main": "main.js",
+        "scripts": {
+            "start": "electron ."
+        },
+        "devDependencies": {
+            "electron-prebuilt": "^1.2.0"
         }
-
+    }
+    ~~~
 
 
 
@@ -150,7 +153,7 @@ Building an interface in Electron is just using your existing HTML/CSS skills. T
 
 The `ipcMain` and `ipcRenderer` modules are instances of the standard Node.js `EventEmitter` class. They can be used to communicate asynchronously between the main process and the renderer process(es). In the Sprite Animation Generator the main process listens for form submission and then executes the `generator` function. It returns an event to the renderer process on success and failure, so the user can be notified.
 
-~~~
+~~~ js
 const { ..., ipcMain } = require('electron');
 const generator = require('animation-strip-generator');
 
@@ -178,7 +181,7 @@ app.on('ready', () => {
 
 The renderer process collects data from all existing form elements and submits it via an event to the main process. I have skipped the selection of DOM elements -- they are referenced in the `buttons` and `inputs` objects. Please have a look at the [Sprite Animation Generator](https://github.com/karriereat/sprite-animation-generator) repository on GitHub for the full source code.
 
-~~~
+~~~ js
 const { ..., ipcRenderer } = require('electron');
 
 form.addEventListener('submit', (event) => {
@@ -200,7 +203,7 @@ The renderer process in Electron is not allowed to call native GUI APIs, as this
 
 The buttons labeled "Choose Directory" both have an event listener that displays a file dialog via the `dialog` module. The dialog in which the user gets prompted to select a destination folder also uses the `showOpenDialog()` function with an additional `createDirectory` property.
 
-~~~
+~~~ js
 buttons.source.addEventListener('click', () => {
     const directory = dialog.showOpenDialog({
         properties: ['openDirectory'],
@@ -219,7 +222,7 @@ If your app is finished you can use [Electron Packager](https://github.com/elect
 
 You can add an npm script that only builds the packages you need in your `package.json`. The `--prune` flag tells Electron Packager to prune unnecessary files, like npm modules that are listed as `devDependencies`. Be sure to add a `productName` field, because this is the name that Electron Packager uses for your app.
 
-~~~
+~~~ json
 {
   "name": "sprite-animation-generator",
   "productName": "Sprite Animation Generator",

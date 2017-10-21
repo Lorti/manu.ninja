@@ -18,7 +18,7 @@ Turns out, that Unity has no alpha test with soft edges or a double-sided shader
 
 There are many files in this package. To find the standard shader you have to locate the _Standard.shader_ file in the _DefaultResourcesExtra_ folder. The shader itself consists of two subshaders, made up of five and four passes respectively. You can get a clear overview by collapsing the code blocks.
 
-~~~ cpp
+~~~ glsl
 Shader "Standard" {
 
     Properties { ... }
@@ -78,7 +78,7 @@ If you look at one of the passes you can see a Cg snippet with `#pragma` and `#i
 
 The commands before the Cg snippet (`CGPROGRAM` until `ENDCG`) set up the rendering pass. This is where you can turn backface culling off via the command `Cull Off`. You can do this for each pass, which gives you a result similar to the image below.
 
-~~~ cpp
+~~~ glsl
 Pass {
     Name "FORWARD"
     Tags { "LightMode" = "ForwardBase" }

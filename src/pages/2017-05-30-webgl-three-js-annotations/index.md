@@ -19,7 +19,7 @@ Engines usually provide a separate UI layer, which consists of polygons and text
 
 For this example we'll use a basic three.js setup as described in [WebGL 3D Model Viewer Using three.js]. You can also use any of the various three.js examples in the official repository[<sup>2</sup>](#2). The object we'll annotate is a simple box with a width, height and depth of 500 units.
 
-``` js
+~~~ js
 const mesh = new THREE.Mesh(
     new THREE.BoxGeometry(500, 500, 500),
     new THREE.MeshPhongMaterial({
@@ -30,7 +30,7 @@ const mesh = new THREE.Mesh(
     })
 );
 scene.add(mesh);
-```
+~~~
 
 ## Screen Projection
 
@@ -38,7 +38,7 @@ The annotation is glued to one of the boxes' corners, represented by `THREE.Vect
 
 For this purpose three.js has a helper method `vector.project()`. It converts 3D coordinates to 2D coordinates between `-1` and `1`, `0` being the center of the screen. These are called normalized device coordinates (NDCs) in computer graphics.
 
-``` js
+~~~ js
 const vector = new THREE.Vector3(250, 250, 250);
 const canvas = renderer.domElement; // `renderer` is a THREE.WebGLRenderer
 
@@ -50,7 +50,7 @@ vector.y = Math.round((0.5 - vector.y / 2) * (canvas.height / window.devicePixel
 const annotation = document.querySelector('.annotation');
 annotation.style.top = `${vector.y}px`;
 annotation.style.left = `${vector.x}px`;
-```
+~~~
 
 You can use these coordinates to get the top and left offset relative to the `canvas` element. This is already enough to go ahead and style your annotations. Although, there are a few possible modifications, which we'll discuss in the next sections.
 
@@ -65,7 +65,7 @@ Drawing the annotation box with HTML/CSS is great. You don't have to worry about
 
 To display the annotation marker in your scene you'll have to create a material that can be applied to geometry. three.js can load the bitmap data of other canvases and convert it to WebGL textures. Therefore we'll draw a few shapes that look like the recently removed CSS pseudo-element[<sup>3</sup>](#3).
 
-``` js
+~~~ js
 const canvas = document.getElementById('number');
 const ctx = canvas.getContext('2d');
 const x = 32;
@@ -90,13 +90,13 @@ ctx.font = '32px sans-serif';
 ctx.textAlign = 'center';
 ctx.textBaseline = 'middle';
 ctx.fillText('1', x, y);
-```
+~~~
 
 ### Load the Annotation Marker in the 3D Scene
 
 A sprite is a plane that always faces towards the camera, which is exactly what we want for the annotation marker. You can convert your drawing to a texture by passing the canvas element to `THREE.CanvasTexture`, which is then used for a `THREE.SpriteMaterial`. `depthTest` and `depthWrite` set to `false`, which tells three.js to always draw the marker on top of the object.
 
-``` js
+~~~ js
 const numberTexture = new THREE.CanvasTexture(
     document.querySelector('#number')
 );
@@ -114,20 +114,20 @@ sprite.position.set(250, 250, 250);
 sprite.scale.set(35, 35, 1);
 
 scene.add(sprite);
-```
+~~~
 
 ## Fade the Annotation Marker when it's behind an Object
 
 The 2D marker and 3D marker are both drawn on top of the object. It may not be obvious to the user whether the marker is in front or behind the object. An elegant solution to that problem is to lower the opacity of the CSS pseudo-element or sprite when the annotation vector is farther from the camera than the objects center. This way the user still sees the marker at any time, but can easily tell if it's behind the object.
 
-``` js
+~~~ js
 const meshDistance = camera.position.distanceTo(mesh.position);
 const spriteDistance = camera.position.distanceTo(sprite.position);
 spriteBehindObject = spriteDistance > meshDistance;
 
 sprite.material.opacity = spriteBehindObject ? 0.25 : 1;
 annotation.style.opacity = spriteBehindObject ? 0.25 : 1;
-```
+~~~
 
 ## Conclusion
 

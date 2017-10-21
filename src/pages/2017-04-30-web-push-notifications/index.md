@@ -63,14 +63,14 @@ What is happening? I will explain the most important parts, without error handli
 
 The `applicationServerKey` is part of the Voluntary Application Server Identification for Web Push ([VAPID]) specification. It let's the push service identify your application server. The easiest way to create this public and private pair of keys is to use a library like [Web Push]. Its `webpush.generateVAPIDKeys()` function returns an object with a `publicKey` and a `privateKey` property. If you want to create your keys simply uncomment the four lines at the top of [server.js](https://github.com/Lorti/web-push-notifications/blob/master/server.js#L3), which you've just checked out.
 
-``` js
+~~~ js
 const webpush = require('web-push');
 
 const vapidKeys = webpush.generateVAPIDKeys();
 console.log(vapidKeys.publicKey);
 console.log(vapidKeys.privateKey);
 process.exit();
-```
+~~~
 
 The following code snippets are from the `push.js` module and run on the client.
 
@@ -78,14 +78,14 @@ The following code snippets are from the `push.js` module and run on the client.
 
 The second step is to install a service worker with `navigator.serviceWorker.register()`. This only works if your site is served on `localhost` or has a valid SSL certificate. For testing you can get around the HTTPS restriction by checking the _Enable Service Workers over HTTP (when toolbox is open)_ option in the Firefox developer tools. You can also start Chrome via command line and use the `--unsafely-treat-insecure-origin-as-secure` flag.
 
-``` js
+~~~ js
 navigator.serviceWorker.register('/service-worker.js')
     .then((registration) => {
         init();
     });
-```
+~~~
 
-``` js
+~~~ js
 function init() {
     navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
         serviceWorkerRegistration.pushManager.getSubscription()
@@ -97,7 +97,7 @@ function init() {
             });
     });
 };
-```
+~~~
 
 ### Subscribing to the Push Messaging Service
 
@@ -105,7 +105,7 @@ You should of course ask the user's permission for showing notifications on your
 
 If the service worker registration is successful you can access its `pushManager` object. `serviceWorkerRegistration.pushManager.subscribe()` returns a promise with a valid subscription if successful. You don't have to care about the messaging service itself. Chrome will return a subscription with a Google endpoint wheres Firefox will return a subscription with a Mozilla endpoint. This is the beauty of a standards-based approach.
 
-``` js
+~~~ js
 function subscribe() {
     Notification.requestPermission().then((result) => {
         if (result === 'granted') {
@@ -123,28 +123,28 @@ function subscribe() {
         }
     }):
 }
-```
+~~~
 
 Depending on how you've generated your `applicationServerKey` you might need to convert it from one Base64 variant to another. The variants differ in the last two characters and the padding character. `buildApplicationServerKey()` converts characters 62 and 63 from the `-_` pair to the `+/` pair.
 
-``` js
+~~~ js
 function buildApplicationServerKey() {
     const base64 = 'BE8PyI95I_jBIfb_LTS_nkUJnOwjLP2zAaGBSFEi3jmFJ3l5ox7-NtNqrVuyPL4Qmt4UxDI-YgwYI1sEMIpoU90=';
     const rfc4648 = base64.replace(/-/g, '+').replace(/_/g, '/');
     const characters = atob(rfc4648).split('').map(character => character.charCodeAt(0));
     return new Uint8Array(characters);
 }
-```
+~~~
 
 ### Saving the Subscription Object
 
 The `sendSubscriptionToServer()` function is a stub that you have to implement depending on your server. You can call `subscription.toJSON()` on the subscription object to retrieve the endpoint and keys as strings. Save the subscription object to your database to send the user notifications later on. The example outputs the JSON to the page itself, so you can copy it to `server.js`.
 
-``` js
+~~~ js
 function sendSubscriptionToServer(subscription) {
     console.log(JSON.stringify(subscription.toJSON()));
 }
-```
+~~~
 
 ### Sending the Push Notification
 
@@ -152,7 +152,7 @@ If you open `server.js`, you will find few lines of code, thanks to the [Web Pus
 
 Why use a library? Otherwise, you would have to create the Authorization (JWT), Crypto-Key and TTL headers yourself, as well as encrypt your payload. There is a link at the end of the article, if you are interested in the details.
 
-``` js
+~~~ js
 const webpush = require('web-push');
 const subscription = {
     endpoint: 'https://fcm.googleapis.com/fcm/send/...',
@@ -166,7 +166,7 @@ const notification = JSON.stringify({
     body: 'I’ve just published “Web Push Notifications”.',
 };
 webpush.sendNotification(subscription, notification);
-```
+~~~
 
 ### Receiving the Push Notification
 
@@ -174,7 +174,7 @@ The service worker listens for various events from the push messaging service. T
 
 The payload has to be encrypted, which is good for privacy, but difficult to implement. Which again brings us to the benefits of using a library.
 
-``` js
+~~~ js
 self.addEventListener('push', (event) => {
     const data = event.data.json();
     const title = data.title;
@@ -186,7 +186,7 @@ self.addEventListener('push', (event) => {
         self.registration.showNotification(title, options),
     );
 });
-```
+~~~
 
 Et voilà!
 

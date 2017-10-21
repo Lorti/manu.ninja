@@ -17,7 +17,7 @@ The original Clock Clock 24 is kinetic art by [Humans since 1982]. Twenty-four a
 
 The analog clocks are SVGs made up of a clock face and two shapes for the clock hands. The `--small-hand` and `--large-hand` variables drive the `transform`/`transition` animation.
 
-``` css
+~~~ css
 .clock {
   --small-hand: -135deg;
   --large-hand: -45deg;
@@ -32,21 +32,21 @@ The analog clocks are SVGs made up of a clock face and two shapes for the clock 
   transform: rotateZ(var(--large-hand));
   transition: transform 10s;
 }
-```
+~~~
 
 I made two helper functions `hourToDegrees()` and `minuteToDegrees()` to let myself think in clock positions instead of degrees. These are then used to set a single analog clock with the `setHands()` function. The small hand moves clockwise and the large hand counterclockwise for a more interesting animation.
 
-``` js
+~~~ js
 function setHands(id, hour, minute) {
   const clock = document.querySelector(`.clock--${id}`);
   clock.style.setProperty(`--small-hand`, `${hourToDegrees(hour) + 360}deg`);
   clock.style.setProperty(`--large-hand`, `${minuteToDegrees(minute) - 360}deg`);
 }
-```
+~~~
 
 A digit consists of six analog clocks. Setting each clock to the necessary clock position forms a seven-segment display. The following example shows the positions for the digit `2`. You have to read in lines, which means the third and fourth objects represent the center clocks.
 
-``` json
+~~~ json
 [
     { hour: 3, minute: 15 },
     { hour: 9, minute: 30 },
@@ -55,7 +55,7 @@ A digit consists of six analog clocks. Setting each clock to the necessary clock
     { hour: 0, minute: 15 },
     { hour: 9, minute: 45 }
 ]
-```
+~~~
 
 At first I tried to recreate the digits from memory, but I struggled with the digit `8`. After watching a lot of promotional videos I discovered how Humans since 1982 solved it. The digit `8` is now my favorite. It may seem weird at first, but you can't confuse the "cyclops" with `6` or `9`.
 
@@ -63,7 +63,7 @@ At first I tried to recreate the digits from memory, but I struggled with the di
 
 The script then reads the system's time and strips the string to `hh:mm`. If the time plus ten seconds differs from the current state it triggers the animation. The animation itself lasts ten seconds and ends at the system's time.
 
-``` js
+~~~ js
 let state = '----';
 window.setInterval(() => {
   const time = new Date(Date.now() + 10000).toTimeString();
@@ -72,7 +72,7 @@ window.setInterval(() => {
     state = time;
   }
 }, 1000);
-```
+~~~
 
 This concludes the [Clock Clock 24] application. View the full source code on [CodePen], if you are interested.
 

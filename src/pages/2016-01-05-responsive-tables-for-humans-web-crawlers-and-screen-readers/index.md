@@ -1,6 +1,6 @@
 ---
 path: /responsive-tables-for-humans-web-crawlers-and-screen-readers
-title: Responsive Tables for Humans, Web&nbsp;Crawlers and Screen&nbsp;Readers
+title: Responsive Tables for Humans, Web Crawlers and Screen Readers
 date: 2016-01-05
 categories: [coding]
 ---
