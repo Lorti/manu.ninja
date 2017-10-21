@@ -2,7 +2,7 @@
 path: /clock-clock-24-on-a-raspberry-pi-using-web-technologies
 title: Clock Clock 24 on a Raspberry Pi using Web Technologies
 date: 2017-03-22
-categories: [coding, art]
+categories: [art, coding]
 thumbnail: /images/clock-clock-24.png
 summary: The original Clock Clock 24 is kinetic art by Humans since 1982. Twenty-four analog clocks form a large digital clock. Clever arrangement of the clock hands transforms the analog clocks into seven-segment displays. My girlfriend’s father stumpled upon this clock when looking for a new living room clock. At the time of writing you can buy the clock at $ 5,999.00 in the MoMA store. Thus I took the liberty and created a Clock Clock 24 homage with web technologies. My girlfriend and I then put the clock on a Raspberry Pi.
 ---

@@ -31,16 +31,22 @@ The example front-end npm package for this tutorial is a form tracker using Goog
 
 <figure>
 <figcaption>package.json</figcaption>
-<pre><code>{
+
+~~~ json
+{
   "name": "form-tracking",
   "version": "0.1.0",
   "description": "Track form submission by specifying a `data-event` attribute on forms."
-}</code></pre>
+}
+~~~
+
 </figure>
 
 <figure>
 <figcaption>main.js</figcaption>
-<pre><code>function submit(e) {
+
+~~~ js
+function submit(e) {
     e.preventDefault();
 
     const form = e.currentTarget;
@@ -68,7 +74,9 @@ function init() {
     });
 }
 
-export default init;</code></pre>
+export default init;
+~~~
+
 </figure>
 
 ## Transpiling to ES5 with Babel
@@ -77,7 +85,9 @@ The prior code is written in ES6, as can be seen by the `const` and `export` sta
 
 <figure>
 <figcaption>package.json</figcaption>
-<pre><code>{
+
+~~~ json
+{
   "name": "form-tracking",
   "version": "0.1.0",
   "description": "Track form submission by specifying a `data-event` attribute on forms.",
@@ -85,16 +95,21 @@ The prior code is written in ES6, as can be seen by the `const` and `export` sta
     "babel-cli": "^6.5.1",
     "babel-preset-es2015": "^6.18.0",
   }
-}</code></pre>
+}
+~~~
+
 </figure>
 
 <figure>
 <figcaption>.babelrc</figcaption>
-<pre><code>{
+
+~~~ json
   "presets": [
     "es2015"
   ]
-}</code></pre>
+}
+~~~
+
 </figure>
 
 After running `npm install` you can test Babel by typing `./node_modules/.bin/babel main.js` and it will output the ES5 result, which should work in any popular browser being used today.
@@ -159,7 +174,9 @@ Finally `babel src/main.js --out-file dist/main.js` is our prepublish hook, read
 
 <figure>
 <figcaption>package.json</figcaption>
-<pre><code>{
+
+~~~ json
+{
   "name": "form-tracking",
   "version": "0.1.0",
   "description": "Track form submission by specifying a `data-event` attribute on forms.",
@@ -171,7 +188,9 @@ Finally `babel src/main.js --out-file dist/main.js` is our prepublish hook, read
   "scripts": {
     "prepublish": "babel src/main.js --out-file dist/main.js",
   }
-}</code></pre>
+}
+~~~
+
 </figure>
 
 ## Testing in a browser environment with Browserify, tape and Sinon
@@ -180,7 +199,9 @@ We now have our project set up and want to confirm that everything is working co
 
 <figure>
 <figcaption>package.json</figcaption>
-<pre><code>{
+
+~~~ json
+{
   "name": "form-tracking",
   "version": "0.1.0",
   "description": "Track form submission by specifying a `data-event` attribute on forms.",
@@ -199,7 +220,9 @@ We now have our project set up and want to confirm that everything is working co
     "prepublish": "babel src/main.js --out-file dist/main.js",
     "test": "browserify test/main.js -t [ babelify ] | tape-run | tap-spec"
   }
-}</code></pre>
+}
+~~~
+
 </figure>
 
 You can find [`test/main.js`](#test/main.js) after my description of the tools. Before you continue reading you might want to create the file, read the test and run `npm test` to see the results.
@@ -222,7 +245,9 @@ We can use [Sinon](http://sinonjs.org/) to mock the Google Analytics library, as
 
 <figure id="test/main.js">
 <figcaption>test/main.js</figcaption>
-<pre><code>import test from 'tape';
+
+~~~ js
+import test from 'tape';
 import { spy } from 'sinon';
 import init from '../src/main';
 
@@ -232,11 +257,11 @@ test('Tracking', (t) => {
     window.ga = null;
     t.throws(init, 'Throws exception when Google Analytics not found');
 
-    document.body.innerHTML = &#96;
-        &lt;form data-event="category,action"&gt;
-            &lt;button type="submit" value="Submit"&gt;
-        &lt;/form&gt;
-    &#96;;
+    document.body.innerHTML = `
+        <form data-event="category,action">
+            <button type="submit" value="Submit">
+        </form>
+    `;
 
     window.ga = spy();
     init();
@@ -247,7 +272,9 @@ test('Tracking', (t) => {
     const fields = window.ga.getCall(0).args[1];
     t.equal(fields.eventCategory, 'category', 'Event category is `category`');
     t.equal(fields.eventAction, 'action', 'Event action is `action`');
-});</code></pre>
+});
+~~~
+
 </figure>
 
 The last package [tap-spec](https://github.com/scottcorgan/tap-spec) takes the TAP output and changes it to look like Mocha's spec reporter, which is just a personal preference. You could even have your results printed as Nyan Cat's rainbow with many of the available [formatters](https://github.com/sindresorhus/awesome-tap#javascript). If you now run `npm test` it will output the result of our test and its four assertions.

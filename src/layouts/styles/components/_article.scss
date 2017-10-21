@@ -143,14 +143,14 @@
        overflow-x: auto;
     }
 
+    figure pre {
+      margin-top: 0;
+    }
+
     figcaption {
-        padding: .5em;
+        padding: .5em 1em;
         font-weight: bold;
         background: #f0f0f0;
-
-        + pre {
-            margin-top: 0;
-        }
     }
 
     del {
