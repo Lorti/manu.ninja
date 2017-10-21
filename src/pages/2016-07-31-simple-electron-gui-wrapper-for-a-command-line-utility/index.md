@@ -1,16 +1,16 @@
 ---
-layout: post
-title:  Simple Electron GUI Wrapper for a Command-Line Utility
-date:   2016-07-31
-categories: coding
+path: /simple-electron-gui-wrapper-for-a-command-line-utility
+title: Simple Electron GUI Wrapper for a Command-Line Utility
+date: 2016-07-31
+categories: [coding]
 thumbnail: /images/sprite-animation-generator.png
 sharing: true
 ---
 
 This post summarizes my experience building a simple Electron app. It guides you through providing a GUI for a command-line utility. It also provides a succinct overview of the few things you really need to know when you are just getting started.
 
-The source code of the finished [Sprite Animation Generator](https://github.com/karriereat/sprite-animation-generator) -- which we'll be building -- is available on Github, as well as the source code of the original [command-line utility](https://github.com/karriereat/animation-strip-generator). 
-  
+The source code of the finished [Sprite Animation Generator](https://github.com/karriereat/sprite-animation-generator) -- which we'll be building -- is available on Github, as well as the source code of the original [command-line utility](https://github.com/karriereat/animation-strip-generator).
+
 ![](/images/sprite-animation-generator.png)
 
 
@@ -28,7 +28,7 @@ There are compelling reasons for [building a desktop application rather than a w
 You can quickly create a GUI wrapper for internal tools, for example automation for graphic designers.
 This has been done with other tools like [ImageOptim](https://imageoptim.com/mac), which uses eight different tools under the hood.
 
-At [karriere.at](http://www.karriere.at/) we experimented with sprite animations as an alternative to animating SVGs with CSS. This way we can shift a bit of workload from the programmers to the designers, while also giving the designers much more creative freedom. 
+At [karriere.at](http://www.karriere.at/) we experimented with sprite animations as an alternative to animating SVGs with CSS. This way we can shift a bit of workload from the programmers to the designers, while also giving the designers much more creative freedom.
 
 One of my colleagues, [Daniela Schmid](https://twitter.com/schmidxdaniela), created a bell animation in After Effects and we then searched the web for a tool that would allow her to create a CSS sprite animation, which we didn't find. Most of the tools were concerned with packing icons for traditional icon sprites.
 
@@ -47,12 +47,12 @@ One of my colleagues, [Daniela Schmid](https://twitter.com/schmidxdaniela), crea
 </style>
 
 This is why I wrote a Node.js [command-line utility](https://github.com/karriereat/animation-strip-generator) for creating sprite animations from image sequences.
-    
+
 ~~~ bash
 animation-strip-generator example/input example/output --name bell --fps 30
 ~~~
 
-The above command will read the image sequence from `example/input`{:.bash} and create a strip at `example/input/bell.png`{:.bash}. The strip is then pushed through [pngquant](https://pngquant.org/) for compression. You also get the necessary CSS styles for the sprite animation.
+The above command will read the image sequence from `example/input` and create a strip at `example/input/bell.png`. The strip is then pushed through [pngquant](https://pngquant.org/) for compression. You also get the necessary CSS styles for the sprite animation.
 
 ![](/images/karriere.at-bell.png)
 
@@ -76,13 +76,13 @@ This worked great, but in reality designers tend to avoid the Mac OS X Terminal 
 
 I highly recommend that you read the [Quick Start](http://electron.atom.io/docs/tutorial/quick-start/) tutorial on the official Electron page. It will tell you that you only need three files to get started:
 
-* A `package.json`{:.bash} with at least a `name`, `version`{:.bash} and `main`{:.bash} property. Electron will load an `index.js`{:.bash} file if there is no `main`{:.bash} specified.
-* A `main.js`{:.bash} which requires the `electron`{:.bash} JavaScript module and runs the main process of your app. It creates web pages by creating `BrowserWindow`{:.bash} instances, each of which have their own renderer process.
-* An `index.html`{:.bash} file. This file can include scripts that run in the renderer process. You have access to Node.js APIs in web pages, so you can do things you wouldn't be able to in a normal browser sandbox.
+* A `package.json` with at least a `name`, `version` and `main` property. Electron will load an `index.js` file if there is no `main` specified.
+* A `main.js` which requires the `electron` JavaScript module and runs the main process of your app. It creates web pages by creating `BrowserWindow` instances, each of which have their own renderer process.
+* An `index.html` file. This file can include scripts that run in the renderer process. You have access to Node.js APIs in web pages, so you can do things you wouldn't be able to in a normal browser sandbox.
 
 You should have a look at the files in the [Electron Quick Start](https://github.com/electron/electron-quick-start) repository, which you can clone and play around with. The bare minimum you have to write is as follows:
 
-1. Create a `package.json`{:.bash} with the properties mentioned before and add a pre-compiled Electron binary via `npm install electron-prebuilt --save-dev`{:.bash}.
+1. Create a `package.json` with the properties mentioned before and add a pre-compiled Electron binary via `npm install electron-prebuilt --save-dev`.
 
         {
             "name": "app",
@@ -92,7 +92,7 @@ You should have a look at the files in the [Electron Quick Start](https://github
                 "electron-prebuilt": "^1.2.0"
             }
         }
-2. Create a `main.js`{:.bash} and import `app`{:.bash} and `BrowserWindow`{:.bash} from the Electron API.
+2. Create a `main.js` and import `app` and `BrowserWindow` from the Electron API.
 
         const { app, BrowserWindow } = require('electron');
         let win;
@@ -113,8 +113,8 @@ You should have a look at the files in the [Electron Quick Start](https://github
             You can use Node.js <script>document.write(process.versions.node)</script> in here!
         </body>
         </html>
-4. Start your app with `./node_modules/.bin/electron .`{:.bash} or add an npm script in your `package.json`{:.bash} and start your app via `npm start`{:.bash}.
-        
+4. Start your app with `./node_modules/.bin/electron .` or add an npm script in your `package.json` and start your app via `npm start`.
+
         {
             "name": "app",
             "version": "0.1.0",
@@ -215,9 +215,9 @@ buttons.source.addEventListener('click', () => {
 
 ## Distribution
 
-If your app is finished you can use [Electron Packager](https://github.com/electron-userland/electron-packager) to package and distribute your app. Add it to your dependencies with `npm install electron-packager --save-dev`{:.bash} and execute it once with `./node_modules/.bin/electron-packager ./ --all`{:.bash}. This will generate packages for all platforms and architectures Electron can handle and may take a few minutes.
+If your app is finished you can use [Electron Packager](https://github.com/electron-userland/electron-packager) to package and distribute your app. Add it to your dependencies with `npm install electron-packager --save-dev` and execute it once with `./node_modules/.bin/electron-packager ./ --all`. This will generate packages for all platforms and architectures Electron can handle and may take a few minutes.
 
-You can add an npm script that only builds the packages you need in your `package.json`{:.bash}. The `--prune`{:.bash} flag tells Electron Packager to prune unnecessary files, like npm modules that are listed as `devDependencies`{:.bash}. Be sure to add a `productName`{:.bash} field, because this is the name that Electron Packager uses for your app.
+You can add an npm script that only builds the packages you need in your `package.json`. The `--prune` flag tells Electron Packager to prune unnecessary files, like npm modules that are listed as `devDependencies`. Be sure to add a `productName` field, because this is the name that Electron Packager uses for your app.
 
 ~~~
 {
@@ -244,7 +244,7 @@ This is all you need to create an app you can send to your friends and colleague
 
 ## Conclusion
 
-Working with Electron is fun and entertaining, once you have grasped the few underlying concepts. The API is well documented and there is a great community building tools and offering learning ressources. There are some minor problems, though. The most commonly mentioned is the large size of application packages. This is the size of the Sprite Animation Generator applications after running `npm run build`{:.bash}:
+Working with Electron is fun and entertaining, once you have grasped the few underlying concepts. The API is well documented and there is a great community building tools and offering learning ressources. There are some minor problems, though. The most commonly mentioned is the large size of application packages. This is the size of the Sprite Animation Generator applications after running `npm run build`:
 
 * 146,2 MB on Mac OS X (55,3 MB zipped)
 * 160,4 MB on Windows (64,8 MB zipped)

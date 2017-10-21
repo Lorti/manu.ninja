@@ -1,8 +1,8 @@
 ---
-layout: post
-title:  Dominant Colors for Lazy-Loading Images
-date:   2016-03-09
-categories: coding
+path: /dominant-colors-for-lazy-loading-images
+title: Dominant Colors for Lazy-Loading Images
+date: 2016-03-09
+categories: [coding]
 thumbnail: /images/tiny-thumbnails.jpg
 ---
 
@@ -10,7 +10,7 @@ Pinterest, Google Images and lots of image-heavy sites lazy-load their content. 
 
 ![](/images/pinterest-placeholders.gif)
 
-The basic concept is to use a tiny `blank.gif`{:.html} as `src` attribute and replace it with the correct image after the page has fully loaded. The `blank.gif`{:.html} can also be set as a Base64-encoded Data URI to save a request.
+The basic concept is to use a tiny `blank.gif` as `src` attribute and replace it with the correct image after the page has fully loaded. The `blank.gif` can also be set as a Base64-encoded Data URI to save a request.
 
 ~~~ html
 <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
@@ -18,7 +18,7 @@ The basic concept is to use a tiny `blank.gif`{:.html} as `src` attribute and re
      alt="Ghost In The Shell">
 ~~~
 
-Pinterest then sets the style of the wrapper to `background: #1e1f20;`{:.css} and shows the image with `opacity: 1;`{:.css} when it has loaded. They could therefore easily animate the transition, but right now they don't.
+Pinterest then sets the style of the wrapper to `background: #1e1f20;` and shows the image with `opacity: 1;` when it has loaded. They could therefore easily animate the transition, but right now they don't.
 
 ## Finding the Dominant Color of an Image
 
@@ -103,7 +103,7 @@ data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACAA==
 
 ## Creating Tiny Single-Colored GIFs
 
-The following snippet takes the above knowledge and creates data URIs in the dominant color of a given image. You can achieve the same in PHP by using the `pack`{:.php} and `base64_encode`{:.php} functions.
+The following snippet takes the above knowledge and creates data URIs in the dominant color of a given image. You can achieve the same in PHP by using the `pack` and `base64_encode` functions.
 
 ~~~ js
 var gm = require('gm');
@@ -137,7 +137,7 @@ data:image/gif;base64,R0lGODlhAQABAIABAEdJRgAAACwAAAAAAQABAAACAkQBAA==
 
 You can now lazy-load your images and show a tiny GIF in the dominant color as a placeholder, which is embedded in your HTML as a Base64-encoded data URI. The last thing I want to show you is how easily you can now implement the placeholders [Medium](https://jmperezperez.com/medium-image-progressive-loading-placeholder/) is using.
 
-If you resize your image to 3 × 3 pixels and remove the color quantization you get a data URI that is only a bit longer than the single-colored `blank.gif`{:.html} but gives you more of a thumbnail for your image. If you then resize your thumbnail to the image dimensions you may have to use `filter: blur(…);` to soften artifacts but you can see in the image below that Chrome does an excellent job in upscaling tiny thumbnails.
+If you resize your image to 3 × 3 pixels and remove the color quantization you get a data URI that is only a bit longer than the single-colored `blank.gif` but gives you more of a thumbnail for your image. If you then resize your thumbnail to the image dimensions you may have to use `filter: blur(…);` to soften artifacts but you can see in the image below that Chrome does an excellent job in upscaling tiny thumbnails.
 
 ~~~ js
 var gm = require('gm');

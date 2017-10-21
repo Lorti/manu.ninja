@@ -125,7 +125,7 @@ function subscribe() {
 }
 ```
 
-Depending on how you've generated your `applicationServerKey` you might need to convert it from one Base64 variant to another. The variants differ in the last two characters and the padding character. `buildApplicationServerKey()` converts characters 62 and 63 from the `-_`{:.no-highlight} pair to the `+/`{:.no-highlight} pair.
+Depending on how you've generated your `applicationServerKey` you might need to convert it from one Base64 variant to another. The variants differ in the last two characters and the padding character. `buildApplicationServerKey()` converts characters 62 and 63 from the `-_` pair to the `+/` pair.
 
 ``` js
 function buildApplicationServerKey() {

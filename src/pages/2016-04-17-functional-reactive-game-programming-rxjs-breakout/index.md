@@ -1,7 +1,7 @@
 ---
-layout: post
-title:  Functional Reactive Game Programming – RxJS Breakout
-date:   2016-04-17
+path: /functional-reactive-game-programming-rxjs-breakout
+title: Functional Reactive Game Programming – RxJS Breakout
+date: 2016-04-17
 categories: [coding, games]
 thumbnail: /images/rxjs-breakout.png
 sharing: true
@@ -13,8 +13,8 @@ This post shares with you my approach as a complete beginner to RxJS so if you n
 
 The code is available on [GitHub](https://github.com/Lorti/rxjs-breakout) and you can play the game in the [CodePen](http://codepen.io/Lorti/pen/JXpgBb) below. Focus the iFrame and then use your arrow keys. Yup, doesn't work on mobile, but so did the original Cab! There is sound as well, so be wary not to shock your colleagues.
 
-<p data-height="480" data-theme-id="0" data-slug-hash="JXpgBb" data-default-tab="result" data-user="Lorti" class='codepen'></p>
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+<iframe height='480' scrolling='no' title='RxJS Breakout' src='//codepen.io/Lorti/embed/JXpgBb/?height=480&theme-id=dark&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/JXpgBb/'>RxJS Breakout</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 ## Everything is a stream
 
@@ -24,13 +24,13 @@ You may have seen Andre Staltz's tutorial gist [The introduction to Reactive Pro
 
 We are not only interested in the keys themselves but in how long the key is being hold down. If the player holds the left key pressed the paddle has to move to the left and vice versa.
 
-<del>In the first step we create an observable that returns all keyboard events as a stream. Then in the next step we filter the events so that the stream only returns the `keyup`{:.js} and `keydown`{:.js} events of the left and right arrow keys. We then scan the stream and return a one-dimensional direction vector -- which sounds sophisticated but is really just a value of `-1`{:.js}, `0`{:.js} or `1`{:.js}, indicating where the paddle should be heading.</del>
+<del>In the first step we create an observable that returns all keyboard events as a stream. Then in the next step we filter the events so that the stream only returns the `keyup` and `keydown` events of the left and right arrow keys. We then scan the stream and return a one-dimensional direction vector -- which sounds sophisticated but is really just a value of `-1`, `0` or `1`, indicating where the paddle should be heading.</del>
 
-<ins>In the first step we create an observable that transform all `keydown` events to a one-dimensional direction vector -- which sounds sophisticated but is really just a value of `-1`{:.js}, `0`{:.js} or `1`{:.js}, indicating where the paddle should be heading. We then merge the first observable with a second observable that listens to all `keyup` events and resets the vector to `0`{:.js} as soon as the player lifts his finger.
+<ins>In the first step we create an observable that transform all `keydown` events to a one-dimensional direction vector -- which sounds sophisticated but is really just a value of `-1`, `0` or `1`, indicating where the paddle should be heading. We then merge the first observable with a second observable that listens to all `keyup` events and resets the vector to `0` as soon as the player lifts his finger.
 
 <ins>(Thanks to [John Lindquist](https://twitter.com/johnlindquist) for pointing out this simpler approach in the comments!)</ins>
 
-The last thing we have to take care of is that the initial Observable returns a `keydown`{:.js} event every few milliseconds while you're holding the key. The `distinctUntilChanged()`{:.js} operator enables us to push a new element down the stream only if the element is different than the one before.
+The last thing we have to take care of is that the initial Observable returns a `keydown` event every few milliseconds while you're holding the key. The `distinctUntilChanged()` operator enables us to push a new element down the stream only if the element is different than the one before.
 
 ~~~ js
 const input$ = Rx.Observable
@@ -54,7 +54,7 @@ const input$ = Rx.Observable
 
 Equipped with the input stream from the previous snippet we can now create a stream that returns the position of the paddle according to the player's actions. We combine the ticker with the input stream and recalculate the position on each tick. The ticker itself is shown in the next section.
 
-The pure function in the scan operator first moves the paddle based on the elapsed time since the last frame (`ticker.deltaTime`{:.js}) and then clamps the value to the boundaries of our canvas.
+The pure function in the scan operator first moves the paddle based on the elapsed time since the last frame (`ticker.deltaTime`) and then clamps the value to the boundaries of our canvas.
 
 ~~~ js
 const paddle$ = ticker$
@@ -100,7 +100,7 @@ const game = Rx.Observable
 
 ## Objects Stream
 
-It is called _objects_ stream but it also holds the game's score, because the score depends on the number of bricks left. The stream returns a new object containing the ball's and the bricks' properties in each update cycle. The initial object holds a centered ball heading to the bottom right, a lot of bricks and a score of `0`{:.js}.
+It is called _objects_ stream but it also holds the game's score, because the score depends on the number of bricks left. The stream returns a new object containing the ball's and the bricks' properties in each update cycle. The initial object holds a centered ball heading to the bottom right, a lot of bricks and a score of `0`.
 
 ~~~ js
 const INITIAL_OBJECTS = {

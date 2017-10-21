@@ -1,7 +1,7 @@
 ---
-layout: post
-title:  Rendering Low-Poly Hair in Unity
-date:   2016-01-26
+path: /rendering-low-poly-hair-in-unity
+title: Rendering Low-Poly Hair in Unity
+date: 2016-01-26
 categories: [coding, games]
 thumbnail: /images/unity-hair-rendering-thumbnail.jpg
 ---
@@ -72,11 +72,11 @@ Shader "Standard" {
 }
 ~~~
 
-The subshaders are essentially the same, but the second one can be used on weaker hardware, as indicated by the `LOD 150`{:.cpp} line. The only difference is that the deferred pass is missing in the second subshader.
+The subshaders are essentially the same, but the second one can be used on weaker hardware, as indicated by the `LOD 150` line. The only difference is that the deferred pass is missing in the second subshader.
 
-If you look at one of the passes you can see a Cg snippet with `#pragma`{:.cpp} and `#include`{:.cpp} commands. At first the pass seems simple, but the real magic happens in the included _UnityStandardCoreForward.cginc_ file, which itself includes between 350 and almost 700 lines.
+If you look at one of the passes you can see a Cg snippet with `#pragma` and `#include` commands. At first the pass seems simple, but the real magic happens in the included _UnityStandardCoreForward.cginc_ file, which itself includes between 350 and almost 700 lines.
 
-The commands before the Cg snippet (`CGPROGRAM`{:.cpp} until `ENDCG`{:.cpp}) set up the rendering pass. This is where you can turn backface culling off via the command `Cull Off`{:.cpp}. You can do this for each pass, which gives you a result similar to the image below.
+The commands before the Cg snippet (`CGPROGRAM` until `ENDCG`) set up the rendering pass. This is where you can turn backface culling off via the command `Cull Off`. You can do this for each pass, which gives you a result similar to the image below.
 
 ~~~ cpp
 Pass {

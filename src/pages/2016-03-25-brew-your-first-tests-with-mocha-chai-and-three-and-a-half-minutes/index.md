@@ -1,8 +1,8 @@
 ---
-layout: post
-title:  "Brew Your First Tests with Mocha, Chai and 3½ Minutes"
-date:   2016-03-25
-categories: coding
+path: /brew-your-first-tests-with-mocha-chai-and-three-and-a-half-minutes
+title: "Brew Your First Tests with Mocha, Chai and 3½ Minutes"
+date: 2016-03-25
+categories: [coding]
 summary: "This post is for front-end developers who want to start writing tests. People have told them that testing their code is beneficial to their sanity. For some reason, though, they never got started – maybe because there are a lot of lenghty articles and different tools to consider. This article is different: It is a copy & paste guide to your first tests with a steeping time of about 3½ Minutes."
 ---
 
@@ -12,7 +12,7 @@ This post is for front-end developers who want to start writing tests. People ha
 
 ## HTML
 
-Include `mocha.js`{:.bash}, `mocha.css`{:.bash} and `chai.js`{:.bash} in your `tests.html`{:.bash}. This example uses behavior-driven development, which is why Mocha is initialized with `mocha.setup('bdd')`{:.bash}.
+Include `mocha.js`, `mocha.css` and `chai.js` in your `tests.html`. This example uses behavior-driven development, which is why Mocha is initialized with `mocha.setup('bdd')`.
 
 ~~~ html
 <!DOCTYPE html>
@@ -44,7 +44,7 @@ Include `mocha.js`{:.bash}, `mocha.css`{:.bash} and `chai.js`{:.bash} in your `t
 
 ## JavaScript
 
-Write a synchronous and an asynchronous test in your `tests.js`{:.bash}. If you are done open your `tests.html`{:.bash} in a browser and look at the test results.
+Write a synchronous and an asynchronous test in your `tests.js`. If you are done open your `tests.html` in a browser and look at the test results.
 
 ~~~ js
 function clamp(number, min, max) {
@@ -100,7 +100,7 @@ describe('Asynchronous Code', function() {
 
 ## Next Steps
 
-Read some detailed articles about testing and use [Mocha](http://mochajs.org/)'s and [Chai](http://chaijs.com/)'s documentation. If you want to run your tests in Node.js run `npm install -g mocha`{:.bash}, write a `test.js`{:.bash} file and start `mocha`{:.bash}.
+Read some detailed articles about testing and use [Mocha](http://mochajs.org/)'s and [Chai](http://chaijs.com/)'s documentation. If you want to run your tests in Node.js run `npm install -g mocha`, write a `test.js` file and start `mocha`.
 
 My goal with this article is to get people up and running so they can start to write some tests and see the benefits for themselves. There are already far better articles out there that can tell you the benefits and intricacies of testing so there is no point in writing another.
 

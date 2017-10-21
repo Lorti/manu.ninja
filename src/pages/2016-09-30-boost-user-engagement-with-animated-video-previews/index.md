@@ -1,8 +1,8 @@
 ---
-layout: post
-title:  Boost User Engagement with Animated Video Previews
-date:   2016-09-30
-categories: coding
+path: /boost-user-engagement-with-animated-video-previews
+title: Boost User Engagement with Animated Video Previews
+date: 2016-09-30
+categories: [coding]
 sharing: true
 thumbnail: /files/big_buck_bunny_720p_h264_thumbnail.jpg
 ---
@@ -10,7 +10,7 @@ thumbnail: /files/big_buck_bunny_720p_h264_thumbnail.jpg
 If you are building a video portal, an artist's portfolio or any other showcase of films, from smartphone footage to news coverage to sports clips, you typically look for engaging thumbnails. Though you don't have to stop there and can boost your video previews and click-through rate by showing more than a single still image of each video. This article highlights two approaches to grab your viewers' attention.
 
 The examples both use the [FFmpeg](https://ffmpeg.org/) library. You can install the command-line tool either via [ffmpeg.org](https://ffmpeg.org/download.html) or your package manager, for example
-`brew install ffmpeg`{:.bash} on macOS. The video being used is the open-source [Big Buck Bunny](https://peach.blender.org/) by the Blender Foundation.
+`brew install ffmpeg` on macOS. The video being used is the open-source [Big Buck Bunny](https://peach.blender.org/) by the Blender Foundation.
 
 
 
@@ -30,28 +30,28 @@ ffmpeg -i video.mp4 \
     <source src="/files/big_buck_bunny_720p_h264_preview.mp4" type="video/mp4">
 </video>
 
-* `-vf`{:.bash} sets the filtergraph, which in this case consists of three operations, separated by commas.
+* `-vf` sets the filtergraph, which in this case consists of three operations, separated by commas.
 
-    * `trim='start=4\:31:duration=4'`{:.bash} trims the video starting at 00:04:31 and ending at 00:04:35. The colon has to be escaped because colons separate parameters in the [filtergraph syntax](https://ffmpeg.org/ffmpeg-all.html#Filtergraph-syntax-1).
-    
-    * `scale=320:-1`{:.bash} scales the video proportionally to a width of 320 pixels.
-    
-    * `setpts=PTS-STARTPTS`{:.bash} changes the presentation timestamp of all frames, so that the trimmed video starts at 00:04:31 of the original.
-    
-* `-sws_flags gauss`{:.bash} sets the [scaling algorithm](https://ffmpeg.org/ffmpeg-all.html#Scaler-Options) to Gaussian.
+    * `trim='start=4\:31:duration=4'` trims the video starting at 00:04:31 and ending at 00:04:35. The colon has to be escaped because colons separate parameters in the [filtergraph syntax](https://ffmpeg.org/ffmpeg-all.html#Filtergraph-syntax-1).
 
-* `-vcodec libx264 -preset medium -crf 31`{:.bash} tells FFmpeg to use the x264 encoder with medium [encoding speed](https://trac.ffmpeg.org/wiki/Encode/H.264#a2.Chooseapreset) and a [constant quality](https://trac.ffmpeg.org/wiki/Encode/H.264#a1.ChooseaCRFvalue) of 31. This is relatively low, resulting in a tiny file of 51.1 KB.
+    * `scale=320:-1` scales the video proportionally to a width of 320 pixels.
 
-* `-movflags +faststart`{:.bash} moves all metadata to the beginning of the file.
+    * `setpts=PTS-STARTPTS` changes the presentation timestamp of all frames, so that the trimmed video starts at 00:04:31 of the original.
 
-* `-an`{:.bash} disables audio and `-y`{:.bash} overwrites the output file without asking.
+* `-sws_flags gauss` sets the [scaling algorithm](https://ffmpeg.org/ffmpeg-all.html#Scaler-Options) to Gaussian.
+
+* `-vcodec libx264 -preset medium -crf 31` tells FFmpeg to use the x264 encoder with medium [encoding speed](https://trac.ffmpeg.org/wiki/Encode/H.264#a2.Chooseapreset) and a [constant quality](https://trac.ffmpeg.org/wiki/Encode/H.264#a1.ChooseaCRFvalue) of 31. This is relatively low, resulting in a tiny file of 51.1 KB.
+
+* `-movflags +faststart` moves all metadata to the beginning of the file.
+
+* `-an` disables audio and `-y` overwrites the output file without asking.
 
 ### Usage
 
 The CodePen below shows see the "classical" desktop example. The thumbnails are replaced with the video snippets on hover. You have to attach a minimal JavaScript event handler to all of your videos to start and pause the videos on `mouseenter` and `mouseleave`. The example also illustrates that modern desktop browsers are highly optimized for video playback. Try increasing the number of elements and you will see that it takes many elements to notice performance issues.
 
-<p data-height="340" data-theme-id="light" data-slug-hash="RGABNa" data-default-tab="result" data-user="Lorti" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/Lorti/pen/RGABNa/">Video Thumbnails</a> by Manuel Wieser (<a href="http://codepen.io/Lorti">@Lorti</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+<iframe height='340' scrolling='no' title='Video Thumbnails I' src='//codepen.io/Lorti/embed/RGABNa/?height=340&theme-id=dark&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/RGABNa/'>Video Thumbnails I</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 ~~~ html
 <a href="https://manu.ninja/">
@@ -95,22 +95,22 @@ ffmpeg -i video.mp4 \
 
 ![](/files/big_buck_bunny_720p_h264_slides.jpg)
 
-* `-vf`{:.bash} sets the filtergraph, which in this case consists of three operations, separated by commas.
+* `-vf` sets the filtergraph, which in this case consists of three operations, separated by commas.
 
-    * `select=gt(scene\,0.75)`{:.bash} selects frames to pass to the output. The condition is that current frame introduces a new scene with a [probability of 75%](https://ffmpeg.org/ffmpeg-all.html#select_002c-aselect).
-    
-    * `scale=320:-1`{:.bash} scales the video proportionally to a width of 320 pixels.
-    
-    * `tile=4x1`{:.bash} layouts several successive frames in a grid.
-    
-* `convert slides.png -quality 75% slides.jpg`{:.bash} uses [ImageMagick](http://www.imagemagick.org/script/index.php) to properly convert the slides to a small JPEG with 40.8 KB.
+    * `select=gt(scene\,0.75)` selects frames to pass to the output. The condition is that current frame introduces a new scene with a [probability of 75%](https://ffmpeg.org/ffmpeg-all.html#select_002c-aselect).
+
+    * `scale=320:-1` scales the video proportionally to a width of 320 pixels.
+
+    * `tile=4x1` layouts several successive frames in a grid.
+
+* `convert slides.png -quality 75% slides.jpg` uses [ImageMagick](http://www.imagemagick.org/script/index.php) to properly convert the slides to a small JPEG with 40.8 KB.
 
 ### Usage
 
 As you would do with a [CSS sprite animation](simple-electron-gui-wrapper-for-a-command-line-utility#bell) you have to use the `steps()` interpolation function to move your slideshow strip along the horizontal axis. You can choose the duration of each slide and show the main thumnbail in-between if you want, which I have done for the CodePen example.
 
-<p data-height="240" data-theme-id="light" data-slug-hash="bwqmVo" data-default-tab="result" data-user="Lorti" data-embed-version="2" class="codepen">See the Pen <a href="https://codepen.io/Lorti/pen/bwqmVo/">Video Thumbnails II</a> by Manuel Wieser (<a href="http://codepen.io/Lorti">@Lorti</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+<iframe height='240' scrolling='no' title='Video Thumbnails II' src='//codepen.io/Lorti/embed/bwqmVo/?height=240&theme-id=dark&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/bwqmVo/'>Video Thumbnails II</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 ~~~ html
 <a href="https://manu.ninja/">

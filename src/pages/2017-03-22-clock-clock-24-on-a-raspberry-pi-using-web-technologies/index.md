@@ -78,8 +78,8 @@ This concludes the [Clock Clock 24] application. View the full source code on [C
 
 The original clock has more sophisticated animations, though. The owner can choose from three different modes. This is why I have included extra animations that you can trigger manually. Touch the bottom left and bottom right corner or press `H` once for happy clock faces and `N` once for neutral clock faces.
 
-<p data-height="700" data-theme-id="0" data-slug-hash="XpQewQ" data-default-tab="result" data-user="Lorti" data-embed-version="2" data-pen-title="Clock Clock 24" class="codepen">See the Pen <a href="http://codepen.io/Lorti/pen/XpQewQ/">Clock Clock 24</a> by Manuel Wieser (<a href="http://codepen.io/Lorti">@Lorti</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+<iframe height='700' scrolling='no' title='Clock Clock 24' src='//codepen.io/Lorti/embed/XpQewQ/?height=700&theme-id=dark&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/Lorti/pen/XpQewQ/'>Clock Clock 24</a> by Manuel Wieser (<a href='https://codepen.io/Lorti'>@Lorti</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 ## Clock Clock 24 on a Raspberry Pi with a 3.5″ touchscreen
 

@@ -1,8 +1,8 @@
 ---
-layout: post
-title:  Thoughts on Linear Gradients That Resemble Images
-date:   2016-11-30
-categories: coding
+path: /thoughts-on-linear-gradients-that-resemble-images
+title: Thoughts on Linear Gradients That Resemble Images
+date: 2016-11-30
+categories: [coding]
 sharing: true
 summary: When Harry Roberts posted Improving Perceived Performance with Multiple Background Images he called for automation of his process. As you can see in my own Dominant Colors for Lazy-Loading Images the topic is dear to me, so I went and over-engineered Harry’s concept for fun in the past month.
 thumbnail: /images/thoughts-on-linear-gradients-that-resemble-images.jpg
@@ -16,7 +16,7 @@ My first thought was re-creating pixels with radial gradients. I wrote a script 
 
 ![© Nina Geometrieva](/images/radial-gradient-horizontal.jpg)
 
-Rendering multiple radial gradients is computationally expensive and without proper blending modes the quality of the result will always depend on the order of your gradients. Therefore it should probably not be used on a real project. 
+Rendering multiple radial gradients is computationally expensive and without proper blending modes the quality of the result will always depend on the order of your gradients. Therefore it should probably not be used on a real project.
 
 Will Wallace then beat me to sharing the concept with the world. Will created a [Blurground](https://codepen.io/wiiiiilllllll/post/blurground) Sass function and manually picked the colors with Photoshop's eyedropper tool. If you don't want to use the eyedropper you may use my script and play around with the idea.
 
@@ -79,7 +79,6 @@ Promise.all([dominant, colors])
     });
 ~~~
 
-{% raw %}
 ~~~ html
 <!doctype html>
 <html>
@@ -108,14 +107,13 @@ Promise.all([dominant, colors])
 </body>
 </html>
 ~~~
-{% endraw %}
 
 ## Creating linear gradients with equal-width stops
 
-My second thought was automating the color retrieval process for Harry's concept. Though I wanted to detect the optimal color stop positions instead of just slicing the image in four quarters. 
+My second thought was automating the color retrieval process for Harry's concept. Though I wanted to detect the optimal color stop positions instead of just slicing the image in four quarters.
 
 Meanwhile Ben Briggs created a [PostCSS plugin](https://github.com/ben-eb/postcss-resemble-image) that "provides a gradient fallback for an image that loosely resembles the original." I decided to amend his plugin instead of publishing another npm package, containing just the algorithm.
- 
+
 ![](/images/linear-gradient-ben-briggs.jpg)
 ![](/images/linear-gradient-horizontal.jpg)
 
@@ -188,7 +186,7 @@ You can see the result in the middle, compared to the previous algorithm on the 
 ![](/images/improved-gradient-kapadokya.jpg)
 
 There are a few more comparisons below, showing that the result is not always distinctly better, but similar to the simpler approach.
- 
+
 ![](/images/improved-gradient-meeting.jpg)
 ![](/images/improved-gradient-mountains.jpg)
 ![](/images/improved-gradient-christmas.jpg)
