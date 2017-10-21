@@ -35,7 +35,7 @@ export default function Template({ data, pathContext }) {
       />
       <article className="Article">
         <Header post={post} />
-        <Content post={post} />
+        <Content post={post} siteUrl={site.siteMetadata.siteUrl} />
       </article>
       <ArticleSchema
         title={title}
@@ -66,6 +66,7 @@ export const pageQuery = graphql`
         thumbnail
         external
         summary
+        sharing
       }
     }
   }

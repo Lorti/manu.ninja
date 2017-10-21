@@ -58,6 +58,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
               thumbnail
               external
               summary
+              sharing
             }
           }
         }
