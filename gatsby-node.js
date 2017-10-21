@@ -35,6 +35,41 @@ const createCategories = (createPage, edges) => {
   })
 }
 
+const createTags = (createPage, edges) => {
+  const template = path.resolve(`src/templates/tag.js`)
+  const posts = {}
+
+  edges.forEach(({ node }) => {
+    if (node.frontmatter.tags) {
+      node.frontmatter.tags.forEach(tag => {
+        if (!posts[tag]) {
+          posts[tag] = []
+        }
+        posts[tag].push(node)
+      })
+    }
+  })
+
+  createPage({
+    path: '/tags',
+    component: template,
+    context: {
+      posts,
+    },
+  })
+
+  Object.keys(posts).forEach(tag => {
+    createPage({
+      path: `/tags/${tag}`,
+      component: template,
+      context: {
+        posts,
+        tag,
+      },
+    })
+  })
+}
+
 exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators
 
@@ -53,11 +88,12 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
             frontmatter {
               title
               path
-              categories
               date(formatString: "MMM DD, YYYY")
+              categories
+              tags
+              summary
               thumbnail
               external
-              summary
               sharing
             }
           }
@@ -72,23 +108,30 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     const posts = result.data.allMarkdownRemark.edges
 
     createCategories(createPage, posts)
+    createTags(createPage, posts)
 
-    posts.forEach(({ node }, index) => {
+    posts.forEach(a => {
       let related = []
-      posts.forEach(post => {
-        if (node.frontmatter.path !== post.node.frontmatter.path) {
-          const matches = node.frontmatter.categories.filter(category => {
-            return post.node.frontmatter.categories.includes(category)
+      posts.forEach(b => {
+        if (a.node.frontmatter.path !== b.node.frontmatter.path) {
+          const alpha = a.node.frontmatter.categories.concat(
+            a.node.frontmatter.tags
+          )
+          const beta = b.node.frontmatter.categories.concat(
+            b.node.frontmatter.tags
+          )
+          const matches = alpha.filter(keyword => {
+            return beta.includes(keyword)
           })
           const score = matches.length
-          if (score) {
-            related.push(Object.assign({}, post, { score }))
+          if (score > 1) {
+            related.push(Object.assign({}, b, { score }))
           }
         }
       })
       related = related.sort((a, b) => b.score - a.score)
       createPage({
-        path: node.frontmatter.path,
+        path: a.node.frontmatter.path,
         component: template,
         context: {
           related,

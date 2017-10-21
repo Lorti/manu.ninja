@@ -3,6 +3,7 @@ path: /game-loop-with-rxjs-5-immutable-js
 title: Game Loop with RxJS 5/Immutable.js
 date: 2017-09-26
 categories: [coding, games]
+tags: [rxjs, threejs]
 thumbnail: /images/corsair.jpg
 ---
 

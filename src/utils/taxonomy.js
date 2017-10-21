@@ -1,9 +1,14 @@
-const tags = {
+const categories = {
   art: 'Digital Art',
   coding: 'Coding',
   games: 'Games',
 }
 
-export default function(tag) {
-  return tags[tag]
+const tags = {
+  rxjs: 'RxJS',
+  threejs: 'three.js',
+}
+
+export default function(keyword) {
+  return categories[keyword] || tags[keyword]
 }
