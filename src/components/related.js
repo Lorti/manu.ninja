@@ -6,7 +6,12 @@ import mapTag from '../utils/taxonomy.js'
 function RelatedLink({ title, path, external }) {
   if (external) {
     return (
-      <a className="Links-link u-truncated" href={external} target="_blank">
+      <a
+        className="Links-link u-truncated"
+        href={external}
+        target="_blank"
+        rel="noopener"
+      >
         {title}
       </a>
     )
