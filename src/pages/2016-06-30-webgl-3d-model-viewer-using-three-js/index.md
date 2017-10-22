@@ -13,7 +13,7 @@ You can create a WebGL 3D model viewer in just a few lines of code using [three.
 
 <div class="FlexEmbed">
     <div class="FlexEmbed-ratio FlexEmbed-ratio--16by9">
-        <iframe class="FlexEmbed-content" src="/files/webgl-3d-model-viewer-using-three-js"></iframe>
+        <iframe class="FlexEmbed-content" src="/files/webgl-3d-model-viewer-using-three-js/index.html"></iframe>
     </div>
 </div>
 
