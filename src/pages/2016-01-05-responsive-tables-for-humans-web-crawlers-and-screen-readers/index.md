@@ -4,6 +4,7 @@ title: Responsive Tables for Humans, Web Crawlers and Screen Readers
 date: 2016-01-05
 categories: [coding]
 tags: [accessibility]
+summary: The web was once full of tables and creative ways of misusing them for layout. These days are over and tables are being used for their initial purpose, being data representation. Unfortunately responsive web design and having to deal with tables on smaller screens has led people to stir <code>&lt;div&gt;></code> soups on the one hand and creating JavaScript houses of cards on the other.
 ---
 
 The web was once full of tables and creative ways of misusing them for layout. These days are over and tables are being used for their initial purpose, being data representation. Unfortunately responsive web design and having to deal with tables on smaller screens has led people to stir `<div>` soups on the one hand and creating JavaScript houses of cards on the other.
