@@ -28,7 +28,6 @@ const tags = {
   shaders: 'Shaders',
   slides: 'Slides',
   svg: 'SVG',
-  tables: 'Tables',
   testing: 'Testing',
   unity: 'Unity',
   zbrush: 'ZBrush',

@@ -61,11 +61,12 @@ export const pageQuery = graphql`
       frontmatter {
         title
         path
-        categories
         date(formatString: "MMM DD, YYYY")
+        categories
+        tags
+        summary
         thumbnail
         external
-        summary
         sharing
       }
     }

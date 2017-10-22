@@ -161,7 +161,7 @@ module.exports = {
                 }
               }
             }
-            allSitePage(filter: {component: {regex: "/(category|pages)/" }}) {
+            allSitePage(filter: {component: {regex: "/(category|pages|tag)/"}}) {
               edges {
                 node {
                   path
