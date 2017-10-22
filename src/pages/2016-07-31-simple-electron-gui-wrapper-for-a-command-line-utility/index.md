@@ -3,6 +3,7 @@ path: /simple-electron-gui-wrapper-for-a-command-line-utility
 title: Simple Electron GUI Wrapper for a Command-Line Utility
 date: 2016-07-31
 categories: [coding]
+tags: [electron, animation]
 thumbnail: /images/sprite-animation-generator.png
 sharing: true
 ---

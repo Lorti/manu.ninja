@@ -3,6 +3,7 @@ path: /why-do-you-need-so-many-developers
 title: “Why Do You Need so Many Developers?”
 date: 2015-11-17
 categories: [coding]
+tags: [business]
 external: http://dev.karriere.at/a/viele-entwickler-homepage
 ---
 

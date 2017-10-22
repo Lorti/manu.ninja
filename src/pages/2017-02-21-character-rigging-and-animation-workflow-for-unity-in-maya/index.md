@@ -3,6 +3,7 @@ path: /character-rigging-and-animation-workflow-for-unity-in-maya
 title: Character Rigging and Animation Workflow for Unity in Maya
 date: 2017-02-21
 categories: [art, games]
+tags: [animation, rigging, unity, maya]
 thumbnail: /images/raptor.jpg
 sharing: true
 ---

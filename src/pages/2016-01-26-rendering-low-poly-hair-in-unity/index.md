@@ -3,6 +3,7 @@ path: /rendering-low-poly-hair-in-unity
 title: Rendering Low-Poly Hair in Unity
 date: 2016-01-26
 categories: [coding, games]
+tags: [unity, shaders, zbrush]
 thumbnail: /images/unity-hair-rendering-thumbnail.jpg
 ---
 

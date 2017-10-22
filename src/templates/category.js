@@ -33,16 +33,18 @@ export default function Category({ pathContext }) {
       <div className="Taxonomy">
         <h1 className="Taxonomy__heading">Categories</h1>
         <ul>
-          {Object.keys(posts).map(category => {
-            const count = posts[category].length
-            return (
-              <li key={category}>
-                <Link to={`/categories/${category}`}>
-                  {mapTag(category)} ({count})
-                </Link>
-              </li>
-            )
-          })}
+          {Object.keys(posts)
+            .sort()
+            .map(category => {
+              const count = posts[category].length
+              return (
+                <li key={category}>
+                  <Link to={`/categories/${category}`}>
+                    {mapTag(category)} ({count})
+                  </Link>
+                </li>
+              )
+            })}
         </ul>
       </div>
     </div>

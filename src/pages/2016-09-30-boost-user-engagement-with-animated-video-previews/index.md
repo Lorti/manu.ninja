@@ -3,6 +3,7 @@ path: /boost-user-engagement-with-animated-video-previews
 title: Boost User Engagement with Animated Video Previews
 date: 2016-09-30
 categories: [coding]
+tags: [animation, conversion, ffmpeg]
 sharing: true
 thumbnail: /files/big_buck_bunny_720p_h264_thumbnail.jpg
 ---

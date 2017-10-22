@@ -114,12 +114,12 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       let related = []
       posts.forEach(b => {
         if (a.node.frontmatter.path !== b.node.frontmatter.path) {
-          const alpha = a.node.frontmatter.categories.concat(
-            a.node.frontmatter.tags
-          )
-          const beta = b.node.frontmatter.categories.concat(
-            b.node.frontmatter.tags
-          )
+          const alpha = a.node.frontmatter.categories
+            .concat(a.node.frontmatter.tags)
+            .sort()
+          const beta = b.node.frontmatter.categories
+            .concat(b.node.frontmatter.tags)
+            .sort()
           const matches = alpha.filter(keyword => {
             return beta.includes(keyword)
           })

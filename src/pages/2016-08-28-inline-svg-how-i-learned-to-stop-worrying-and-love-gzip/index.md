@@ -3,6 +3,7 @@ path: /inline-svg-how-i-learned-to-stop-worrying-and-love-gzip
 title: Inline SVG – How I Learned to Stop Worrying and Love gzip
 date: 2016-08-28
 categories: [coding]
+tags: [svg, icons, performance]
 thumbnail: /images/general-buck-turgidson.gif
 sharing: true
 ---

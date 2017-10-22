@@ -3,7 +3,7 @@ path: /functional-reactive-game-programming-rxjs-5-immutable-js-and-three-js
 title: Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js
 date: 2017-08-22
 categories: [art, coding, games]
-tags: [rxjs, threejs]
+tags: [rxjs, three-js, functional-reactive-programming]
 thumbnail: /images/corsair.jpg
 summary: This series of blog posts will guide you through creating a computer game using RxJS 5, Immutable.js and WebGL/three.js, following the functional reactive programming paradigm in JavaScript. You can find the full source code on GitHub, which you can fork and adapt for your own projects.
 ---

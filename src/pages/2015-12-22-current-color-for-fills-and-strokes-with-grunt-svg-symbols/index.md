@@ -3,6 +3,7 @@ path: /current-color-for-fills-and-strokes-with-grunt-svg-symbols
 title: Current Color for Fills and Strokes
 date: 2015-12-22
 categories: [coding]
+tags: [svg, icons]
 summary: Several people have given me feedback on my <code>grunt-svg-symbols</code> plugin. They especially liked the idea of changing color values to <code>currentColor</code>, so that the icons inherit the text color. Therefore the updated plugin has an option to automatically replace the values of all <code>fill</code> and <code>stroke</code> attributes for you.
 ---
 

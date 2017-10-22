@@ -3,6 +3,7 @@ path: /simple-svg-icon-system-using-symbol
 title: Simple SVG Icon System Using <symbol>
 date: 2015-12-01
 categories: [coding]
+tags: [svg, icons]
 summary: I won’t go into detail why an SVG icon system based on symbols is a good choice for your icons, because there are plenty of great articles out there. I will just give you an overview of our solution at karriere.at and show you a tiny Grunt plugin called <code>grunt-svg-symbols</code>, which creates a bunch of SVG icon systems from as many folders full of icons as you like.
 ---
 

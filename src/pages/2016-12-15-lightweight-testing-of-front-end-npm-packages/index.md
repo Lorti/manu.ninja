@@ -3,6 +3,7 @@ path: /lightweight-testing-of-front-end-npm-packages
 title: Lightweight Testing of Front-End npm Packages
 date: 2016-12-15
 categories: [coding]
+tags: [testing]
 sharing: true
 thumbnail: /images/form-tracking-test-results.png
 ---

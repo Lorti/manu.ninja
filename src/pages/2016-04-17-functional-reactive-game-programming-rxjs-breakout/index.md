@@ -3,7 +3,7 @@ path: /functional-reactive-game-programming-rxjs-breakout
 title: Functional Reactive Game Programming – RxJS Breakout
 date: 2016-04-17
 categories: [coding, games]
-tags: [rxjs]
+tags: [rxjs, functional-reactive-programming]
 thumbnail: /images/rxjs-breakout.png
 sharing: true
 ---

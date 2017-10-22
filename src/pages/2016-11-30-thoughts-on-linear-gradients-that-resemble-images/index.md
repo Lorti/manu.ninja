@@ -3,6 +3,7 @@ path: /thoughts-on-linear-gradients-that-resemble-images
 title: Thoughts on Linear Gradients That Resemble Images
 date: 2016-11-30
 categories: [coding]
+tags: [image-processing, lazy-loading, performance]
 sharing: true
 summary: When Harry Roberts posted Improving Perceived Performance with Multiple Background Images he called for automation of his process. As you can see in my own Dominant Colors for Lazy-Loading Images the topic is dear to me, so I went and over-engineered Harry’s concept for fun in the past month.
 thumbnail: /images/thoughts-on-linear-gradients-that-resemble-images.jpg

@@ -3,6 +3,7 @@ path: /using-web-technologies-for-a-pull-to-refresh-animation
 title: Using Web Technologies for a “Pull to Refresh” Animation
 date: 2016-10-23
 categories: [coding]
+tags: [animation, interaction-design]
 sharing: true
 thumbnail: /images/pull-to-refresh.png
 ---

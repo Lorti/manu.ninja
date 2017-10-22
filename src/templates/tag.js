@@ -33,16 +33,18 @@ export default function Tags({ pathContext }) {
       <div className="Taxonomy">
         <h1 className="Taxonomy__heading">Tags</h1>
         <ul>
-          {Object.keys(posts).map(tag => {
-            const count = posts[tag].length
-            return (
-              <li key={tag}>
-                <Link to={`/tags/${tag}`}>
-                  {mapTag(tag)} ({count})
-                </Link>
-              </li>
-            )
-          })}
+          {Object.keys(posts)
+            .sort()
+            .map(tag => {
+              const count = posts[tag].length
+              return (
+                <li key={tag}>
+                  <Link to={`/tags/${tag}`}>
+                    {mapTag(tag) || tag} ({count})
+                  </Link>
+                </li>
+              )
+            })}
         </ul>
       </div>
     </div>

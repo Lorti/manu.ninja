@@ -3,6 +3,7 @@ path: /notes-from-topconf-linz-2016
 title: Notes from Topconf Linz 2016
 date: 2016-02-09
 categories: [coding]
+tags: [conferences, slides]
 summary: Topconf Linz 2016 was a a great conference with charming people and inspiring talks. I am looking forward to next year and hope events like this will help put Linz on the map and attract more international attendees and speakers. Here are my notes from the talks that I have seen.
 ---
 
