@@ -87,7 +87,6 @@ The original clock has more sophisticated animations, though. The owner can choo
 The motivation for this project was that my girlfriend's parents were looking for a new living room clock. As Wolfgang's birthday was nearing, we thought about ways to display the clock on a budget, as a fun gadget. This is when my girlfriend had the idea of hooking up a Raspberry Pi to a display.
 
 At first we thought about a used HDMI display, but we then found the <a rel="nofollow" href="https://www.amazon.de/gp/product/B01JRUH0CY/ref=as_li_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B01JRUH0CY&linkCode=as2&tag=manuninja-21">Elegoo 3.5″ touchscreen</a> which costs around $ 25. You connect it to the GPIO of the Raspberry Pi, where it also draws its power from.
-
 <img src="http://ir-de.amazon-adsystem.com/e/ir?t=manuninja-21&l=as2&o=3&a=B01JRUH0CY" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
 ![](/images/clock-clock-24-on-a-raspberry-pi-with-a-3-5-inch-touchscreen.jpg)
