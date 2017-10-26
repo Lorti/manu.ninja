@@ -18,6 +18,7 @@ export default function Template({ data, pathContext }) {
 
   const title = `${post.frontmatter.title} | manu.ninja`
   const description = post.frontmatter.summary || excerpt(post.html)
+  const pageUrl = `${site.siteMetadata.siteUrl}${post.frontmatter.path}`
   const imageUrl = post.frontmatter.thumbnail
     ? `${site.siteMetadata.siteUrl}${post.frontmatter.thumbnail}`
     : `${site.siteMetadata.siteUrl}/share.png`
@@ -30,7 +31,7 @@ export default function Template({ data, pathContext }) {
       <Meta
         title={title}
         description={description}
-        pageUrl={`${site.siteMetadata.siteUrl}${post.frontmatter.path}`}
+        pageUrl={pageUrl}
         imageUrl={imageUrl}
       />
       <article className="Article">
@@ -43,7 +44,7 @@ export default function Template({ data, pathContext }) {
         date={post.frontmatter.date}
         imageUrl={imageUrl}
       />
-      <Disqus identifier={post.frontmatter.path} />
+      <Disqus url={pageUrl} identifier={post.frontmatter.path} />
       <Related posts={related || []} />
     </div>
   )

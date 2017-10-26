@@ -17,9 +17,10 @@ class Disqus extends React.Component {
       window.DISQUS.reset({ reload: true })
       return
     }
-    const identifier = this.props.identifier
+    const identifier = this.props.identifier.substring(1)
+    console.log(this.props)
     window.disqus_config = function() {
-      this.page.url = document.querySelector('link[rel="canonical"]').href
+      this.page.url = url
       this.page.identifier = identifier
     }
     const script = document.createElement('script')
