@@ -18,7 +18,6 @@ class Disqus extends React.Component {
       return
     }
     const identifier = this.props.identifier.substring(1)
-    console.log(this.props)
     window.disqus_config = function() {
       this.page.url = url
       this.page.identifier = identifier
