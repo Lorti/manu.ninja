@@ -1,0 +1,4 @@
+# 2017-10-24
+Redirect 301 /art /categories/art
+Redirect 301 /coding /categories/coding
+Redirect 301 /games /categories/games
