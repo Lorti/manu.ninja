@@ -6,10 +6,6 @@ class Disqus extends React.Component {
     this.loadDisqus()
   }
 
-  componentDidUpdate() {
-    this.loadDisqus()
-  }
-
   render() {
     return <div id="disqus_thread" />
   }

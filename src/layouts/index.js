@@ -14,12 +14,9 @@ import './styles/index.scss'
 
 class TemplateWrapper extends React.Component {
   componentDidMount() {
-    WebFont.load({
-      google: {
-        families: ['Lato:400,400italic,700', 'Oswald:300,700'],
-      },
-    })
+    this.loadFonts()
   }
+
   render() {
     const meta = this.props.data.site.siteMetadata
     return (
@@ -50,6 +47,14 @@ class TemplateWrapper extends React.Component {
         <PersonSchema imageUrl={`${meta.siteUrl}/manu.jpg`} />
       </div>
     )
+  }
+
+  loadFonts() {
+    WebFont.load({
+      google: {
+        families: ['Lato:400,400italic,700', 'Oswald:300,700'],
+      },
+    })
   }
 }
 
