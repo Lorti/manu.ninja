@@ -11,7 +11,9 @@ This is the second part in a series on creating a game with RxJS 5, Immutable.js
 
 You can take a look at the full [Corsair] game and its source code, which we're going to develop in this series. All parts of the series will be listed in my [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js], if you want to read them.
 
-``` js
+## Creating the game's state object
+
+~~~js
 Immutable.fromJS({
     player: {
         angle: Math.PI * 0.5,
@@ -31,9 +33,11 @@ Immutable.fromJS({
     shipDestroyed: false,
     lingering: 60,
 });
-```
+~~~
 
-``` js
+The functions `calculatePlayerSpeed()`, `calculateCannonSpeed()` and `calculateCannonballSpeed()` each take an argument for setting the game's difficulty.
+
+~~~js
 function coinFactory() {
     const coins = [];
     const n = COINS;
@@ -50,36 +54,126 @@ function coinFactory() {
     }
     return coins;
 }
-```
+~~~
 
-``` js
-const initialState = [...];
+~~~js
+{
+  "player": {
+    "angle": 1.5707963267948966,
+    "radius": 50,
+    "direction": -1,
+    "size": 6
+  },
+  "speed": {
+    "player": 0.0014000000000000002,
+    "cannon": 661.7647058823529,
+    "cannonball": 0.0355
+  },
+  "coins": [
+    {
+      "angle": 0,
+      "radius": 50,
+      "size": 1,
+      "collected": false
+    },
+    {
+      "angle": 0.19634954084936207,
+      "radius": 50,
+      "size": 1,
+      "collected": false
+    },
+    {...}
+  ],
+  "cannonballs": [],
+  "score": 0,
+  "lootCollected": false,
+  "shipDestroyed": false,
+  "lingering": 60
+}
+~~~
 
-const clock = clockStream();
-const input = inputStream();
+## Updating the game's state object
 
-const events = clock.withLatestFrom(input);
+~~~js
+function gameFactory(stage, score) {
+  const initialState = {...};
+  
+  const clock = clockStream();
+  const input = inputStream();
+  
+  const events = clock.withLatestFrom(input);
+  
+  const player = {...};
+  const coins = {...};
+  const cannonballs = {...};
+  const cannon = {...};
+  const finish = {...};
+  
+  const state = Rx.Observable
+      .merge(player, coins, cannon, cannonballs, finish)
+      .startWith(initialState)
+      .scan((state, reducer) => reducer(state));
+  
+  return clock
+      .withLatestFrom(state, (clock, state) => state)
+      .takeWhile(state => state.get('lingering') >= 0);
+}
+~~~
 
-const player = [...];
+The `clockStream()` factory returns a clock as described in the first part of the series, [Game Loop with RxJS 5/Immutable.js](/game-loop-with-rxjs-5-immutable-js). The `inputStream()` factory returns a stream of objects, each containing a single property `direction`, which is either positive or negative, telling us whether the ship is sailing clockwise or counterclockwise. These two streams are then combined into a single events stream.
 
-const coins = [...];
+~~~js
+import Rx from 'rxjs/Rx';
+import Immutable from 'immutable';
 
-const cannonballs = [...];
+export default () => {
+    const state = Immutable.fromJS({
+        direction: 1,
+    });
 
-const cannon = [...];
+    return Rx.Observable
+        .fromEvent(document, 'keypress')
+        .scan((previous, event) => {
+            if (event.keyCode === 32) {
+                return previous.update('direction', direction => direction * -1);
+            }
+            return previous;
+        }, state)
+        .distinctUntilChanged();
+};
+~~~
 
-const finish = [...];
+~~~js
+events.take(1).subscribe(([clock, input]) => {
+    console.log(clock.toJS(), input.toJS());
+});
+~~~
 
-const state = Rx.Observable
-    .merge(player, coins, cannon, cannonballs, finish)
-    .startWith(initialState)
-    .scan((state, reducer) => reducer(state));
+~~~json
+{
+  "time": 2507.19,
+  "delta": 17.715000000000146
+}
+~~~
 
-return clock
-    .withLatestFrom(state, (clock, state) => state)
-    .takeWhile(state => state.get('lingering') >= 0);
-```
-    
+~~~json
+{
+  "direction": -1
+}
+~~~
+
+
+
+## Using the game's state object
+
+~~~js
+gameFactory(stage, score)
+    .take(1)
+    .subscribe((state) => {
+        console.log(state.toJS());
+    });
+~~~
+
 ## Further reading
 
 * [(Official) RxJS Tutorial](http://reactivex.io/rxjs/manual/tutorial.html)
@@ -87,3 +181,4 @@ return clock
 
 [Corsair]: https://github.com/Lorti/corsair
 [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js]: functional-reactive-game-programming-rxjs-5-immutable-js-and-three-js
+[Game Loop with RxJS 5/Immutable.js]: game-loop-with-rxjs-5-immutable-js
