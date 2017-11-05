@@ -5,6 +5,7 @@ import Link from 'gatsby-link'
 import Header from '../components/article/header'
 import Content from '../components/article/content'
 import Disqus from '../components/disqus'
+import Donation from '../components/donation'
 import Related from '../components/related'
 
 import Meta from '../components/meta'
@@ -46,6 +47,7 @@ export default function Template({ data, pathContext }) {
       />
       <Disqus url={pageUrl} identifier={post.frontmatter.path} />
       <Related posts={related || []} />
+      <Donation />
     </div>
   )
 }
