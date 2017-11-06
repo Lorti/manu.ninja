@@ -11,7 +11,7 @@ This is the second part in a series on creating a game with RxJS 5, Immutable.js
 
 You can take a look at the full [Corsair] game and its source code, which we're going to develop in this series. All parts of the series will be listed in my [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js], if you want to read them.
 
-## Creating the game's state object
+## Defining the game's state object
 
 ~~~js
 Immutable.fromJS({
@@ -31,7 +31,6 @@ Immutable.fromJS({
     score,
     lootCollected: false,
     shipDestroyed: false,
-    lingering: 60,
 });
 ~~~
 
@@ -88,11 +87,10 @@ function coinFactory() {
   "score": 0,
   "lootCollected": false,
   "shipDestroyed": false,
-  "lingering": 60
 }
 ~~~
 
-## Updating the game's state object
+## Creating the game's state stream
 
 ~~~js
 function gameFactory(stage, score) {
@@ -101,7 +99,8 @@ function gameFactory(stage, score) {
   const clock = clockStream();
   const input = inputStream();
   
-  const events = clock.withLatestFrom(input);
+  const events = clock
+      .withLatestFrom(input);
   
   const player = {...};
   const coins = {...};
@@ -115,32 +114,26 @@ function gameFactory(stage, score) {
       .scan((state, reducer) => reducer(state));
   
   return clock
-      .withLatestFrom(state, (clock, state) => state)
-      .takeWhile(state => state.get('lingering') >= 0);
+      .withLatestFrom(state, (clock, state) => state);
 }
 ~~~
 
-The `clockStream()` factory returns a clock as described in the first part of the series, [Game Loop with RxJS 5/Immutable.js](/game-loop-with-rxjs-5-immutable-js). The `inputStream()` factory returns a stream of objects, each containing a single property `direction`, which is either positive or negative, telling us whether the ship is sailing clockwise or counterclockwise. These two streams are then combined into a single events stream.
+The `clockStream()` factory ([clock.js]) returns a clock as described in the first part of the series, [Game Loop with RxJS 5/Immutable.js]. The `inputStream()` factory ([input.js]) returns a stream of objects, each containing a single property `direction`, which is either positive or negative, telling us whether the ship is sailing clockwise or counterclockwise. These two streams are then combined into a single events stream.
 
 ~~~js
-import Rx from 'rxjs/Rx';
-import Immutable from 'immutable';
+const state = Immutable.fromJS({
+    direction: 1,
+});
 
-export default () => {
-    const state = Immutable.fromJS({
-        direction: 1,
-    });
-
-    return Rx.Observable
-        .fromEvent(document, 'keypress')
-        .scan((previous, event) => {
-            if (event.keyCode === 32) {
-                return previous.update('direction', direction => direction * -1);
-            }
-            return previous;
-        }, state)
-        .distinctUntilChanged();
-};
+return Rx.Observable
+    .fromEvent(document, 'keypress')
+    .scan((previous, event) => {
+        if (event.keyCode === 32) {
+            return previous.update('direction', direction => direction * -1);
+        }
+        return previous;
+    }, state)
+    .distinctUntilChanged();
 ~~~
 
 ~~~js
@@ -150,21 +143,166 @@ events.take(1).subscribe(([clock, input]) => {
 ~~~
 
 ~~~json
-{
-  "time": 2507.19,
-  "delta": 17.715000000000146
-}
+{ "time": 2507.19, "delta": 17.715000000000146 }
 ~~~
 
 ~~~json
-{
-  "direction": -1
+{ "direction": -1 }
+~~~
+
+## Updating the game's state objects
+
+### Handling ship movement
+
+~~~js
+const player = events.map(([clock, input]) => (state) => {
+    if (state.get('lootCollected') || state.get('shipDestroyed')) {
+        return state;
+    }
+
+    const position = state.getIn(['player', 'angle']) +
+        clock.get('delta') * input.get('direction') * state.getIn(['speed', 'player']);
+    const normalized = (position + Math.PI * 2) % (Math.PI * 2);
+
+    return state.mergeDeep({
+        player: {
+            angle: normalized,
+            direction: input.get('direction'),
+        },
+    });
+});
+~~~
+
+### Handling the coins collision detection
+
+~~~js
+const coins = events.map(([clock]) => (state) => {
+    let collected = 0;
+
+    const playerAngle = state.getIn(['player', 'angle']);
+    const playerSpeed = clock.get('delta') * state.getIn(['player', 'direction']) * state.getIn(['speed', 'player']);
+    const playerSize = state.getIn(['player', 'size']) * Math.PI / 180;
+
+    function updateCoin(coin) {
+        if (coin.get('collected')) {
+            return coin;
+        }
+
+        const coinAngle = coin.get('angle');
+        const coinSpeed = 0;
+        const coinSize = coin.get('size') * Math.PI / 180;
+
+        const collision = detectCollision(
+            new Vector2(playerAngle, 0), new Vector2(playerSpeed, 0), playerSize,
+            new Vector2(coinAngle, 0), new Vector2(coinSpeed, 0), coinSize,
+            4);
+
+        if (collision) {
+            collected++;
+        }
+
+        return coin.set('collected', collision);
+    }
+
+    return state
+        .update('coins', coins => coins.map(updateCoin))
+        .update('score', score => score + collected);
+});
+~~~
+
+~~~js
+function detectCollision(playerPosition, playerDirection, playerRadius,
+                           objectPosition, objectDirection, objectRadius,
+                           resolution = 1) {
+    const circleCollision = (aPos, bPos, aRad, bRad) => aPos.distanceTo(bPos) <= aRad + bRad;
+    for (let i = 0; i < resolution; i++) {
+        const intermediateFrame = (1 / resolution) * i;
+        const aPos = playerPosition.add(playerDirection.multiplyScalar(intermediateFrame));
+        const bPos = objectPosition.add(objectDirection.multiplyScalar(intermediateFrame));
+        if (circleCollision(aPos, bPos, playerRadius, objectRadius)) {
+            return true;
+        }
+    }
+    return false;
 }
 ~~~
 
+### Handling the cannonballs movement and collision detection
 
+~~~js
+const cannonballs = events.map(([clock]) => (state) => {
+    const playerAngle = state.getIn(['player', 'angle']);
+    const playerRadius = state.getIn(['player', 'radius']);
+    const playerDirection = playerAngle + (Math.PI / 2) * state.getIn(['player', 'direction']);
+    const playerSpeed = clock.get('delta') * state.getIn(['player', 'direction']) * state.getIn(['speed', 'cannonball']);
+    const playerSize = state.getIn(['player', 'size']);
 
-## Using the game's state object
+    function updateCannonball(cannonball) {
+        const cannonballAngle = cannonball.get('angle');
+        const cannonBallRadius = cannonball.get('radius');
+        const cannonballSpeed = clock.get('delta') * calculateCannonballSpeed(stage);
+        const cannonBallSize = cannonball.get('size');
+
+        let next = cannonball;
+        const collision = detectCollision(
+            polarToCartesian(playerAngle, playerRadius),
+            polarToCartesian(playerDirection, playerSpeed),
+            playerSize,
+            polarToCartesian(cannonballAngle, cannonBallRadius),
+            polarToCartesian(cannonballAngle, cannonballSpeed),
+            cannonBallSize,
+            4);
+
+        if (collision) {
+            next = next.set('collision', true);
+        }
+
+        return next.set('radius', cannonBallRadius + cannonballSpeed);
+    }
+
+    return state.update('cannonballs', cannonballs => cannonballs.map(updateCannonball));
+});
+~~~
+
+~~~js
+function polarToCartesian(angle, radius) {
+    const x = Math.cos(angle) * radius;
+    const y = Math.sin(angle) * radius;
+    return new Vector2(x, y);
+}
+~~~
+
+### Handling the cannon and spawning of cannonballs
+
+~~~js
+const cannon = events
+    .throttleTime(initialState.getIn(['speed', 'cannon']))
+    .map(() => (state) => {
+        if (state.get('lootCollected') || state.get('shipDestroyed')) {
+            return state;
+        }
+        const angle = state.get('cannonballs').size ? state.get('cannonballs').last().get('angle') : 0;
+        const cannonball = Immutable.fromJS(cannonballFactory(angle));
+        return state.update('cannonballs', cannonballs => cannonballs.push(cannonball));
+    });
+~~~
+
+### Handling the game's end conditions
+
+~~~js
+const finish = events.map(() => (state) => {
+    const lootCollected = state.get('coins').every(coin => coin.get('collected'));
+    const shipDestroyed = !lootCollected && state.get('cannonballs').find(cannonball => cannonball.get('collision'));
+    if (lootCollected || shipDestroyed) {
+        return state
+            .set('lootCollected', lootCollected)
+            .set('shipDestroyed', shipDestroyed)
+    }
+    return state;
+});
+~~~
+
+## Reading the game's state stream
 
 ~~~js
 gameFactory(stage, score)
@@ -174,11 +312,38 @@ gameFactory(stage, score)
     });
 ~~~
 
+## Starting the game and testing for end conditions
+
+~~~js
+function start(stage, score) {
+    const progress = { stage, score };
+    game(stage, score).subscribe({
+        next: (state) => {
+            render(state);
+            if (state.get('lootCollected')) {
+                progress.stage = stage + 1;
+                progress.score = state.get('score');
+            }
+            if (state.get('shipDestroyed')) {
+                progress.stage = 1;
+                progress.score = 0;
+            }
+        },
+        error: error => console.error(error),
+        complete: () => start(progress.stage, progress.score),
+    });
+}
+~~~
+
+`start(1, 0)`
+
 ## Further reading
 
 * [(Official) RxJS Tutorial](http://reactivex.io/rxjs/manual/tutorial.html)
 * [Immutable.js](https://facebook.github.io/immutable-js/)
 
 [Corsair]: https://github.com/Lorti/corsair
+[clock.js]: https://github.com/Lorti/corsair/blob/master/src/clock.js
+[input.js]: https://github.com/Lorti/corsair/blob/master/src/input.js
 [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js]: functional-reactive-game-programming-rxjs-5-immutable-js-and-three-js
 [Game Loop with RxJS 5/Immutable.js]: game-loop-with-rxjs-5-immutable-js
