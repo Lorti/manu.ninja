@@ -13,6 +13,14 @@ You can take a look at the full [Corsair] game and its source code, which we're 
 
 ## Defining the game's state object
 
+The game state is represented by an Immutable.js collection. It contains 
+
+* the player's polar coordinates, movement direction and radius for collision detection, 
+* the speed of all moving objects,
+* the position of coins, and whether they've already been collected, 
+* the position of cannonballs, 
+* the player's score and a few flags for determining losing and winning. 
+
 ~~~js
 Immutable.fromJS({
     player: {
@@ -34,7 +42,9 @@ Immutable.fromJS({
 });
 ~~~
 
-The functions `calculatePlayerSpeed()`, `calculateCannonSpeed()` and `calculateCannonballSpeed()` each take an argument for setting the game's difficulty.
+The functions `calculatePlayerSpeed()`, `calculateCannonSpeed()` and `calculateCannonballSpeed()` each take an argument for setting the game's difficulty. 
+
+The coins are created by a `coinFactory()` function, which spreads `n` coins around a circle. The `collected` property tells us, if the coin's already been hit by the player's ship.
 
 ~~~js
 function coinFactory() {
@@ -54,6 +64,8 @@ function coinFactory() {
     return coins;
 }
 ~~~
+
+The actual object at the start of the game looks like the following JSON. None of the game's state resists outside of this collection, making debugging relatively easy.
 
 ~~~js
 {
@@ -151,6 +163,8 @@ events.take(1).subscribe(([clock, input]) => {
 ~~~
 
 ## Updating the game's state objects
+
+reducer functions
 
 ### Handling ship movement
 
