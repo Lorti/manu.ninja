@@ -104,6 +104,8 @@ The actual object at the start of the game looks like the following JSON. None o
 
 ## Creating the game's state stream
 
+The `gameFactory()` function returns an RxJS observable, respecting the current difficulty and the player's score from last round. Let's dissect it line by line.
+
 ~~~js
 function gameFactory(stage, score) {
   const initialState = {...};
@@ -130,13 +132,23 @@ function gameFactory(stage, score) {
 }
 ~~~
 
-The `clockStream()` factory ([clock.js]) returns a clock as described in the first part of the series, [Game Loop with RxJS 5/Immutable.js]. The `inputStream()` factory ([input.js]) returns a stream of objects, each containing a single property `direction`, which is either positive or negative, telling us whether the ship is sailing clockwise or counterclockwise. These two streams are then combined into a single events stream.
+
+
+### Initial state
+
+The inital state is the Immutable.js collection from the previous section.
 
 ~~~js
-const state = Immutable.fromJS({
-    direction: 1,
-});
+const initialState = {...};
+~~~
 
+### Events stream
+
+The `clockStream()` factory ([clock.js]) returns a clock as described in the first part of the series, [Game Loop with RxJS 5/Immutable.js]. 
+
+The `inputStream()` factory ([input.js]) returns a stream of objects, each containing a single property `direction`, which is either positive or negative, telling us whether the ship is sailing clockwise or counterclockwise. These two streams are then combined into a single events stream. 
+
+~~~js
 return Rx.Observable
     .fromEvent(document, 'keypress')
     .scan((previous, event) => {
@@ -144,27 +156,52 @@ return Rx.Observable
             return previous.update('direction', direction => direction * -1);
         }
         return previous;
-    }, state)
+    }, Immutable.fromJS({
+        direction: 1,
+    }))
     .distinctUntilChanged();
 ~~~
 
+The values from this events stream is what drives changes to the game. It is the the only entity that's initiating a state change. 
+
 ~~~js
-events.take(1).subscribe(([clock, input]) => {
-    console.log(clock.toJS(), input.toJS());
-});
+const clock = clockStream();
+const input = inputStream();
+
+const events = clock.withLatestFrom(input);
+~~~
+
+~~~js
+events.take(1).subscribe(value => { console.log(value); });
 ~~~
 
 ~~~json
-{ "time": 2507.19, "delta": 17.715000000000146 }
+[
+    { "time": 2507.19, "delta": 17.715000000000146 }, 
+    { "direction": -1 }
+]
 ~~~
 
-~~~json
-{ "direction": -1 }
+### Reducer streams
+
+~~~js
+const state = Rx.Observable
+    .merge(player, coins, cannon, cannonballs, finish)
+    .startWith(initialState)
+    .scan((state, reducer) => reducer(state));
 ~~~
+
+We'll look at reducer streams in detail in the section [Updating the game's state objects](#updating-the-games-state-objects) of this article.
+
+### Locking updates to the clock
+
+~~~js
+return clock.withLatestFrom(state, (clock, state) => state);
+~~~
+
+
 
 ## Updating the game's state objects
-
-reducer functions
 
 ### Handling ship movement
 
@@ -316,6 +353,8 @@ const finish = events.map(() => (state) => {
 });
 ~~~
 
+
+
 ## Reading the game's state stream
 
 ~~~js
@@ -325,6 +364,8 @@ gameFactory(stage, score)
         console.log(state.toJS());
     });
 ~~~
+
+
 
 ## Starting the game and testing for end conditions
 
@@ -351,10 +392,14 @@ function start(stage, score) {
 
 `start(1, 0)`
 
+
+
 ## Further reading
 
 * [(Official) RxJS Tutorial](http://reactivex.io/rxjs/manual/tutorial.html)
 * [Immutable.js](https://facebook.github.io/immutable-js/)
+
+
 
 [Corsair]: https://github.com/Lorti/corsair
 [clock.js]: https://github.com/Lorti/corsair/blob/master/src/clock.js
