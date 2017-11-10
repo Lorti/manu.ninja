@@ -148,6 +148,8 @@ The `clockStream()` factory ([clock.js]) returns a clock as described in the fir
 
 The `inputStream()` factory ([input.js]) returns a stream of objects, each containing a single property `direction`, which is either positive or negative, telling us whether the ship is sailing clockwise or counterclockwise. These two streams are then combined into a single events stream. 
 
+The input stream is a simple observable that listens on the `keypress` event. As soon as the player hits the space bar it updates the direction and emits an immutable collection. What makes RxJS and this stream so powerful is that it produces values using pure functions. The `distinctUntilChanged` filtering operator prevents the stream from emitting a value twice in a row.
+
 ~~~js
 return Rx.Observable
     .fromEvent(document, 'keypress')
@@ -162,7 +164,7 @@ return Rx.Observable
     .distinctUntilChanged();
 ~~~
 
-The values from this events stream is what drives changes to the game. It is the the only entity that's initiating a state change. 
+The values from this events stream is what drives changes to the game. It is the the only entity that's initiating a state change. The `withLatestFrom` combination operator makes sure, that a new events value is only pushed down the stream when the clock changes. This way the stream is locked to the game's ticker, otherwise it may return a value inbetween ticks, depending on when the player's input is happening. 
 
 ~~~js
 const clock = clockStream();
@@ -171,8 +173,12 @@ const input = inputStream();
 const events = clock.withLatestFrom(input);
 ~~~
 
+We can now take a look at what's inside the events stream by subscribing to the observable. Combining two streams with the `withLatesFrom` operator returns all combined streams as an array. The two arrays are Immutable.js collection, which we'll first have to transform `toJS()`. The `take(1)` filtering operator emits only the first value from the Observable, which is enough for debugging.
+
 ~~~js
-events.take(1).subscribe(value => { console.log(value); });
+events.take(1).subscribe(([clock, input]) => {
+    console.log([clock.toJS(), input.toJS()]);
+});
 ~~~
 
 ~~~json
@@ -184,6 +190,10 @@ events.take(1).subscribe(value => { console.log(value); });
 
 ### Reducer streams
 
+The goal of this second part of the series is to have a single immutable state collection, emitted by an observable. To do this we'll apply a bunch of reducer functions to the state, each time an event happens. The reducer functions themselves are emitted by observables. 
+
+The powerful `merge` operator forwards any given stream to the output. The `scan` operator therefore receives five streams of reducers, which it can apply to the state collection.
+
 ~~~js
 const state = Rx.Observable
     .merge(player, coins, cannon, cannonballs, finish)
@@ -194,6 +204,8 @@ const state = Rx.Observable
 We'll look at reducer streams in detail in the section [Updating the game's state objects](#updating-the-games-state-objects) of this article.
 
 ### Locking updates to the clock
+
+The last line in our `gameFactory` is similar to the [events stream](#events-stream). We want the game loop to update at exactly 60 cycles per second, as described in [Game Loop with RxJS 5/Immutable.js].
 
 ~~~js
 return clock.withLatestFrom(state, (clock, state) => state);
