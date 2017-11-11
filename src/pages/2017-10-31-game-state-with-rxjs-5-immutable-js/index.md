@@ -209,7 +209,7 @@ const state = Rx.Observable
     .scan((state, reducer) => reducer(state));
 ~~~
 
-We'll look at each reducer stream in detail in the section [Updating the game state objects](#updating-the-game-state-objects).
+We'll look at each reducer stream in detail in the section [Updating the game state collection](#updating-the-game-state-collection).
 
 
 
