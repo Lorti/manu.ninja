@@ -7,13 +7,13 @@ tags: [rxjs, functional-reactive-programming]
 thumbnail: /images/corsair.jpg
 ---
 
-This is the second part in a series on creating a game with RxJS 5, Immutable.js and three.js. We'll look into describing the game's state with RxJS 5 observables and Immutable.js. The goal of this part is to have a stream of objects, where each object is an Immutable.js collection that represents the whole game's state at the particular point in time.
+This is the second part in a series on creating a game with RxJS 5, Immutable.js and three.js. We'll look into describing the game state with RxJS 5 observables and Immutable.js. The goal of this part is to have a stream of objects, where each object is an Immutable.js collection that represents the whole game state at a particular point in time.
 
 The full [Corsair] game, which we're going to develop in this series, is available on GitHub. You can clone it, play it and read the full source code while reading this article, if you want. All parts of the series will be listed in [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js].
 
 
 
-## Defining the game's state collection
+## Defining the game state collection
 
 The game state is represented by a single Immutable.js collection. It contains 
 
@@ -67,7 +67,7 @@ function coinFactory() {
 }
 ~~~
 
-You have to call `toJS()` on the Immutable.js collection, if you want to log the actual object. At the start of the game it looks like the following JSON. None of the game's state resists outside of this collection, making debugging very pleasant.
+You have to call `toJS()` on the Immutable.js collection, if you want to log the actual object. At the start of the game it looks like the following JSON. None of the game's state exists outside of this collection, making debugging very pleasant.
 
 ~~~js
 {
@@ -106,7 +106,7 @@ You have to call `toJS()` on the Immutable.js collection, if you want to log the
 
 
 
-## Creating the game's state stream
+## Creating the game state stream
 
 The `gameFactory()` function returns an RxJS observable, respecting the current difficulty and the player's score from last round. It's the heart of the game and called at the beginning of each round, spawning a new stream of Immutable.js collections. Let's dissect the `gameFactory()` line by line.
 
@@ -140,7 +140,7 @@ function gameFactory(stage, score) {
 
 ### Initial state
 
-The initial state is simply the Immutable.js collection from the [Defining the game's state collection](#defining-the-games-state-collection) section.
+The initial state is simply the Immutable.js collection from the [Defining the game state collection](#defining-the-game-state-collection) section.
 
 ~~~js
 const initialState = {...};
@@ -152,7 +152,7 @@ const initialState = {...};
 
 The `clockStream()` factory returns a clock as described in the first part of the series, [Game Loop with RxJS 5/Immutable.js]. The `inputStream()` factory returns a stream of collection, each containing a single `direction` key, which contains either a positive or negative value. It tells us whether the ship is sailing clockwise or counterclockwise.
 
-Let's take a quick detour and inspect the input stream. It creates a simple observable from `keypress` events. As soon as the player hits the space bar it updates the direction and emits an Immutable.js collection. What makes RxJS and this stream so powerful is that it produces values using pure functions. The `distinctUntilChanged()` filtering operator prevents the stream from emitting the same value twice in a row.
+Let's take a quick detour and inspect the `input` stream. It creates a simple observable from `keypress` events. As soon as the player hits the space bar, it updates the direction and emits an Immutable.js collection. What makes RxJS and this stream so powerful is that it produces values using pure functions. The `distinctUntilChanged()` filtering operator prevents the stream from emitting the same value twice in a row.
 
 ~~~js
 return Rx.Observable
@@ -168,7 +168,7 @@ return Rx.Observable
     .distinctUntilChanged();
 ~~~
 
-The two clock and input streams are then combined into a single events stream. The values from this events stream is what drives changes to the game. It is the only entity that's initiating a state change. 
+The `clock` and `input` streams are then combined into a single `events` stream. The values from this stream is what drives changes to the game. It is the only entity that's initiating a state change. 
 
 ~~~js
 const clock = clockStream();
@@ -209,7 +209,7 @@ const state = Rx.Observable
     .scan((state, reducer) => reducer(state));
 ~~~
 
-We'll look at each reducer stream in detail in the section [Updating the game's state objects](#updating-the-games-state-objects).
+We'll look at each reducer stream in detail in the section [Updating the game state objects](#updating-the-game-state-objects).
 
 
 
@@ -223,7 +223,7 @@ return clock.withLatestFrom(state, (clock, state) => state);
 
 
 
-## Updating the game's state collection
+## Updating the game state collection
 
 In the previous section we've created our stream of state collections. In this section we'll look at the streams of reducer functions that modify the state collection. There are five of them -- `player`, `coins`, `cannon`, `cannonballs`, and `finish` -- each stream handling different parts of the state collection.
 
@@ -235,7 +235,7 @@ The `player` stream returns a reducer function that updates the ship's position.
 
 To do this we first map the values of the events stream to `(state) => { return state.doSomething(); }`. 
 
-The reducer then uses a few Immutable.js methods. `get` and `getIn` both let us read values from the collection. `getIn` can take a variable amount of layers and return nested values. The `mergeDeep` function let's us merge a nested object into the Immutable.js collection.
+The reducer then uses a few Immutable.js methods. `get` and `getIn` both let us read values from the collection. `getIn` can take a variable amount of layers and return nested values. The `mergeDeep` function lets us merge a nested object into the Immutable.js collection.
 
 ~~~js
 const player = events.map(([clock, input]) => (state) => {
@@ -256,7 +256,7 @@ const player = events.map(([clock, input]) => (state) => {
 });
 ~~~
 
-The ship itself is moved along the circle surrounding the island. This is why an angle is the only necessary key for specifying the player's position. The direction is directly taken from the events stream and merged into the player's state, so that we don't need the events for representing the game's state.
+The ship itself is moved along the circle surrounding the island. This is why an angle is the only necessary key for specifying the player's position. The direction is directly taken from the events stream and merged into the player's state, so that we don't need the events for representing the game state.
 
 The clock is needed to calculate the player's new position, telling us how much time has passed since the last frame, as described in [Game Loop with RxJS 5/Immutable.js].
 
@@ -303,7 +303,7 @@ const coins = events.map(([clock]) => (state) => {
 });
 ~~~
 
-The collision detection helper function is testing for two-dimensional circle collision. The algorithm takes the center of two circles and compares the distance between the centers to the two radii added togeter. 
+The collision detection helper function is testing for two-dimensional circle collision. The algorithm takes the center of two circles and compares the distance between the centers to the two radii added together. 
 
 ~~~js
 function detectCollision(playerPosition, playerDirection, playerRadius,
@@ -408,7 +408,7 @@ function polarToCartesian(angle, radius) {
 
 All that's left is testing for whether the player's lost or won this round of the game. These two events are represented by the `lootCollected` and `shipDestroyed` flags.
 
-If any of the two conditions is met we'll update the game's state. Note that all of the previous reducer functions test for `state.get('lootCollected')` or `state.get('shipDestroyed')`, bringing the game to a halt when the flags are set.
+If any of the two conditions is met we'll update the game state. Note that all of the previous reducer functions test for `state.get('lootCollected')` or `state.get('shipDestroyed')`, bringing the game to a halt when the flags are set.
 
 ~~~js
 const finish = events.map(() => (state) => {
@@ -427,9 +427,9 @@ const finish = events.map(() => (state) => {
  
 
 
-## Reading the game's state collection stream
+## Reading the game state collection stream
 
-The `gameFactory()` is finished. It returns an RxJS 5 observable that emits Immutable.js collections as its values. The values are our state collections, which describe the game's state at any given point.
+The `gameFactory()` is finished. It returns an RxJS 5 observable that emits Immutable.js collections as its values. The values are our state collections, which describe the game state at any given point.
 
 To see if the stream works we'll subscribe to it and log its values. The `take(7)` tells the game to run for seven iterations. This should be enough for checking that it doesn't throw any errors.
 
@@ -472,7 +472,7 @@ The whole process gets started by calling `start(1, 0)`. `start()` is a recursiv
 
 ---
 
-If you've liked this article please return for the next part of the [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js] series. We'll discuss the `render()` function, lazy-loading of game objects and rendering [Corsair]'s graphics using three.js/WebGL.
+If you've liked this article, please return for the next part of the [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js] series. We'll discuss the `render()` function, lazy-loading of game objects and rendering [Corsair]'s graphics using three.js/WebGL.
 
 
 

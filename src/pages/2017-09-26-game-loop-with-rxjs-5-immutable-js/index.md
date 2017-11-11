@@ -165,7 +165,7 @@ loop.subscribe(({ clock, state }) => {
 
 This finishes our game loop. You can also choose to merge the `(clock, state)` arguments into a single value in the project function of `Observable.withLatestFrom()`. Subscribing to the game loop now let's us show the current state to the player. That means rendering the game or simply showing the current count.
 
-If you've liked this article please return for the next part of the [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js] series. We'll further explore the concept of using a single state store to represent the game's state by looking at everything [Corsair]'s state contains.
+If you've liked this article, please return for the next part of the [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js] series. We'll further explore the concept of using a single state store to represent the game's state by looking at everything [Corsair]'s state contains.
 
 ## Further reading
 
