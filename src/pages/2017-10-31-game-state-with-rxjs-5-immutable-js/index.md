@@ -470,12 +470,15 @@ function start(stage, score) {
 
 The whole process gets started by calling `start(1, 0)`. `start()` is a recursive function that always starts another round with increased difficulty. That is, until the ship gets hit by a cannonball.
 
-If you've liked this article please return for the next part of the [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js] series. We'll discuss the `render()` function and [Corsair]'s graphics using three.js/WebGL.
+---
+
+If you've liked this article please return for the next part of the [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js] series. We'll discuss the `render()` function, lazy-loading of game objects and rendering [Corsair]'s graphics using three.js/WebGL.
 
 
 
 ## References
 
+* [Corsair]
 * [RxJS 5](http://reactivex.io/rxjs/)
 * [Immutable.js](https://facebook.github.io/immutable-js/)
 
