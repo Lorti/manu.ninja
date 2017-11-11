@@ -429,7 +429,7 @@ gameFactory(1, 0)
 
 ## Starting the game and testing for end conditions
 
-
+The game loop will run forever, if we don't test for the end conditions. The `subscribe()` accepts more than a single function, you can also pass an object containing `next`, `error` and `complete` callbacks. We can use them to end the game and start another round, when the players collected all of the coins.
 
 ~~~js
 function start(stage, score) {
@@ -452,8 +452,9 @@ function start(stage, score) {
 }
 ~~~
 
-`start(1, 0)`
+The whole process gets started by calling `start(1, 0)`. `start()` is a recursive function that starts a new round with increased difficulty, until the player gets hit by a cannonball.
 
+If you've liked this article please return for the next part of the [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js] series. We'll discuss the `render()` function, in which we'll render [Corsair]'s graphics using three.js/WebGL.
 
 
 ## Further reading
