@@ -198,9 +198,9 @@ events.take(1).subscribe(([clock, input]) => {
 
 ### Reducer streams
 
-The goal of this second part of the series is to have a single immutable state collection, emitted by an observable. To do this we'll apply a bunch of reducer functions to the state, each time an event happens. The reducer functions themselves are emitted by observables. 
+The goal of this second part of the series is to have a stream of Immutable.js state collections. At any given time only a single state collection must exist. To do this we'll apply a set of reducer functions to the state collection each time an event happens. 
 
-The powerful `merge` operator forwards any given stream to the output. The `scan` operator therefore receives five streams of reducers, which it can apply to the state collection.
+The reducer functions themselves are emitted by observables. They are combined together by the powerful `merge` operator, which simply forwards any given stream to its output. The `scan` operator then receives the five reducer streams and applies them to the state collection, one after another.
 
 ~~~js
 const state = Rx.Observable
@@ -209,13 +209,13 @@ const state = Rx.Observable
     .scan((state, reducer) => reducer(state));
 ~~~
 
-We'll look at reducer streams in detail in the section [Updating the game's state objects](#updating-the-games-state-objects) of this article.
+We'll look at each reducer stream in detail in the section [Updating the game's state objects](#updating-the-games-state-objects).
 
 
 
 ### Locking updates to the clock
 
-The last line in our `gameFactory` is similar to the [events stream](#events-stream). We want the game loop to update at exactly 60 cycles per second, as described in [Game Loop with RxJS 5/Immutable.js].
+The last line in our `gameFactory()` is similar to what we already did with the events stream. We want the game loop to update at exactly 60 fps or cycles per second, as described in [Game Loop with RxJS 5/Immutable.js]. We'll also drop the clock by passing a projection function to the optional second argument of `withLatestFrom()`. This way the `gameFactory()` returns a clean stream of Immutable.js state collections.
 
 ~~~js
 return clock.withLatestFrom(state, (clock, state) => state);
@@ -223,13 +223,13 @@ return clock.withLatestFrom(state, (clock, state) => state);
 
 
 
-## Updating the game's state objects
+## Updating the game's state collection
 
-In the last section we've created our stream of state collections. In this section we'll create the streams of reducer functions that modify the state collections.
+In the previous section we've created our stream of state collections. In this section we'll look at the streams of reducer functions that modify a state collection.
 
 
 
-### Handling ship movement
+### Handling the ship's movement
 
 The first stream returns a reducer function that updates the player's position. In other words each value the player stream emits is a function that receives the current state collection and returns an updated state collection. To do this we map the emitted values of the events stream to `(state) => { return state.doSomething(); }`. 
 
@@ -260,7 +260,7 @@ The clock is needed to calculate the player's new position, as it tells us how m
 
 
 
-### Handling the coins collision detection
+### Handling the coin's collision detection
 
 Updating the coins is a matter of running a collision detection of each coin against the player. We set the `collected` flag of the coins to true, to hide them when rendering. 
 
@@ -351,7 +351,7 @@ const cannon = events
 
 
 
-### Handling the cannonballs movement and collision detection
+### Handling the cannonball's movement and collision detection
 
 The cannonballs reducer function is similar to the coins reducer function. It moves the cannonballs further along their path leaving the island and tests against player collisions.
 
@@ -425,7 +425,7 @@ const finish = events.map(() => (state) => {
 
 
 
-## Reading the game's state stream
+## Reading the game's state collection stream
 
 The `gameFactory()` is finished. It returns an RxJS observable that emits Immutable.js collections as its values. The values are our state collections, which describe the game's state at any given point. 
 
@@ -469,6 +469,7 @@ function start(stage, score) {
 The whole process gets started by calling `start(1, 0)`. `start()` is a recursive function that starts a new round with increased difficulty, until the player gets hit by a cannonball.
 
 If you've liked this article please return for the next part of the [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js] series. We'll discuss the `render()` function, in which we'll render [Corsair]'s graphics using three.js/WebGL.
+
 
 
 ## Further reading
