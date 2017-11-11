@@ -244,6 +244,8 @@ This example shows a few Immutable.js methods. `get` and `getIn` both let you re
 
 The player itself is moved along the circle surrounding the island, which is why the angle is the only value needed to specify the player's position. The direction is taken from the events stream and copied into the player's state, so that we don't need the events for representing the game's state.
 
+The clock is needed to calculate the player's new position, as it tells us how much time has passed since the last frame, resulting in smooth animation.
+
 ### Handling the coins collision detection
 
 Updating the coins is a matter of running a collision detection of each coin against the player. We set the `collected` flag of the coins to true, to hide them when rendering. 
@@ -289,7 +291,7 @@ const coins = events.map(([clock]) => (state) => {
 
 The collision detection helper function is testing for simple two-dimensional circle collision. The algorithm takes the center of two circles and compares the distance between the centers to the two radii added togeter. 
 
-Two things can be noted here: The first is that the high speed of the game, especially in higher stages, makes it mandatory to test the collision "between frames". Otherwise the player might "jump over" a coin and the collision detection fails. This is what the loop and `resolution` argument are for. 
+Two things can be noted here: The first is that the high speed of the game, especially in higher stages, makes it mandatory to test the collision "between frames". Otherwise the player might "jump over" a coin and the collision detection fails. This is what the loop and `resolution` argument are for. For this to work we also need the players speed, which tells us where the player will be in the next frame. This look ahead makes sure, that we don't miss a collision.
 
 The other thing is that we could write different collision algorithm for the player against the coins and the player against the cannonballs. Why? The coins and the player move on a circle, making it possible to test against one-dimensional circle collision. This can be seen in passing `new Vector2(playerAngle, 0)` and `new Vector2(playerSpeed, 0)` arguments in the `updateCoin()` function, where the _y_ value is set to zero. That optimization won't likely speed up the calculation by a significant factor, so we won't go into that. 
 
@@ -310,9 +312,34 @@ function detectCollision(playerPosition, playerDirection, playerRadius,
 }
 ~~~
 
+
+
+### Handling the cannon and spawning of cannonballs
+
+The cannon uses RxJS 5 and Immutable.js operators we've not seen in the previous sections. The `throttleTime` operator lets a value pass through the stream, then ignores values for the duration set by `calculateCannonSpeed()` in the initial state collection.
+
+The `size` property in `state.get('cannonballs').size` returns the length of an immutable list. The `last()` method in `state.get('cannonballs').last()` returns the last element of an immutable list. This helps us prevent shooting cannonballs in the same direction twice in a row.
+
+The newly spawned cannonball has to be transformed to an immutable collection with `fromJS()` first, before being pushed into the state collection.
+
+~~~js
+const cannon = events
+    .throttleTime(initialState.getIn(['speed', 'cannon']))
+    .map(() => (state) => {
+        if (state.get('lootCollected') || state.get('shipDestroyed')) {
+            return state;
+        }
+        const angle = state.get('cannonballs').size ? state.get('cannonballs').last().get('angle') : 0;
+        const cannonball = Immutable.fromJS(cannonballFactory(angle));
+        return state.update('cannonballs', cannonballs => cannonballs.push(cannonball));
+    });
+~~~
+
+
+
 ### Handling the cannonballs movement and collision detection
 
-
+The cannonballs reducer function is similar to the coins reducer function. It moves the cannonballs further along their path leaving the island and tests against player collisions.
 
 ~~~js
 const cannonballs = events.map(([clock]) => (state) => {
@@ -349,6 +376,8 @@ const cannonballs = events.map(([clock]) => (state) => {
 });
 ~~~
 
+In this function the collision detection really is a two-dimensional algorithm, for which we'll have to transform the polar coordinates saved in the state collection to cartesian coordinates to get the circle's center position.
+
 ~~~js
 function polarToCartesian(angle, radius) {
     const x = Math.cos(angle) * radius;
@@ -357,27 +386,20 @@ function polarToCartesian(angle, radius) {
 }
 ~~~
 
-### Handling the cannon and spawning of cannonballs
 
-~~~js
-const cannon = events
-    .throttleTime(initialState.getIn(['speed', 'cannon']))
-    .map(() => (state) => {
-        if (state.get('lootCollected') || state.get('shipDestroyed')) {
-            return state;
-        }
-        const angle = state.get('cannonballs').size ? state.get('cannonballs').last().get('angle') : 0;
-        const cannonball = Immutable.fromJS(cannonballFactory(angle));
-        return state.update('cannonballs', cannonballs => cannonballs.push(cannonball));
-    });
-~~~
 
 ### Handling the game's end conditions
+
+All that is left is testing for whether the player's lost or won this round of the game. The `every()` function returns `true` if all entries in a list pass a given test. This makes it a reducer in a reducer in a stream, complicated?
+
+The `some()` function is the brother of `every()` and returns `true` if any entry in a list passes a given test. It is similar to `find()`, but `find()` will return the value that passed the test, whereas `some()` returns a boolean.
+
+If any of the two conditions are met we'll update the game's state. Note that all of the previous reducer functions test for `state.get('lootCollected')` or `state.get('shipDestroyed')`, bringing the game to a halt when the flags are set.
 
 ~~~js
 const finish = events.map(() => (state) => {
     const lootCollected = state.get('coins').every(coin => coin.get('collected'));
-    const shipDestroyed = !lootCollected && state.get('cannonballs').find(cannonball => cannonball.get('collision'));
+    const shipDestroyed = !lootCollected && state.get('cannonballs').some(cannonball => cannonball.get('collision'));
     if (lootCollected || shipDestroyed) {
         return state
             .set('lootCollected', lootCollected)
@@ -391,9 +413,13 @@ const finish = events.map(() => (state) => {
 
 ## Reading the game's state stream
 
+The `gameFactory()` is finished. It returns an RxJS observable that emits Immutable.js collections as its values. The values are our state collections, which describe the game's state at any given point. 
+
+We can subscribe to it, to see if it works. The `take(7)` tells our game to run for seven iterations, which is enough for it to throw any bugs and let's us debug any errors.
+
 ~~~js
-gameFactory(stage, score)
-    .take(1)
+gameFactory(1, 0)
+    .take(7)
     .subscribe((state) => {
         console.log(state.toJS());
     });
@@ -402,6 +428,8 @@ gameFactory(stage, score)
 
 
 ## Starting the game and testing for end conditions
+
+
 
 ~~~js
 function start(stage, score) {
