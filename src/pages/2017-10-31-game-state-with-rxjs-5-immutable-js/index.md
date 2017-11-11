@@ -1,24 +1,26 @@
 ---
 path: /game-state-with-rxjs-5-immutable-js
 title: Game State with RxJS 5/Immutable.js
-date: 2017-10-31
+date: 2017-11-11
 categories: [coding, games]
 tags: [rxjs, functional-reactive-programming]
 thumbnail: /images/corsair.jpg
 ---
 
-This is the second part in a series on creating a game with RxJS 5, Immutable.js and three.js. We'll look into describing the game's state with RxJS 5 observables and Immutable.js. The goal of this part is to have a stream of objects, where each object represents the whole game's state at the particular point in time.
+This is the second part in a series on creating a game with RxJS 5, Immutable.js and three.js. We'll look into describing the game's state with RxJS 5 observables and Immutable.js. The goal of this part is to have a stream of objects, where each object is an Immutable.js collection that represents the whole game's state at the particular point in time.
 
-You can take a look at the full [Corsair] game and its source code, which we're going to develop in this series. All parts of the series will be listed in my [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js], if you want to read them.
+The full [Corsair] game, which we're going to develop in this series, is available on GitHub. You can clone it, play it and read the full source code while reading this article, if you want. All parts of the series will be listed in [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js].
 
-## Defining the game's state object
 
-The game state is represented by an Immutable.js collection. It contains 
+
+## Defining the game's state collection
+
+The game state is represented by a single Immutable.js collection. It contains 
 
 * the player's polar coordinates, movement direction and radius for collision detection, 
 * the speed of all moving objects,
 * the position of coins, and whether they've already been collected, 
-* the position of cannonballs, 
+* the position and direction of cannonballs, 
 * the player's score and a few flags for determining losing and winning. 
 
 ~~~js
@@ -42,9 +44,9 @@ Immutable.fromJS({
 });
 ~~~
 
-The functions `calculatePlayerSpeed()`, `calculateCannonSpeed()` and `calculateCannonballSpeed()` each take an argument for setting the game's difficulty. 
+The functions `calculatePlayerSpeed()`, `calculateCannonSpeed()` and `calculateCannonballSpeed()` each take an argument for setting the game's difficulty, that means increasing the speed per round.
 
-The coins are created by a `coinFactory()` function, which spreads `n` coins around a circle. The `collected` property tells us, if the coin's already been hit by the player's ship.
+The coins are created by a `coinFactory()` function, which spreads _n_ coins evenly around a circle. The `collected` property tells us, if the coin's already been collected by the player's ship.
 
 ~~~js
 function coinFactory() {
@@ -65,7 +67,7 @@ function coinFactory() {
 }
 ~~~
 
-The actual object at the start of the game looks like the following JSON. None of the game's state resists outside of this collection, making debugging relatively easy.
+You have to call `toJS()` on the Immutable.js collection, if you want to log the actual object. At the start of the game it looks like the following JSON. None of the game's state resists outside of this collection, making debugging very pleasant.
 
 ~~~js
 {
@@ -102,9 +104,11 @@ The actual object at the start of the game looks like the following JSON. None o
 }
 ~~~
 
+
+
 ## Creating the game's state stream
 
-The `gameFactory()` function returns an RxJS observable, respecting the current difficulty and the player's score from last round. Let's dissect it line by line.
+The `gameFactory()` function returns an RxJS observable, respecting the current difficulty and the player's score from last round. It's the heart of the game and called at the beginning of each round, spawning a new stream of Immutable.js collections. Let's dissect the `gameFactory()` line by line.
 
 ~~~js
 function gameFactory(stage, score) {
@@ -136,11 +140,13 @@ function gameFactory(stage, score) {
 
 ### Initial state
 
-The inital state is the Immutable.js collection from the previous section.
+The initial state is simply the Immutable.js collection from the [Defining the game's state collection](#defining-the-games-state-collection) section.
 
 ~~~js
 const initialState = {...};
 ~~~
+
+
 
 ### Events stream
 
@@ -188,6 +194,8 @@ events.take(1).subscribe(([clock, input]) => {
 ]
 ~~~
 
+
+
 ### Reducer streams
 
 The goal of this second part of the series is to have a single immutable state collection, emitted by an observable. To do this we'll apply a bunch of reducer functions to the state, each time an event happens. The reducer functions themselves are emitted by observables. 
@@ -203,6 +211,8 @@ const state = Rx.Observable
 
 We'll look at reducer streams in detail in the section [Updating the game's state objects](#updating-the-games-state-objects) of this article.
 
+
+
 ### Locking updates to the clock
 
 The last line in our `gameFactory` is similar to the [events stream](#events-stream). We want the game loop to update at exactly 60 cycles per second, as described in [Game Loop with RxJS 5/Immutable.js].
@@ -216,6 +226,8 @@ return clock.withLatestFrom(state, (clock, state) => state);
 ## Updating the game's state objects
 
 In the last section we've created our stream of state collections. In this section we'll create the streams of reducer functions that modify the state collections.
+
+
 
 ### Handling ship movement
 
@@ -245,6 +257,8 @@ This example shows a few Immutable.js methods. `get` and `getIn` both let you re
 The player itself is moved along the circle surrounding the island, which is why the angle is the only value needed to specify the player's position. The direction is taken from the events stream and copied into the player's state, so that we don't need the events for representing the game's state.
 
 The clock is needed to calculate the player's new position, as it tells us how much time has passed since the last frame, resulting in smooth animation.
+
+
 
 ### Handling the coins collision detection
 
