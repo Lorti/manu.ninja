@@ -215,7 +215,11 @@ return clock.withLatestFrom(state, (clock, state) => state);
 
 ## Updating the game's state objects
 
+In the last section we've created our stream of state collections. In this section we'll create the streams of reducer functions that modify the state collections.
+
 ### Handling ship movement
+
+The first stream returns a reducer function that updates the player's position. In other words each value the player stream emits is a function that receives the current state collection and returns an updated state collection. To do this we map the emitted values of the events stream to `(state) => { return state.doSomething(); }`. 
 
 ~~~js
 const player = events.map(([clock, input]) => (state) => {
@@ -236,7 +240,17 @@ const player = events.map(([clock, input]) => (state) => {
 });
 ~~~
 
+This example shows a few Immutable.js methods. `get` and `getIn` both let you read values from the collection. `getIn` can take a variable amount of layers and return nested values. The `mergeDeep` function let's you merge a nested object into the immutable collection.
+
+The player itself is moved along the circle surrounding the island, which is why the angle is the only value needed to specify the player's position. The direction is taken from the events stream and copied into the player's state, so that we don't need the events for representing the game's state.
+
 ### Handling the coins collision detection
+
+Updating the coins is a matter of running a collision detection of each coin against the player. We set the `collected` flag of the coins to true, to hide them when rendering. 
+
+Why don't we remove the coins from the collection altogether? They'll be used in [Handling the game's end conditions](#handling-the-games-end-conditions) for checking whether the player's won. 
+
+The coins reducer is also the one that's updating the player's score when a coin gets collected.
 
 ~~~js
 const coins = events.map(([clock]) => (state) => {
@@ -273,6 +287,12 @@ const coins = events.map(([clock]) => (state) => {
 });
 ~~~
 
+The collision detection helper function is testing for simple two-dimensional circle collision. The algorithm takes the center of two circles and compares the distance between the centers to the two radii added togeter. 
+
+Two things can be noted here: The first is that the high speed of the game, especially in higher stages, makes it mandatory to test the collision "between frames". Otherwise the player might "jump over" a coin and the collision detection fails. This is what the loop and `resolution` argument are for. 
+
+The other thing is that we could write different collision algorithm for the player against the coins and the player against the cannonballs. Why? The coins and the player move on a circle, making it possible to test against one-dimensional circle collision. This can be seen in passing `new Vector2(playerAngle, 0)` and `new Vector2(playerSpeed, 0)` arguments in the `updateCoin()` function, where the _y_ value is set to zero. That optimization won't likely speed up the calculation by a significant factor, so we won't go into that. 
+
 ~~~js
 function detectCollision(playerPosition, playerDirection, playerRadius,
                            objectPosition, objectDirection, objectRadius,
@@ -291,6 +311,8 @@ function detectCollision(playerPosition, playerDirection, playerRadius,
 ~~~
 
 ### Handling the cannonballs movement and collision detection
+
+
 
 ~~~js
 const cannonballs = events.map(([clock]) => (state) => {
