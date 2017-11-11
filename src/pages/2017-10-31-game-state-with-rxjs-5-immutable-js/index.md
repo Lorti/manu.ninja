@@ -150,11 +150,9 @@ const initialState = {...};
 
 ### Events stream
 
-The `clockStream()` factory ([clock.js]) returns a clock as described in the first part of the series, [Game Loop with RxJS 5/Immutable.js]. 
+The `clockStream()` factory returns a clock as described in the first part of the series, [Game Loop with RxJS 5/Immutable.js]. The `inputStream()` factory returns a stream of collection, each containing a single `direction` key, which contains either a positive or negative value. It tells us whether the ship is sailing clockwise or counterclockwise.
 
-The `inputStream()` factory ([input.js]) returns a stream of objects, each containing a single property `direction`, which is either positive or negative, telling us whether the ship is sailing clockwise or counterclockwise. These two streams are then combined into a single events stream. 
-
-The input stream is a simple observable that listens on the `keypress` event. As soon as the player hits the space bar it updates the direction and emits an immutable collection. What makes RxJS and this stream so powerful is that it produces values using pure functions. The `distinctUntilChanged` filtering operator prevents the stream from emitting a value twice in a row.
+Let's take a quick detour and inspect the input stream. It creates a simple observable from `keypress` events. As soon as the player hits the space bar it updates the direction and emits an Immutable.js collection. What makes RxJS and this stream so powerful is that it produces values using pure functions. The `distinctUntilChanged()` filtering operator prevents the stream from emitting the same value twice in a row.
 
 ~~~js
 return Rx.Observable
@@ -170,7 +168,7 @@ return Rx.Observable
     .distinctUntilChanged();
 ~~~
 
-The values from this events stream is what drives changes to the game. It is the the only entity that's initiating a state change. The `withLatestFrom` combination operator makes sure, that a new events value is only pushed down the stream when the clock changes. This way the stream is locked to the game's ticker, otherwise it may return a value inbetween ticks, depending on when the player's input is happening. 
+The two clock and input streams are then combined into a single events stream. The values from this events stream is what drives changes to the game. It is the only entity that's initiating a state change. 
 
 ~~~js
 const clock = clockStream();
@@ -179,7 +177,9 @@ const input = inputStream();
 const events = clock.withLatestFrom(input);
 ~~~
 
-We can now take a look at what's inside the events stream by subscribing to the observable. Combining two streams with the `withLatesFrom` operator returns all combined streams as an array. The two arrays are Immutable.js collection, which we'll first have to transform `toJS()`. The `take(1)` filtering operator emits only the first value from the Observable, which is enough for debugging.
+The `withLatestFrom()` combination operator ensures that a new events value is only pushed down the stream when the clock's value changes. The stream has to be locked to the game's ticker, otherwise it may return a value inbetween ticks, depending on when the player's input is happening.
+
+We can now take a look at what's inside the events stream by subscribing to the observable. The two arrays are Immutable.js collection, which we'll have to transform to plain objects using `toJS()`. The `take(1)` filtering operator takes only the first value from the observable, which is enough for debugging.
 
 ~~~js
 events.take(1).subscribe(([clock, input]) => {
@@ -473,13 +473,11 @@ If you've liked this article please return for the next part of the [Functional 
 
 ## Further reading
 
-* [(Official) RxJS Tutorial](http://reactivex.io/rxjs/manual/tutorial.html)
+* [RxJS 5](http://reactivex.io/rxjs/)
 * [Immutable.js](https://facebook.github.io/immutable-js/)
 
 
 
 [Corsair]: https://github.com/Lorti/corsair
-[clock.js]: https://github.com/Lorti/corsair/blob/master/src/clock.js
-[input.js]: https://github.com/Lorti/corsair/blob/master/src/input.js
 [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js]: functional-reactive-game-programming-rxjs-5-immutable-js-and-three-js
 [Game Loop with RxJS 5/Immutable.js]: game-loop-with-rxjs-5-immutable-js
