@@ -225,13 +225,17 @@ return clock.withLatestFrom(state, (clock, state) => state);
 
 ## Updating the game's state collection
 
-In the previous section we've created our stream of state collections. In this section we'll look at the streams of reducer functions that modify a state collection.
+In the previous section we've created our stream of state collections. In this section we'll look at the streams of reducer functions that modify the state collection. There are five of them -- `player`, `coins`, `cannon`, `cannonballs`, and `finish` -- each stream handling different parts of the state collection.
 
 
 
 ### Handling the ship's movement
 
-The first stream returns a reducer function that updates the player's position. In other words each value the player stream emits is a function that receives the current state collection and returns an updated state collection. To do this we map the emitted values of the events stream to `(state) => { return state.doSomething(); }`. 
+The `player` stream returns a reducer function that updates the ship's position. That means each value the player stream emits is a function. That function receives the current state collection and returns an updated state collection. 
+
+To do this we first map the values of the events stream to `(state) => { return state.doSomething(); }`. 
+
+The reducer then uses a few Immutable.js methods. `get` and `getIn` both let us read values from the collection. `getIn` can take a variable amount of layers and return nested values. The `mergeDeep` function let's us merge a nested object into the Immutable.js collection.
 
 ~~~js
 const player = events.map(([clock, input]) => (state) => {
@@ -252,11 +256,9 @@ const player = events.map(([clock, input]) => (state) => {
 });
 ~~~
 
-This example shows a few Immutable.js methods. `get` and `getIn` both let you read values from the collection. `getIn` can take a variable amount of layers and return nested values. The `mergeDeep` function let's you merge a nested object into the immutable collection.
+The ship itself is moved along the circle surrounding the island. This is why an angle is the only necessary key for specifying the player's position. The direction is directly taken from the events stream and merged into the player's state, so that we don't need the events for representing the game's state.
 
-The player itself is moved along the circle surrounding the island, which is why the angle is the only value needed to specify the player's position. The direction is taken from the events stream and copied into the player's state, so that we don't need the events for representing the game's state.
-
-The clock is needed to calculate the player's new position, as it tells us how much time has passed since the last frame, resulting in smooth animation.
+The clock is needed to calculate the player's new position, telling us how much time has passed since the last frame, as described in [Game Loop with RxJS 5/Immutable.js].
 
 
 
@@ -427,9 +429,9 @@ const finish = events.map(() => (state) => {
 
 ## Reading the game's state collection stream
 
-The `gameFactory()` is finished. It returns an RxJS observable that emits Immutable.js collections as its values. The values are our state collections, which describe the game's state at any given point. 
+The `gameFactory()` is finished. It returns an RxJS 5 observable that emits Immutable.js collections as its values. The values are our state collections, which describe the game's state at any given point.
 
-We can subscribe to it, to see if it works. The `take(7)` tells our game to run for seven iterations, which is enough for it to throw any bugs and let's us debug any errors.
+To see if the stream works we'll subscribe to it and log its values. The `take(7)` tells the game to run for seven iterations. This should be enough for checking that it doesn't throw any errors.
 
 ~~~js
 gameFactory(1, 0)
@@ -443,7 +445,7 @@ gameFactory(1, 0)
 
 ## Starting the game and testing for end conditions
 
-The game loop will run forever, if we don't test for the end conditions. The `subscribe()` accepts more than a single function, you can also pass an object containing `next`, `error` and `complete` callbacks. We can use them to end the game and start another round, when the players collected all of the coins.
+The game loop will run forever if we don't test for the end conditions. The `subscribe()` function accepts a single function, but you can also pass an object containing `next`, `error` and `complete` callbacks. This way we can discard the game loop and start the next round when the player has collected all of the coins.
 
 ~~~js
 function start(stage, score) {
@@ -466,13 +468,13 @@ function start(stage, score) {
 }
 ~~~
 
-The whole process gets started by calling `start(1, 0)`. `start()` is a recursive function that starts a new round with increased difficulty, until the player gets hit by a cannonball.
+The whole process gets started by calling `start(1, 0)`. `start()` is a recursive function that always starts another round with increased difficulty. That is, until the ship gets hit by a cannonball.
 
-If you've liked this article please return for the next part of the [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js] series. We'll discuss the `render()` function, in which we'll render [Corsair]'s graphics using three.js/WebGL.
+If you've liked this article please return for the next part of the [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js] series. We'll discuss the `render()` function and [Corsair]'s graphics using three.js/WebGL.
 
 
 
-## Further reading
+## References
 
 * [RxJS 5](http://reactivex.io/rxjs/)
 * [Immutable.js](https://facebook.github.io/immutable-js/)
