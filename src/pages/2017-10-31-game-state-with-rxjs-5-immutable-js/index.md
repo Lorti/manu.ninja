@@ -262,13 +262,11 @@ The clock is needed to calculate the player's new position, telling us how much 
 
 
 
-### Handling the coin's collision detection
+### Handling the coins' collision detection
 
-Updating the coins is a matter of running a collision detection of each coin against the player. We set the `collected` flag of the coins to true, to hide them when rendering. 
+Updating the coins means running a collision detection on each coin against the player's ship. If collisions occur we set the `collected` flag of the coins, to hide them when rendering. Why don't we remove the coins from the collection altogether? They'll be used in [Handling the game's end conditions](#handling-the-games-end-conditions) for checking whether the player has won this round.
 
-Why don't we remove the coins from the collection altogether? They'll be used in [Handling the game's end conditions](#handling-the-games-end-conditions) for checking whether the player's won. 
-
-The coins reducer is also the one that's updating the player's score when a coin gets collected.
+The coins' reducer is also the function that's updating the player's score when a coin gets collected.
 
 ~~~js
 const coins = events.map(([clock]) => (state) => {
@@ -305,11 +303,7 @@ const coins = events.map(([clock]) => (state) => {
 });
 ~~~
 
-The collision detection helper function is testing for simple two-dimensional circle collision. The algorithm takes the center of two circles and compares the distance between the centers to the two radii added togeter. 
-
-Two things can be noted here: The first is that the high speed of the game, especially in higher stages, makes it mandatory to test the collision "between frames". Otherwise the player might "jump over" a coin and the collision detection fails. This is what the loop and `resolution` argument are for. For this to work we also need the players speed, which tells us where the player will be in the next frame. This look ahead makes sure, that we don't miss a collision.
-
-The other thing is that we could write different collision algorithm for the player against the coins and the player against the cannonballs. Why? The coins and the player move on a circle, making it possible to test against one-dimensional circle collision. This can be seen in passing `new Vector2(playerAngle, 0)` and `new Vector2(playerSpeed, 0)` arguments in the `updateCoin()` function, where the _y_ value is set to zero. That optimization won't likely speed up the calculation by a significant factor, so we won't go into that. 
+The collision detection helper function is testing for two-dimensional circle collision. The algorithm takes the center of two circles and compares the distance between the centers to the two radii added togeter. 
 
 ~~~js
 function detectCollision(playerPosition, playerDirection, playerRadius,
@@ -328,15 +322,21 @@ function detectCollision(playerPosition, playerDirection, playerRadius,
 }
 ~~~
 
+You might have noticed two characteristics in the `detectCollision()` and `updateCoin()` functions. The first is that the high speed of the game, especially in later rounds, makes it mandatory to account for the ship's positions between frames. Otherwise the ship might jump over a coin and the collision detection fails.
+
+This is what the `playerDirection`, `objectDirection` and `resolution` argument are needed for. The player's speed tells us where the ship will be in the next frame. The repeated lookahead in the loop ensures that we don't miss a collision.
+
+The second detail is that we could write different collision algorithms for the player against the coins and the player against the cannonballs. Why? The player and the coins reside on a circle, allowing a one-dimensional test. This gets highlighted by the `(playerAngle, 0)` and `(playerSpeed, 0)` vectors passed to the `updateCoin()` function -- both have their _y_ value set to `0`. That optimization won't likely speed up the calculation by a significant factor, so we won't go into that.
+
 
 
 ### Handling the cannon and spawning of cannonballs
 
-The cannon uses RxJS 5 and Immutable.js operators we've not seen in the previous sections. The `throttleTime` operator lets a value pass through the stream, then ignores values for the duration set by `calculateCannonSpeed()` in the initial state collection.
+The cannon uses an RxJS 5 operator and Immutable.js methods we've not previously used. The `throttleTime()` operator lets a value pass through the stream, then ignores values for the duration set by `calculateCannonSpeed()` in the initial state collection.
 
-The `size` property in `state.get('cannonballs').size` returns the length of an immutable list. The `last()` method in `state.get('cannonballs').last()` returns the last element of an immutable list. This helps us prevent shooting cannonballs in the same direction twice in a row.
+The `size` property in `state.get('cannonballs').size` returns the length of an Immutable.js list. The `last()` method in `state.get('cannonballs').last()` returns the last element of an Immutable.js list. This helps us prevent shooting cannonballs in the same direction twice in a row.
 
-The newly spawned cannonball has to be transformed to an immutable collection with `fromJS()` first, before being pushed into the state collection.
+The newly spawned cannonball has to be transformed to an Immutable.js collection with `fromJS()` first, before being pushed into the state collection.
 
 ~~~js
 const cannon = events
@@ -353,9 +353,9 @@ const cannon = events
 
 
 
-### Handling the cannonball's movement and collision detection
+### Handling the cannonballs' movement and collision detection
 
-The cannonballs reducer function is similar to the coins reducer function. It moves the cannonballs further along their path leaving the island and tests against player collisions.
+The cannonballs stream is very similar to the coins stream. It's reducer function moves the cannonballs further along their path, leaving the island, and tests against player collisions.
 
 ~~~js
 const cannonballs = events.map(([clock]) => (state) => {
@@ -392,7 +392,7 @@ const cannonballs = events.map(([clock]) => (state) => {
 });
 ~~~
 
-In this function the collision detection really is a two-dimensional algorithm, for which we'll have to transform the polar coordinates saved in the state collection to cartesian coordinates to get the circle's center position.
+In this function the collision detection really is a two-dimensional test. That is why we'll have to transform the polar coordinates saved in the state collection to cartesian coordinates, to get the circles' center position.
 
 ~~~js
 function polarToCartesian(angle, radius) {
@@ -406,11 +406,9 @@ function polarToCartesian(angle, radius) {
 
 ### Handling the game's end conditions
 
-All that is left is testing for whether the player's lost or won this round of the game. The `every()` function returns `true` if all entries in a list pass a given test. This makes it a reducer in a reducer in a stream, complicated?
+All that's left is testing for whether the player's lost or won this round of the game. These two events are represented by the `lootCollected` and `shipDestroyed` flags.
 
-The `some()` function is the brother of `every()` and returns `true` if any entry in a list passes a given test. It is similar to `find()`, but `find()` will return the value that passed the test, whereas `some()` returns a boolean.
-
-If any of the two conditions are met we'll update the game's state. Note that all of the previous reducer functions test for `state.get('lootCollected')` or `state.get('shipDestroyed')`, bringing the game to a halt when the flags are set.
+If any of the two conditions is met we'll update the game's state. Note that all of the previous reducer functions test for `state.get('lootCollected')` or `state.get('shipDestroyed')`, bringing the game to a halt when the flags are set.
 
 ~~~js
 const finish = events.map(() => (state) => {
@@ -425,6 +423,8 @@ const finish = events.map(() => (state) => {
 });
 ~~~
 
+ The `every()` function returns `true` if all entries in a list pass a given test. The `some()` function is the brother of `every()` and returns `true` if any entry in a list passes a given test.
+ 
 
 
 ## Reading the game's state collection stream
