@@ -132,7 +132,8 @@ function gameFactory(stage, score) {
       .scan((state, reducer) => reducer(state));
   
   return clock
-      .withLatestFrom(state, (clock, state) => state);
+      .withLatestFrom(state, (clock, state) => state)
+      .takeWhile(state => !state.get('lootCollected') && !state.get('shipDestroyed'));
 }
 ~~~
 
@@ -218,8 +219,12 @@ We'll look at each reducer stream in detail in the section [Updating the game st
 The last line in our `gameFactory()` is similar to what we already did with the events stream. We want the game loop to update at exactly 60 fps or cycles per second, as described in [Game Loop with RxJS 5/Immutable.js]. We'll also drop the clock by passing a projection function to the optional second argument of `withLatestFrom()`. This way the `gameFactory()` returns a clean stream of Immutable.js state collections.
 
 ~~~js
-return clock.withLatestFrom(state, (clock, state) => state);
+  return clock
+      .withLatestFrom(state, (clock, state) => state)
+      .takeWhile(state => !state.get('lootCollected') && !state.get('shipDestroyed'));
 ~~~
+
+The `takeWhile()` operator is explained in the [Starting the game and testing for end conditions](#starting-the-game-and-testing-for-end-conditions) section.
 
 
 
@@ -445,7 +450,15 @@ gameFactory(1, 0)
 
 ## Starting the game and testing for end conditions
 
-The game loop will run forever if we don't test for the end conditions. The `subscribe()` function accepts a single function, but you can also pass an object containing `next`, `error` and `complete` callbacks. This way we can discard the game loop and start the next round when the player has collected all of the coins.
+The game loop will run forever if we don't test for the end conditions. The only detail we've not discussed in the [Creating the game state stream](#creating-the-game-state-stream) section is the `takeWhile()` operator. This filter lets values pass as long as the `lootCollected` and `shipDestroyed` flags aren't set. The observable completes when the player has collected all of the coins or  gets hit by a cannonball.
+
+~~~js
+return clock
+    .withLatestFrom(state, (clock, state) => state)
+    .takeWhile(state => !state.get('lootCollected') && !state.get('shipDestroyed'));
+~~~
+
+The `subscribe()` function accepts a single function, but you can also pass an object containing `next`, `error` and `complete` callbacks. This way we can discard the game loop and start the next round when the observable completes.
 
 ~~~js
 function start(stage, score) {
