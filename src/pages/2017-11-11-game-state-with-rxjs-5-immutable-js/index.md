@@ -450,7 +450,7 @@ gameFactory(1, 0)
 
 ## Starting the game and testing for end conditions
 
-The game loop will run forever if we don't test for the end conditions. The only detail we've not discussed in the [Creating the game state stream](#creating-the-game-state-stream) section is the `takeWhile()` operator. This filter lets values pass as long as the `lootCollected` and `shipDestroyed` flags aren't set. The observable completes when the player has collected all of the coins or  gets hit by a cannonball.
+The game loop will run forever if we don't test for the end conditions. The only detail we've not discussed in the [Creating the game state stream](#creating-the-game-state-stream) section is the `takeWhile()` operator. This filter lets values pass as long as the `lootCollected` and `shipDestroyed` flags aren't set. The observable completes when the player collects all of the coins or the ship gets destroyed.
 
 ~~~js
 return clock
