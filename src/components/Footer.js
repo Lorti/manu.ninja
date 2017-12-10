@@ -22,17 +22,14 @@ export default function Footer() {
             games with my friends.
           </p>
           <p>
-            You can contact me via <a href="https://github.com/Lorti">
-              GitHub
-            </a>, <a href="http://twitter.com/manuelwieser">Twitter</a> or{' '}
-            <a href="mailto:office@manuelwieser.com">
-              office@manuelwieser.com
-            </a>.
+            You can contact me via <a href="https://github.com/Lorti">GitHub</a>,{' '}
+            <a href="http://twitter.com/manuelwieser">Twitter</a> or{' '}
+            <a href="mailto:office@manuelwieser.com">office@manuelwieser.com</a>.
           </p>
           <p>
-            I’m currently working as a full-stack web developer for{' '}
-            <a href="http://www.karriere.at">karriere.at</a>, making software
-            that helps people find the job of their dreams.
+            I’m currently working as a technical lead and full-stack web
+            developer for <a href="http://www.karriere.at">karriere.at</a>,
+            making software that helps people find the job of their dreams.
           </p>
         </div>
       </div>
