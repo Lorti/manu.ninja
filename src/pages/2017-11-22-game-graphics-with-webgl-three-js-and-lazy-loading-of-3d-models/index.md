@@ -9,11 +9,9 @@ thumbnail: /images/corsair.jpg
 
 This is the third part in a series on creating a game with RxJS 5, Immutable.js and three.js. We'll look at rendering the game graphics in 3D, using WebGL and the three.js library. The goal of this part is to have a 3D scene that's updated according to the Immutable.js collection returned by our game state stream.
 
-The full [Corsair] game, which we're developing in this series, is available on GitHub. You can clone it, play it and read the full source code while reading this article, if you want. All parts of the series are listed in [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js].
+![](/images/corsair-default.jpg)
 
-<video style="margin-left: auto; margin-right: auto;" controls preload="auto" loop>
-    <source src="/images/corsair.mp4" type="video/mp4">
-</video>
+The full [Corsair] game, which we're developing in this series, is available on GitHub. You can clone it, play it and read the full source code while reading this article, if you want. All parts of the series are listed in [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js].
 
 
 
@@ -332,7 +330,9 @@ ship.position.y = position.y;
 
 When building and debugging the 3D scene during development you may wan't to use a few optional helpers. Some of them are provided by three.js, others can be made by yourself.
 
+![](/images/corsair-helpers.jpg)
 
+To accurately test collisions of the objects I've created myself a wireframe sphere factory. You may have seen it already in the ship factory. It returns a wireframe sphere in the size of the object's collision sphere.
 
 ~~~js
 function wireframeSphereFactory(size) {
@@ -346,10 +346,14 @@ function wireframeSphereFactory(size) {
 }
 ~~~
 
+If you are uncertain as to where X, Y and Z are in your scene, you'll want to render an axis helper.
+
 ~~~js
 const axisHelper = new THREE.AxisHelper(10);
 scene.add(axisHelper);
 ~~~
+
+To debug Corsair I've frequently moved the camera to a lower position. This position is difficult to play in but makes it easier to see where objects are located.
 
 ~~~js
 camera.position.set(0, -100, 30);
@@ -357,8 +361,10 @@ camera.up = new THREE.Vector3(0, 1, 0);
 camera.lookAt(new THREE.Vector3(0, 0, 0));
 ~~~
 
+If you are uncertain about the camera's arguments you can use a camera helper. The helper shows the frustum, line of sight and up of the camera.
+
 ~~~js
-const cameraHelper = new THREE.CameraHelper(light.shadow.camera);
+const cameraHelper = new THREE.CameraHelper(camera);
 scene.add(cameraHelper);
 ~~~
 
@@ -366,7 +372,7 @@ scene.add(cameraHelper);
 
 ## Using the render function
 
-The render loop itself is an infinite loop calling itself at 60 frames per second using the `animationFrame` RxJS scheduler.
+The render function is called each time our game loop emits a value. Using the `animationFrame` RxJS scheduler the stream updates at 60 frames per second. The value, an Immutable.js collection, is used to update the 3D objects in the WebGL/three.js scene. 
 
 ~~~js
 game(stage, score).subscribe({
@@ -378,6 +384,12 @@ game(stage, score).subscribe({
     complete: () => start(progress.stage, progress.score),
 });
 ~~~
+
+---
+
+This concludes the [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js] series for 2017. If you've liked this article, please also read the first and second part of the series and return for a possibly future update. I'd love to add explosions using sprites and particles to the game, as well as recreating The Wind Waker's cartoon water shader.
+
+Please leave any questions in the comments section, and I'd appreciate your feedback. If you spot an error you can also open up an issue in the [Corsair] GitHub repository. If you want to help improve the game you are also free to fork it and open up a pull request. And of course, if the series helped you create a game of your own, please share it with us!
 
 
 
