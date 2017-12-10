@@ -7,13 +7,19 @@ tags: [rxjs, functional-reactive-programming, three-js, lazy-loading]
 thumbnail: /images/corsair.jpg
 ---
 
-This is the third part in a series on creating a game with RxJS 5, Immutable.js and three.js. We'll look into [...]. The goal of this part is [...].
+This is the third part in a series on creating a game with RxJS 5, Immutable.js and three.js. We'll look at rendering the game graphics in 3D, using WebGL and the three.js library. The goal of this part is to have a 3D scene that's updated according to the Immutable.js collection returned by our game state stream.
 
-The full [Corsair] game, which we're going to develop in this series, is available on GitHub. You can clone it, play it and read the full source code while reading this article, if you want. All parts of the series will be listed in [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js].
+The full [Corsair] game, which we're developing in this series, is available on GitHub. You can clone it, play it and read the full source code while reading this article, if you want. All parts of the series are listed in [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js].
 
 
 
 ## Scene setup
+
+Scene objects contain your objects, lights and cameras. You create a scene by calling `new THREE.Scene()` and then add objects with the `add()` method. We'll look at different objects later, but for now the most important object is the camera.
+
+There are different camera types in three.js. We'll be using a `THREE.PerspectiveCamera`, as it gives us a 3D perspective projection. The various parameters define the camera's [viewing frustrum](https://en.wikipedia.org/wiki/Viewing_frustum). Please refer to the three.js documentation and [Optional helpers](#optional-helpers) section for details.
+
+To render the scene you have to create a `THREE.WebGLRenderer`. The renderer has a `domElement` property, which is the `canvas` element where the renderer draws its WebGL graphics. You can add it anywhere to your page, but we'll add it to the body and use the whole browser viewport. 
 
 ~~~js
 function setup() {
@@ -58,9 +64,13 @@ function setup() {
 }
 ~~~
 
+Please notice that the `setup` function returns a function that's receiving the game state, we've previously defined in the [Game State with RxJS 5/Immutable.js] part of this series. First the function updates all scene objects by reading the Immutable.js state. Then it renders the scene and updates the score display, which is just a DOM element sitting on top of the WebGL canvas. We'll discuss the details in the (Updating scene objects and animation)[#updating-scene-objects-and-animation] section.
+
 
 
 ## Lighting
+
+
 
 ~~~js
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.35);
@@ -319,7 +329,6 @@ game(stage, score).subscribe({
 ## References
 
 * [Corsair]
-* [RxJS 5](http://reactivex.io/rxjs/)
 * [Immutable.js](https://facebook.github.io/immutable-js/)
 * [three.js](https://threejs.org/docs/)
 
@@ -327,5 +336,4 @@ game(stage, score).subscribe({
 
 [Corsair]: https://github.com/Lorti/corsair
 [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js]: functional-reactive-game-programming-rxjs-5-immutable-js-and-three-js
-[Game Loop with RxJS 5/Immutable.js]: game-loop-with-rxjs-5-immutable-js
 [Game State with RxJS 5/Immutable.js]: game-state-with-rxjs-5-immutable-js
