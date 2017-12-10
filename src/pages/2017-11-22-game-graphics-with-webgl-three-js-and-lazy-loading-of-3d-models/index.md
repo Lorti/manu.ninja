@@ -258,7 +258,7 @@ function islandFactory() {
 
 ## Updating scene objects and animation
 
-Now that we've populated our scene with various 3D objects we want to give life to them. 
+Now that we've populated our scene with various 3D objects we want to give life to them. Let's return the function returned by our setup function. It receives the Immutable.js collection containing our game state.
 
 ~~~js
 return (state) => {
@@ -267,6 +267,8 @@ return (state) => {
     $score.innerHTML = state.get('score');
 };
 ~~~
+
+The first thing we'll do is create any objects we've not already created. This means creating a mesh for each coin in our game state, if the empty 3D object that is our coin container has no children.
 
 ~~~js
 if (!coins.children.length) {
@@ -278,10 +280,17 @@ if (!coins.children.length) {
         coins.add(mesh);
     });
 }
+~~~
+
+If the coin meshes exist we toggle their visibility according to the game state. This is cheaper than creating and removing 3D objects, so it won't cause any frame rate drops.
+
+~~~js
 for (let i = 0; i < state.get('coins').size; i++) {
     coins.children[i].visible = !state.getIn(['coins', i, 'collected']);
 }
 ~~~
+
+As we don't know how many cannonballs we'll need in the run of the game we create a bunch of them just to be certain. If these are not enough we add more when needed. This could also be tweaked for higher difficulty levels, when the cannon is faster.
 
 ~~~js
 if (!cannonballs.children.length) {
@@ -308,6 +317,8 @@ for (let i = 0; i < state.get('cannonballs').size; i++) {
 }
 ~~~
 
+The player's ship is constantly sailing further along the circle surrounding the island. To update the ship's position we need to convert the player's polar coordinates and account for the direction the ship's heading. 
+
 ~~~js
 ship.rotation.z = state.getIn(['player', 'angle']) - (state.getIn(['player', 'direction']) > 0 ? 0 : Math.PI);
 const position = polarToCartesian(state.getIn(['player', 'angle']), state.getIn(['player', 'radius']));
@@ -318,6 +329,10 @@ ship.position.y = position.y;
 
 
 ## Optional helpers
+
+When building and debugging the 3D scene during development you may wan't to use a few optional helpers. Some of them are provided by three.js, others can be made by yourself.
+
+
 
 ~~~js
 function wireframeSphereFactory(size) {
