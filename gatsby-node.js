@@ -130,6 +130,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
         }
       })
       related = related.sort((a, b) => b.score - a.score)
+      related = related.slice(0, 7)
       createPage({
         path: a.node.frontmatter.path,
         component: template,
