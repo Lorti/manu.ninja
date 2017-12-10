@@ -27,9 +27,9 @@ export default function Footer() {
             <a href="mailto:office@manuelwieser.com">office@manuelwieser.com</a>.
           </p>
           <p>
-            I’m currently working as a full-stack web developer for{' '}
-            <a href="http://www.karriere.at">karriere.at</a>, making software
-            that helps people find the job of their dreams.
+            I’m currently working as a technical lead and full-stack web
+            developer for <a href="http://www.karriere.at">karriere.at</a>,
+            making software that helps people find the job of their dreams.
           </p>
         </div>
       </div>
