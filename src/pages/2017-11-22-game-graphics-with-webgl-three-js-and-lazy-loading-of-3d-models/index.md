@@ -11,11 +11,15 @@ This is the third part in a series on creating a game with RxJS 5, Immutable.js 
 
 The full [Corsair] game, which we're developing in this series, is available on GitHub. You can clone it, play it and read the full source code while reading this article, if you want. All parts of the series are listed in [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js].
 
+<video style="margin-left: auto; margin-right: auto;" controls preload="auto" loop>
+    <source src="/images/corsair.mp4" type="video/mp4">
+</video>
+
 
 
 ## Scene setup
 
-Scene objects contain your objects, lights and cameras. You create a scene by calling `new THREE.Scene()` and then add objects with the `add()` method. We'll look at different objects later, but for now the most important object is the camera.
+A scene holds your camera(s), lights and models, as it would do in real life. You create a scene by calling `new THREE.Scene()` and then add objects with the `add()` method. We'll look at different objects later, but for now the most important object is the camera.
 
 There are different camera types in three.js. We'll be using a `THREE.PerspectiveCamera`, as it gives us a 3D perspective projection. The various parameters define the camera's [viewing frustrum](https://en.wikipedia.org/wiki/Viewing_frustum). Please refer to the three.js documentation and [Optional helpers](#optional-helpers) section for details.
 
@@ -64,32 +68,44 @@ function setup() {
 }
 ~~~
 
-Please notice that the `setup` function returns a function that's receiving the game state, we've previously defined in the [Game State with RxJS 5/Immutable.js] part of this series. First the function updates all scene objects by reading the Immutable.js state. Then it renders the scene and updates the score display, which is just a DOM element sitting on top of the WebGL canvas. We'll discuss the details in the (Updating scene objects and animation)[#updating-scene-objects-and-animation] section.
+Please notice that the `setup` function returns a function that's receiving the game state, we've previously defined in the [Game State with RxJS 5/Immutable.js] part of this series. First the function updates all scene objects by reading the Immutable.js state. Then it renders the scene and updates the score display, which is just a DOM element sitting on top of the WebGL canvas. We'll discuss the details in the [Updating scene objects and animation](#updating-scene-objects-and-animation) section.
 
 
 
 ## Lighting
 
-
+three.js offers a few different lights. The one we'll be using are an ambient light, a hemisphere light and a directional light. The ambient light is the simplest option and brightens the whole scene. It does not have a direction nor can it cast any shadows.
 
 ~~~js
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.35);
 ambientLight.color.setHSL(0.1, 1, 0.95);
 scene.add(ambientLight);
+~~~
 
+The hemisphere light has two colors, one for the sky and one for the ground. The sky color will be used for the highest point of the hemisphere, directly on top of the scene. The sky color then fades to the ground color. We can use the hemisphere light to simulate outdoor conditions, but like the ambient light, it can not cast any shadows.
+
+~~~ js
 const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.5);
 hemisphereLight.color.setHSL(0.6, 1, 0.95);
 hemisphereLight.groundColor.setHSL(0.095, 1, 0.75);
 hemisphereLight.position.set(0, 0, 500);
 scene.add(hemisphereLight);
+~~~
 
+This is where the third light, the directional light, comes in. It is our sun and casts shadows.
+
+~~~js
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.65);
 directionalLight.color.setHSL(0.1, 1, 0.95);
 directionalLight.position.set(-1, 1, 1);
 directionalLight.position.multiplyScalar(50);
 directionalLight.castShadow = true;
 scene.add(directionalLight);
+~~~
 
+For the shadow map to work correctly we have to tweak a few settings.
+ 
+~~~js
 directionalLight.shadow.mapSize.width = 1024;
 directionalLight.shadow.mapSize.height = 1024;
 directionalLight.shadow.camera.left = -50;
@@ -98,6 +114,130 @@ directionalLight.shadow.camera.top = 50;
 directionalLight.shadow.camera.bottom = -50;
 directionalLight.shadow.camera.near = 1;
 directionalLight.shadow.camera.far = 200;
+~~~
+
+
+
+## Adding objects via primitive geometries
+
+Now that the scene's perfectly set up we want to populate it with 3D objects. Some of them can be created by using primitive geometries: boxes, circles, cylinders, planes and spheres.
+
+
+
+~~~js
+function circleFactory() {
+    const segmentCount = 64;
+    const radius = RADIUS;
+    const geometry = new THREE.Geometry();
+    const material = new THREE.LineBasicMaterial({ color: 0xFFFFFF, opacity: 0.1, transparent: true });
+
+    for (let i = 0; i <= segmentCount; i++) {
+        const theta = (i / segmentCount) * Math.PI * 2;
+        geometry.vertices.push(
+            new THREE.Vector3(Math.cos(theta) * radius, Math.sin(theta) * radius, 0),
+        );
+    }
+
+    return new THREE.Line(geometry, material);
+}
+~~~
+
+~~~js
+function waterFactory() {
+    const geometry = new THREE.PlaneBufferGeometry(500, 500);
+    const material = new THREE.ShadowMaterial({ opacity: 0.25 });
+    const plane = new THREE.Mesh(geometry, material);
+    plane.receiveShadow = true;
+    return plane;
+}
+~~~
+
+~~~js
+function coinFactory() {
+    const cylinder = new THREE.Mesh(
+        new THREE.CylinderGeometry(2, 2, 0.5, 16),
+        new THREE.MeshPhongMaterial({
+            color: 0xffd800,
+            shininess: 32,
+            specular: 0xffff82,
+        }),
+    );
+    cylinder.rotation.x = Math.PI / 2;
+    cylinder.castShadow = true;
+    return cylinder;
+}
+~~~
+
+~~~js
+function cannonballFactory() {
+    const sphere = new THREE.Mesh(
+        new THREE.SphereGeometry(2, 32, 32),
+        new THREE.MeshPhongMaterial({
+            color: 0x23232d,
+            shininess: 64,
+            specular: 0x646478,
+        }),
+    );
+    sphere.castShadow = true;
+    return sphere;
+}
+~~~
+
+
+
+## Adding objects via lazy-loading of 3D models
+
+The `MTLLoader` and `OBJLoader` both require a file path and a callback function.
+
+~~~js
+function loadAsset(name) {
+    return new Promise((resolve, reject) => {
+        const mtlLoader = new THREE.MTLLoader();
+        mtlLoader.setPath('assets/');
+        mtlLoader.load(`${name}.mtl`, (materials) => {
+            materials.preload();
+            const objLoader = new THREE.OBJLoader();
+            objLoader.setMaterials(materials);
+            objLoader.setPath('assets/');
+            objLoader.load(`${name}.obj`, object => resolve(object), undefined, xhr => reject(xhr));
+        }, undefined, xhr => reject(xhr));
+    });
+}
+~~~
+
+~~~js
+function shipFactory() {
+    const container = new THREE.Object3D();
+    // container.add(wireframeSphereFactory(6));
+    loadAsset('ship').then((ship) => {
+        ship.traverse((node) => {
+            node.castShadow = true; // eslint-disable-line no-param-reassign
+            if (node.material) {
+                node.material.side = THREE.DoubleSide; // eslint-disable-line no-param-reassign
+            }
+        });
+        ship.scale.multiplyScalar(12);
+        ship.rotation.set(Math.PI / 2, Math.PI, 0);
+        container.add(ship);
+    });
+    return container;
+}
+~~~
+
+~~~js
+function islandFactory() {
+    const container = new THREE.Object3D();
+    loadAsset('island').then((island) => {
+        island.scale.multiplyScalar(32);
+        island.rotation.set(Math.PI / 2, 0, 0);
+        island.position.set(0, 0, -8.5);
+        island.traverse((node) => {
+            node.castShadow = true; // eslint-disable-line no-param-reassign
+        });
+        container.add(island);
+    });
+    return container;
+}
 ~~~
 
 
@@ -193,125 +333,9 @@ scene.add(cameraHelper);
 
 
 
-## Adding objects via lazy-loading of 3D models
-
-~~~js
-function loadAsset(name) {
-    return new Promise((resolve, reject) => {
-        const mtlLoader = new THREE.MTLLoader();
-        mtlLoader.setPath('assets/');
-        mtlLoader.load(`${name}.mtl`, (materials) => {
-            materials.preload();
-            const objLoader = new THREE.OBJLoader();
-            objLoader.setMaterials(materials);
-            objLoader.setPath('assets/');
-            objLoader.load(`${name}.obj`, object => resolve(object), undefined, xhr => reject(xhr));
-        }, undefined, xhr => reject(xhr));
-    });
-}
-~~~
-
-~~~js
-function shipFactory() {
-    const container = new THREE.Object3D();
-    // container.add(wireframeSphereFactory(6));
-    loadAsset('ship').then((ship) => {
-        ship.traverse((node) => {
-            node.castShadow = true; // eslint-disable-line no-param-reassign
-            if (node.material) {
-                node.material.side = THREE.DoubleSide; // eslint-disable-line no-param-reassign
-            }
-        });
-        ship.scale.multiplyScalar(12);
-        ship.rotation.set(Math.PI / 2, Math.PI, 0);
-        container.add(ship);
-    });
-    return container;
-}
-~~~
-
-~~~js
-function islandFactory() {
-    const container = new THREE.Object3D();
-    loadAsset('island').then((island) => {
-        island.scale.multiplyScalar(32);
-        island.rotation.set(Math.PI / 2, 0, 0);
-        island.position.set(0, 0, -8.5);
-        island.traverse((node) => {
-            node.castShadow = true; // eslint-disable-line no-param-reassign
-        });
-        container.add(island);
-    });
-    return container;
-}
-~~~
-
-
-
-## Adding objects via primitive geometries
-
-~~~js
-function circleFactory() {
-    const segmentCount = 64;
-    const radius = RADIUS;
-    const geometry = new THREE.Geometry();
-    const material = new THREE.LineBasicMaterial({ color: 0xFFFFFF, opacity: 0.1, transparent: true });
-
-    for (let i = 0; i <= segmentCount; i++) {
-        const theta = (i / segmentCount) * Math.PI * 2;
-        geometry.vertices.push(
-            new THREE.Vector3(Math.cos(theta) * radius, Math.sin(theta) * radius, 0),
-        );
-    }
-
-    return new THREE.Line(geometry, material);
-}
-~~~
-
-~~~js
-function waterFactory() {
-    const geometry = new THREE.PlaneBufferGeometry(500, 500);
-    const material = new THREE.ShadowMaterial({ opacity: 0.25 });
-    const plane = new THREE.Mesh(geometry, material);
-    plane.receiveShadow = true;
-    return plane;
-}
-~~~
-
-~~~js
-function coinFactory() {
-    const cylinder = new THREE.Mesh(
-        new THREE.CylinderGeometry(2, 2, 0.5, 16),
-        new THREE.MeshPhongMaterial({
-            color: 0xffd800,
-            shininess: 32,
-            specular: 0xffff82,
-        }),
-    );
-    cylinder.rotation.x = Math.PI / 2;
-    cylinder.castShadow = true;
-    return cylinder;
-}
-~~~
-
-~~~js
-function cannonballFactory() {
-    const sphere = new THREE.Mesh(
-        new THREE.SphereGeometry(2, 32, 32),
-        new THREE.MeshPhongMaterial({
-            color: 0x23232d,
-            shininess: 64,
-            specular: 0x646478,
-        }),
-    );
-    sphere.castShadow = true;
-    return sphere;
-}
-~~~
-
-
-
 ## Using the render function
+
+The render loop itself is an infinite loop calling itself at 60 frames per second using the `animationFrame` RxJS scheduler.
 
 ~~~js
 game(stage, score).subscribe({
@@ -329,6 +353,7 @@ game(stage, score).subscribe({
 ## References
 
 * [Corsair]
+* [RxJS 5](http://reactivex.io/rxjs/)
 * [Immutable.js](https://facebook.github.io/immutable-js/)
 * [three.js](https://threejs.org/docs/)
 
