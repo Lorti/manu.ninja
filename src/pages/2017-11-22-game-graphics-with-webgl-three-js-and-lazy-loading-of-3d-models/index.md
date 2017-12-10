@@ -122,7 +122,7 @@ directionalLight.shadow.camera.far = 200;
 
 Now that the scene's perfectly set up we want to populate it with 3D objects. Some of them can be created by using primitive geometries: boxes, circles, cylinders, planes and spheres.
 
-
+There is a built-in `CircleGeometry`, but we just want a circle line, not a circle surface, for the ship's course. To achieve this we can use the `THREE.LineBasicMaterial` and build the geometry ourselves, by pushing vertices into a `THREE.Geometry`. The geometry and material are then combined to form a `THREE.Line` object.
 
 ~~~js
 function circleFactory() {
@@ -142,6 +142,8 @@ function circleFactory() {
 }
 ~~~
 
+The water mesh is just a simple plane. The material is what makes it interesting: A `THREE.ShadowMaterial` is transparent but receives shadows. This way the page's CSS gradient shines through the scene. For this to work we had to create the renderer with the `{ alpha: true }` setting in the [Scene setup](#scene-setup) section.
+
 ~~~js
 function waterFactory() {
     const geometry = new THREE.PlaneBufferGeometry(500, 500);
@@ -151,6 +153,8 @@ function waterFactory() {
     return plane;
 }
 ~~~
+
+Each coin mesh is a scaled `CylinderGeometry`. The `MeshPhongMaterial` has shininess and specular settings, ideal for glossy surfaces like metal. As the cylinder geometry is generated along the Y axis we have to rotate the coins, because my scene's up vector is on the Z axis.
 
 ~~~js
 function coinFactory() {
@@ -167,6 +171,8 @@ function coinFactory() {
     return cylinder;
 }
 ~~~
+
+The cannonballs are just plain spheres with a shiny material, casting shadows.
 
 ~~~js
 function cannonballFactory() {
@@ -187,7 +193,9 @@ function cannonballFactory() {
 
 ## Adding objects via lazy-loading of 3D models
 
-The `MTLLoader` and `OBJLoader` both require a file path and a callback function.
+The ship and island are 3D models I've created in a 3D modeling software and exported as OBJ/MTL pairs. To load them you can use the `OBJLoader` and `MTLLoader` which are located in the examples folder of the official three.js repository. There's also a Collada loader, if you need animation support. I'll stick with OBJ for my static objects, as I don't need animations and virtually every software can read and write OBJ files.
+
+The `MTLLoader` and `OBJLoader` both require a file path and a callback function. I wrap both of these callbacks in a promise, which gives me an easy to use `loadAsset()` function, which takes the name of the asset as an argument, and resolves to the fully loaded and decorated 3D model.
 
 ~~~js
 function loadAsset(name) {
@@ -205,15 +213,19 @@ function loadAsset(name) {
 }
 ~~~
 
+The ship gets loaded via `loadAsset('ship')` and then added to an empty `THREE.Object3D()`. This way we can return the empty object immediately and start the game before the asset is fully loaded. With this lazy-loading of 3D models we could also render a placeholder object in the meantime, like a sphere or a model with less level of detail than the original. Most modern 3D games use such LOD rendering techniques.
+
+As the ship has multiple shapes we need to traverse them and set each node to cast shadows. For the ship's sail we also want the materials to be rendered double-sided.
+
 ~~~js
 function shipFactory() {
     const container = new THREE.Object3D();
-    // container.add(wireframeSphereFactory(6));
+    //container.add(wireframeSphereFactory(6));
     loadAsset('ship').then((ship) => {
         ship.traverse((node) => {
-            node.castShadow = true; // eslint-disable-line no-param-reassign
+            node.castShadow = true;
             if (node.material) {
-                node.material.side = THREE.DoubleSide; // eslint-disable-line no-param-reassign
+                node.material.side = THREE.DoubleSide;
             }
         });
         ship.scale.multiplyScalar(12);
@@ -224,6 +236,8 @@ function shipFactory() {
 }
 ~~~
 
+The island is loaded in the same way as the ship, using the `loadAsset()` lazy-loading function.
+
 ~~~js
 function islandFactory() {
     const container = new THREE.Object3D();
@@ -232,7 +246,7 @@ function islandFactory() {
         island.rotation.set(Math.PI / 2, 0, 0);
         island.position.set(0, 0, -8.5);
         island.traverse((node) => {
-            node.castShadow = true; // eslint-disable-line no-param-reassign
+            node.castShadow = true;
         });
         container.add(island);
     });
@@ -243,6 +257,8 @@ function islandFactory() {
 
 
 ## Updating scene objects and animation
+
+Now that we've populated our scene with various 3D objects we want to give life to them. 
 
 ~~~js
 return (state) => {
