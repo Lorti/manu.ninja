@@ -1,7 +1,7 @@
 ---
 path: /game-graphics-with-webgl-three-js-and-lazy-loading-of-3d-models
 title: Game Graphics with WebGL/three.js and Lazy-Loading of 3D Models
-date: 2017-12-12
+date: 2017-12-13
 categories: [art, coding, games]
 tags: [rxjs, functional-reactive-programming, three-js, lazy-loading]
 thumbnail: /images/corsair.jpg
@@ -213,9 +213,9 @@ function loadAsset(name) {
 }
 ~~~
 
-The ship gets loaded via `loadAsset('ship')` and then added to an empty `THREE.Object3D()`. This way we can return the empty object immediately and start the game before the asset is fully loaded. With this lazy-loading of 3D models we could also render a placeholder object in the meantime, like a sphere or a model with less level of detail than the original. Most modern 3D games use such LOD rendering techniques.
+The ship factory calls `loadAsset('ship')` and then adds it to an empty `Object3D`. This way we can return the container immediately and start the game before the asset is fully loaded. Using this lazy-loading of 3D models you could also render a placeholder object, like a sphere or a model with less level of detail than the original. Almost all modern 3D games use such LOD rendering techniques.
 
-As the ship has multiple shapes we need to traverse them and set each node to cast shadows. For the ship's sail we also want the materials to be rendered double-sided.
+As the ship consists of multiple shapes we have to traverse them and explicitly set each node to cast shadows. Also the ship's sail is a surface shape, not a volumetric shape, so we want the materials to be rendered double-sided.
 
 ~~~js
 function shipFactory() {
@@ -258,7 +258,7 @@ function islandFactory() {
 
 ## Updating scene objects and animation
 
-Now that we've populated our scene with various 3D objects we want to give life to them. Let's return the function returned by our setup function. It receives the Immutable.js collection containing our game state.
+The scene's now populated with 3D objects, so we want to give life to them. Let's revisit the update function returned by our setup function. It receives the Immutable.js collection representing our game state.
 
 ~~~js
 return (state) => {
@@ -268,7 +268,7 @@ return (state) => {
 };
 ~~~
 
-The first thing we'll do is create any objects we've not already created. This means creating a mesh for each coin in our game state, if the empty 3D object that is our coin container has no children.
+The first thing we'll do is create any objects we've not already created. This means creating a mesh for each coin in our game, if the empty `Object3D` coin container has no children.
 
 ~~~js
 if (!coins.children.length) {
@@ -282,7 +282,7 @@ if (!coins.children.length) {
 }
 ~~~
 
-If the coin meshes exist we toggle their visibility according to the game state. This is cheaper than creating and removing 3D objects, so it won't cause any frame rate drops.
+We can then toggle the coins' visibility according to the game state. This is far cheaper than creating and removing 3D objects, preventing any frame rate drops.
 
 ~~~js
 for (let i = 0; i < state.get('coins').size; i++) {
@@ -290,7 +290,7 @@ for (let i = 0; i < state.get('coins').size; i++) {
 }
 ~~~
 
-As we don't know how many cannonballs we'll need in the run of the game we create a bunch of them just to be certain. If these are not enough we add more when needed. This could also be tweaked for higher difficulty levels, when the cannon is faster.
+We don't know how many cannonballs we'll need in the run of the game, so we create a bunch of them, just to be on the safe side. If these aren't enough we add more when needed. This could later be tweaked for higher difficulty levels, when the cannon is operating faster.
 
 ~~~js
 if (!cannonballs.children.length) {
@@ -317,7 +317,7 @@ for (let i = 0; i < state.get('cannonballs').size; i++) {
 }
 ~~~
 
-The player's ship is constantly sailing further along the circle surrounding the island. To update the ship's position we need to convert the player's polar coordinates and account for the direction the ship's heading. 
+The last object in need of an update is the player's ship, which is constantly sailing further along the circle surrounding the island. To update the ship's position we have to convert the player's polar coordinates to cartesian coordinates and account for the direction the ship's heading.
 
 ~~~js
 ship.rotation.z = state.getIn(['player', 'angle']) - (state.getIn(['player', 'direction']) > 0 ? 0 : Math.PI);
@@ -330,11 +330,11 @@ ship.position.y = position.y;
 
 ## Helpers
 
-When building and debugging the 3D scene during development you may wan't to use a few optional helpers. Some of them are provided by three.js, others can be made by yourself.
+When building and debugging your WebGL/three.js scene during development you may want to use a few optional helpers. Some of them are provided by three.js, others can be quickly made by yourself.
 
 ![](/images/corsair-helpers.jpg)
 
-To accurately test collisions of the objects I've created myself a wireframe sphere factory. You may have seen it already in the ship factory. It returns a wireframe sphere in the size of the object's collision sphere.
+To accurately test collisions between objects I've created a wireframe sphere factory. It returns a wireframe sphere in the size of the object's collision sphere. There is still a comment in the ship factory, If you want to try it. The coins and cannonballs are very similar to their collision shapes, so they don't need it. 
 
 ~~~js
 function wireframeSphereFactory(size) {
@@ -355,7 +355,7 @@ const axisHelper = new THREE.AxisHelper(10);
 scene.add(axisHelper);
 ~~~
 
-To debug Corsair I've frequently moved the camera to a lower position. This position is difficult to play in but makes it easier to see where objects are located.
+To debug [Corsair] I've frequently moved the camera to a lower position. This position is difficult to play in, but it helps to see where the objects are spatially located.
 
 ~~~js
 camera.position.set(0, -100, 30);
@@ -363,7 +363,7 @@ camera.up = new THREE.Vector3(0, 1, 0);
 camera.lookAt(new THREE.Vector3(0, 0, 0));
 ~~~
 
-If you are uncertain about the camera's arguments you can use a camera helper. The helper shows the frustum, line of sight and up of the camera. You can also pass the directional light's shadow frustum to the camera helper, to see how the shadow is actually calculated.
+If you are uncertain about the camera's arguments you can use a camera helper. The helper shows the frustum, line of sight and up vector of the camera. You can also pass the directional light's shadow frustum to the camera helper, to see how the shadow is actually being calculated.
 
 ~~~js
 const cameraHelper = new THREE.CameraHelper(camera);
@@ -374,9 +374,10 @@ scene.add(cameraHelper);
 
 ## Using the render function
 
-The render function is called each time our game loop emits a value. Using the `animationFrame` RxJS scheduler the stream updates at 60 frames per second. The value, an Immutable.js collection, is used to update the 3D objects in the WebGL/three.js scene. 
+The update function returned by the `setup` function is called each time our game loop emits a value. Using the `animationFrame` RxJS scheduler the stream updates at roughly 60 frames per second. The emitted value, an Immutable.js collection, is used to update the 3D objects in the WebGL/three.js scene.
 
 ~~~js
+const render = setup();
 game(stage, score).subscribe({
     next: (state) => {
         render(state);
@@ -389,9 +390,11 @@ game(stage, score).subscribe({
 
 ---
 
-This concludes the [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js] series for 2017. If you've liked this article, please also read the first and second part of the series and return for a possibly future update. I'd love to add explosions using sprites and particles to the game, as well as recreating The Wind Waker's cartoon water shader.
+This concludes the [Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js] series for 2017. If you've liked this article, be sure to read the first and second part of the series and return for a potential future update. I'd love to add explosions using sprites and particles to the game, as well as recreating The Wind Waker's cartoon water shader.
 
-Please leave any questions in the comments section, and I'd appreciate your feedback. If you spot an error you can also open up an issue in the [Corsair] GitHub repository. If you want to help improve the game you are also free to fork it and open up a pull request. And of course, if the series helped you create a game of your own, please share it with us!
+I'd greatly appreciate your feedback. If you have any questions, please leave them in the comments section. If you spot an error, please create an issue in the [Corsair] GitHub repository. Also, if you want to help improve the game, feel free to fork it and open up a pull request. 
+
+And of course, I'd be glad if the series helped you create a game of your own, so please tell me about your project(s)!
 
 
 
