@@ -17,7 +17,7 @@ The full [Corsair] game, which we're developing in this series, is available on 
 
 ## Scene setup
 
-A scene holds your camera(s), lights and models, as it would do in real life. You create a scene by calling `new THREE.Scene()` and then add objects with the `add()` method. We'll look at different types of objects later, but for now the most important object is the camera.
+A scene holds your camera(s), lights and models. You create a scene by calling `new THREE.Scene()` and then add objects with the `add()` method. We'll look at different types of objects later, but for now the most important object is the camera.
 
 There are different camera types in three.js. We'll be using a `PerspectiveCamera`, as it gives us a 3D perspective projection. The various parameters define the camera's [viewing frustrum](https://en.wikipedia.org/wiki/Viewing_frustum). Please refer to the three.js documentation and [Helpers](#helpers) section for help on defining the frustrum.
 
@@ -82,7 +82,7 @@ ambientLight.color.setHSL(0.1, 1, 0.95);
 scene.add(ambientLight);
 ~~~
 
-The hemisphere light has two colors, one for the sky and one for the ground. The sky color is be used for the highest point of the hemisphere, directly on top of the scene. It then fades gradually to the ground color. We can use the hemisphere light to simulate outdoor conditions, but like the ambient light, it can not cast any shadows.
+The hemisphere light has two colors, one for the sky and one for the ground. The sky color is used for the highest point of the hemisphere, directly on top of the scene. It then fades gradually to the ground color. We can use the hemisphere light to simulate outdoor conditions, but like the ambient light, it can not cast any shadows.
 
 ~~~ js
 const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.5);
@@ -120,7 +120,7 @@ directionalLight.shadow.camera.far = 200;
 
 ## Adding objects via primitive geometries
 
-The scene's set up and ready for being populated with 3D objects. Many of them can be created using primitive geometries like boxes, circles, cylinders, planes and spheres.
+The scene is set up and ready for being populated with 3D objects. Many of them can be created using primitive geometries like boxes, circles, cylinders, planes and spheres.
 
 three.js has a built-in `CircleGeometry`, but we only want a circle line for the ship's course, not a circle surface. To achieve this we can use the `LineBasicMaterial` and build the geometry ourselves, by pushing vertices into an empty `Geometry`. The geometry and material are then combined to form a `THREE.Line` object.
 
@@ -258,7 +258,7 @@ function islandFactory() {
 
 ## Updating scene objects and animation
 
-The scene's now populated with 3D objects, so we want to give life to them. Let's revisit the update function returned by our setup function. It receives the Immutable.js collection representing our game state.
+The scene is now populated with 3D objects, so we want to give life to them. Let's revisit the update function returned by our setup function. It receives the Immutable.js collection representing our game state.
 
 ~~~js
 return (state) => {
@@ -334,7 +334,7 @@ When building and debugging your WebGL/three.js scene during development you may
 
 ![](/images/corsair-helpers.jpg)
 
-To accurately test collisions between objects I've created a wireframe sphere factory. It returns a wireframe sphere in the size of the object's collision sphere. There is still a comment in the ship factory, If you want to try it. The coins and cannonballs are very similar to their collision shapes, so they don't need it. 
+To accurately test collisions between objects I've created a wireframe sphere factory. It returns a wireframe sphere in the size of the object's collision sphere. There is still a comment in the ship factory, if you want to try it. The coins and cannonballs are very similar to their collision shapes, so they don't need it. 
 
 ~~~js
 function wireframeSphereFactory(size) {
@@ -394,7 +394,7 @@ This concludes the [Functional Reactive Game Programming – RxJS 5, Immutable.j
 
 I'd greatly appreciate your feedback. If you have any questions, please leave them in the comments section. If you spot an error, please create an issue in the [Corsair] GitHub repository. Also, if you want to help improve the game, feel free to fork it and open up a pull request. 
 
-And of course, I'd be glad if the series helped you create a game of your own, so please tell me about your project(s)!
+And of course, I'd be glad if the series helped you create a game of your own, so please tell me about your projects!
 
 
 
