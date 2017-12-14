@@ -24,8 +24,8 @@ I have presented the current progress of this project at the [Stahlstadt.js] mee
 
 The game is missing a few things I want to implement. As soon as I am done writing about the existing code it might therefore turn into a five-part series:
 
-* three.js The Wind Waker's Cartoon Water Shader _(to be decided)_
-* three.js Explosion with Particles/Sprites _(to be decided)_
+* three.js The Wind Waker's Cartoon Water Shader
+* three.js Explosion with Particles/Sprites
 
 The series is intended to help fellow developers who try to achieve similar goals. Keep in mind, that I am also constantly learning. If you have improvement suggestions or spot an error please don't hesitate to mention it in the comment section or on [Twitter].
 
