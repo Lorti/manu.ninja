@@ -20,7 +20,7 @@ I have presented the current progress of this project at the [Stahlstadt.js] mee
 
  * [Game Loop with RxJS 5/Immutable.js](game-loop-with-rxjs-5-immutable-js)
  * [Game State with RxJS 5/Immutable.js](game-state-with-rxjs-5-immutable-js)
- * Game Graphics with WebGL/three.js and Lazy-Loading of 3D Models _(scheduled for November)_
+ * [Game Graphics with WebGL/three.js and Lazy-Loading of 3D Models](game-graphics-with-webgl-three-js-and-lazy-loading-of-3d-models)
 
 The game is missing a few things I want to implement. As soon as I am done writing about the existing code it might therefore turn into a five-part series:
 
