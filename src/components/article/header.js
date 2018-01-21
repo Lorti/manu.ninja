@@ -8,7 +8,12 @@ import mapTag from '../../utils/taxonomy'
 function Title({ frontmatter, forListing }) {
   if (forListing && frontmatter.external) {
     return (
-      <a href={frontmatter.external} target="_blank" rel="noopener">
+      <a
+        href={frontmatter.external}
+        hrefLang={frontmatter.language ? frontmatter.language : 'en'}
+        target="_blank"
+        rel="noopener"
+      >
         {frontmatter.title}
       </a>
     )

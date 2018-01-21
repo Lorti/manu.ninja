@@ -17,6 +17,24 @@
     border-top: 1px solid lightgray;
     padding-top: .6875em;
     padding-bottom: .6875em;
+
+    &[hreflang="de"]::after {
+        content: ' [German]';
+        color: $hover-color;
+    }
+}
+
+.Links-icon {
+    position: relative;
+    margin-left: .25em;
+
+    svg {
+        position: absolute;
+        width: .75em;
+        height: .75em;
+        top: 50%;
+        margin-top: -.375em;
+    }
 }
 
 .Links-meta {

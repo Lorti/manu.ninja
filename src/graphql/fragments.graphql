@@ -8,6 +8,7 @@ fragment frontmatterFragment on MarkdownRemark {
     summary
     thumbnail
     external
+    language
     sharing
   }
 }

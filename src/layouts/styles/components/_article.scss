@@ -26,6 +26,11 @@
         display: inline-block;
         vertical-align: middle;
     }
+
+    a[hreflang="de"]::after {
+        content: ' [German]';
+        color: $hover-color;
+    }
 }
 
 .Article-category,

@@ -3,12 +3,13 @@ import Link from 'gatsby-link'
 
 import mapTag from '../utils/taxonomy.js'
 
-function RelatedLink({ title, path, external }) {
+function RelatedLink({ title, path, external, language }) {
   if (external) {
     return (
       <a
         className="Links-link u-truncated"
         href={external}
+        hrefLang={language ? language : 'en'}
         target="_blank"
         rel="noopener"
       >
@@ -44,6 +45,7 @@ export default function Related({ posts = [] }) {
                 title={post.node.frontmatter.title}
                 path={post.node.frontmatter.path}
                 external={post.node.frontmatter.external}
+                language={post.node.frontmatter.language}
               />
             </li>
           )

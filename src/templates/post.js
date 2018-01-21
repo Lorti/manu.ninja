@@ -13,7 +13,7 @@ import excerpt from '../utils/excerpt'
 
 export default function Template({ data, pathContext }) {
   const { site, markdownRemark: post } = data
-  const metadata = site.siteMetadata;
+  const metadata = site.siteMetadata
   const { frontmatter } = post
   const { related } = pathContext
 

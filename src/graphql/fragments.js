@@ -22,6 +22,7 @@ export const frontmatterFragment = graphql`
       summary
       thumbnail
       external
+      language
       sharing
     }
   }
