@@ -29,6 +29,7 @@ const tags = {
   slides: 'Slides',
   svg: 'SVG',
   testing: 'Testing',
+  tools: 'Tools',
   unity: 'Unity',
   zbrush: 'ZBrush',
 }

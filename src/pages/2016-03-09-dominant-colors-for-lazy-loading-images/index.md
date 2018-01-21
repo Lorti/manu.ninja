@@ -3,7 +3,7 @@ path: /dominant-colors-for-lazy-loading-images
 title: Dominant Colors for Lazy-Loading Images
 date: 2016-03-09
 categories: [coding]
-tags: [image-processing, lazy-loading, performance]
+tags: [image-processing, lazy-loading, performance, tools]
 thumbnail: /images/tiny-thumbnails.jpg
 ---
 
