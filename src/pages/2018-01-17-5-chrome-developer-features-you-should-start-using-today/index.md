@@ -8,7 +8,7 @@ external: https://dev.karriere.at/a/chrome-developer-tools
 language: de
 ---
 
-Developers use the Chrome DevTools on a regular basis. However, most developers limit themselves to a few features that are familiar to them - like changing CSS styles or checking JavaScript errors. It pays off to explore and discover new tools. In this post I'll show you 5 features you may not yet know, but which I find very helpful in my work.
+Developers use the Chrome DevTools on a regular basis. However, most developers limit themselves to a few features that are familiar to them -- like changing CSS styles or checking JavaScript errors. It pays off to explore and discover new tools. In this post I'll show you 5 features you may not yet know, but which I find very helpful in my work.
 
 <!--
 
