@@ -1,10 +1,8 @@
 import React from 'react'
-import Link from 'gatsby-link'
-import Helmet from 'react-helmet'
 
-import Introduction from '../components/Introduction'
-import Header from '../components/article/header'
 import Content from '../components/article/content'
+import Header from '../components/article/header'
+import Introduction from '../components/Introduction'
 
 export default function Index({ data }) {
   const { edges: posts } = data.allMarkdownRemark

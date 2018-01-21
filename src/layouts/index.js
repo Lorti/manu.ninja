@@ -1,20 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
 import WebFont from 'webfontloader'
 
 import Banner from '../components/Banner'
 import Footer from '../components/Footer'
-
 import Meta from '../components/meta'
 import PersonSchema from '../components/schema/person'
 
+import '../graphql/fragments'
 import './styles/index.scss'
-
-// https://facebook.github.io/relay/docs/en/fragment-container.html
-// https://github.com/gatsbyjs/gatsby/tree/master/examples/gatsbygram
-import '../graphql/fragments';
 
 class TemplateWrapper extends React.Component {
   componentDidMount() {

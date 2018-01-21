@@ -1,3 +1,6 @@
+// https://facebook.github.io/relay/docs/en/fragment-container.html
+// https://github.com/gatsbyjs/gatsby/tree/master/examples/gatsbygram
+
 export const siteMetadataFragment = graphql`
   fragment Index_siteMetadata on Site {
     siteMetadata {

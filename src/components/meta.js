@@ -1,6 +1,5 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import Link from 'gatsby-link'
 
 export default function Meta({ title, description, pageUrl, imageUrl }) {
   return (

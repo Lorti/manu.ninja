@@ -115,20 +115,22 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
           const alpha = a.node.frontmatter.categories
             .concat(a.node.frontmatter.tags)
             .sort()
+
           const beta = b.node.frontmatter.categories
             .concat(b.node.frontmatter.tags)
             .sort()
+
           const matches = alpha.filter(keyword => {
             return beta.includes(keyword)
           })
+
           const score = matches.length
           if (score > 1) {
             related.push(Object.assign({}, b, { score }))
           }
         }
       })
-      related = related.sort((a, b) => b.score - a.score)
-      related = related.slice(0, 7)
+      related = related.sort((a, b) => b.score - a.score).slice(0, 7)
       createPage({
         path: a.node.frontmatter.path,
         component: template,

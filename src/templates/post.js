@@ -1,28 +1,28 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import Link from 'gatsby-link'
 
-import Header from '../components/article/header'
+import ArticleSchema from '../components/schema/article'
 import Content from '../components/article/content'
 import Disqus from '../components/disqus'
 import Donation from '../components/donation'
-import Related from '../components/related'
-
+import Header from '../components/article/header'
 import Meta from '../components/meta'
-import ArticleSchema from '../components/schema/article'
+import Related from '../components/related'
 
 import excerpt from '../utils/excerpt'
 
 export default function Template({ data, pathContext }) {
   const { site, markdownRemark: post } = data
+  const metadata = site.siteMetadata;
+  const { frontmatter } = post
   const { related } = pathContext
 
-  const title = `${post.frontmatter.title} | manu.ninja`
-  const description = post.frontmatter.summary || excerpt(post.html)
-  const pageUrl = `${site.siteMetadata.siteUrl}${post.frontmatter.path}`
-  const imageUrl = post.frontmatter.thumbnail
-    ? `${site.siteMetadata.siteUrl}${post.frontmatter.thumbnail}`
-    : `${site.siteMetadata.siteUrl}/share.png`
+  const title = `${frontmatter.title} | manu.ninja`
+  const description = frontmatter.summary || excerpt(post.html)
+  const pageUrl = `${metadata.siteUrl}${frontmatter.path}`
+  const imageUrl = frontmatter.thumbnail
+    ? `${metadata.siteUrl}${frontmatter.thumbnail}`
+    : `${metadata.siteUrl}/share.png`
 
   return (
     <div className="Column">
@@ -37,15 +37,15 @@ export default function Template({ data, pathContext }) {
       />
       <article className="Article">
         <Header post={post} />
-        <Content post={post} siteUrl={site.siteMetadata.siteUrl} />
+        <Content post={post} siteUrl={metadata.siteUrl} />
       </article>
       <ArticleSchema
         title={title}
         description={description}
-        date={post.frontmatter.date}
+        date={frontmatter.date}
         imageUrl={imageUrl}
       />
-      <Disqus url={pageUrl} identifier={post.frontmatter.path} />
+      <Disqus url={pageUrl} identifier={frontmatter.path} />
       <Related posts={related || []} />
       <Donation />
     </div>
@@ -55,9 +55,7 @@ export default function Template({ data, pathContext }) {
 export const pageQuery = graphql`
   query PostQuery($path: String!) {
     site {
-      siteMetadata {
-        siteUrl
-      }
+      ...Index_siteMetadata
     }
     markdownRemark(frontmatter: { path: { eq: $path } }) {
       html

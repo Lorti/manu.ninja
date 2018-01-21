@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'gatsby-link'
 
 class Disqus extends React.Component {
   componentDidMount() {

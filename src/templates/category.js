@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from 'gatsby-link'
 
-import Header from '../components/article/header'
 import Content from '../components/article/content'
+import Header from '../components/article/header'
 
 import mapTag from '../utils/taxonomy'
 
