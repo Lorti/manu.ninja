@@ -64,14 +64,20 @@ TemplateWrapper.propTypes = {
 
 export default TemplateWrapper
 
+export const siteMetadataFragment = graphql`
+  fragment Index_siteMetadata on Site {
+    siteMetadata {
+      title
+      description
+      siteUrl
+    }
+  }
+`
+
 export const pageQuery = graphql`
   query LayoutQuery {
     site {
-      siteMetadata {
-        title
-        description
-        siteUrl
-      }
+      ...Index_siteMetadata
     }
   }
 `

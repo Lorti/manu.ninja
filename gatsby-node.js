@@ -1,4 +1,11 @@
+const fs = require('fs')
 const path = require('path')
+const fragments = [
+  fs.readFileSync(
+    path.join(__dirname, 'src/graphql/fragments.graphql'),
+    'utf8'
+  ),
+]
 
 const createCategories = (createPage, edges) => {
   const template = path.resolve(`src/templates/category.js`)
@@ -76,6 +83,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
   const template = path.resolve(`src/templates/post.js`)
 
   return graphql(`
+    ${fragments}
     {
       allMarkdownRemark(
         sort: { order: DESC, fields: [frontmatter___date] }
@@ -85,17 +93,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
           node {
             id
             html
-            frontmatter {
-              title
-              path
-              date(formatString: "MMM DD, YYYY")
-              categories
-              tags
-              summary
-              thumbnail
-              external
-              sharing
-            }
+            ...frontmatterFragment
           }
         }
       }

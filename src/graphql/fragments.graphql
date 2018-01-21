@@ -1,0 +1,13 @@
+fragment frontmatterFragment on MarkdownRemark {
+  frontmatter {
+    title
+    path
+    date(formatString: "MMM DD, YYYY")
+    categories
+    tags
+    summary
+    thumbnail
+    external
+    sharing
+  }
+}

@@ -32,15 +32,7 @@ export const pageQuery = graphql`
         node {
           id
           html
-          frontmatter {
-            title
-            path
-            categories
-            date(formatString: "MMM DD, YYYY")
-            thumbnail
-            external
-            summary
-          }
+          ...Post_frontmatter
         }
       }
     }
