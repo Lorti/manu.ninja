@@ -32,7 +32,7 @@ export const pageQuery = graphql`
         node {
           id
           html
-          ...Post_frontmatter
+          ...Index_frontmatter
         }
       }
     }

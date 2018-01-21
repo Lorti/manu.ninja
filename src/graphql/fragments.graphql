@@ -1,3 +1,11 @@
+fragment siteMetadataFragment on Site {
+  siteMetadata {
+    title
+    description
+    siteUrl
+  }
+}
+
 fragment frontmatterFragment on MarkdownRemark {
   frontmatter {
     title

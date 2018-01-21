@@ -12,6 +12,10 @@ import PersonSchema from '../components/schema/person'
 
 import './styles/index.scss'
 
+// https://facebook.github.io/relay/docs/en/fragment-container.html
+// https://github.com/gatsbyjs/gatsby/tree/master/examples/gatsbygram
+import '../graphql/fragments';
+
 class TemplateWrapper extends React.Component {
   componentDidMount() {
     this.loadFonts()
@@ -63,16 +67,6 @@ TemplateWrapper.propTypes = {
 }
 
 export default TemplateWrapper
-
-export const siteMetadataFragment = graphql`
-  fragment Index_siteMetadata on Site {
-    siteMetadata {
-      title
-      description
-      siteUrl
-    }
-  }
-`
 
 export const pageQuery = graphql`
   query LayoutQuery {

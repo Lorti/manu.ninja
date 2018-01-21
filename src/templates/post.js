@@ -52,22 +52,6 @@ export default function Template({ data, pathContext }) {
   )
 }
 
-export const markdownFragment = graphql`
-  fragment Post_frontmatter on MarkdownRemark {
-    frontmatter {
-      title
-      path
-      date(formatString: "MMM DD, YYYY")
-      categories
-      tags
-      summary
-      thumbnail
-      external
-      sharing
-    }
-  }
-`
-
 export const pageQuery = graphql`
   query PostQuery($path: String!) {
     site {
@@ -77,7 +61,7 @@ export const pageQuery = graphql`
     }
     markdownRemark(frontmatter: { path: { eq: $path } }) {
       html
-      ...Post_frontmatter
+      ...Index_frontmatter
     }
   }
 `
