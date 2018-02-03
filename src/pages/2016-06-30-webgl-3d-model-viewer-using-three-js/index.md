@@ -13,7 +13,7 @@ You can create a WebGL 3D model viewer in just a few lines of code using [three.
 
 <div class="FlexEmbed">
     <div class="FlexEmbed-ratio FlexEmbed-ratio--16by9">
-        <iframe class="FlexEmbed-content" src="https://manu.ninja/files/webgl-3d-model-viewer-using-three-js"></iframe>
+        <iframe class="FlexEmbed-content" src="https://static.manu.ninja/files/webgl-3d-model-viewer-using-three-js/"></iframe>
     </div>
 </div>
 
@@ -214,5 +214,5 @@ Congratulations on creating a WebGL 3D model viewer with three.js. The full exam
 
 [threejs]: http://threejs.org/
 [orbit]: https://github.com/mrdoob/three.js/blob/master/examples/js/controls/OrbitControls.js
-[example]: https://manu.ninja/files/webgl-3d-model-viewer-using-three-js
+[example]: https://static.manu.ninja/files/webgl-3d-model-viewer-using-three-js/
 [github]: https://github.com/Lorti/webgl-3d-model-viewer-using-three.js
