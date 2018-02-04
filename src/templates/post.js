@@ -20,9 +20,15 @@ export default function Template({ data, pathContext }) {
   const title = `${frontmatter.title} | manu.ninja`
   const description = frontmatter.summary || excerpt(post.html)
   const pageUrl = `${metadata.siteUrl}${frontmatter.path}`
-  const imageUrl = frontmatter.thumbnail
-    ? `${metadata.siteUrl}${frontmatter.thumbnail}`
-    : `${metadata.siteUrl}/share.png`
+
+  let imageUrl = `${metadata.siteUrl}/share.png`
+  if (frontmatter.thumbnail) {
+    if (frontmatter.thumbnail.includes('http')) {
+      imageUrl = frontmatter.thumbnail
+    } else {
+      imageUrl = `${metadata.siteUrl}${frontmatter.thumbnail}`
+    }
+  }
 
   return (
     <div className="Column">

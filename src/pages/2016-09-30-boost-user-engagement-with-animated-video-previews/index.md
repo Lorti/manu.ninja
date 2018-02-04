@@ -5,7 +5,7 @@ date: 2016-09-30
 categories: [coding]
 tags: [animation, conversion, ffmpeg]
 sharing: true
-thumbnail: /files/big_buck_bunny_720p_h264_thumbnail.jpg
+thumbnail: https://static.manu.ninja/files/big_buck_bunny_720p_h264_thumbnail.jpg
 ---
 
 If you are building a video portal, an artist's portfolio or any other showcase of films, from smartphone footage to news coverage to sports clips, you typically look for engaging thumbnails. Though you don't have to stop there and can boost your video previews and click-through rate by showing more than a single still image of each video. This article highlights two approaches to grab your viewers' attention.
@@ -28,7 +28,7 @@ ffmpeg -i video.mp4 \
 ~~~
 
 <video width="320" height="180" autoplay controls preload="auto" loop>
-    <source src="/files/big_buck_bunny_720p_h264_preview.mp4" type="video/mp4">
+    <source src="https://static.manu.ninja/files/big_buck_bunny_720p_h264_preview.mp4" type="video/mp4">
 </video>
 
 * `-vf` sets the filtergraph, which in this case consists of three operations, separated by commas.
@@ -94,7 +94,7 @@ ffmpeg -i video.mp4 \
 && rm slides.png
 ~~~
 
-![](/files/big_buck_bunny_720p_h264_slides.jpg)
+![](https://static.manu.ninja/files/big_buck_bunny_720p_h264_slides.jpg)
 
 * `-vf` sets the filtergraph, which in this case consists of three operations, separated by commas.
 
