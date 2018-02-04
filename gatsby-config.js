@@ -173,7 +173,7 @@ module.exports = {
         `,
         serialize: ({ site, allMarkdownRemark, allSitePage }) => {
           const posts = allMarkdownRemark.edges
-            .filter(edge => !edge.node.external)
+            .filter(edge => !edge.node.frontmatter.external)
             .map(edge => edge.node.frontmatter.path)
 
           const pages = allSitePage.edges.map(edge => edge.node.path)
