@@ -1,6 +1,6 @@
 ---
 path: /how-to-take-a-high-dpi-full-page-screenshot-in-google-chrome
-title: How to take a high-DPI full page screenshot in Google Chrome
+title: How to Take a High-DPI Full Page Screenshot in Google Chrome
 date: 2018-02-08
 categories: [art, coding, games]
 tags: [tools, slides]
