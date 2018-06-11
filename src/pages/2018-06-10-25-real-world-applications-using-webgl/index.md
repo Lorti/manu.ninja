@@ -27,7 +27,9 @@ OpenGL ES is the “most widely deployed 3D graphics API in history”.
 
 topographic maps
 
-[Google Maps](https://goo.gl/maps/49h6bEVhwDn)
+[Google Maps](https://goo.gl/maps/1Q1YxF4zckJ2)
+
+[![](/images/webgl-examples/google-maps-innsbruck.png)](https://goo.gl/maps/1Q1YxF4zckJ2)
 
 ## Medicine
 
