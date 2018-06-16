@@ -150,22 +150,20 @@ We started Sketchfab in Paris, France, in early 2012. We were frustrated to see 
 
 [Vossen3D](http://vossen3d.com/)
 
-[![Vossen3D](/images/webgl-examples/.png)]()
-
 [Andari Systems](http://realism.andarisystems.com/)
 
-[![Andari Systems](/images/webgl-examples/.png)]()
+[![Vossen3D](/images/webgl-examples/andari-systems-vossen-3d.png)](http://vossen3d.com/)
 
 [Xymatic](http://experiences.xymatic.com/car/)
 
-[![Xymatic](/images/webgl-examples/.png)]()
+[![Xymatic](/images/webgl-examples/xymatic-bmw.png)](http://experiences.xymatic.com/car/)
 
 ## Car Visualization
 
 [Renault Kadjar](http://kadjar-vr.littleworkshop.fr/)
 
-[![Renault Kadjar](/images/webgl-examples/.png)]()
+[![Renault Kadjar](/images/webgl-examples/renault-kadjar.png)](http://kadjar-vr.littleworkshop.fr/)
 
 [VW Polo](https://partner.viscircle.com/VWPolo/)
 
-[![VW Polo](/images/webgl-examples/.png)]()
+[![VW Polo](/images/webgl-examples/vw-polo.png)](https://partner.viscircle.com/VWPolo/)
