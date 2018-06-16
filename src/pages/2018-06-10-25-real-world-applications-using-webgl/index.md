@@ -1,21 +1,26 @@
 ---
-path: /25-real-world-applications-using-webgl-three-js
-title: 25 Real-World Applications Using WebGL/three.js
+path: /25-real-world-applications-using-webgl
+title: 25 Real-World Applications Using WebGL
 date: 2018-06-10
 categories: [coding, games]
 tags: [business, interaction-design, three-js, webgl]
 ---
 
-use cases for WebGL
+Whenever I've tried to explain the fascination of WebGL I failed to think of examples apart from demos, experiments and games. Since then I've done research and collected 25 inspiring real-world applications using WebGL/WebVR.
 
-apart from Chrome Experiments and technical demonstrations
+If you're inclined to delve into 3D graphics on the web, and create something of your own, check out pure [WebGL Examples](https://github.com/Lorti/webgl-examples), the popular [three.js](https://threejs.org/) and [A-Frame](https://aframe.io/) libraries, or the [Unity](https://unity3d.com/) and [PlayCanvas](https://playcanvas.com/) game engines.
 
-WebGL is a cross-platform, royalty-free web standard for a low-level 3D graphics API based on OpenGL ES, exposed to ECMAScript via the HTML5 <canvas> element. 
-WebGL brings plugin-free 3D to the web, implemented right into the browser. Major browser vendors Apple (Safari), Google (Chrome), Microsoft (Edge), and Mozilla (Firefox) are members of the WebGL Working Group.
+What is WebGL, though? 
 
-OpenGL ES is a cross-platform API for rendering advanced 2D/3D graphics on embedded and mobile systems (consoles, phones, appliances, vehicles…). 
-It consists of a well-defined subset of OpenGL suitable for low-power devices, and provides a flexible and powerful interface between software and graphics acceleration hardware.
-OpenGL ES is the “most widely deployed 3D graphics API in history”.
+<blockquote>
+
+WebGL is a cross-platform, royalty-free web standard for a low-level 3D graphics API based on OpenGL ES, exposed to ECMAScript via the HTML5 &lt;canvas&gt; element.<br>WebGL brings plugin-free 3D to the web, implemented right into the browser. Major browser vendors Apple, Google, Microsoft, and Mozilla are members of the WebGL Working Group.
+
+OpenGL ES is a cross-platform API for rendering advanced 2D/3D graphics on embedded and mobile systems. It consists of a well-defined subset of OpenGL suitable for low-power devices, such as appliances, phones or vehicles.<br>OpenGL ES is the “most widely deployed 3D graphics API in history”.
+
+<a href="https://www.khronos.org/">The Khronos Group</a>
+  
+</blockquote>
 
 ## Maps
 
@@ -152,7 +157,7 @@ We started Sketchfab in Paris, France, in early 2012. We were frustrated to see 
 
 [![Xymatic](/images/webgl-examples/xymatic-bmw.jpg)](http://experiences.xymatic.com/car/)
 
-## Car Visualization
+## Marketing
 
 [Renault Kadjar](http://kadjar-vr.littleworkshop.fr/)
 
