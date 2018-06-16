@@ -3,7 +3,7 @@ path: /game-graphics-with-webgl-three-js-and-lazy-loading-of-3d-models
 title: Game Graphics with WebGL/three.js and Lazy-Loading of 3D Models
 date: 2017-12-13
 categories: [art, coding, games]
-tags: [rxjs, functional-reactive-programming, three-js, lazy-loading]
+tags: [functional-reactive-programming, lazy-loading, rxjs, three-js, webgl]
 thumbnail: /images/corsair.jpg
 ---
 

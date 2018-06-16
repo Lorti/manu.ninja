@@ -3,7 +3,7 @@ path: /webgl-3d-model-viewer-using-three-js
 title: WebGL 3D Model Viewer Using three.js
 date: 2016-06-30
 categories: [art, coding, games]
-tags: [three-js]
+tags: [three-js, webgl]
 summary: You can create a WebGL 3D model viewer in just a few lines of code using three.js. This tutorial shows you all you need to get started. The final code is on GitHub and you can see the viewer in action showing a low-poly model that I made for an unfinished Space Western game.
 thumbnail: /images/webgl-3d-model-viewer.jpg
 sharing: true

@@ -3,14 +3,8 @@ path: /25-real-world-applications-using-webgl-three-js
 title: 25 Real-World Applications Using WebGL/three.js
 date: 2018-06-10
 categories: [coding, games]
-tags: [webgl, three-js]
+tags: [business, interaction-design, three-js, webgl]
 ---
-
-<!-- 
-TODO
-Tags?
-Introduction? 
--->
 
 use cases for WebGL
 

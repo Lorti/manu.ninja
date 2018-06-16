@@ -31,6 +31,7 @@ const tags = {
   testing: 'Testing',
   tools: 'Tools',
   unity: 'Unity',
+  webgl: 'WebGL',
   zbrush: 'ZBrush',
 }
 
