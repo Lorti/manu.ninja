@@ -29,57 +29,57 @@ topographic maps
 
 [Google Maps](https://goo.gl/maps/1Q1YxF4zckJ2)
 
-[![](/images/webgl-examples/google-maps.png)](https://goo.gl/maps/1Q1YxF4zckJ2)
+[![Google Maps](/images/webgl-examples/google-maps.png)](https://goo.gl/maps/1Q1YxF4zckJ2)
 
 ## Medicine
 
 [BioDigital Human](https://www.biodigital.com/)
 
-[![](/images/webgl-examples/biodigital-human.png)](https://www.biodigital.com/)
+[![BioDigital Human](/images/webgl-examples/biodigital-human.png)](https://www.biodigital.com/)
 
 ## Shops
 
 [ThreeKit](https://threekit.com/)
 
-[![](/images/webgl-examples/threekit.png)](https://threekit.com/)
+[![ThreeKit](/images/webgl-examples/threekit.png)](https://threekit.com/)
 
 [Xbox Design Lab](https://xboxdesignlab.xbox.com/en-US/customize)
 
-[![](/images/webgl-examples/xbox.png)](https://xboxdesignlab.xbox.com/en-US/customize)
+[![Xbox Design Lab](/images/webgl-examples/xbox.png)](https://xboxdesignlab.xbox.com/en-US/customize)
 
 [Meisterschmuck](https://www.meisterschmuck.de/shop/trauringe/)
 
-[![](/images/webgl-examples/meisterschmuck.png)](https://www.meisterschmuck.de/shop/trauringe/)
+[![Meisterschmuck](/images/webgl-examples/meisterschmuck.png)](https://www.meisterschmuck.de/shop/trauringe/)
 
 ## Floorplanning
 
 [Archilogic](https://spaces.archilogic.com/)
 
-[![](/images/webgl-examples/archilogic.png)](https://spaces.archilogic.com/)
+[![Archilogic](/images/webgl-examples/archilogic.png)](https://spaces.archilogic.com/)
 
 [Roomle](https://www.roomle.com/en/floorplanner)
 
-[![](/images/webgl-examples/roomle.png)](https://www.roomle.com/en/floorplanner)
+[![Roomle](/images/webgl-examples/roomle.png)](https://www.roomle.com/en/floorplanner)
 
 ## Architecture Visualization
 
 [Matterport](https://matterport.com/)
 
-[![](/images/webgl-examples/matterport.png)](https://matterport.com/)
+[![Matterport](/images/webgl-examples/matterport.png)](https://matterport.com/)
 
 [Shapespark](https://www.shapespark.com/)
 
-[![](/images/webgl-examples/shapespark.png)](https://www.shapespark.com/)
+[![Shapespark](/images/webgl-examples/shapespark.png)](https://www.shapespark.com/)
 
 [WebVR Showroom by Little Workshop](http://showroom.littleworkshop.fr/)
 
-[![](/images/webgl-examples/little-workshop.png)](http://showroom.littleworkshop.fr/)
+[![WebVR Showroom by Little Workshop](/images/webgl-examples/little-workshop.png)](http://showroom.littleworkshop.fr/)
 
 ## Human Rights Activism
 
 [Fear of the Sky](http://www.360syria.com/)
 
-[![](/images/webgl-examples/amnesty-international.png)](http://www.360syria.com/)
+[![Fear of the Sky](/images/webgl-examples/amnesty-international.png)](http://www.360syria.com/)
 
 An interactive WebVR experience showing the devastation caused by barrel bombs in Syria, created by Amnesty International UK and Syrian media activists.
 
@@ -89,21 +89,21 @@ Rainforest Foundation Norway
 
 [Save the Rainforest](http://rainforest.arkivert.no/)
 
-[![](/images/webgl-examples/regnskogfondet.png)](http://rainforest.arkivert.no/)
+[![Save the Rainforest](/images/webgl-examples/regnskogfondet.png)](http://rainforest.arkivert.no/)
 
 Save the Rainforest website allows visitors to explore the rainforest through WebGL, immersive 360-degree panoramic images, and videos.
 
 ## 3D Printing Marketplaces
 
-[Shapeways](https://www.thingiverse.com/)
+[Thingiverse](https://www.thingiverse.com/)
 
-[![](/images/webgl-examples/thingiverse.png)](https://www.thingiverse.com/)
+[![Thingiverse](/images/webgl-examples/thingiverse.png)](https://www.thingiverse.com/)
 
 ## 3D Model Marketplaces
 
 [Sketchfab](https://sketchfab.com/)
 
-[![](/images/webgl-examples/.png)]()
+[![Sketchfab](/images/webgl-examples/sketchfab.png)](https://sketchfab.com/)
 
 Sketchfab is empowering a new era of creativity by making it easy for anyone to publish and find 3D content online. With a community of millions of creators who have published millions of models, we are the largest platform for immersive and interactive 3D. Additionally, our store allows thousands of buyers and sellers to transact in confidence using our realtime 3D viewer and model inspector. 
 Our technology is integrated with every major 3D creation tool and publishing platform, and is compatible with every browser and most VR headsets. Our player is embeddable anywhere on the web, and lets you view and share 3D and VR content on social media such as Facebook, Twitter or Reddit.
@@ -114,58 +114,58 @@ We started Sketchfab in Paris, France, in early 2012. We were frustrated to see 
 
 [Unity](https://beta.unity3d.com/jonas/AngryBots/)
 
-[![](/images/webgl-examples/.png)]()
+[![Unity](/images/webgl-examples/unity.png)](https://beta.unity3d.com/jonas/AngryBots/)
 
-[PlayCanvas](https://robostorm.io/)
+[PlayCanvas](https://playcanvas.com/)
 
-[![](/images/webgl-examples/.png)]()
+[![PlayCanvas](/images/webgl-examples/playcanvas.png)](https://robostorm.io/)
 
 ## Magazines and Newspapers
 
 [National Geographic](https://www.nationalgeographic.com/magazine/2017/06/nodosaur-3d-interactive-dinosaur-fossil/)
 
-[![](/images/webgl-examples/.png)]()
+[![National Geographic](/images/webgl-examples/national-geographic.png)](https://www.nationalgeographic.com/magazine/2017/06/nodosaur-3d-interactive-dinosaur-fossil/)
 
 [New York Times](https://www.nytimes.com/interactive/2015/01/09/sports/the-dawn-wall-el-capitan.html)
 
-[![](/images/webgl-examples/.png)]()
+[![New York Times](/images/webgl-examples/new-york-times.png)](https://www.nytimes.com/interactive/2015/01/09/sports/the-dawn-wall-el-capitan.html)
 
 ## 3D Modeling
 
 [SculptGL](https://stephaneginier.com/sculptgl/)
 
-[![](/images/webgl-examples/.png)]()
+[![SculptGL](/images/webgl-examples/sculptgl.png)](https://stephaneginier.com/sculptgl/)
 
 [SketchUp](https://app.sketchup.com/app?hl=en)
 
-[![](/images/webgl-examples/.png)]()
+[![SketchUp](/images/webgl-examples/sketchup.png)](https://app.sketchup.com/app?hl=en)
 
 ## CAD
 
 [Onshape](https://www.onshape.com/)
 
-[![](/images/webgl-examples/.png)]()
+[![Onshape](/images/webgl-examples/onshape.png)](https://www.onshape.com/)
 
 ## Car Configuration
 
 [Vossen3D](http://vossen3d.com/)
 
-[![](/images/webgl-examples/.png)]()
+[![Vossen3D](/images/webgl-examples/.png)]()
 
 [Andari Systems](http://realism.andarisystems.com/)
 
-[![](/images/webgl-examples/.png)]()
+[![Andari Systems](/images/webgl-examples/.png)]()
 
 [Xymatic](http://experiences.xymatic.com/car/)
 
-[![](/images/webgl-examples/.png)]()
+[![Xymatic](/images/webgl-examples/.png)]()
 
 ## Car Visualization
 
 [Renault Kadjar](http://kadjar-vr.littleworkshop.fr/)
 
-[![](/images/webgl-examples/.png)]()
+[![Renault Kadjar](/images/webgl-examples/.png)]()
 
 [VW Polo](https://partner.viscircle.com/VWPolo/)
 
-[![](/images/webgl-examples/.png)]()
+[![VW Polo](/images/webgl-examples/.png)]()
