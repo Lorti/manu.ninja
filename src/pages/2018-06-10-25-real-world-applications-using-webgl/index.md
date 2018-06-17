@@ -1,6 +1,6 @@
 ---
 path: /25-real-world-applications-using-webgl
-title: 25 Real-World Applications Using WebGL
+title: 25+ Real-World Applications Using WebGL
 date: 2018-06-10
 categories: [coding, games]
 tags: [business, interaction-design, three-js, webgl]
@@ -41,136 +41,141 @@ Many complex three-dimensional objects, with overlapping and interweaving parts,
 
 ## Shops
 
+3D graphics have a wide array of uses for web shops, ranging from simple product presentations, to product customization and realistic shading of jewellery.
 
-
-[ThreeKit](https://threekit.com/)
+[ThreeKit](https://threekit.com/) offers services, creating web shop integrations of product presentations. 
 
 [![ThreeKit](/images/webgl-examples/threekit.jpg)](https://threekit.com/)
 
-[Xbox Design Lab](https://xboxdesignlab.xbox.com/en-US/customize)
+[Xbox Design Lab](https://xboxdesignlab.xbox.com/en-US/customize) allows you to configure your custom Xbox Controller in the browser with a 3D preview of the final result. 
 
 [![Xbox Design Lab](/images/webgl-examples/xbox.jpg)](https://xboxdesignlab.xbox.com/en-US/customize)
 
-[Meisterschmuck](https://www.meisterschmuck.de/shop/trauringe/)
-
+[Meisterschmuck](https://www.meisterschmuck.de/shop/trauringe/) offers a highly sophisticated 3D display of their wedding rings. Though the complex shading can quickly exhaust your laptop or smartphone.
+ 
 [![Meisterschmuck](/images/webgl-examples/meisterschmuck.jpg)](https://www.meisterschmuck.de/shop/trauringe/)
 
 ## Floorplanning
 
-[Archilogic](https://spaces.archilogic.com/)
+Floorplanning is just one of many architectural use-cases for 3D graphics, and is rapidly making it's transition from traditional desktop to web applications. 
+
+[Archilogic](https://spaces.archilogic.com/) generates 3D models out of floor plans and then allows you to plan your interiour by choosing from a library of furniture and materials.
 
 [![Archilogic](/images/webgl-examples/archilogic.jpg)](https://spaces.archilogic.com/)
 
-[Roomle](https://www.roomle.com/en/floorplanner)
+[Roomle](https://www.roomle.com/en/floorplanner) also allows you to furnish and decorate floor plans, but it's more focused on the furniture products and their configuration.
 
 [![Roomle](/images/webgl-examples/roomle.jpg)](https://www.roomle.com/en/floorplanner)
 
+Both services supports interactive walkthroughs and WebVR (Virtual Reality) to explore your virtual house or apartment.
+ 
 ## Architecture Visualization
 
-[Matterport](https://matterport.com/)
+The boundary between various architectural services is fluid. I want to show you two ends of the spectrum, a service for existing buildings and a service for not-yet existing buildings.
+ 
+[Matterport](https://matterport.com/) scans your existing houses and rooms and transforms it into a walkthrough that mixes 360° images and 3D models mapped with textures of the scans.
 
 [![Matterport](/images/webgl-examples/matterport.jpg)](https://matterport.com/)
 
-[Shapespark](https://www.shapespark.com/)
+[Shapespark](https://www.shapespark.com/) offers real-time architecture visualization for planned of ongoing projects, as an improvement upon common prerendered still images.
 
 [![Shapespark](/images/webgl-examples/shapespark.jpg)](https://www.shapespark.com/)
 
-[WebVR Showroom by Little Workshop](http://showroom.littleworkshop.fr/)
+The [WebVR Showroom by Little Workshop](http://showroom.littleworkshop.fr/) is not an actual client project of theirs, but shows a beautiful mixture of furniture customization and architecture visualization.
 
 [![WebVR Showroom by Little Workshop](/images/webgl-examples/little-workshop.jpg)](http://showroom.littleworkshop.fr/)
 
 ## Human Rights Activism
 
-[Fear of the Sky](http://www.360syria.com/)
+Non-governmental organizations have used WebGL successfully without a business goal in mind. [Fear of the Sky](http://www.360syria.com/), a project by Amnesty International UK and Syrian media activists, uses 360° images and WebVR to create an interactive experience showing the devastation caused by barrel bombs in Syria.
 
 [![Fear of the Sky](/images/webgl-examples/amnesty-international.jpg)](http://www.360syria.com/)
 
-An interactive WebVR experience showing the devastation caused by barrel bombs in Syria, created by Amnesty International UK and Syrian media activists.
-
 ## Environmental Protection 
 
-Rainforest Foundation Norway
-
-[Save the Rainforest](http://rainforest.arkivert.no/)
+Going from human rights activism to environmental protection, [Save the Rainforest](http://rainforest.arkivert.no/), a project by the Rainforest Foundation Norway and public broadcaster NRK, allows visitors to explore the rainforest through WebGL and 360° images.
 
 [![Save the Rainforest](/images/webgl-examples/regnskogfondet.jpg)](http://rainforest.arkivert.no/)
 
-Save the Rainforest website allows visitors to explore the rainforest through WebGL, immersive 360-degree panoramic images, and videos.
-
 ## 3D Printing Marketplaces
 
-[Thingiverse](https://www.thingiverse.com/)
+If you sell 3D models you might want to show them in actual 3D. [Thingiverse](https://www.thingiverse.com/) has an interactive viewer for all their user's 3D printing models.
 
 [![Thingiverse](/images/webgl-examples/thingiverse.jpg)](https://www.thingiverse.com/)
 
+The big commercial players Pinshape and Sculpteo, however, use a streaming solution to render the interactive viewer on the server. My guess is they worry about decompilation and theft of their models, and haven't found a safe solution yet. This brings us right to the next example.
+
 ## 3D Model Marketplaces
 
-[Sketchfab](https://sketchfab.com/)
+There are not only 3D models for printing, but also for real-time applications. [Sketchfab](https://sketchfab.com/) started as a realtime 3D viewer and model inspector, to allow artists to showcase their models appropriately, with all shading and postprocessing features one might expect from modern game engines. It now also has a store for artists to sell their models. Buyers have the confidence, that the models work as advertised, as they are shown in real-time, not in screenshots.
 
 [![Sketchfab](/images/webgl-examples/sketchfab.jpg)](https://sketchfab.com/)
 
-Sketchfab is empowering a new era of creativity by making it easy for anyone to publish and find 3D content online. With a community of millions of creators who have published millions of models, we are the largest platform for immersive and interactive 3D. Additionally, our store allows thousands of buyers and sellers to transact in confidence using our realtime 3D viewer and model inspector. 
-Our technology is integrated with every major 3D creation tool and publishing platform, and is compatible with every browser and most VR headsets. Our player is embeddable anywhere on the web, and lets you view and share 3D and VR content on social media such as Facebook, Twitter or Reddit.
-
-We started Sketchfab in Paris, France, in early 2012. We were frustrated to see so many 3D creators spending hours on making great 3D models, but ending up sharing boring screenshots as there was no better solution to showcase their work
-
 ## Game Engines
 
-[Unity](https://beta.unity3d.com/jonas/AngryBots/)
+Games are the easiest example to recollect, which is why I just want to name the two most popular game engines for the web, being [Unity](https://beta.unity3d.com/jonas/AngryBots/) and [PlayCanvas](https://playcanvas.com/). Both have been used for many free and commercial games.
 
 [![Unity](/images/webgl-examples/unity.jpg)](https://beta.unity3d.com/jonas/AngryBots/)
-
-[PlayCanvas](https://playcanvas.com/)
 
 [![PlayCanvas](/images/webgl-examples/playcanvas.jpg)](https://robostorm.io/)
 
 ## Magazines and Newspapers
 
-[National Geographic](https://www.nationalgeographic.com/magazine/2017/06/nodosaur-3d-interactive-dinosaur-fossil/)
+The usefulness of 3D graphics is not limited to highly interactive applications. They can also be used to enhance a magazine or newspaper article.
+
+The [National Geographic](https://www.nationalgeographic.com/magazine/2017/06/nodosaur-3d-interactive-dinosaur-fossil/) magazine regularly uses 3D to enhance their articles, like they did with the Nodosaur dinosaur fossil, which is shown in different views while scrolling, and can be explored freely at the end of the article.
 
 [![National Geographic](/images/webgl-examples/national-geographic.jpg)](https://www.nationalgeographic.com/magazine/2017/06/nodosaur-3d-interactive-dinosaur-fossil/)
 
-[New York Times](https://www.nytimes.com/interactive/2015/01/09/sports/the-dawn-wall-el-capitan.html)
+The [New York Times](https://www.nytimes.com/interactive/2015/01/09/sports/the-dawn-wall-el-capitan.html) famously used WebGL to convey the challenge of the 3,000-foot Dawn Wall, a vertical sheet of mostly smooth granite that many believe is the hardest climb in the world.
 
 [![New York Times](/images/webgl-examples/new-york-times.jpg)](https://www.nytimes.com/interactive/2015/01/09/sports/the-dawn-wall-el-capitan.html)
 
 ## 3D Modeling
 
-[SculptGL](https://stephaneginier.com/sculptgl/)
+In addition to presenting 3D models and scenes, they're also digital content creation tools available on the web.
+
+[SculptGL](https://stephaneginier.com/sculptgl/) is an online sculpting application similar to Pixologic ZBrush or Autodesk Mudbox. Sketchfab has forked the application and created the similar [Sculptfab](https://labs.sketchfab.com/sculptfab/).
 
 [![SculptGL](/images/webgl-examples/sculptgl.jpg)](https://stephaneginier.com/sculptgl/)
 
-[SketchUp](https://app.sketchup.com/app?hl=en)
+Google's [SketchUp](https://app.sketchup.com/app?hl=en) is a 3D modeling software that's easy to learn for beginners and is available as a web-based version since November 2017.
 
 [![SketchUp](/images/webgl-examples/sketchup.jpg)](https://app.sketchup.com/app?hl=en)
 
 ## CAD
 
-[Onshape](https://www.onshape.com/)
+[Onshape](https://www.onshape.com/) is a computer-aided design software system, delivered via SaaS (Software as a Service. The editor is using WebGL, with difficult processing and rendering being performed on their servers.
 
 [![Onshape](/images/webgl-examples/onshape.jpg)](https://www.onshape.com/)
 
 ## Car Configuration
 
-[Vossen3D](http://vossen3d.com/)
+Apart from construction and real-estate, the automotive industry may have embraced WebGL the most.
 
-[Andari Systems](http://realism.andarisystems.com/)
+Vossen, a manufacturer of luxury and performance wheels, offers a [Vossen3D](http://vossen3d.com/) online configurator. It has an extensive library of cars to choose from, and is developed by [Andari Systems](http://realism.andarisystems.com/).
 
 [![Vossen3D](/images/webgl-examples/andari-systems-vossen-3d.jpg)](http://vossen3d.com/)
 
-[Xymatic](http://experiences.xymatic.com/car/)
+Many studios try to appeal to large car manufacturers and sell configuration platforms, as [Xymatic](http://experiences.xymatic.com/car/) did with their BMW 7 series car configurator.
 
 [![Xymatic](/images/webgl-examples/xymatic-bmw.jpg)](http://experiences.xymatic.com/car/)
 
+As WebGL implementations of shader's advance, realistic depiction of painting options becomes possible, as in VisCircle's [VW Polo](https://partner.viscircle.com/VWPolo/) configurator.
+
+[![VW Polo](/images/webgl-examples/vw-polo.jpg)](https://partner.viscircle.com/VWPolo/)
+
 ## Marketing
 
-[Renault Kadjar](http://kadjar-vr.littleworkshop.fr/)
+You don't have to think about configuration, if you want to see the WebGL appeal for the automotive industry. Lots of marketing and product landing pages can be greatly enhanced with 3D graphics.
+
+[Inside Renault Kadjar](http://kadjar-vr.littleworkshop.fr/), a collaboration between Renault, Little Workshop and Oculus, let's you explore and customize the car's interior.
 
 [![Renault Kadjar](/images/webgl-examples/renault-kadjar.jpg)](http://kadjar-vr.littleworkshop.fr/)
 
-[VW Polo](https://partner.viscircle.com/VWPolo/)
+WebGL isn't limited to building complex experiences. It can also be used in subtle ways to add a bit of style and interactivity. For example, the [Transmit](https://panic.com/transmit/) app has an interactive 3D logo on their product page.
 
-[![VW Polo](/images/webgl-examples/vw-polo.jpg)](https://partner.viscircle.com/VWPolo/)
+[![Transmit](/images/webgl-examples/transmit.jpg)](https://panic.com/transmit/)
 
 ---
 
