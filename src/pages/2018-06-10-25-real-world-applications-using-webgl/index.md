@@ -29,19 +29,19 @@ OpenGL ES is the “most widely deployed 3D graphics API in history”.
 
 ## Maps
 
-topographic maps
-
-[Google Maps](https://goo.gl/maps/1Q1YxF4zckJ2)
+The most widely known example for WebGL is [Google Maps'](https://goo.gl/maps/1Q1YxF4zckJ2) terrain view. Any form of topographic map or spatial arrangement can greatly benefit from 3D representations.
 
 [![Google Maps](/images/webgl-examples/google-maps.jpg)](https://goo.gl/maps/1Q1YxF4zckJ2)
 
 ## Medicine
 
-[BioDigital Human](https://www.biodigital.com/)
+Many complex three-dimensional objects, with overlapping and interweaving parts, are difficult to grasp. The prime example are living creatures. [BioDigital Human](https://www.biodigital.com/) brings to life thousands of medically accurate anatomy objects and health conditions in an interactive WebGL application.
 
 [![BioDigital Human](/images/webgl-examples/biodigital-human.jpg)](https://www.biodigital.com/)
 
 ## Shops
+
+
 
 [ThreeKit](https://threekit.com/)
 
@@ -171,3 +171,7 @@ We started Sketchfab in Paris, France, in early 2012. We were frustrated to see 
 [VW Polo](https://partner.viscircle.com/VWPolo/)
 
 [![VW Polo](/images/webgl-examples/vw-polo.jpg)](https://partner.viscircle.com/VWPolo/)
+
+---
+
+Do you know other examples of real-world WebGL applications? Please post them in the comments, and if you enjoyed this article, [consider sharing it with your followers](https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fmanu.ninja%2F25-real-world-applications-using-webgl&text=25%20Real-World%20Applications%20Using%20WebGL&url=https://manu.ninja/25-real-world-applications-using-webgl&via=manuelwieser).
