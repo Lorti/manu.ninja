@@ -107,7 +107,7 @@ The large commercial players Pinshape and Sculpteo, however, use a streaming sol
 
 ## 3D Model Marketplaces
 
-The majority of 3D models is not used for printing, but for for real-time applications. 
+The majority of 3D models is not used for printing, but for real-time applications. 
 
 [Sketchfab](https://sketchfab.com/) started as a real-time 3D viewer and model inspector, to allow artists to showcase their models appropriately, including all the shading and postprocessing features one might expect from modern game engines.
 
