@@ -13,7 +13,7 @@ A/B testing allows you to continually improve your product's user experience or 
 
 A/B testing allows you to continually improve your product's user experience or various sales and marketing KPIs, as long as your goals are well-defined and you have a clear hypothesis. This article does not tell you why you should do A/B testing, but focuses on how to track the test and analyze its result using JavaScript and Google Analytics.
 
-![](/images/google-analytics-ab-testing/analytics-chart-data-cliché-stock-photo.jpg) 
+![](/images/gaab-testing/analytics-chart-data-cliché-stock-photo.jpg) 
 
 The article is written for developers, marketing and product managers. If you are not a developer, feel free to skip the coding part and only read the first and third sections!
 
@@ -23,7 +23,7 @@ Before the actual implementation you should define your A and B (even C?) versio
 
 The example A/B test we are going to create has a `Version A` and a `Version B`. The versions have no difference other than their names and we want visitors to click on the `Call to action` button, which is our conversion goal.
 
-![](/images/google-analytics-ab-testing/versions.png) 
+![](/images/gaab-testing/versions.png) 
 
 To evaluate the test we therefore have to track three events:
 
@@ -61,11 +61,11 @@ In the example A/B test the pageview URLs are as follows:
 
 Page | URL (Path)
 - | - 
-Page containing the A/B test | `/google-analytics-ab-testing`
+Page containing the A/B test | `/gaab-testing`
 Version A | `/virtual/A`
 Version B | `/virtual/B`
 
-What does that mean? For each request two pageviews are send to Google Analytics: the original pageview of `/google-analytics-ab-testing` and, depending on the version that was served to the user, either `/virtual/A` or `/virtual/B`. 
+What does that mean? For each request two pageviews are sent to Google Analytics: the original pageview of `/google-analytics-ab-testing` and, depending on the version that was served to the user, either `/virtual/A` or `/virtual/B`. 
 
 Why virtual pageviews? I feel it makes talking about the A/B test easier, as you would normally use phrases like 
 
@@ -103,7 +103,7 @@ First you have to add Google Analytics to your code. If you copy the snippet fro
 
 You can immediately test the pageview by opening your browser's developer tools and looking at the network tab:
 
-![](/images/google-analytics-ab-testing/network-tab-pageview-request.png)
+![](/images/gaab-testing/network-tab-pageview-request.png)
 
 In the example A/B test the visitor is assigned a version randomly, which is then stored via `localStorage` on the client. 
 
@@ -132,7 +132,7 @@ function sendVirtualPageview(version) {
 }
 ```
 
-![](/images/google-analytics-ab-testing/network-tab-virtual-pageview-request.png) 
+![](/images/gaab-testing/network-tab-virtual-pageview-request.png) 
 
 The conversion event, which has to be fired when clicking the `Call to action` button, is also sent via `ga('send', ...);`:
 
@@ -148,7 +148,7 @@ function sendConversionEvent() {
 }
 ```
 
-![](/images/google-analytics-ab-testing/network-tab-event-request.png) 
+![](/images/gaab-testing/network-tab-event-request.png) 
 
 This concludes the tracking implementation. The `getVersion` function can then be used to change parts of the page depending on the version being served.
 
@@ -158,35 +158,35 @@ You can start setting up the A/B test report in Google Analytics simultaneous to
 
 To check the pageviews you can open up any content report and search for `virtual`. You can also select real-time reports, if you have just finished implementation and the data hasn't been processed yet, which can take up to a few hours in Google Analytics. This will show you all virtual pageviews collected in the specified timeframe:
 
-![](/images/google-analytics-ab-testing/report-virtual-pageviews.png) 
+![](/images/gaab-testing/report-virtual-pageviews.png) 
 
 Then you can verify the conversion event by going to the behavior category and searching for your event (either by category, action or label):
 
-![](/images/google-analytics-ab-testing/report-events.png) 
+![](/images/gaab-testing/report-events.png) 
 
 For your report you will now have to create so-called [segments](https://support.google.com/analytics/answer/3123951) and a [goal](https://support.google.com/analytics/answer/1012040?hl=en) in Google Analytics.
 
 The goal can be created by going to the admin section and selecting _Goals_ in the view column, which is the rightmost column.
 
-![](/images/google-analytics-ab-testing/goal-creation-step-1.png)
+![](/images/gaab-testing/goal-creation-step-1.png)
 
 I have named the goal `Conversion` and set its type to _Event_. You then have to enter the details of the event and save the goal. If you want, you can use __Verify this Goal__ to have Google Analytics check for any existing events that match your settings.
 
-![](/images/google-analytics-ab-testing/goal-creation-step-2.png)
+![](/images/gaab-testing/goal-creation-step-2.png)
 
 You can now pick any report in Google Analytics and select the newly defined `Conversion` goal and its various metrics. You can for example go to __Channels__ in the __Acquisition__ section and select goal completions. It will show you how often the `Call to action` button has been clicked in total:
 
-![](/images/google-analytics-ab-testing/goal-completions.png)
+![](/images/gaab-testing/goal-completions.png)
 
 What you then want to do is get the number of clicks that happened in each version of your A/B test. For this to happen you have to add two segments via the __+ Add Segment__ button. The only thing you have to specify, besides giving it a meaningful name, is the page you want to filter:
 
-![](/images/google-analytics-ab-testing/segment-creation.png)
+![](/images/gaab-testing/segment-creation.png)
 
 With your report properly set up you should now see the conversion rate per version. You can save your report for later or export it in various formats, so you can send it to your data analyst to check its statistical significance. There are also many online [significance calculators](https://vwo.com/ab-split-test-significance-calculator/), if you prefer.
 
 Obviously the data from the example A/B test is boring, which is why I want to conclude this article with the report of an actual A/B/C test that we did at _karriere.at_, so you can see what it looks like with real numbers:
 
-![](/images/google-analytics-ab-testing/report.png)
+![](/images/gaab-testing/report.png)
 
 That was all you need for a simple A/B testing setup using Google Analytics. If you have any questions or feedback, please get in touch!
 
