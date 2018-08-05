@@ -23,6 +23,7 @@ const tags = {
   maya: 'Maya',
   meetups: 'Meetups',
   performance: 'Performance',
+  pwa: 'Progressive Web Apps',
   rigging: 'Rigging',
   rxjs: 'RxJS',
   shaders: 'Shaders',
@@ -31,6 +32,7 @@ const tags = {
   testing: 'Testing',
   tools: 'Tools',
   unity: 'Unity',
+  vue: 'Vue.js',
   webgl: 'WebGL',
   zbrush: 'ZBrush',
 }

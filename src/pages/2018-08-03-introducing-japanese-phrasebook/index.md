@@ -3,7 +3,7 @@ path: /introducing-japanese-phrasebook
 title: Introducing “Japanese Phrasebook”
 date: 2018-08-03
 categories: [coding]
-tags: [business]
+tags: [interaction-design, pwa, performance, vue]
 thumbnail: /images/japanese-phrasebook-screens.png
 ---
 
@@ -39,7 +39,7 @@ There are a few core features I knew my phrasebook app needed to have:
 
 * __Extensibility__: I want the phrasebook to be easy to extend. This is why all of the data is fetched as a large JSON object. It allows me to build an editor in the future, where users can add and edit their own phrases and sets. The JSON object could then be exported and shared with friends, who import the custom additions to their phrasebook.<br>Also the code can be forked and with a few simple changes used for another language.
 
-* __Personalization__: 
+* __Personalization__: The user should be able to mark phrases as her favorite, and filter each set to only see the favorites. This allows for quicker access to what is important. The editor to add your own phrases and sets is also a form of personalization, as well as the [community features](#future-plans) I mention at the end of this blog post.
 
 ## Implementation Details
 
@@ -92,6 +92,7 @@ The Japanese Phrasebook is a single-page web application with a few particular c
   ```json
   {
     "phrases": {
+      ...
       "aa3ea769-e37c-4ca1-9a44-1c0b84a12ba8": {
         "id": "d8186e78-0f66-47c0-bd42-421e286a80e0",
         "english": "Good afternoon.",
@@ -100,7 +101,7 @@ The Japanese Phrasebook is a single-page web application with a few particular c
         "sets": [
           "5bbcdb75-3bbf-4e5d-83ce-65425be830fc"
         ]
-      }
+      },
       ...
     },
     "sets": {
@@ -114,11 +115,13 @@ The Japanese Phrasebook is a single-page web application with a few particular c
           "461b586d-f0aa-4aa5-983c-9e6800648168",
           "f25c5b32-8dd3-45e4-9f37-32776a4d4b57"
         ]
-      }
+      },
       ...
     }
   }
   ```
+  
+* __Vue Material__: Vue Material is a set of Vue.js components built after Google's Material Design guidelines. I like its attention to detail in following the guidelines, the documentation and how it helps speed up prototyping. It does however add an overhead to the app, as almost every single element is now a Vue.js component. I do get a 95-100 Lighthouse score and all A's in WebPagetest, but there is noticeably scroll jank and delayed drawing of list elements.
 
 ## Future Plans
 
