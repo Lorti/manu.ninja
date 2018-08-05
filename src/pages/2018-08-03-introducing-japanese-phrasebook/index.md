@@ -136,3 +136,5 @@ The next step could be some community features, like sharing your own phrases an
 My girlfriend's brother is currently in Japan with his friends. They are testing the phrasebook and giving me feedback--sort of a field test for the app.
 
 If you are interested in contributing, head to the [GitHub](https://github.com/Lorti/phrasebook) repository. If you don't know how to code and want to support the project, submit new phrases or give feedback at [feedback@japanese-phrasebook.com](mailto:feedback@japanese-phrasebook.com), make a small donation via [PayPal](https://www.paypal.me/manuninja), or tell your friends and family about the phrasebook (you can use the sharing buttons in the app's footer), when they are about to visit Japan. 
+
+Lastly I want to thank the two people, who have already contributed to the Japanese Phrasebook: [Ksenia](https://steemit.com/@happyksu) for the logo and [Daisy](https://www.instagram.com/daisimerollin/) for the Kinkaku-ji picture. 
