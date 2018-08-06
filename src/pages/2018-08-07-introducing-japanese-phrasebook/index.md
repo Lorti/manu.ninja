@@ -1,13 +1,13 @@
 ---
 path: /introducing-japanese-phrasebook
 title: Introducing “Japanese Phrasebook”
-date: 2018-08-03
+date: 2018-08-07
 categories: [coding]
 tags: [interaction-design, pwa, performance, vue]
 thumbnail: /images/japanese-phrasebook-screens.png
 ---
 
-For the last few weeks I have build an open-source [Japanese Phrasebook](https://www.japanese-phrasebook.com) app optimized for travel and offline usage. The app's content are 690+ phrases I have taken from Wikitravel and transformed to a structured data model. This blog post explains my motivation and outlines what I am trying to achieve with this project.
+For the last few weeks I have built an open-source [Japanese Phrasebook](https://www.japanese-phrasebook.com) app optimized for travel and offline usage. The app's content are nearly 700 phrases from Wikitravel, transformed to a structured data model. This blog post explains my motivation and outlines what I am trying to achieve with this project.
 
 [![](/images/japanese-phrasebook-screens.png)](https://www.japanese-phrasebook.com)
 
