@@ -19,27 +19,27 @@ If you are interested in contributing or learning from the app's source code, op
 
 Why did I build yet another phrasebook app?
 
-I have visited Japan in the spring with my girlfriend. We traveled for three weeks from March to April, enjoying the full cherry blossom bloom. I had learned a fair amount of basic Japanese before our trip, to get around, like reading Katakana and Hiragana, and a few dozen basic Kanji. Still I wanted to have a phrasebook for the vocabulary I tend to forget. 
+I have visited Japan in spring with my girlfriend. We traveled for three weeks from March to April, enjoying the full cherry blossom bloom. I had learned a fair amount of basic Japanese before our trip, like reading Hiragana and Katakana, and a few dozen Kanji. Still I wanted to have a phrasebook for the vocabulary I frequently forget. 
 
-Printed phrasebooks are fun to read before my trips but I never actually used them when I am abroad. My phone is quicker to access, as it is in my pocket, so I tested a few phrasebook apps before going to Japan. None of them convinced me, mostly because I never found the phrases I looked for. In the end I used the phrasebook at [Wikitravel](https://wikitravel.org/en/Japanese_phrasebook) because, to me, it had the best content. 
+Printed phrasebooks are fun to read before my trips but I never use them when I am abroad. My phone is immediately ready, as it is in my pocket, so I tested a few phrasebook apps before going to Japan. None of them convinced me, as I rarely found the phrases I was looking for. In the end I used the phrasebook at [Wikitravel](https://wikitravel.org/en/Japanese_phrasebook) because it had the best content. 
 
-The problem with Wikitravel is, that it is a single page. Without a table of contents and the possibility to mark my favorite phrases it is hard to find anything when you are in a hurry. The browser is not helping when it forgets your scroll position or wants to refresh the page, as you have been offline for a long enough period of time.
+Their are a few problems with Wikitravel, though. Everything is on a single page and there's no table of contents, making it hard to find what you are looking for when you are in a hurry. The browser isn't helping when it forgets your scroll position or wants to refresh the page because you have been offline for a long enough period of time.
 
-Basically what I was wishing for, was an easy to use app with Wikitravel's content. When we returned to Tokyo after two weeks of going around by train, I knew that I wanted to build that app.
+What I was wishing for was an easy-to-use app with Wikitravel's content. When we returned to Tokyo after two weeks of traveling Japan by train, I knew I wanted to build that app.
 
 ## Design Considerations
 
 There are a few core features I knew my phrasebook app needed to have:
 
-* __Web Application__: I personally can't think of a reason why the phrasebook should be an Android/iPhone app, other than marketing possibilities in the App Store/Play Store. Following the Progressive Web App guidelines the phrasebook can feel like a native app, have the same user experience and can still be added to the home screen without the hassle of an app store.
+* __Web Application__: I can't think of a reason why the phrasebook should be an iPhone/Android app, other than marketing opportunities in the App Store/Play Store. Following the [Progressive Web App](https://developers.google.com/web/progressive-web-apps/) guidelines the phrasebook app can feel like a native app and have the same user experience, and you can still add it to the home screen--without the hassle of an app store.
 
-* __Offline Support__: I want the app to be fully connectivity-independent, meaning it works offline or on low-quality networks. Even with a Pocket WiFi you will have periods with no internet connection, and that often broke the Wikitravel experience for me.
+* __Offline Support__: I want the app to be connectivity-independent, which means it works on low-quality networks and when there's no connection at all. Even with a Pocket WiFi you are going have periods with no internet access in Japan, and that often broke the Wikitravel experience for me.
 
-* __Easy Access__: The phrasebook is 100% free and open source, so anyone can benefit from it. Thanks to the Web App Manifest search engines can discover the phrasebook as an app. The URL [https://www.japanese-phrasebook.com](https://www.japanese-phrasebook.com) is easy to remember and can be shared with anyone--no friction, no installation necessary. 
+* __Easy Access__: The phrasebook is 100% free and open-source, so anyone can enjoy it. Thanks to the [Web App Manifest](https://www.w3.org/TR/appmanifest/) search engines can discover the phrasebook as an application. The URL [https://www.japanese-phrasebook.com](https://www.japanese-phrasebook.com) is easy to remember and share with anyone--no accounts, no friction, no installation.
 
-* __Extensibility__: I want the phrasebook to be easy to extend. This is why all of the data is fetched as a large JSON object. It allows me to build an editor in the future, where users can add and edit their own phrases and sets. The JSON object could then be exported and shared with friends, who import the custom additions to their phrasebook.<br>Also the code can be forked and with a few simple changes used for another language.
+* __Extensibility__: I want the app to be easy to extend. This is why all of the data is fetched as a large JSON object. It allows me to build an editor in the future, where users can add and edit their own phrases and sets. The JSON object could then be exported and shared with friends, who then import the custom additions to their phrasebook.<br>Also the code can be forked and adapted for any language with just a few changes. This could allow for several languages to be used at once, when visiting different countries in one trip, eliminating the need for multiple apps to be installed.
 
-* __Personalization__: The user should be able to mark phrases as her favorite, and filter each set to only see the favorites. This allows for quicker access to what is important. The editor to add your own phrases and sets is also a form of personalization, as well as the [community features](#future-plans) I mention at the end of this blog post.
+* __Personalization__: I want to be able to mark phrases as my favorites. When I view phrases regarding a certain topic I want to be able to activate a filter and only see my favorites. This allows for quicker access to what is important. The editor to add your own phrases and sets, and the [community features](#future-plans) I mention at the end of this blog post, are also forms of personalization.
 
 ## Implementation Details
 
@@ -98,7 +98,7 @@ The Japanese Phrasebook is a single-page web application with a few particular c
         "english": "Good afternoon.",
         "japanese": "こんにちは。",
         "romaji": "Konnichiwa.",
-        "sets": [
+        "sets": [</p> 
           "5bbcdb75-3bbf-4e5d-83ce-65425be830fc"
         ]
       },
@@ -111,7 +111,7 @@ The Japanese Phrasebook is a single-page web application with a few particular c
         "name": "Family",
         "slug": "family",
         "notes": "<h4>Family</h4><p>In Japanese, it's always important to use less respectful terms for your own family and more respectful terms for another's family. Note also that the words for older/younger brother/sister are different.</p>",
-        "subsets": [
+        "subsets": [</p> 
           "461b586d-f0aa-4aa5-983c-9e6800648168",
           "f25c5b32-8dd3-45e4-9f37-32776a4d4b57"
         ]
