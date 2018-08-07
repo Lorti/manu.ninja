@@ -137,4 +137,4 @@ My girlfriend's brother is currently in Japan with his friends. They are testing
 
 If you are interested in contributing, please head to the [GitHub](https://github.com/Lorti/phrasebook) repository. If you don't know how to code and want to support the project, submit new phrases or give feedback at [feedback@japanese-phrasebook.com](mailto:feedback@japanese-phrasebook.com), make a small donation via [PayPal](https://www.paypal.me/manuninja), or tell your friends and family about the phrasebook (you can use the sharing buttons in the app's footer), when they are about to visit Japan.
 
-I'd also like to thank the people who have already shown their support for the [Japanese Phrasebook](https://www.japanese-phrasebook.com) app--[Ksenia](https://steemit.com/@happyksu) for the logo and [Daisy](https://www.instagram.com/daisimerollin/) for the picture!
+I'd also like to thank the people who have already shown their support for the [Japanese Phrasebook](https://www.japanese-phrasebook.com) app--[Ksenia](https://steemit.com/@happyksu) for the logo and [Daisy](https://www.instagram.com/daisimerollin/) for the Kinkaku-ji picture!
