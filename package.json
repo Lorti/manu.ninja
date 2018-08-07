@@ -28,7 +28,6 @@
     "prismjs": "^1.15.0",
     "react-helmet": "^5.2.0",
     "striptags": "^2.2.1",
-    "webfontloader": "^1.6.28",
     "wordcount": "^1.1.1"
   },
   "license": "MIT",

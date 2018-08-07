@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import WebFont from 'webfontloader'
 
 import Banner from '../components/Banner'
 import Footer from '../components/Footer'
@@ -12,10 +11,6 @@ import '../graphql/fragments'
 import './styles/index.scss'
 
 class TemplateWrapper extends React.Component {
-  componentDidMount() {
-    this.loadFonts()
-  }
-
   render() {
     const meta = this.props.data.site.siteMetadata
     return (
@@ -26,8 +21,6 @@ class TemplateWrapper extends React.Component {
             content="ksUOGNNttZF4FJuFdVLzSvvTEJyh5Leip6UsFAElMSc"
           />
           <link href="//cdnjs.cloudflare.com" rel="dns-prefetch" />
-          <link href="//fonts.googleapis.com" rel="dns-prefetch" />
-          <link href="//fonts.gstatic.com" rel="dns-prefetch" />
           <link href="//www.google-analytics.com" rel="dns-prefetch" />
         </Helmet>
         <Meta
@@ -46,14 +39,6 @@ class TemplateWrapper extends React.Component {
         <PersonSchema imageUrl={`${meta.siteUrl}/manu.jpg`} />
       </div>
     )
-  }
-
-  loadFonts() {
-    WebFont.load({
-      google: {
-        families: ['Lato:400,400italic,700', 'Oswald:300,700'],
-      },
-    })
   }
 }
 
