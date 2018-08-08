@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'manu.ninja | Frond-End Development, Games and Digital Art',
+    title: 'manu.ninja | Front-End Development, Games and Digital Art',
     description:
       'manu.ninja is the personal blog of Manuel Wieser, where he talks about front-end development, web development, coding, games and digital art',
     siteUrl: 'https://manu.ninja',
@@ -57,7 +57,7 @@ module.exports = {
       resolve: 'gatsby-plugin-manifest',
       options: {
         lang: 'en',
-        name: 'manu.ninja | Frond-End Development, Games and Digital Art',
+        name: 'manu.ninja | Front-End Development, Games and Digital Art',
         short_name: 'manu.ninja',
         description:
           'manu.ninja is the personal blog of Manuel Wieser, where he talks about front-end development, web development, coding, games and digital art',
