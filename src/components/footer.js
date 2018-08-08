@@ -22,9 +22,10 @@ export default function Footer() {
             games with my friends.
           </p>
           <p>
-            You can contact me via <a href="https://github.com/Lorti">GitHub</a>,{' '}
-            <a href="http://twitter.com/manuelwieser">Twitter</a> or{' '}
-            <a href="mailto:office@manuelwieser.com">office@manuelwieser.com</a>.
+            You can contact me via <a href="https://github.com/Lorti">GitHub</a>
+            , <a href="http://twitter.com/manuelwieser">Twitter</a> or{' '}
+            <a href="mailto:office@manuelwieser.com">office@manuelwieser.com</a>
+            .
           </p>
           <p>
             I’m currently working as a technical lead and full-stack web
@@ -37,7 +38,11 @@ export default function Footer() {
       <hr />
 
       <p className="Footer-copyright">
-        © {new Date().getFullYear()} Manuel Wieser<br />
+        <Link className="u-floatRight" to="/privacy">
+          Imprint & Privacy Policy
+        </Link>
+        © {new Date().getFullYear()} Manuel Wieser
+        <br />
         <small>
           <Link to="/">manu.ninja</Link> is the personal blog of Manuel Wieser,
           where he talks about front-end development, games and digital art
