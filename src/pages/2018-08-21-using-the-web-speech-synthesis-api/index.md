@@ -1,18 +1,24 @@
 ---
 path: /using-the-web-speech-synthesis-api
-title: Using the Web Speech Synthesis API
+title: Using the Speech Synthesis API
 date: 2018-08-21
 categories: [coding]
 tags: [accessibility, interaction-design]
 ---
 
-## TODO
+<!--
+TODO
 * Tags?
 * Thumbnail?
+-->
 
-<video width="1872" height="1080" autoplay controls preload="auto" loop>
-    <source src="/images/japanese-phrasebook-speech-synthesis-H264.mp4" type="video/mp4">
-</video>
+## What is the Speech Synthesis API?
+
+https://caniuse.com/#feat=speech-recognition
+
+https://caniuse.com/#feat=speech-synthesis
+
+## Init speech synthesis and select one of the current device's voices
 
 ```js
 let synth;
@@ -23,7 +29,11 @@ if ('speechSynthesis' in window) {
   const voices = synth.getVoices();
   voice = voices.find(_voice => /ja-JP/.test(_voice.lang));
 }
+```
 
+## Tell the speech synthesis what (and how) to read
+
+```js
 function speak(text) {
   if (!synth || synth.speaking) {
     return;
@@ -35,6 +45,8 @@ function speak(text) {
 }
 ```
 
+## Fix invalid BCP 47 language tags on Android
+
 ```diff
 if ('speechSynthesis' in window) {
   synth = window.speechSynthesis;
@@ -43,6 +55,79 @@ if ('speechSynthesis' in window) {
 +  voice = voices.find(_voice => /ja[-_]JP/.test(_voice.lang));
 }
 ```
+
+## Load voices when `window.speechSynthesis` is ready
+
+There is a `voiceschanged` event, but it works unreliably, as a quick Stack Overflow search can tell you. 
+
+```js
+let attempts = 0;
+function loadVoices() {
+  attempts++;
+  const voices = synth.getVoices();
+  if (voices.length) {
+    voice = voices.find(_voice => /ja[-_]JP/.test(_voice.lang));
+  }
+  if (!voice) {
+    if (attempts < 10) {
+      setTimeout(() => {
+        loadVoices();
+      }, 250);
+    } else {
+      console.error('`ja-JP` voice not found.');
+    }
+  }
+}
+```
+
+## Fix default `SpeechSynthesisUtterance` property values on Android
+
+```diff
+if ('speechSynthesis' in window) {
+  synth = window.speechSynthesis;
+-  const voices = synth.getVoices();
+-  voice = voices.find(_voice => /ja[-_]JP/.test(_voice.lang));
++  loadVoices();
+}
+```
+
+```diff
+function speak(text) {
+  if (!synth || synth.speaking) {
+    return;
+  }
+  const utterance = new SpeechSynthesisUtterance(output);
+  utterance.addEventListener('error', error => console.error(error));
++  utterance.lang = 'ja-JP';
++  utterance.pitch = 1;
++  utterance.rate = 1;
+  utterance.voice = voice;
++  utterance.volume = 1;
+  synth.speak(utterance);
+}
+```
+
+## Fix utterance of punctuation marks
+
+```diff
+function speak(text) {
+  if (!synth || synth.speaking) {
+    return;
+  }
+-  const utterance = new SpeechSynthesisUtterance(output);
++  const output = text.replace(/(…|[._]{2,})/, '');
++  const utterance = new SpeechSynthesisUtterance(output);
+  utterance.addEventListener('error', error => console.error(error));
+  utterance.lang = 'ja-JP';
+  utterance.pitch = 1;
+  utterance.rate = 1;
+  utterance.voice = voice;
+  utterance.volume = 1;
+  synth.speak(utterance);
+}
+```
+
+## Full speech synthesis JavaScript module
 
 ```js
 let synth;
@@ -91,3 +176,19 @@ export default {
   speak,
 };
 ```
+
+## Use of speech synthesis in the ⛩ Japanese Phrasebook
+
+[Japanese Phrasebook](https://www.japanese-phrasebook.com/)
+
+<video width="1872" height="1080" autoplay controls preload="auto">
+    <source src="/images/japanese-phrasebook-speech-synthesis-H264.mp4" type="video/mp4">
+</video>
+
+Kanji pose a problem, as they have different readings.
+
+## References
+
+[Web Speech API Specification (W3C)](https://w3c.github.io/speech-api/webspeechapi.html)
+
+[Web Speech API (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
