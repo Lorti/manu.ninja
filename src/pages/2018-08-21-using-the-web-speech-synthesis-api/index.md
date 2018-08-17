@@ -1,6 +1,6 @@
 ---
 path: /using-the-web-speech-synthesis-api
-title: Using the Speech Synthesis API
+title: Using the Web Speech Synthesis API
 date: 2018-08-21
 categories: [coding]
 tags: [accessibility, interaction-design]
@@ -11,6 +11,10 @@ TODO
 * Tags?
 * Thumbnail?
 -->
+
+<video width="1872" height="1080" autoplay controls preload="auto">
+    <source src="/images/japanese-phrasebook-speech-synthesis-H264.mp4" type="video/mp4">
+</video>
 
 ## What is the Speech Synthesis API?
 
@@ -180,10 +184,6 @@ export default {
 ## Use of speech synthesis in the ⛩ Japanese Phrasebook
 
 [Japanese Phrasebook](https://www.japanese-phrasebook.com/)
-
-<video width="1872" height="1080" autoplay controls preload="auto">
-    <source src="/images/japanese-phrasebook-speech-synthesis-H264.mp4" type="video/mp4">
-</video>
 
 Kanji pose a problem, as they have different readings.
 
