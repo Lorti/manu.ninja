@@ -11,7 +11,7 @@ tags: [accessibility, interaction-design]
 * Thumbnail?
 
 <video width="1872" height="1080" autoplay controls preload="auto" loop>
-    <source src="/images/japanese-phrasebook-speech-synthesis-H265.mp4" type="video/mp4">
+    <source src="/images/japanese-phrasebook-speech-synthesis-H264.mp4" type="video/mp4">
 </video>
 
 ```js
@@ -33,10 +33,6 @@ function speak(text) {
   utterance.voice = voice;
   synth.speak(utterance);
 }
-
-export default {
-  speak,
-};
 ```
 
 ```diff
