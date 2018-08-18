@@ -12,9 +12,9 @@ TODO
 * Thumbnail?
 -->
 
-<video width="1872" height="1080" autoplay controls preload="auto">
-    <source src="/images/japanese-phrasebook-speech-synthesis-H264.mp4" type="video/mp4">
-</video>
+> "Isn't it nice to have a computer that will talk to you?" 
+
+-- [Agnes](https://www.youtube.com/watch?v=t2A_fZYI6cE), voice in Apple's text-to-speech since before Mac OS X
 
 ## What is the Speech Synthesis API?
 
@@ -184,6 +184,10 @@ export default {
 ## Use of speech synthesis in the ⛩ Japanese Phrasebook
 
 [Japanese Phrasebook](https://www.japanese-phrasebook.com/)
+
+<video width="1872" height="1080" controls preload="auto">
+    <source src="/images/japanese-phrasebook-speech-synthesis-H264.mp4" type="video/mp4">
+</video>
 
 Kanji pose a problem, as they have different readings.
 
