@@ -7,7 +7,7 @@ tags: [business, conferences, slides, tools]
 external: https://dev.karriere.at/a/changing-the-color-of-all-links-in-a-google-slides-presentation-with-a-google-apps-script
 ---
 
-We often use Google Slides at karriere.at for our presentations. To comply with our corporate identity we usually change all colors to our brand color, which is a saturated green. There is one problem, though: The default hyperlink color in Google Slides is a light blue and can not be changed for all Slides at once. Luckily, there is Google Apps Script, which allows you to automate Google Slides and other services.
+We often use Google Slides at karriere.at for our presentations. To comply with our corporate identity we usually change all colors to our brand color, which is a saturated green. There is one problem, though: The default hyperlink color in Google Slides is a light blue and can not be changed for all slides at once. Luckily, there is Google Apps Script, which allows you to automate Google Slides and other services.
 
 <!--
 
