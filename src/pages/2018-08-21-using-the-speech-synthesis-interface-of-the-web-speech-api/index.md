@@ -1,16 +1,13 @@
 ---
-path: /using-the-web-speech-synthesis-api
-title: Using the Web Speech Synthesis API
+path: /using-the-speech-synthesis-interface-of-the-web-speech-api
+title: Using the Speech Synthesis Interface of the Web Speech API
 date: 2018-08-21
 categories: [coding]
 tags: [accessibility, interaction-design]
+thumbnail: /images/author.jpg
 ---
 
-<!--
-TODO
-* Tags?
-* Thumbnail?
--->
+<!-- Tags? -->
 
 > "Isn't it nice to have a computer that will talk to you?" 
 
