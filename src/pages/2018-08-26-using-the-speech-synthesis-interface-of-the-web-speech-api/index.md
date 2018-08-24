@@ -4,11 +4,9 @@ title: Using the Speech Synthesis Interface of the Web Speech API
 htmlTitle: Using the Speech Synthesis Interface of the Web&nbsp;Speech&nbsp;API
 date: 2018-08-26
 categories: [coding]
-tags: [accessibility, interaction-design]
+tags: [accessibility, apis, interaction-design, pwa]
 thumbnail: /images/author.jpg
 ---
-
-<!-- Tags? -->
 
 > "Isn't it nice to have a computer that will talk to you?" 
 

@@ -12,6 +12,7 @@ const tags = {
   'three-js': 'three.js',
   accessibility: 'Accessibility',
   animation: 'Animation',
+  apis: 'Web APIs',
   business: 'Business',
   conferences: 'Conferences',
   conversion: 'Conversion',
