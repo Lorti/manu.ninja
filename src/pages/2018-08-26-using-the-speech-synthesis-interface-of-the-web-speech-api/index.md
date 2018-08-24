@@ -6,7 +6,10 @@ date: 2018-08-26
 categories: [coding]
 tags: [accessibility, apis, interaction-design, pwa]
 thumbnail: /images/author.jpg
+sharing: true
 ---
+
+Speech synthesis has come a long way since it's first appearance in operating systems in the 1980s. In the 1990s Apple already offered system-wide text-to-speech support. Alexa, Cortana, Siri and other virtual assistents recently brought speech synthesis to the masses. In modern browsers the [Web Speech API](https://w3c.github.io/speech-api/webspeechapi.html) allows you to gain access to your device's speech capabilities, so let's start using it!
 
 > "Isn't it nice to have a computer that will talk to you?" 
 
@@ -14,9 +17,7 @@ thumbnail: /images/author.jpg
 
 ## What is the Speech Synthesis API?
 
-https://caniuse.com/#feat=speech-recognition
-
-https://caniuse.com/#feat=speech-synthesis
+This Web Speech API enables web developers to incorporate speech recognition and synthesis into their web applications. These are available via the `SpeechRecognition` and `SpeechSynthesis` interfaces. While speech recognition has very limited browser support<sup>[3](#references)</sup>, speech synthesis is supported by all major desktop browsers, iOS Safari, Chrome Android and Samsung Internet<sup>[4](#references)</sup>.
 
 ## Init speech synthesis and select one of the current device's voices
 
@@ -189,6 +190,7 @@ Kanji pose a problem, as they have different readings.
 
 ## References
 
-[Web Speech API Specification (W3C)](https://w3c.github.io/speech-api/webspeechapi.html)
-
-[Web Speech API (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
+1. [Web Speech API Specification (W3C)](https://w3c.github.io/speech-api/webspeechapi.html)
+1. [Web Speech API (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
+1. [Speech Recognition API Browser Support](https://caniuse.com/#feat=speech-recognition)
+1. [Speech Synthesis API Browser Support](https://caniuse.com/#feat=speech-synthesis)
