@@ -29,7 +29,7 @@ export default function Footer() {
           </p>
           <p>
             I’m currently working as a technical lead and full-stack web
-            developer for <a href="http://www.karriere.at">karriere.at</a>,
+            developer for <a href="https://www.karriere.at">karriere.at</a>,
             making software that helps people find the job of their dreams.
           </p>
         </div>
