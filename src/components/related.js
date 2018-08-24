@@ -27,7 +27,7 @@ function RelatedLink({ title, path, external, language }) {
 export default function Related({ posts = [] }) {
   return (
     <div className="Links">
-      <h3 className="Links-heading">You may also like…</h3>
+      <h3 className="Links-heading">Related Articles</h3>
       <ul>
         {posts.map(post => {
           return (
