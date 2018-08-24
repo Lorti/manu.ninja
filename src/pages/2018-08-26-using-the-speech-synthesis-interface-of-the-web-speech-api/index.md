@@ -1,7 +1,8 @@
 ---
 path: /using-the-speech-synthesis-interface-of-the-web-speech-api
 title: Using the Speech Synthesis Interface of the Web Speech API
-date: 2018-08-21
+htmlTitle: Using the Speech Synthesis Interface of the Web&nbsp;Speech&nbsp;API
+date: 2018-08-26
 categories: [coding]
 tags: [accessibility, interaction-design]
 thumbnail: /images/author.jpg
