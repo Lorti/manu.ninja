@@ -10,8 +10,8 @@ export default function Footer() {
         <div className="Grid-cell u-size1of5">
           <img
             className="Footer-image u-sizeFull u-round"
-            src="/manu.jpg"
-            alt="Manuel Wieser"
+            src="/author.jpg"
+            alt="Manuel Wieser, BSc MA"
           />
         </div>
         <div className="Grid-cell u-size4of5">
@@ -29,7 +29,7 @@ export default function Footer() {
           </p>
           <p>
             I’m currently working as a technical lead and full-stack web
-            developer for <a href="http://www.karriere.at">karriere.at</a>,
+            developer for <a href="https://www.karriere.at">karriere.at</a>,
             making software that helps people find the job of their dreams.
           </p>
         </div>
