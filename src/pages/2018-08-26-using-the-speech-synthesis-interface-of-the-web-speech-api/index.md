@@ -21,6 +21,10 @@ This Web Speech API enables web developers to incorporate speech recognition and
 
 ## Init speech synthesis and select one of the current device's voices
 
+The `speechSynthesis` interface is a property of the `window` object, if supported by the browser. The `getVoices` method returns a list of all voices that are available on the current device. 
+
+A voice has a name, for example `Kyoko` and a BCP 47 language tag<sup>[5](#references)</sup>, for example `ja-JP`, and a few other attributes. You can have the user choose a voice or iterate the list to find a voice for a specific language. Usually there aren't many to choose from, except when looking for English voices.
+
 ```js
 let synth;
 let voice;
@@ -33,6 +37,10 @@ if ('speechSynthesis' in window) {
 ```
 
 ## Tell the speech synthesis what (and how) to read
+
+If you have selected a voice you can define a `SpeechSynthesisUtterance`, which you can pass to the `speak` method of the `SpeechSynthesis` API.
+
+Depending on your operating system and device you should already be able to hear your computer talk. If not, there are a few pitfalls I have encountered myself and will describe in the next sections.
 
 ```js
 function speak(text) {
@@ -48,6 +56,8 @@ function speak(text) {
 
 ## Fix invalid BCP 47 language tags on Android
 
+Some Android versions seem to ignore BCP 47, which tells us to use a hyphen in language tags<sup>[5](#references)</sup>, and use an underscore character instead. You can circumvent this with a simple `/ja[-_]JP/` regex.
+
 ```diff
 if ('speechSynthesis' in window) {
   synth = window.speechSynthesis;
@@ -59,7 +69,18 @@ if ('speechSynthesis' in window) {
 
 ## Load voices when `window.speechSynthesis` is ready
 
-There is a `voiceschanged` event, but it works unreliably, as a quick Stack Overflow search can tell you. 
+Your first call of the `getVoices` method might return an empty array. This is because the Speech Synthesis API requires a few milliseconds for initialization. There is a `voiceschanged` event, but it works unreliably, as a quick Stack Overflow search can tell you.
+
+The safest approach is therefore to call `getVoices` again after a certain amount of time, and throw an error if it fails too often.
+
+```diff
+if ('speechSynthesis' in window) {
+  synth = window.speechSynthesis;
+-  const voices = synth.getVoices();
+-  voice = voices.find(_voice => /ja[-_]JP/.test(_voice.lang));
++  loadVoices();
+}
+```
 
 ```js
 let attempts = 0;
@@ -83,14 +104,7 @@ function loadVoices() {
 
 ## Fix default `SpeechSynthesisUtterance` property values on Android
 
-```diff
-if ('speechSynthesis' in window) {
-  synth = window.speechSynthesis;
--  const voices = synth.getVoices();
--  voice = voices.find(_voice => /ja[-_]JP/.test(_voice.lang));
-+  loadVoices();
-}
-```
+The specification lists sensible default values for the properties of `SpeechSynthesisUtterance` objects. Unfortunately, I have noticed Android using `-1` for pitch, rate and volume.
 
 ```diff
 function speak(text) {
@@ -109,6 +123,10 @@ function speak(text) {
 ```
 
 ## Fix utterance of punctuation marks
+
+The [Japanese Phrasebook](https://www.japanese-phrasebook.com/) app has sentences that start with an ellipsis or multiple underscores, to mark blanks. Some text-to-speech implementations might read that out loud. This can be solved with a `/(…|[._]{2,})/` regex that sanitizes the text before speaking.
+
+Generally, though, any text-to-speech implementation is highly advanced and will try to read the same way a human does.
 
 ```diff
 function speak(text) {
@@ -194,3 +212,4 @@ Kanji pose a problem, as they have different readings.
 1. [Web Speech API (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
 1. [Speech Recognition API Browser Support](https://caniuse.com/#feat=speech-recognition)
 1. [Speech Synthesis API Browser Support](https://caniuse.com/#feat=speech-synthesis)
+1. [Tags for Identifying Languages (BCP 47)](https://tools.ietf.org/html/bcp47)
