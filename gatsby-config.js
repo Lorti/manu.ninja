@@ -19,8 +19,7 @@ module.exports = {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
-          // Keep this in `package.json`, as we'll use it's `github-slugger` dependency.
-          // 'gatsby-remark-autolink-headers',
+          'gatsby-remark-autolink-headers-forked',
 
           // Find a way to handle (relative) social media images and use these packages.
           // 'gatsby-remark-copy-linked-files',

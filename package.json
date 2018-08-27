@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "author": "Manuel Wieser <office@manuelwieser.com>",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
     "gatsby": "^1.9.277",
     "gatsby-link": "^1.6.46",
     "gatsby-plugin-canonical-urls": "^1.0.18",

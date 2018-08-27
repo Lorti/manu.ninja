@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
 
 import excerpt from '../../utils/excerpt'
-import headingLinks from '../../utils/headings'
 
 function ContentContent({ html, summary }) {
   if (summary) {
@@ -53,7 +52,7 @@ export default function Content({ post, siteUrl, forListing }) {
   }
   return (
     <div className="Article-content">
-      <div dangerouslySetInnerHTML={{ __html: headingLinks(html) }} />
+      <div dangerouslySetInnerHTML={{ __html: html }} />
       {post.frontmatter.sharing && (
         <ContentSharing
           url={siteUrl + post.frontmatter.path}
