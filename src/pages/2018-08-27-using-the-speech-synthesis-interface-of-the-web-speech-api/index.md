@@ -2,7 +2,7 @@
 path: /using-the-speech-synthesis-interface-of-the-web-speech-api
 title: Using the Speech Synthesis Interface of the Web Speech API
 htmlTitle: Using the Speech Synthesis Interface of the Web&nbsp;Speech&nbsp;API
-date: 2018-08-26
+date: 2018-08-27
 categories: [coding]
 tags: [accessibility, apis, interaction-design, pwa]
 thumbnail: /images/author.jpg
@@ -124,7 +124,7 @@ function speak(text) {
 
 ## Fix utterance of punctuation marks
 
-The [Japanese Phrasebook](https://www.japanese-phrasebook.com/) app has sentences that start with an ellipsis or multiple underscores, to mark blanks. Some text-to-speech implementations might read that out loud. This can be solved with a `/(…|[._]{2,})/` regex that sanitizes the text before speaking.
+My [Japanese Phrasebook](https://www.japanese-phrasebook.com/) app has sentences that start with an ellipsis or multiple underscores, to mark blanks. Some text-to-speech implementations might read that out loud. This can be solved with a `/(…|[._]{2,})/` regex that sanitizes the text before speaking.
 
 Generally, though, any text-to-speech implementation is highly advanced and will try to read the same way a human does.
 
@@ -147,6 +147,8 @@ function speak(text) {
 ```
 
 ## Full speech synthesis JavaScript module
+
+The following is a complete JavaScript module you can adapt to your needs and use in your own projects with `import speech from 'speech.js'` and `speech.speak('Hello!')`.
 
 ```js
 let synth;
@@ -198,13 +200,13 @@ export default {
 
 ## Use of speech synthesis in the ⛩ Japanese Phrasebook
 
-[Japanese Phrasebook](https://www.japanese-phrasebook.com/)
+If you want a live example of the Speech Synthesis API you can open my [Japanese Phrasebook](https://www.japanese-phrasebook.com/) app. Many travelers don't know how to pronounce Japanese phrases correctly, so text-to-speech is a helpful addition to this web application.
 
 <video width="1872" height="1080" controls preload="auto">
     <source src="/images/japanese-phrasebook-speech-synthesis-H264.mp4" type="video/mp4">
 </video>
 
-Kanji pose a problem, as they have different readings.
+Kanji pose a problem, as they have different readings. I want to add furigana soon and see if text-to-speech implementations respect them when using `<ruby>` annotations.
 
 ## References
 
