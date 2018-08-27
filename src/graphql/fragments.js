@@ -15,6 +15,7 @@ export const frontmatterFragment = graphql`
   fragment Index_frontmatter on MarkdownRemark {
     frontmatter {
       title
+      htmlTitle
       path
       date(formatString: "MMM DD, YYYY")
       categories

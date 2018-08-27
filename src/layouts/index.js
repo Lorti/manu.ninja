@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 
-import Banner from '../components/Banner'
-import Footer from '../components/Footer'
+import Banner from '../components/banner'
+import Footer from '../components/footer'
 import Meta from '../components/meta'
 import PersonSchema from '../components/schema/person'
 

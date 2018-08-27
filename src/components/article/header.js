@@ -6,6 +6,7 @@ import readingLength from '../../utils/length'
 import mapTag from '../../utils/taxonomy'
 
 function Title({ frontmatter, forListing }) {
+  const htmlTitle = frontmatter.htmlTitle || frontmatter.title
   if (forListing && frontmatter.external) {
     return (
       <a
@@ -13,15 +14,19 @@ function Title({ frontmatter, forListing }) {
         hrefLang={frontmatter.language ? frontmatter.language : 'en'}
         target="_blank"
         rel="noopener"
-      >
-        {frontmatter.title}
-      </a>
+        dangerouslySetInnerHTML={{ __html: htmlTitle }}
+      />
     )
   }
   if (forListing && frontmatter.path) {
-    return <Link to={frontmatter.path}>{frontmatter.title}</Link>
+    return (
+      <Link
+        to={frontmatter.path}
+        dangerouslySetInnerHTML={{ __html: htmlTitle }}
+      />
+    )
   }
-  return <span>{frontmatter.title}</span>
+  return <span dangerouslySetInnerHTML={{ __html: htmlTitle }} />
 }
 
 function Category({ categories }) {
