@@ -199,6 +199,9 @@ exports.createPages = ({ actions, graphql }) => {
 
 Add optional context data. Data can be used as arguments to the page GraphQL query. The page "path" is always available as a GraphQL argument.
 
+<https://www.gatsbyjs.org/docs/node-apis/#createPages>
+<https://www.gatsbyjs.org/docs/actions/#createPage>
+
 # Add pages for your pages
 
 ```js
@@ -221,3 +224,4 @@ then basically follow the same steps as for your blog posts
 
 # Summary
 
+we've learned how to use a Gatsby source plugin to convert headless CMS data to Gatsby nodes, how to query those nodes with GraphQL and create pages from it
