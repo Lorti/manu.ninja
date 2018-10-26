@@ -1,7 +1,7 @@
 ---
 path: /gatsby-and-buttercms
 title: Gatsby and ButterCMS
-date: 2018-10-22
+date: 2018-10-29
 categories: [coding]
 tags: [tools]
 thumbnail: /author.jpg
@@ -70,27 +70,11 @@ Head to GraphiQL, the in-browser IDE for exploring GraphQL, at <http://localhost
 }
 ```
 
+The plugin maps all JSON fields documented in the [Butter CMS API Reference](https://buttercms.com/docs/api/#blog-engine) to GraphQL fields.
+
 ## Add a list of your blog posts
 
-`src/pages/index.js`
-
-```js
-import React from 'react'
-import { Link } from 'gatsby'
-
-import Layout from '../components/layout'
-
-const IndexPage = () => (
-  <Layout>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
-
-export default IndexPage
-```
+Your ButterCMS data can now be queried in any Gatsby page or template. You can start by editing `src/pages/index.js` and adding a list of your blog posts to your home page.
 
 ```js
 import React from 'react'
@@ -125,7 +109,9 @@ export const pageQuery = graphql`
 
 ### Add pages for your blog posts
 
-`src/templates/post.js`
+Generating a page for each of your posts requires you to create an template and use [Gatsby's Node APIs](https://www.gatsbyjs.org/docs/node-apis), specifically the [`createPages`](https://www.gatsbyjs.org/docs/node-apis/#createPages) API and its [`createPage`](https://www.gatsbyjs.org/docs/actions/#createPage) action.
+
+#### `src/templates/post.js`
 
 ```js
 import React from 'react'
@@ -154,7 +140,7 @@ export const pageQuery = graphql`
 `
 ```
 
-`src/templates/gatsby-node.js`
+#### `src/templates/gatsby-node.js`
 
 ```js
 const path = require('path')
@@ -194,23 +180,16 @@ exports.createPages = ({ actions, graphql }) => {
 }
 ```
 
-Add optional context data. Data can be used as arguments to the page GraphQL query. The page "path" is always available as a GraphQL argument.
-
-<https://www.gatsbyjs.org/docs/node-apis/#createPages>
-<https://www.gatsbyjs.org/docs/actions/#createPage>
-
 # Categories, Tags, and Authors
 
-Use the `filter` argument against your ButterCMS categories, tags, and authors to feature and filter content on your blog.
+Use the `filter` argument against your ButterCMS categories, tags, and authors to feature and filter content of your blog.
 
 ```graphql
 {
   allButterPost(filter: {
     tags: {
       elemMatch: {
-        slug: {
-          in: "example-tag"
-        }
+        slug: { in: "example-tag" }
       }
     }
   }) {
@@ -246,6 +225,6 @@ then basically follow the same steps as for your blog posts
 
 # Conclusion
 
-we've learned how to use a Gatsby source plugin to convert headless CMS data to Gatsby nodes, how to query those nodes with GraphQL and create pages from it
+We have learned how to use a Gatsby source plugin to convert headless CMS data to Gatsby nodes, how to query those nodes with GraphQL and create pages from it. This should give you a head start when building a Gatsby blog with ButterCMS. If you have any questions, just ask.
 
-If you want to contribute to the source plugin, feel free to open a pull request on [GitHub](https://github.com/youfoundron/gatsby-source-buttercms). I have just recently updated it using Babel 7, ButterCMS 1.1 and Gatsby 2, but there's still room for improvements.
+The [Gatsby Source Plugin for ButterCMS](https://www.gatsbyjs.org/packages/gatsby-source-buttercms/?=buttercms) is an open-source community plugin for Gatsby. I have updated it prior to writing this article, but there's still room for improvements. If you want to contribute to the source plugin, open a pull request on [GitHub](https://github.com/youfoundron/gatsby-source-buttercms). 
