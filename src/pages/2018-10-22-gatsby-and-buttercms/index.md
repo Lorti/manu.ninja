@@ -7,27 +7,26 @@ tags: [tools]
 thumbnail: /author.jpg
 ---
 
-Blazing fast modern site generator for React. Go beyond static sites: build blogs, ecommerce sites, full-blown apps, and more with Gatsby.
+Learn how to build a Gatsby blog using ButterCMS. Gatsby is a static site generator for web developers familar with React. ButterCMS is a headless CMS and blogging platform. The code examples in this article let you combine Gatsby and ButterCMS in just a few minutes.
 
-Add a blog or CMS to your website in minutes. ButterCMS is a headless CMS and blogging platform built for developers.
+## Setup
 
-# Install Gatsby's CLI and create a new site
+This guide starts with an existing Gatsby site. If you have never used Gatsby you'll have to install the Gatsby CLI first.
 
 ```bash
 npm install --global gatsby-cli
 ```
 
-```bash
-gatsby new gatsby-site https://github.com/gatsbyjs/gatsby-starter-default
-```
+You can then create a new site from the official starting template. If you navigate to the directory and run `gatsby develop` Gatsby will start a hot-reloading server at 
+<http://localhost:8000/>.
 
 ```bash
+gatsby new gatsby-site https://github.com/gatsbyjs/gatsby-starter-default
+cd gatsby-site
 gatsby develop
 ```
 
-<http://localhost:8000/>
-
-# Use a Gatsby source plugin to fetch your ButterCMS blog posts
+## Posts
 
 There are two types of plugins that work within Gatsby’s data system, “source” and “transformer” plugins.
 
@@ -73,7 +72,7 @@ gatsby develop
 }
 ```
 
-# Add a list of your blog posts
+## Add a list of your blog posts
 
 `src/pages/index.js`
 
@@ -126,7 +125,7 @@ export const pageQuery = graphql`
 `
 ```
 
-# Add pages for your blog posts
+### Add pages for your blog posts
 
 `src/templates/post.js`
 
@@ -202,7 +201,24 @@ Add optional context data. Data can be used as arguments to the page GraphQL que
 <https://www.gatsbyjs.org/docs/node-apis/#createPages>
 <https://www.gatsbyjs.org/docs/actions/#createPage>
 
-# Add pages for your pages
+# Categories, Tags, and Authors
+
+Use Butter's APIs for categories, tags, and authors to feature and filter content on your blog.
+
+```graphql
+{
+  allButterPost(filter: {tags: {elemMatch: {slug: {in: "example-tag"}}}}) {
+    edges {
+      node {
+        id
+        title
+      }
+    }
+  }
+}
+```
+
+# Pages
 
 ```js
 module.exports = {
