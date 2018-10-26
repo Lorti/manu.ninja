@@ -7,11 +7,13 @@ tags: [tools]
 thumbnail: /author.jpg
 ---
 
-Learn how to build a Gatsby blog using ButterCMS. Gatsby is a static site generator for web developers familar with React. ButterCMS is a headless CMS and blogging platform. The code examples in this article let you combine Gatsby and ButterCMS in just a few minutes.
+Learn how to build a Gatsby blog using ButterCMS. Gatsby is a static site generator for web developers familar with React. ButterCMS is a headless CMS and blogging platform. The code examples in this article let you combine Gatsby and ButterCMS in just a few minutes, no matter if you are a beginner or an expert in any of them.
 
 ## Setup
 
-This guide starts with an existing Gatsby site. If you have never used Gatsby you'll have to install the Gatsby CLI first.
+When you create a ButterCMS account you'll be provided with an API token and an example blog post. You'll need both for this tutorial.
+
+We'll start with an existing Gatsby site. If you have never used Gatsby before you'll have to install the Gatsby CLI first.
 
 ```bash
 npm install --global gatsby-cli
@@ -28,17 +30,15 @@ gatsby develop
 
 ## Posts
 
-There are two types of plugins that work within Gatsby’s data system, “source” and “transformer” plugins.
+When building with Gatsby, you access your data via the query language [GraphQL](https://graphql.org/). There are many official and community plugins that fetch data from remote or local locations and make it available via GraphQL. 
 
-Source plugins “source” data from remote or local locations into what Gatsby calls nodes.
-
-Transformer plugins “transform” data provided by source plugins into new nodes and/or node fields.
-
-https://www.gatsbyjs.org/packages/gatsby-source-buttercms/?=buttercms
+These plugins are called "source plugins" and there is already a [Gatsby Source Plugin for ButterCMS](https://www.gatsbyjs.org/packages/gatsby-source-buttercms/?=buttercms) you can install.
 
 ```bash
 npm install --save gatsby-source-buttercms
 ```
+
+Add the plugin to your `gatsby-config.js` and copy and paste your ButterCMS API token.
 
 ```js
 module.exports = {
@@ -53,11 +53,9 @@ module.exports = {
 }
 ```
 
-```bash
-gatsby develop
-```
+After a change to the configuration you might have to restart the hot-reloading server (`gatsby develop`), before you can test the GraphQL fields and types the plugin is providing.
 
-<http://localhost:8000/___graphql>
+Head to GraphiQL, the in-browser IDE for exploring GraphQL, at <http://localhost:8000/___graphql> and explore the `butterPost` and `allButterPost` fields.
 
 ```graphql
 {
@@ -203,11 +201,19 @@ Add optional context data. Data can be used as arguments to the page GraphQL que
 
 # Categories, Tags, and Authors
 
-Use Butter's APIs for categories, tags, and authors to feature and filter content on your blog.
+Use the `filter` argument against your ButterCMS categories, tags, and authors to feature and filter content on your blog.
 
 ```graphql
 {
-  allButterPost(filter: {tags: {elemMatch: {slug: {in: "example-tag"}}}}) {
+  allButterPost(filter: {
+    tags: {
+      elemMatch: {
+        slug: {
+          in: "example-tag"
+        }
+      }
+    }
+  }) {
     edges {
       node {
         id
@@ -238,6 +244,8 @@ module.exports = {
 
 then basically follow the same steps as for your blog posts
 
-# Summary
+# Conclusion
 
 we've learned how to use a Gatsby source plugin to convert headless CMS data to Gatsby nodes, how to query those nodes with GraphQL and create pages from it
+
+If you want to contribute to the source plugin, feel free to open a pull request on [GitHub](https://github.com/youfoundron/gatsby-source-buttercms). I have just recently updated it using Babel 7, ButterCMS 1.1 and Gatsby 2, but there's still room for improvements.
