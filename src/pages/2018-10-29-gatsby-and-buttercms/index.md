@@ -205,6 +205,8 @@ Use the `filter` argument against your ButterCMS categories, tags, and authors t
 
 # Pages
 
+If you want to add ButterCMS pages to your blog, add a list of page slugs to your `gatsby-config.js` and follow the same steps as for your blog posts, using the `butterPage` and `allButterPage` GraphQL fields.
+
 ```js
 module.exports = {
   plugins: [
@@ -219,9 +221,7 @@ module.exports = {
     }
   ]
 }
-```
-
-then basically follow the same steps as for your blog posts
+``` 
 
 # Conclusion
 
