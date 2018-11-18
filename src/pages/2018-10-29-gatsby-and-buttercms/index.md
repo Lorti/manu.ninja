@@ -7,7 +7,15 @@ tags: [tools]
 thumbnail: /author.jpg
 ---
 
-Learn how to build a Gatsby blog using ButterCMS. Gatsby is a static site generator that combines React, GraphQL, webpack and other front-end technologies to provide a great developer experience. Its preconfiguration and plugin ecosystem let you create incredibly fast websites with very little setup. ButterCMS is a headless CMS and blogging platform. It allows you to add a CMS to your Gatsby websites without having to worry about hosting, upgrades, uptime, security, or performance. The code examples in this article let you combine Gatsby and ButterCMS in just a few minutes, no matter if you are a beginner or an expert.
+Learn how to build a Gatsby blog using ButterCMS. The code examples in this article let you combine Gatsby and ButterCMS in just a few minutes, no matter if you are a beginner or an expert.
+
+## Why Gatsby and ButterCMS?
+
+A static site (HTML, CSS and JavaScript) is fast, secure and flexible. There is no database or server-side code that attackers can exploit. A static site generator pulls data from APIs, databases or files and generates pages using templates. 
+
+As a developer you propably want to write your blog posts and pages as Markdown files. If your static site's content has to be managed by non-developers, however, they'll prefer a CMS. A headless CMS is a content management system with a read-only API, that can be read by your static site generator.
+
+Gatsby is a static site generator that combines React, GraphQL, webpack and other front-end technologies to provide a great developer experience. It's a great choice if you are already familiar with React and JSX. ButterCMS is a headless CMS and blogging platform. It allows you to add a CMS to your Gatsby websites without having to worry about hosting, upgrades, uptime, security, or performance. 
 
 ## Setup
 
@@ -228,7 +236,5 @@ ButterCMS automatically generates a slug when you create a new page: A page titl
 We have learned how to use a Gatsby source plugin to convert headless CMS data to Gatsby nodes, how to query those nodes with GraphQL, and how to create pages. This should give you a head start when building a Gatsby blog with ButterCMS.
 
 Where to go from here? You could use what you've learned and add a page that lists your categories and tags. If you already have a lot of content, you might want to add pagination to your list of blog posts. You can do so by using the `limit` and `skip` arguments of the `allButterPost` field in GraphQL.
-
-If you need help after reading this, contact ButterCMS's support via [email](mailto:support@buttercms.com) or livechat.
 
 The [Gatsby Source Plugin for ButterCMS](https://www.gatsbyjs.org/packages/gatsby-source-buttercms/?=buttercms) is an open-source community plugin for Gatsby. If you want to contribute to the source plugin, [open a GitHub pull request](https://github.com/ButterCMS/gatsby-source-buttercms). If you have found a bug, [open a GitHub issue](https://github.com/ButterCMS/gatsby-source-buttercms).
