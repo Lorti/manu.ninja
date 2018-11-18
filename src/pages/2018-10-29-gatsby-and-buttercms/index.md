@@ -7,20 +7,20 @@ tags: [tools]
 thumbnail: /author.jpg
 ---
 
-Learn how to build a Gatsby blog using ButterCMS. Gatsby is a static site generator for web developers familar with React. ButterCMS is a headless CMS and blogging platform. The code examples in this article let you combine Gatsby and ButterCMS in just a few minutes, no matter if you are a beginner or an expert in any of them.
+Learn how to build a Gatsby blog using ButterCMS. Gatsby is a static site generator that combines React, GraphQL, webpack and other front-end technologies to provide a great developer experience. Its preconfiguration and plugin ecosystem let you create incredibly fast websites with very little setup. ButterCMS is a headless CMS and blogging platform. It allows you to add a CMS to your Gatsby websites without having to worry about hosting, upgrades, uptime, security, or performance. The code examples in this article let you combine Gatsby and ButterCMS in just a few minutes, no matter if you are a beginner or an expert.
 
 ## Setup
 
-When you create a ButterCMS account you'll be provided with an API token and an example blog post. You'll need both for this tutorial.
+First, create a ButterCMS account. You'll be provided with an API token and an example blog post. You'll need both for this tutorial.
 
-We'll start with an existing Gatsby site. If you have never used Gatsby before you'll have to install the Gatsby CLI first.
+Next, install the Gatsby CLI.
 
 ```bash
 npm install --global gatsby-cli
 ```
 
-You can then create a new site from the official starting template. If you navigate to the directory and run `gatsby develop` Gatsby will start a hot-reloading server at 
-<http://localhost:8000/>.
+You can then create a new site from the official starting template. If you navigate to the directory and run `gatsby develop`, Gatsby will start a hot-reloading server at 
+<http://localhost:8000/>. This way, you don’t have to refresh your page as Gatsby injects new versions of the files that you edited at runtime.
 
 ```bash
 gatsby new gatsby-site https://github.com/gatsbyjs/gatsby-starter-default
@@ -30,9 +30,7 @@ gatsby develop
 
 ## Posts
 
-When building with Gatsby, you access your data via the query language [GraphQL](https://graphql.org/). There are many official and community plugins that fetch data from remote or local locations and make it available via GraphQL. 
-
-These plugins are called "source plugins" and there is already a [Gatsby Source Plugin for ButterCMS](https://www.gatsbyjs.org/packages/gatsby-source-buttercms/?=buttercms) you can install.
+When building with Gatsby, you access your data via the query language [GraphQL](https://graphql.org/). There are many official and community plugins that fetch data from remote or local locations and make it available via GraphQL. These plugins are called "source plugins" and there is already a [Gatsby Source Plugin for ButterCMS](https://www.gatsbyjs.org/packages/gatsby-source-buttercms/?=buttercms) you can install.
 
 ```bash
 npm install --save gatsby-source-buttercms
@@ -53,7 +51,7 @@ module.exports = {
 }
 ```
 
-After a change to the configuration you might have to restart the hot-reloading server (`gatsby develop`), before you can test the GraphQL fields and types the plugin is providing.
+After this change, you might have to restart the hot-reloading server (`gatsby develop`) before you can test the GraphQL fields and types the plugin is providing.
 
 Head to GraphiQL, the in-browser IDE for exploring GraphQL, at <http://localhost:8000/___graphql> and explore the `butterPost` and `allButterPost` fields.
 
@@ -109,7 +107,7 @@ export const pageQuery = graphql`
 
 ### Add pages for your blog posts
 
-Generating a page for each of your posts requires you to create an template and use [Gatsby's Node APIs](https://www.gatsbyjs.org/docs/node-apis), specifically the [`createPages`](https://www.gatsbyjs.org/docs/node-apis/#createPages) API and its [`createPage`](https://www.gatsbyjs.org/docs/actions/#createPage) action.
+Generating a page for each of your posts requires you to create a template and use [Gatsby's Node APIs](https://www.gatsbyjs.org/docs/node-apis), specifically the [`createPages`](https://www.gatsbyjs.org/docs/node-apis/#createPages) API and its [`createPage`](https://www.gatsbyjs.org/docs/actions/#createPage) action.
 
 #### `src/templates/post.js`
 
@@ -182,7 +180,7 @@ exports.createPages = ({ actions, graphql }) => {
 
 # Categories, Tags, and Authors
 
-Use the `filter` argument against your ButterCMS categories, tags, and authors to feature and filter content of your blog.
+Use the `filter` argument against your ButterCMS categories, tags, and authors to feature and filter the content of your blog.
 
 ```graphql
 {
@@ -223,8 +221,14 @@ module.exports = {
 }
 ``` 
 
+ButterCMS automatically generates a slug when you create a new page: A page titled `Example Page` gets an `example-page` slug, which is shown below the page title in the ButterCMS editor.
+
 # Conclusion
 
-We have learned how to use a Gatsby source plugin to convert headless CMS data to Gatsby nodes, how to query those nodes with GraphQL and create pages from it. This should give you a head start when building a Gatsby blog with ButterCMS. If you have any questions, just ask.
+We have learned how to use a Gatsby source plugin to convert headless CMS data to Gatsby nodes, how to query those nodes with GraphQL, and how to create pages. This should give you a head start when building a Gatsby blog with ButterCMS.
 
-The [Gatsby Source Plugin for ButterCMS](https://www.gatsbyjs.org/packages/gatsby-source-buttercms/?=buttercms) is an open-source community plugin for Gatsby. I have updated it prior to writing this article, but there's still room for improvements. If you want to contribute to the source plugin, open a pull request on [GitHub](https://github.com/youfoundron/gatsby-source-buttercms). 
+Where to go from here? You could use what you've learned and add a page that lists your categories and tags. If you already have a lot of content, you might want to add pagination to your list of blog posts. You can do so by using the `limit` and `skip` arguments of the `allButterPost` field in GraphQL.
+
+If you need help after reading this, contact ButterCMS's support via [email](mailto:support@buttercms.com) or livechat.
+
+The [Gatsby Source Plugin for ButterCMS](https://www.gatsbyjs.org/packages/gatsby-source-buttercms/?=buttercms) is an open-source community plugin for Gatsby. If you want to contribute to the source plugin, [open a GitHub pull request](https://github.com/ButterCMS/gatsby-source-buttercms). If you have found a bug, [open a GitHub issue](https://github.com/ButterCMS/gatsby-source-buttercms).
