@@ -1,7 +1,7 @@
 ---
 path: /gatsby-and-buttercms
 title: Gatsby and ButterCMS
-date: 2018-10-29
+date: 2018-11-20
 categories: [coding]
 tags: [tools]
 thumbnail: /author.jpg
