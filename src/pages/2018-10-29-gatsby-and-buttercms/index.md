@@ -9,13 +9,17 @@ thumbnail: /author.jpg
 
 Learn how to build a Gatsby blog using ButterCMS. The code examples in this article let you combine Gatsby and ButterCMS in just a few minutes, no matter if you are a beginner or an expert.
 
-## Why Gatsby and ButterCMS?
+## Why Gatsby and ButterCMS? 
+
+Gatsby is a static site generator based on React and GraphQL. ButterCMS is a headless CMS and blogging platform. What does that mean and why should you use them?
 
 A static site (HTML, CSS and JavaScript) is fast, secure and flexible. There is no database or server-side code that attackers can exploit. A static site generator pulls data from APIs, databases or files and generates pages using templates. 
 
-As a developer you propably want to write your blog posts and pages as Markdown files. If your static site's content has to be managed by non-developers, however, they'll prefer a CMS. A headless CMS is a content management system with a read-only API, that can be read by your static site generator.
+As a developer you propably want to write your content as Markdown files. However, if your static site's content has to be managed by non-developers, they'll prefer a CMS. A headless CMS offers a read-only API, that can be read by your static site generator.
 
-Gatsby is a static site generator that combines React, GraphQL, webpack and other front-end technologies to provide a great developer experience. It's a great choice if you are already familiar with React and JSX. ButterCMS is a headless CMS and blogging platform. It allows you to add a CMS to your Gatsby websites without having to worry about hosting, upgrades, uptime, security, or performance. 
+Gatsby combines React, GraphQL, webpack and other front-end technologies to provide a great developer experience. It's a great choice if you are already familiar with React and JSX. ButterCMS allows you to add a CMS to your Gatsby sites without having to worry about hosting, security, or performance. You can focus on implementing your front-end.
+
+Now that we know the benefits of Gatsby and ButterCMS, let's get started!
 
 ## Setup
 
