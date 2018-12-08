@@ -1,7 +1,7 @@
 ---
 path: /gatsby-and-buttercms
 title: Gatsby and ButterCMS
-date: 2018-11-20
+date: 2018-12-10
 categories: [coding]
 tags: [tools]
 thumbnail: /author.jpg
@@ -84,14 +84,14 @@ The plugin maps all JSON fields documented in the [Butter CMS API Reference](htt
 
 ## Add a list of your blog posts
 
-Your ButterCMS data can now be queried in any Gatsby page or template. You can start by editing `src/pages/index.js` and adding a list of your blog posts to your home page.
+Your ButterCMS data can now be queried in any Gatsby page or template. You can start by creating a `src/pages/blog.js` and adding a list of your blog posts.
 
 ```js
 import React from 'react'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/layout'
 
-const IndexPage = ({ data }) => {
+const BlogPage = ({ data }) => {
   const posts = data.allButterPost.edges
     .map(({ node }) => {
       return <Link key={node.id} to={`/${node.slug}`}>{node.title}</Link>
@@ -100,7 +100,7 @@ const IndexPage = ({ data }) => {
   return <Layout>{posts}</Layout>
 }
 
-export default IndexPage
+export default BlogPage
 
 export const pageQuery = graphql`
   query {
@@ -117,9 +117,11 @@ export const pageQuery = graphql`
 `
 ```
 
+The page is now available at `/blog`. You can also edit the existing `src/pages/index.js`, if you want to have the list on your home page.
+
 ### Add pages for your blog posts
 
-Generating a page for each of your posts requires you to create a template and use [Gatsby's Node APIs](https://www.gatsbyjs.org/docs/node-apis), specifically the [`createPages`](https://www.gatsbyjs.org/docs/node-apis/#createPages) API and its [`createPage`](https://www.gatsbyjs.org/docs/actions/#createPage) action.
+Generating a page for each of your posts requires you to create a template at `src/template/post.js`. You’ll then edit `gatsby-node.js` in your project’s root folder and use [Gatsby's Node APIs](https://www.gatsbyjs.org/docs/node-apis), specifically the [`createPages`](https://www.gatsbyjs.org/docs/node-apis/#createPages) API and its [`createPage`](https://www.gatsbyjs.org/docs/actions/#createPage) action.
 
 #### `src/templates/post.js`
 
@@ -140,17 +142,18 @@ export default function Template({ data }) {
 }
 
 export const pageQuery = graphql`
-  query($id: String!) {
-    butterPost(id: { eq: $id }) {
+  query($slug: String!) {
+    butterPost(slug: { eq: $slug }) {
       title
       date
       body
     }
   }
 `
+
 ```
 
-#### `src/templates/gatsby-node.js`
+#### `gatsby-node.js`
 
 ```js
 const path = require('path')
@@ -165,8 +168,7 @@ exports.createPages = ({ actions, graphql }) => {
       allButterPost {
         edges {
           node {
-            url
-            id
+            slug
           }
         }
       }
@@ -179,10 +181,10 @@ exports.createPages = ({ actions, graphql }) => {
     result.data.allButterPost.edges.forEach(({ node }) => {
       console.log(node);
       createPage({
-        path: `/${node.url}`,
+        path: `/blog/${node.slug}`,
         component: template,
         context: {
-          id: node.id
+          slug: node.slug
         }
       })
     })
@@ -217,6 +219,8 @@ Use the `filter` argument against your ButterCMS categories, tags, and authors t
 
 If you want to add ButterCMS pages to your blog, add a list of page slugs to your `gatsby-config.js` and follow the same steps as for your blog posts, using the `butterPage` and `allButterPage` GraphQL fields.
 
+ButterCMS automatically generates a slug when you create a new page: A page titled `Example Page` gets an `example-page` slug, which is shown below the page title in the ButterCMS editor. You can add these slugs to your `gatsby-config.js`:
+
 ```js
 module.exports = {
   plugins: [
@@ -225,7 +229,7 @@ module.exports = {
       options: {
         authToken: 'your_api_token',
         pages: [
-          'page_slug'
+          'homepage'
         ]
       }
     }
@@ -233,12 +237,56 @@ module.exports = {
 }
 ``` 
 
-ButterCMS automatically generates a slug when you create a new page: A page titled `Example Page` gets an `example-page` slug, which is shown below the page title in the ButterCMS editor.
+```graphql
+{
+  allButterPage(filter: {slug: {eq: "homepage"}}) {
+    edges {
+      node {
+        slug
+      }
+    }
+  }
+}
+```
+
+You can also specify a page type in your `gatsby-config.js`:
+
+```js
+module.exports = {
+  plugins: [
+    {
+      resolve: 'gatsby-source-buttercms',
+      options: {
+        authToken: 'your_api_token',
+        pageTypes: [
+          'products'
+        ]
+      }
+    }
+  ]
+}
+``` 
+
+To get all pages for a given type you can then use the following GraphQL query:
+
+```graphql
+{
+  allButterPage(filter: {page_type: {eq: "products"}}) {
+    edges {
+      node {
+        slug
+      }
+    }
+  }
+}
+```
 
 # Conclusion
 
 We have learned how to use a Gatsby source plugin to convert headless CMS data to Gatsby nodes, how to query those nodes with GraphQL, and how to create pages. This should give you a head start when building a Gatsby blog with ButterCMS.
 
-Where to go from here? You could use what you've learned and add a page that lists your categories and tags. If you already have a lot of content, you might want to add pagination to your list of blog posts. You can do so by using the `limit` and `skip` arguments of the `allButterPost` field in GraphQL.
+Where to go from here? You could use what you’ve learned and add a page that lists your categories and tags. If you already have a lot of content, you might want to add pagination to your list of blog posts. You can do so by using the `limit` and `skip` arguments of the `allButterPost` and `allButterPage` fields in GraphQL.
+
+If you need help after reading this, contact ButterCMS’s support via [email](mailto:support@buttercms.com) or livechat.
 
 The [Gatsby Source Plugin for ButterCMS](https://www.gatsbyjs.org/packages/gatsby-source-buttercms/?=buttercms) is an open-source community plugin for Gatsby. If you want to contribute to the source plugin, [open a GitHub pull request](https://github.com/ButterCMS/gatsby-source-buttercms). If you have found a bug, [open a GitHub issue](https://github.com/ButterCMS/gatsby-source-buttercms).
