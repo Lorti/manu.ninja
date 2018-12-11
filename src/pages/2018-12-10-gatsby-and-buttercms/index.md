@@ -5,7 +5,12 @@ date: 2018-12-10
 categories: [coding]
 tags: [tools]
 thumbnail: /author.jpg
+external: https://buttercms.com/blog/gatsby-and-buttercms
 ---
+
+Learn how to build a Gatsby blog using ButterCMS. The code examples in this article let you combine Gatsby and ButterCMS in just a few minutes, no matter if you are a beginner or an expert.
+
+<!--
 
 Learn how to build a Gatsby blog using ButterCMS. The code examples in this article let you combine Gatsby and ButterCMS in just a few minutes, no matter if you are a beginner or an expert.
 
@@ -290,3 +295,5 @@ Where to go from here? You could use what you’ve learned and add a page that l
 If you need help after reading this, contact ButterCMS’s support via [email](mailto:support@buttercms.com) or livechat.
 
 The [Gatsby Source Plugin for ButterCMS](https://www.gatsbyjs.org/packages/gatsby-source-buttercms/?=buttercms) is an open-source community plugin for Gatsby. If you want to contribute to the source plugin, [open a GitHub pull request](https://github.com/ButterCMS/gatsby-source-buttercms). If you have found a bug, [open a GitHub issue](https://github.com/ButterCMS/gatsby-source-buttercms).
+
+-->
