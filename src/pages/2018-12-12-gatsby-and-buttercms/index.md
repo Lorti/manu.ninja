@@ -1,11 +1,11 @@
 ---
 path: /gatsby-and-buttercms
 title: Gatsby and ButterCMS
-date: 2018-12-10
+date: 2018-12-12
 categories: [coding]
 tags: [tools]
 thumbnail: /author.jpg
-external: https://buttercms.com/blog/gatsby-and-buttercms
+external: https://buttercms.com/blog/how-to-use-gatsby-with-a-headless-cms
 ---
 
 Learn how to build a Gatsby blog using ButterCMS. The code examples in this article let you combine Gatsby and ButterCMS in just a few minutes, no matter if you are a beginner or an expert.
