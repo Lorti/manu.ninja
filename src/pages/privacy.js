@@ -1,8 +1,11 @@
 import React from 'react'
+import Layout from '../components/layout'
+
+// TODO Why is /privacy not Markdown?
 
 export default function Privacy() {
   return (
-    <div>
+    <Layout>
       <div className="Column">
         <div className="Article">
           <div className="article-header u-textCenter">
@@ -246,6 +249,6 @@ export default function Privacy() {
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   )
 }

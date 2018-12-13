@@ -1,31 +1,34 @@
 import React from 'react'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 
+import Layout from '../components/layout'
 import Header from '../components/article/header'
 import Content from '../components/article/content'
 
 import mapTag from '../utils/taxonomy'
 
-export default function Tags({ pathContext }) {
-  const { posts, tag } = pathContext
+export default function Tags({ pageContext }) {
+  const { posts, tag } = pageContext
   if (tag) {
     const list = posts[tag]
     return (
-      <div className="Column">
-        <div className="Taxonomy">
-          <h1 className="Taxonomy__heading u-textCenter">
-            <strong>{mapTag(tag)}</strong> ({list.length} Articles)
-          </h1>
+      <Layout>
+        <div className="Column">
+          <div className="Taxonomy">
+            <h1 className="Taxonomy__heading u-textCenter">
+              <strong>{mapTag(tag)}</strong> ({list.length} Articles)
+            </h1>
+          </div>
+          {list.map(post => {
+            return (
+              <article className="Article" key={post.id}>
+                <Header post={post} forListing={true} />
+                <Content post={post} forListing={true} />
+              </article>
+            )
+          })}
         </div>
-        {list.map(post => {
-          return (
-            <article className="Article" key={post.id}>
-              <Header post={post} forListing={true} />
-              <Content post={post} forListing={true} />
-            </article>
-          )
-        })}
-      </div>
+      </Layout>
     )
   }
   return (

@@ -1,5 +1,7 @@
 import React from 'react'
+import { graphql } from 'gatsby'
 
+import Layout from '../components/layout'
 import Content from '../components/article/content'
 import Header from '../components/article/header'
 import Introduction from '../components/introduction'
@@ -7,7 +9,7 @@ import Introduction from '../components/introduction'
 export default function Index({ data }) {
   const { edges: posts } = data.allMarkdownRemark
   return (
-    <div>
+    <Layout>
       <Introduction />
       <div className="Column">
         {posts.map(({ node: post }) => {
@@ -19,12 +21,12 @@ export default function Index({ data }) {
           )
         })}
       </div>
-    </div>
+    </Layout>
   )
 }
 
-export const pageQuery = graphql`
-  query IndexQuery {
+export const query = graphql`
+  query {
     allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
       edges {
         node {

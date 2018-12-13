@@ -77,8 +77,8 @@ const createTags = (createPage, edges) => {
   })
 }
 
-exports.createPages = ({ boundActionCreators, graphql }) => {
-  const { createPage } = boundActionCreators
+exports.createPages = ({ actions, graphql }) => {
+  const { createPage } = actions
 
   const template = path.resolve(`src/templates/post.js`)
 
@@ -142,7 +142,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
   })
 }
 
-exports.modifyWebpackConfig = ({ config, stage }) => {
+exports.onCreateWebpackConfig = ({ config, stage }) => {
   if (stage === 'build-html') {
     config.loader('null', {
       test: /webfontloader/,

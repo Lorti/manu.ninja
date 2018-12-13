@@ -77,7 +77,7 @@ This worked great, but in reality designers tend to avoid the Mac OS X Terminal 
 
 I highly recommend that you read the [Quick Start](http://electron.atom.io/docs/tutorial/quick-start/) tutorial on the official Electron page. It will tell you that you only need three files to get started:
 
-* A `package.json` with at least a `name`, `version` and `main` property. Electron will load an `index.js` file if there is no `main` specified.
+* A `package.json` with at least a `name`, `version` and `main` property. Electron will load an `layout.js` file if there is no `main` specified.
 * A `main.js` which requires the `electron` JavaScript module and runs the main process of your app. It creates web pages by creating `BrowserWindow` instances, each of which have their own renderer process.
 * An `index.html` file. This file can include scripts that run in the renderer process. You have access to Node.js APIs in web pages, so you can do things you wouldn't be able to in a normal browser sandbox.
 

@@ -122,7 +122,7 @@ export const pageQuery = graphql`
 `
 ```
 
-The page is now available at `/blog`. You can also edit the existing `src/pages/index.js`, if you want to have the list on your home page.
+The page is now available at `/blog`. You can also edit the existing `src/pages/layout.js`, if you want to have the list on your home page.
 
 ### Add pages for your blog posts
 
