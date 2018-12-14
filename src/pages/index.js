@@ -27,7 +27,10 @@ export default function Index({ data }) {
 
 export const query = graphql`
   query {
-    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
+    allMarkdownRemark(
+      sort: { order: DESC, fields: [frontmatter___date] }
+      filter: { frontmatter: { date: { ne: null } } }
+    ) {
       edges {
         node {
           id
