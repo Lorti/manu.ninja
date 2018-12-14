@@ -142,11 +142,12 @@ exports.createPages = ({ actions, graphql }) => {
   })
 }
 
-exports.onCreateWebpackConfig = ({ config, stage }) => {
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
   if (stage === 'build-html') {
-    config.loader('null', {
-      test: /webfontloader/,
-      loader: 'null-loader',
+    actions.setWebpackConfig({
+      module: {
+        rules: [{ test: /webfontloader/, use: 'null-loader' }],
+      },
     })
   }
 }
