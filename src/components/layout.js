@@ -30,19 +30,19 @@ export default ({ children }) => (
           <link href="//www.google-analytics.com" rel="dns-prefetch" />
         </Helmet>
         <Meta
-          title={data.site.metaData.title}
-          description={data.site.metaData.description}
-          pageUrl={data.site.metaData.siteUrl}
-          imageUrl={`${data.site.metaData.siteUrl}/share.png`}
+          title={data.site.siteMetadata.title}
+          description={data.site.siteMetadata.description}
+          pageUrl={data.site.siteMetadata.siteUrl}
+          imageUrl={`${data.site.siteMetadata.siteUrl}/share.png`}
         />
         <div className="Column">
           <Banner />
         </div>
-        {this.props.children}
+        {children}
         <div className="Column">
           <Footer />
         </div>
-        <PersonSchema imageUrl={`${data.site.metaData.siteUrl}/manu.jpg`} />
+        <PersonSchema imageUrl={`${data.site.siteMetadata.siteUrl}/manu.jpg`} />
       </>
     )}
   />
