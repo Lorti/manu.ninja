@@ -11,7 +11,7 @@ function RelatedLink({ title, path, external, language }) {
         href={external}
         hrefLang={language ? language : 'en'}
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
       >
         {title}
       </a>

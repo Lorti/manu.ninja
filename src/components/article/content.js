@@ -20,7 +20,7 @@ original_referer=${encodeURIComponent(url)}
   return (
     <p>
       If you liked this article, please consider{' '}
-      <a href={link} target="_blank" rel="noopener">
+      <a href={link} target="_blank" rel="noopener noreferrer">
         sharing
       </a>{' '}
       it with your followers.

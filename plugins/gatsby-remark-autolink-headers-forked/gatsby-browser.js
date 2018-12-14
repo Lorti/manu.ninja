@@ -1,36 +1,35 @@
-"use strict";
+var offsetY = 0;
 
-var scrollToHash = function scrollToHash(offsetY) {
-  // Make sure React has had a chance to flush to DOM first.
-  setTimeout(function () {
-    var hash = window.decodeURI(window.location.hash.replace("#", ""));
-    if (hash !== "") {
-      var element = document.getElementById(hash);
-      if (element) {
-        var offset = element.offsetTop;
-        window.scrollTo(0, offset - offsetY);
-      }
+var getTargetOffset = function getTargetOffset(hash) {
+  var id = window.decodeURI(hash.replace("#", ""));
+
+  if (id !== "") {
+    var element = document.getElementById(id);
+
+    if (element) {
+      return element.offsetTop - offsetY;
     }
-  }, 10);
+  }
+
+  return null;
 };
 
-exports.onClientEntry = function (args, pluginOptions) {
-  var offsetY = 0;
-  if (pluginOptions.offsetY) {
-    offsetY = pluginOptions.offsetY;
-  }
-  // This code is only so scrolling to header hashes works in development.
-  // For production, the equivalent code is in gatsby-ssr.js.
-  if (process.env.NODE_ENV !== "production") {
-    scrollToHash(offsetY);
-  }
-};
-
-exports.onRouteUpdate = function (args, pluginOptions) {
-  var offsetY = 0;
+exports.onInitialClientRender = function (_, pluginOptions) {
   if (pluginOptions.offsetY) {
     offsetY = pluginOptions.offsetY;
   }
 
-  scrollToHash(offsetY);
+  requestAnimationFrame(function () {
+    var offset = getTargetOffset(window.location.hash);
+
+    if (offset !== null) {
+      window.scrollTo(0, offset);
+    }
+  });
+};
+
+exports.shouldUpdateScroll = function (_ref) {
+  var location = _ref.routerProps.location;
+  var offset = getTargetOffset(location.hash);
+  return offset !== null ? [0, offset] : true;
 };

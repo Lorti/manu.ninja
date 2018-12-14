@@ -13,7 +13,7 @@ function Title({ frontmatter, forListing }) {
         href={frontmatter.external}
         hrefLang={frontmatter.language ? frontmatter.language : 'en'}
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         dangerouslySetInnerHTML={{ __html: htmlTitle }}
       />
     )
