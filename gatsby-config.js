@@ -119,8 +119,8 @@ module.exports = {
             query: `
               {
                 allMarkdownRemark(
-                  limit: 1000,
                   sort: { order: DESC, fields: [frontmatter___date] }
+                  filter: { frontmatter: { date: { ne: null } } }
                 ) {
                   edges {
                     node {
@@ -151,7 +151,9 @@ module.exports = {
                 siteUrl
               }
             }
-            allMarkdownRemark {
+            allMarkdownRemark(
+              filter: { frontmatter: { date: { ne: null } } }
+            ) {
               edges {
                 node {
                   frontmatter {
@@ -178,7 +180,7 @@ module.exports = {
 
           const pages = allSitePage.edges.map(edge => edge.node.path)
 
-          return [].concat(posts, pages).map(path => {
+          return [...posts, ...pages].map(path => {
             return {
               url: site.siteMetadata.siteUrl + path,
               lastmodISO: new Date().toISOString(),
