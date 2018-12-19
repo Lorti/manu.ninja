@@ -12,21 +12,33 @@ Vue CLI 3 has been released and it’s completely different from its previous ve
 
 This guide is intended for beginners who've never used Vue as well as veterans who've already used Vue CLI 2 and wish to quickly start building projects with Vue CLI 3.
 
+## Vue? Vue CLI?
+
+Vue (/vjuː/) is a progressive framework for building user interfaces. But you may already now that, if you've stumbled upon this guide. But what is the Vue CLI?
+
+The first and second versions of the Vue CLI have been primarily a tool for scaffolding Vue projects. After the CLI had prepared a project for you you wouldn't need or use the Vue CLI anymore. 
+
+The Vue CLI 3 is different, in that it is meant as a companion for Vue developers. It's a full system for rapid Vue development that you'll be using constantly while developing your application.
+
+The new CLI is also more in line with Vue's goals of being a progressive framework. Whereas the Vue CLI 2 scaffolded a large project with 500-1000 lines of configuration code in multiple files for you (when using the webpack template), the Vue CLI 3 hides away this complexity and let's you start with a very simple setup, allowing you to fully customize its parts and go deeper as soon as, and only if, you need it.
+
 ## Install Vue CLI 3
 
-recommended to globally install Vue CLI 3
-remove Vue CLI 2 to be safe
-you can use the package manager you prefer
+The first thing to do, obviously, is to install Vue CLI 3. Like with any command-line tool, the Vue.js team recommends to globally install Vue CLI 3. However, before you do that, you should remove Vue CLI 2, to avoid any conflicts caused by remaining files. 
+
+For both removing Vue CLI 2 and installing Vue CLI 3 you can use the package manager you prefer (npm or Yarn) and run the following commands:
 
 ```bash
 npm uninstall vue-cli -g
-yarn global remove vue-cli
+npm install -g @vue/cli
 ```
 
 ```bash
-npm install -g @vue/cli
+yarn global remove vue-cli
 yarn global add @vue/cli
 ```
+
+Take note, that the Vue CLI 3 package is `@vue/cli`, not `vue-cli`. Every npm package that has to do with Vue CLI 3 is prefixed with `@vue`.
 
 ## Create a new project
 
