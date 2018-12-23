@@ -5,10 +5,10 @@ htmlTitle: Scaffolding a Progressive Web App using Vue&nbsp;CLI&nbsp;3
 date: 2018-12-24
 categories: [coding]
 tags: [meetups, pwa, slides, tools, vue]
-thumbnail: /author.jpg
+thumbnail: /images/vue-cli-3-pwa/scaffolding-a-progressive-web-app-using-vue-cli-3.jpg
 ---
 
-Vue CLI 3 has been released and it’s completely different from its previous version. Discover how it simplifies your toolchain, reduces configuration fatigue and improves your developer experience.
+Vue CLI 3 has been released and it's completely different from its previous version. Discover how it simplifies your toolchain, reduces configuration fatigue and improves your developer experience.
 
 This guide is intended for beginners who've never used Vue as well as veterans who've already used Vue CLI 2 and wish to quickly start building projects with Vue CLI 3.
 
@@ -52,7 +52,7 @@ a few prompts, as Vue CLI 2
 select only Babel and Linter (ESLint + Airbnb), and place all config in package.json
 4 directories, 10 files
 
-```bash
+```txt
 my-project
 ├── README.md
 ├── babel.config.js
