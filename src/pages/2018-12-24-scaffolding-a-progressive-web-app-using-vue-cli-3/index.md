@@ -14,11 +14,13 @@ This guide is intended for beginners who've never used Vue as well as veterans w
 
 ## Vue? Vue CLI?
 
-Vue (/vjuː/) is a progressive framework for building user interfaces. But you may already now that, if you've stumbled upon this guide. But what is the Vue CLI?
+> Vue (/vjuː/) is a progressive framework for building user interfaces. 
 
-The first and second versions of the Vue CLI have been primarily a tool for scaffolding Vue projects. After the CLI had prepared a project for you you wouldn't need or use the Vue CLI anymore. 
+You may already heard that, if you've stumbled upon this guide. The word "progressive" means, that there's a very quick learning curve as you can start to use just a little of what the framework provides and gradually use and learn more and more concepts. But what is the Vue CLI?
 
-The Vue CLI 3 is different, in that it is meant as a companion for Vue developers. It's a full system for rapid Vue development that you'll be using constantly while developing your application.
+The first and second versions of the Vue CLI have been primarily a tool for scaffolding Vue projects. After the CLI had prepared a project for you you wouldn't need or use the Vue CLI anymore. The Vue CLI 3 is different, in that it is meant as a companion for Vue developers. It's a full system for rapid Vue development that you'll be using constantly while developing your application.
+
+> Vue CLI is a <strike>tool for scaffolding Vue projects</strike> full system for rapid development.
 
 The new CLI is also more in line with Vue's goals of being a progressive framework. Whereas the Vue CLI 2 scaffolded a large project with 500-1000 lines of configuration code in multiple files for you (when using the webpack template), the Vue CLI 3 hides away this complexity and let's you start with a very simple setup, allowing you to fully customize its parts and go deeper as soon as, and only if, you need it.
 
