@@ -8,8 +8,6 @@ tags: [meetups, pwa, slides, tools, vue]
 thumbnail: /images/vue-cli-3-pwa/scaffolding-a-progressive-web-app-using-vue-cli-3.jpg
 ---
 
-![Scaffolding a Progressive Web App using Vue CLI 3](/images/vue-cli-3-pwa/scaffolding-a-progressive-web-app-using-vue-cli-3.jpg)
-
 Vue CLI 3 has been released and it's completely different from its previous version. Discover how it simplifies your toolchain, reduces configuration fatigue and improves your developer experience.
 
 This guide is intended for beginners who've never used Vue as well as veterans who've already used Vue CLI 2 and wish to quickly start building projects with Vue CLI 3.
@@ -72,6 +70,8 @@ cd my-project
 npm run serve
 ```
 
+### What's in a project?
+
 Let's now inspect the generated folder and you'll find 4 directories with 10 files:
 
 ```txt
@@ -112,6 +112,8 @@ The same is true for the project's `package.json` file. Whereas a project create
 
 We'll get into the details of the `@vue` packages in the next sections. Before that let's head to the `scripts` field.
 
+### Understanding `vue-cli-service`
+
 ```json
 {
   "scripts": {
@@ -127,13 +129,21 @@ The `vue-cli-service` is what allows the Vue CLI 3 to scaffold projects without 
 
 ## Add and configure the official Progressive Web App plugin
 
-We've already talked about the `@vue/cli-service` listed in your project's `devDependencies`. The other two packages, `@vue/cli-plugin-babel` and `@vue/cli-plugin-eslint` are plugins for the Vue CLI 3. The Vue CLI 3 is centered around plugins that can augment either the development or functionality of your application. They can be individually added, removed and updated, in most cases without you having to change anything about your application or configuration. Most plugins also have a sensible default configuration, that means, you don't even have to configure that plugin, only if you want to change its default behaviour. This goes so far as to many plugins not even placing their default configuration in your `package.json` or their separate configuration files.
+We've already talked about the `@vue/cli-service` listed in your project's `devDependencies`. The other two packages, `@vue/cli-plugin-babel` and `@vue/cli-plugin-eslint` are plugins for the Vue CLI 3. 
 
-All official plugins are prefixed with `@vue/cli-plugin`,  whereas community plugins are prefixed with `vue-cli-plugin` (TODO Add link to Nightwatch/Cucumber plugin).
+### Understanding Vue CLI's plugins
+
+The Vue CLI 3 is centered around plugins that can augment either the development or functionality of your application. They can be individually added, removed and updated, in most cases without you having to change anything about your application or configuration. Most plugins also have a sensible default configuration, that means, you don't even have to configure that plugin, only if you want to change its default behaviour. This goes so far as to many plugins not even placing their default configuration in your `package.json` or their separate configuration files.
+
+### `@vue/cli-plugin-babel`
 
 The already installed `@vue/cli-plugin-babel` transforms your ES2015+ code according to the configuration in `babel.config.js`. By default it uses a `@vue/app` preset, making sure your application works on all browsers supported by the Vue framework itself (TODO Add link to the browser support of Vue), and the `browserlist` field in your `package.json`. This field is also used for PostCSS (TODO Add a link to the documentation). 
 
+### `@vue/cli-plugin-eslint`
+
 `@vue/cli-plugin-eslint` checks your code against the `eslintConfig` configuration in your `package.json` files. It does this whenever you make changes to your code (while running the development server via `npm run dev`).
+
+### Adding the Progressive Web App plugin 
 
 Now, if we want to add further plugins we can use the `vue add` command, followed by either the full name of the plugin, or a shorthand version. The following two commands lead to the same result:
 
@@ -159,6 +169,8 @@ This will install the `@vue/cli-plugin-pwa` package (TODO Link to npm or GitHub 
    ├── main.js
    └── registerServiceWorker.js
 ```
+
+### Configuring the Progressive Web App plugin
 
 `vue.config.js`
 
