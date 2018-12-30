@@ -183,13 +183,19 @@ We'll talk about how to configure the Service Worker in the next section. If you
 
 The Service Worker is disabled in development mode, because local changes may not show up while you develop your application when files are being cached. This means if you want to test your Progressive Web App you'll have to build your Vue application first. This can be done by simply running `npm run build`. 
 
+#### Build (and serve) your application
+
 You will most likely encounter linting errors when trying to run `npm run build`. To fix them automatically just run `npm run lint --fix` and it will auto-fix `main.js` and `registerServiceWorker.js` to match your ESLint settings.
+
+Now that you've build you application open the `dist` folder that was created and serve your application. You can do this with `npx http-server` or any other HTTP server that can serve files from a folder.
+
+#### Clear site data
 
 It's also a good idea to clear Service Workers and Cache Storage for <http://localhost:8080/>, if you have previously served another (Vue) project at this URL. (TODO How does this work in Firefox?) If you don't want to do this you can also just use the browser's incognito mode.
 
 ![Chrome Dev Tools > Application > Clear storage > Clear site data](/images/vue-cli-3-pwa/clear-site-data.png)
 
-Now that you've build you application open the `dist` folder that was created and serve your application. You can do this with `npx http-server` or any other HTTP server that can serve files from a folder.
+#### Inspect cache and test offline functionality
 
 TODO Describe cache storage and how to test offline functionality.
 
