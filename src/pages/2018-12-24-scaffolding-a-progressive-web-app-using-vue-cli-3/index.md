@@ -12,6 +12,19 @@ Vue CLI 3 has been released and it's completely different from its previous vers
 
 This guide is intended for beginners who've never used Vue as well as veterans who've already used Vue CLI 2 and wish to quickly start building projects with Vue CLI 3.
 
+## Table of Contents
+
+1. [Vue? Vue CLI?](#vue-vue-cli)
+1. [Install Vue CLI 3](#install-vue-cli-3)
+1. [Create a new project](#create-a-new-project)
+1. [Add and configure the official Progressive Web App plugin](#add-and-configure-the-official-progressive-web-app-plugin)
+1. [Configure webpack](#configure-webpack)
+1. [Troubleshoot relative file imports](#troubleshoot-relative-file-imports)
+1. [Prerendering pages for SEO](#prerendering-pages-for-seo)
+1. [Audit with WebPagetest and Lighthouse](#audit-with-webpagetest-and-lighthouse)
+1. [Conclusion](#conclusion)
+1. [Resources](#resources)
+
 ## Vue? Vue CLI?
 
 > Vue (/vjuː/) is a progressive framework for building user interfaces. 
