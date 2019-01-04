@@ -20,10 +20,10 @@ This guide is intended for beginners who've never used Vue as well as veterans w
 1. [Add and configure the official Progressive Web App plugin](#add-and-configure-the-official-progressive-web-app-plugin)
 1. [Configure webpack](#configure-webpack)
 1. [Troubleshoot relative file imports](#troubleshoot-relative-file-imports)
-1. [Prerendering pages for SEO](#prerendering-pages-for-seo)
+1. [Prerender pages for SEO](#prerender-pages-for-seo)
 1. [Audit with WebPagetest and Lighthouse](#audit-with-webpagetest-and-lighthouse)
 1. [Conclusion](#conclusion)
-1. [Resources](#resources)
+1. [Resources](#linksresources)
 
 ## Vue? Vue CLI?
 
@@ -255,6 +255,12 @@ module.exports = {
 
 ## Configure webpack
 
+At some point in your project's life you'll want to edit the webpack configuration. You probably want to add another webpack plugin or edit an existing webpack loader (we'll be doing both these tasks in the following sections). Vue CLI 3 allows you to edit the webpack configuration inside your `vue.config.js` file in three different ways.
+
+### Option 1: Provide an object to the `configureWebpack` property
+
+If you simply pass an object to the `configreWebpack` property it will be merged with the existing webpack config. This way you can easily add new plugins and loaders.
+
 ```js
 // vue.config.js
 module.exports = {
@@ -265,6 +271,10 @@ module.exports = {
  }
 };
 ```
+
+### Option 2: Provide a function to the `configureWebpack` property
+
+If you want to have more fine-grined control you can assign a function to the `configureWebpack` property. It receives a `config` argument which you can mutate directly. This allows you to have different configurations for development and production builds.
 
 ```js
 module.exports = {
@@ -277,6 +287,10 @@ module.exports = {
 };
 ```
 
+### Option 3: Use the (advanced) chaining API
+
+If you want full control, edit existing plugins and loaders or prefer a chaining API you can pass a function to the `chainWebpack` property (not `configureWebpack`). It allows you to make configuration changes using the chaining API provided by [webpack-chain](https://github.com/neutrinojs/webpack-chain). With it you can easily tap into an existing plugin or loader and modify its settings.
+
 ```js
 module.exports = {
  chainWebpack: config => {
@@ -288,6 +302,8 @@ module.exports = {
  }
 };
 ```
+
+We'll be using the chaining API for a simple example in the next section, which should make things clear.
 
 ## Troubleshoot relative file imports
 
@@ -333,7 +349,7 @@ module.exports = {
 <img src="data:image/svg+xml;base64,..." alt="Logo">
 ```
 
-## Prerendering pages for SEO
+## Prerender pages for SEO
 
 [PrerenderSPAPlugin](https://github.com/chrisvfritz/prerender-spa-plugin)
 
@@ -413,7 +429,7 @@ which I may highlight in further articles, if you're interested.
 
 If you want to see a complete Progresive Web App build with Vue CLI 3 have a look at the [full example application](#full-example-application) in the links/resources section. I have kept the Vue CLI 2 and Vue CLI 3 snapshots in separate branches, if you're interested in the exact differences when upgrading/migrating to Vue CLI 3.
 
-## Resources
+## Links/Resources
 
 * [Vue CLI 3 Guide](https://cli.vuejs.org/guide/)
 * [Vue CLI 3 Configuration Reference](https://cli.vuejs.org/config/)
