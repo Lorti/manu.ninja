@@ -393,16 +393,16 @@ With these changes the `logo.svg` gets inlined (using the data URI scheme) as lo
 
 ## Prerender pages for SEO
 
-[PrerenderSPAPlugin](https://github.com/chrisvfritz/prerender-spa-plugin)
+Your Progressive Web App is already up and running. This section explains an optional step you can take for search engine optimization (SEO): Configuring the [Prerender SPA Plugin](https://github.com/chrisvfritz/prerender-spa-plugin) webpack plugin to prerender certain pages (or routes) of your application. This gives bots the ability to crawl your public-facing pages without having to execute JavaScript.
 
-`vue.config.js`
+First run `npm install prerender-spa-plugin`, then edit your `vue.config.js`:
 
 ```js
 const path = require('path');
-const cheerio = require('cheerio');
 const PrerenderSPAPlugin = require('prerender-spa-plugin');
 
 module.exports = {
+  // … other Vue CLI options …
   configureWebpack: (config) => {
     if (process.env.NODE_ENV !== 'production') {
       return {};
@@ -411,25 +411,40 @@ module.exports = {
       plugins: [
         new PrerenderSPAPlugin({
           staticDir: config.output.path,
-          routes: ['/', '/404', /* … */],
+          routes: ['/', '/about', /* … */],
           renderer: new PrerenderSPAPlugin.PuppeteerRenderer({
             renderAfterDocumentEvent: 'rendered',
           }),
-          postProcess(context) {
-            if (context.route === '/404') {
-              context.outputPath = path.join(config.output.path, '/404.html');
-            }
-            const $ = cheerio.load(context.html);
-            $('[src*="https://www.google-analytics.com/analytics.js"]').remove();
-            context.html = $.html();
-            return context;
-          },
+            // … other Prerender SPA Plugin options …
         }),
       ],
     };
   }
 };
 ```
+
+The plugin listens for a `rendered` custom event to take its snapshot, so you have to emit it when your app has finished rendering. You can do so from your root Vue instance, for example:
+
+```js
+new Vue({
+  /* … */
+  mounted() {
+    document.dispatchEvent(new Event('rendered'));
+  },
+});
+```
+
+You might also want to add the `data-server-rendered` custom attribute to your application's `public/index.html` file, so that Vue correctly takes over the static HTML sent by the server (a process called "client side hydration"):
+
+```html
+<body>
+  <div id="app" data-server-rendered="true"></div>
+</body>
+```
+
+When you run a production build the plugin will now add an `index.html`, `about/index.html` and any other route you have configured to your `dist` directory.
+
+Please have a look at the [Prerender SPA Plugin](https://github.com/chrisvfritz/prerender-spa-plugin) documentation for all its options, as elaborating on the plugin would go beyond the scope of this guide. You can find a more advanced example in the `vue.config.js` file of my [full example application](#full-example-application) in the links/resources section.
 
 ## Audit with WebPagetest and Lighthouse
 
