@@ -307,9 +307,11 @@ We'll be using the chaining API for a simple example in the next section, which 
 
 ## Troubleshoot relative file imports
 
-[Documentation](https://cli.vuejs.org/guide/html-and-static-assets.html#building-a-multi-page-app)
+The Vue CLI 3 [documentation](https://cli.vuejs.org/guide/html-and-static-assets.html#building-a-multi-page-app) states that static assets are inlined when they are referenced using a relative path and smaller than 4KB:
 
 > Internally, we use `file-loader` to determine the final file location with version hashes and correct public base paths, and use `url-loader` to conditionally inline assets that are smaller than 4kb, reducing the amount of HTTP requests.
+
+Although, when you reference an SVG file it won't get inlined. The file only gets a version hash for cache busting when building your application:
 
 ```html
 <img src="./assets/logo.svg" alt="Logo">
@@ -317,11 +319,45 @@ We'll be using the chaining API for a simple example in the next section, which 
 <img src="./assets/logo.ec9a16c8.svg" alt="Logo">
 ```
 
+### Inspecting your webpack configuration
+
+To "debug" the webpack configuration and find out why the SVG doesn't get inlined the Vue CLI 3 provides an `inspect` command. If you run it without any arguments it will output the complete webpack configuration it uses when building your application.
+
+To narrow your search down you can use the `--rules` or `--plugins` options. When you know the exact name of your rule you can also just output a single webpack rule:
+
+```bash
+vue inspect --rule images
+```
+
+```js
+{
+  test: /\.(png|jpe?g|gif|webp)(\?.*)?$/,
+  use: [
+    {
+      loader: 'url-loader',
+      options: {
+        limit: 4096,
+        fallback: {
+          loader: 'file-loader',
+          options: {
+            name: 'img/[name].[hash:8].[ext]'
+          }
+        }
+      }
+    }
+  ]
+}
+```
+
+As you can see, images are loaded with the URL loader when they are smaller than the 4096 bytes limit. If they are larger, the file loader is used as a fallback. 
+
+But what's that? The `test` regular expression only lists PNGs, JPGs, GIFs and WebPs as images. What about SVGs? SVGs have their own default rule:
+
 ```bash
 vue inspect --rule svg
 ```
 
-```
+```js
 {
   test: /\.(svg)(\?.*)?$/,
   use: [{
@@ -331,7 +367,11 @@ vue inspect --rule svg
 }
 ```
 
-`vue.config.js`
+### Use the chaining API to edit the `images` rule
+
+I personally want SVGs to be handled exactly as any other image type. To accomplish this you can edit the webpack configruation in `vue.config.js`.
+
+We'll use the chaining API to delete the `svg` rule and edit the `test` regular expression of the `images` rule:
 
 ```js
 module.exports = {
@@ -342,6 +382,8 @@ module.exports = {
   }
 };
 ```
+
+With these changes the `logo.svg` gets inlined (using the data URI scheme) as long as it's smaller than 4096 bytes:
 
 ```html
 <img src="./assets/logo.svg" alt="Logo">
