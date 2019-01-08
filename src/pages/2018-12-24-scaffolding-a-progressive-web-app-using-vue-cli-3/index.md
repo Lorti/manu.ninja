@@ -253,6 +253,9 @@ module.exports = {
 
  All configuration options are listed in [@vue/cli-plugin-pwa's README.md](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa#configuration). You don't have to change any of the default options, if you don't want to, but I suggest that you set the `name`, `themeColor` and `msTileColor` correctly.
 
+TODO 
+You can even debug your app's manifest.json in your browser's developer tools.
+
 ## Configure webpack
 
 At some point in your project's life you'll want to edit the webpack configuration. You probably want to add another webpack plugin or edit an existing webpack loader (we'll be doing both these tasks in the following sections). Vue CLI 3 allows you to edit the webpack configuration inside your `vue.config.js` file in three different ways.
@@ -447,6 +450,8 @@ When you run a production build the plugin will now add an `index.html`, `about/
 Please have a look at the [Prerender SPA Plugin](https://github.com/chrisvfritz/prerender-spa-plugin) documentation for all its options, as elaborating on the plugin would go beyond the scope of this guide. You can find a more advanced example in the `vue.config.js` file of my [full example application](#full-example-application) in the links/resources section.
 
 ## Audit with WebPagetest and Lighthouse
+
+
 
 ![100 Lighthouse PWA Score
 A First Byte Time
