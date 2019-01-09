@@ -163,6 +163,8 @@ The already installed `@vue/cli-plugin-babel` transforms your ES2015+ code accor
 
 ### Adding the Progressive Web App plugin 
 
+![](/images/vue-cli-3-pwa/npm-vue-cli-plugin-pwa.png)
+
 Now, if we want to add further plugins we can use the `vue add` command, followed by either the full name of the plugin, or a shorthand version. The following two commands lead to the same result:
 
 ```bash
