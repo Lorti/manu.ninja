@@ -39,7 +39,7 @@ Vue CLI 3 is also more in line with Vue's goal of being a progressive framework.
 
 ## Install Vue CLI 3
 
-The first thing to do, obviously, is to install Vue CLI 3. Like with any command-line tool, the Vue.js team recommends to globally install Vue CLI 3. However, before you do that, you should remove Vue CLI 2, to avoid any conflicts caused by remaining files. 
+The first thing, obviously, is to install Vue CLI 3. As is the case with most command-line tools, the Vue team recommends to globally install Vue CLI 3. However, before you do that, be sure to remove Vue CLI 2, to avoid any conflicts caused by remaining files.
 
 For both removing Vue CLI 2 and installing Vue CLI 3 you can use the package manager you prefer (npm or Yarn) and run the following commands:
 
@@ -53,7 +53,7 @@ yarn global remove vue-cli
 yarn global add @vue/cli
 ```
 
-Take note, that the Vue CLI 3 package is `@vue/cli`, not `vue-cli`. Every npm package that has to do with Vue CLI 3 is prefixed with `@vue`.
+Take note that the Vue CLI 3 package is `@vue/cli`, not `vue-cli`. Every npm package that has to do with Vue CLI 3 is prefixed with `@vue` and can be found in the `vue` scope/namescape.
 
 ## Create a new project
 
@@ -147,7 +147,19 @@ The `vue-cli-service` is what allows the Vue CLI 3 to scaffold projects without 
 
 ## Add and configure the official Progressive Web App plugin
 
-We've already talked about the `@vue/cli-service` listed in your project's `devDependencies`. The other two packages, `@vue/cli-plugin-babel` and `@vue/cli-plugin-eslint` are plugins for the Vue CLI 3. 
+We've already talked about the `@vue/cli-service` package listed in your project's `devDependencies`. The other `@vue` packages, `@vue/cli-plugin-babel` and `@vue/cli-plugin-eslint`, are plugins for Vue CLI 3.
+
+```json
+{
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.2.0",
+    "@vue/cli-plugin-eslint": "^3.2.0",
+    "@vue/cli-service": "^3.2.0",
+    "@vue/eslint-config-airbnb": "^4.0.0",
+    // …
+  }
+}
+```
 
 ### Understanding Vue CLI's plugins
 
@@ -162,8 +174,6 @@ The already installed `@vue/cli-plugin-babel` transforms your ES2015+ code accor
 `@vue/cli-plugin-eslint` checks your code against the `eslintConfig` configuration in your `package.json` files. It does this whenever you make changes to your code (while running the development server via `npm run dev`).
 
 ### Adding the Progressive Web App plugin 
-
-![](/images/vue-cli-3-pwa/npm-vue-cli-plugin-pwa.png)
 
 Now, if we want to add further plugins we can use the `vue add` command, followed by either the full name of the plugin, or a shorthand version. The following two commands lead to the same result:
 
@@ -201,6 +211,8 @@ The Service Worker is disabled in development mode, because local changes may no
 #### Build (and serve) your application
 
 You will most likely encounter linting errors when trying to run `npm run build`. To fix them automatically just run `npm run lint --fix` and it will auto-fix `main.js` and `registerServiceWorker.js` to match your ESLint settings.
+
+Vue CLI 3 plugins can generate JavaScript files, but they can't and often won't match your ESLint settings, depending on the plugin author's preferences.
 
 Now that you've build you application open the `dist` folder that was created and serve your application. You can do this with `npx http-server` or any other HTTP server that can serve files from a folder.
 
