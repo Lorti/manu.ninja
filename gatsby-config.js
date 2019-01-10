@@ -20,7 +20,6 @@ module.exports = {
       options: {
         plugins: [
           'gatsby-remark-autolink-headers-forked',
-
           // Find a way to handle (relative) social media images and use these packages.
           // 'gatsby-remark-copy-linked-files',
           // {
@@ -30,10 +29,21 @@ module.exports = {
           //     linkImagesToOriginal: false,
           //   },
           // },
-
           'gatsby-remark-prismjs',
           'gatsby-remark-responsive-iframe',
           'gatsby-remark-smartypants',
+          {
+            resolve: 'gatsby-remark-toc',
+            options: {
+              header: 'Table of Contents',
+              useExistingHeader: true,
+              orderedList: true,
+              include: [`src/pages/**/*.md`],
+              mdastUtilTocOptions: {
+                maxDepth: 2,
+              },
+            },
+          },
         ],
       },
     },

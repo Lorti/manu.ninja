@@ -20,17 +20,6 @@ This guide is intended for beginners who've never used Vue as well as veterans w
 
 ## Table of Contents
 
-1. [Vue? Vue CLI?](#vue-vue-cli)
-1. [Install Vue CLI 3](#install-vue-cli-3)
-1. [Create a new project](#create-a-new-project)
-1. [Add and configure the official Progressive Web App plugin](#add-and-configure-the-official-progressive-web-app-plugin)
-1. [Configure webpack](#configure-webpack)
-1. [Troubleshoot relative file imports](#troubleshoot-relative-file-imports)
-1. [Prerender pages for SEO](#prerender-pages-for-seo)
-1. [Audit with WebPagetest and Lighthouse](#audit-with-webpagetest-and-lighthouse)
-1. [Conclusion](#conclusion)
-1. [Resources](#linksresources)
-
 ## Vue? Vue CLI?
 
 > Vue (/vjuː/) is a progressive framework for building user interfaces. 
@@ -151,7 +140,7 @@ When you've run `npm run serve` you might have already noticed, that npm runs th
 
 The `vue-cli-service` is what allows the Vue CLI 3 to scaffold projects without hundreds of lines of webpack configuration. It strips away a lot of configuration while also allowing you to benefit from updates to the `vue-cli-service`, without having to adjust your project's configuration. In Vue CLI 2 updates to a template would go by your project unnoticed, if you did not invest the time to manually apply updates and resolve conflicts.
 
-## Add and configure the official Progressive Web App plugin
+## Add the official Progressive Web App plugin
 
 We've already talked about the `@vue/cli-service` package listed in your project's `devDependencies`. The other `@vue` packages, `@vue/cli-plugin-babel` and `@vue/cli-plugin-eslint`, are plugins for Vue CLI 3.
 
@@ -210,7 +199,7 @@ The plugin added itself and the `register-service-worker` package as dependencie
 
 We'll talk about how to configure the Service Worker in the next section. If you're unsure what a Service Worker is or what it's used for in a Progressive Web App -- keep in mind that we're only using it for caching network requests, so that your app (or at least parts of your app) are available offline or in unreliable network conditions.
 
-### Testing the Progressive Web App plugin
+## Test the Progressive Web App plugin
 
 The Service Worker is disabled in development mode, because local changes may not show up while you develop your application when files are being cached. This means if you want to test your Progressive Web App you'll have to build your Vue application first. This can be done by simply running `npm run build`. 
 
@@ -238,7 +227,7 @@ Next, you should test if the Service Worker correctly proxies network requests w
 
 ![Network ✔️ Offline (from ServiceWorker)](/images/vue-cli-3-pwa/from-service-worker.png)
 
-### Configuring the Progressive Web App plugin
+## Configure the Progressive Web App plugin
 
 You have already seen where many libraries (Babel, PostCSS, ESLint …) can be configured: In dedicated config files or in `package.json` fields. For many plugins, especially official Vue CLI plugins in the `@vue` namespace there's another place for configuration: `vue.config.js`. 
 
@@ -515,18 +504,14 @@ which I may highlight in further articles, if you're interested.
 If you want to see a complete Progresive Web App build with Vue CLI 3 have a look at the [full example application](#full-example-application) in the links/resources section. I have kept the Vue CLI 2 and Vue CLI 3 snapshots in separate branches, if you're interested in the exact differences when upgrading/migrating to Vue CLI 3.
 
 I want this guide to be as helpful as possible, especially for beginners. If you have questions, suggestions or any feedback please leave them in the comments or contact me on Twitter.
-
-## Footnotes 
-
-1. <a name="1"></a>This is compared to running [`vue init webpack my-project`](https://github.com/vuejs-templates/webpack/tree/develop/template) and using the `webpack` template.
  
-## Links/Resources
+## Further reading
 
 * [Vue CLI 3 Guide](https://cli.vuejs.org/guide/)
 * [Vue CLI 3 Configuration Reference](https://cli.vuejs.org/config/)
 * [Service Workers (Introduction)](https://developers.google.com/web/fundamentals/primers/service-workers/)
 
-### Official Plugins
+### Official plugins
 
 * [@vue/cli-plugin-babel](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel)
 * [@vue/cli-plugin-typescript](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript)
@@ -543,3 +528,7 @@ I want this guide to be as helpful as possible, especially for beginners. If you
 * [master Branch](https://github.com/Lorti/phrasebook/tree/master)
 * [vue-cli-2 Branch](https://github.com/Lorti/phrasebook/tree/vue-cli-2)
 * [vue-cli-3 Branch](https://github.com/Lorti/phrasebook/tree/vue-cli-3)
+
+## Footnotes 
+
+1. <a name="1"></a>This is compared to running `vue init webpack my-project` and using the [`webpack` template](https://github.com/vuejs-templates/webpack/tree/develop/template).
