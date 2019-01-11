@@ -288,11 +288,11 @@ All configuration options are listed in [@vue/cli-plugin-pwa's README.md](https:
  
 ## Configure webpack
 
-At some point in your project's life you'll want to edit the webpack configuration. You probably want to add another webpack plugin or edit an existing webpack loader (we'll be doing both these tasks in the following sections). Vue CLI 3 allows you to edit the webpack configuration inside your `vue.config.js` file in three different ways.
+At some point in your project's life you'll want to edit the webpack configuration, maybe to add another webpack plugin or edit an existing webpack loader (we'll be doing both these tasks in the following sections). Vue CLI 3 allows you to edit the webpack configuration inside your `vue.config.js` file in three different ways.
 
 ### Option 1: Provide an object to the `configureWebpack` property
 
-If you simply pass an object to the `configreWebpack` property it will be merged with the existing webpack config. This way you can easily add new plugins and loaders.
+If you simply pass an object to the `configureWebpack` property it will be merged with the existing webpack config. This way you can easily add new plugins and loaders.
 
 ```js
 // vue.config.js
@@ -307,7 +307,7 @@ module.exports = {
 
 ### Option 2: Provide a function to the `configureWebpack` property
 
-If you want to have more fine-grined control you can assign a function to the `configureWebpack` property. It receives a `config` argument which you can mutate directly. This allows you to have different configurations for development and production builds.
+If you want to have more control you can assign a function to the `configureWebpack` property. It receives a `config` argument which you can mutate directly. This allows you to have different configurations for development and production builds.
 
 ```js
 module.exports = {
@@ -322,7 +322,7 @@ module.exports = {
 
 ### Option 3: Use the (advanced) chaining API
 
-If you want full control, edit existing plugins and loaders or prefer a chaining API you can pass a function to the `chainWebpack` property (not `configureWebpack`). It allows you to make configuration changes using the chaining API provided by [webpack-chain](https://github.com/neutrinojs/webpack-chain). With it you can easily tap into an existing plugin or loader and modify its settings.
+If you want full control, edit existing plugins and loaders or simply prefer method chaining you can pass a function to the `chainWebpack` property (instead of `configureWebpack`). This allows you to make configuration changes using the chaining API provided by [webpack-chain](https://github.com/neutrinojs/webpack-chain). With it you can easily tap into an existing plugin or loader and modify its settings.
 
 ```js
 module.exports = {
@@ -336,15 +336,15 @@ module.exports = {
 };
 ```
 
-We'll be using the chaining API for a simple example in the next section, which should make things clear.
+We'll be using the chaining API for a simple example in the next section.
 
 ## Troubleshoot relative file imports
 
-The Vue CLI 3 [documentation](https://cli.vuejs.org/guide/html-and-static-assets.html#building-a-multi-page-app) states that static assets are inlined when they are referenced using a relative path and smaller than 4KB:
+The Vue CLI 3 documentation on [Static Assets Handling](https://cli.vuejs.org/guide/html-and-static-assets.html#building-a-multi-page-app) mentions that static assets are inlined when they are referenced using a relative path and smaller than 4KB:
 
 > Internally, we use `file-loader` to determine the final file location with version hashes and correct public base paths, and use `url-loader` to conditionally inline assets that are smaller than 4kb, reducing the amount of HTTP requests.
 
-Although, when you reference an SVG file it won't get inlined. The file only gets a version hash for cache busting when building your application:
+However, when you reference an SVG file it won't get inlined. The file only gets a version hash for cache busting when building your application:
 
 ```html
 <img src="./assets/logo.svg" alt="Logo">
@@ -354,9 +354,9 @@ Although, when you reference an SVG file it won't get inlined. The file only get
 
 ### Inspecting your webpack configuration
 
-To "debug" the webpack configuration and find out why the SVG doesn't get inlined the Vue CLI 3 provides an `inspect` command. If you run it without any arguments it will output the complete webpack configuration it uses when building your application.
+To "debug" the webpack configuration and learn why the SVG doesn't get inlined Vue CLI 3 provides an `inspect` command. If you run the command without any arguments it will output the complete webpack configuration the CLI uses when building your application.
 
-To narrow your search down you can use the `--rules` or `--plugins` options. When you know the exact name of your rule you can also just output a single webpack rule:
+To narrow your search down use the `--rules` or `--plugins` options. When you know the exact name of your rule you can also just output a single webpack rule:
 
 ```bash
 vue inspect --rule images
@@ -382,7 +382,7 @@ vue inspect --rule images
 }
 ```
 
-As you can see, images are loaded with the URL loader when they are smaller than the 4096 bytes limit. If they are larger, the file loader is used as a fallback. 
+These lines tell us that images are loaded with the `url-loader` when they are smaller than the 4096 bytes limit. If they are larger the `file-loader` is used as a fallback. 
 
 But what's that? The `test` regular expression only lists PNGs, JPGs, GIFs and WebPs as images. What about SVGs? SVGs have their own default rule:
 
@@ -402,9 +402,9 @@ vue inspect --rule svg
 
 ### Use the chaining API to edit the `images` rule
 
-I personally want SVGs to be handled exactly as any other image type. To accomplish this you can edit the webpack configruation in `vue.config.js`.
+I personally want SVGs to be handled exactly as any other image type. To accomplish this you can edit the webpack configuration in `vue.config.js`.
 
-We'll use the chaining API to delete the `svg` rule and edit the `test` regular expression of the `images` rule:
+We'll use the chaining API to delete the `svg` rule and adapt the `test` regular expression of the `images` rule:
 
 ```js
 module.exports = {
