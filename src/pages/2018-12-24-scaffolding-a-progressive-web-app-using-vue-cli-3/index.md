@@ -162,11 +162,11 @@ Vue CLI 3 is centered around plugins that can enhance the development experience
 
 Most plugins also have a sensible default configuration, meaning you don't even have to configure a plugin, as long as you don't want to change its default behaviour. This goes so far as to many plugins not even placing their default configuration in your `package.json` or their separate configuration files. But we'll get to that when we configure the official Progressive Web App plugin.
 
-### `@vue/cli-plugin-babel`
+#### `@vue/cli-plugin-babel`
 
 The already installed `@vue/cli-plugin-babel` transforms your ES2015+ code according to the configuration in `babel.config.js`. By default it uses a `@vue/app` preset, making sure your application works on all browsers supported by the Vue framework itself[<sup>3</sup>](#3), and the `browserlist` field in your `package.json`. This field is also used for PostCSS -- you can read the [Browser Compatibility](https://cli.vuejs.org/guide/browser-compatibility.html) section in the Vue CLI 3 documentation for further details.
 
-### `@vue/cli-plugin-eslint`
+#### `@vue/cli-plugin-eslint`
 
 `@vue/cli-plugin-eslint` checks your code against the `eslintConfig` configuration in your `package.json` files. It does this whenever you make changes to your code, when running the development server via `npm run dev`.
 
@@ -179,7 +179,7 @@ vue add @vue/pwa
 vue add @vue/cli-plugin-pwa
 ```
 
-This will install the [`@vue/cli-plugin-pwa`](https://www.npmjs.com/package/@vue/cli-plugin-pwa) package, which adds a lot of Progressive Web App functionality to your project. After running it will tell you that it has changed (or added) the following files:
+This will install the [`@vue/cli-plugin-pwa`](https://www.npmjs.com/package/@vue/cli-plugin-pwa) package, which adds a lot of Progressive Web App functionality to your project. After completion it will tell you that it has changed/created the following files:
 
 ```txt
 ├── package-lock.json
@@ -197,19 +197,19 @@ This will install the [`@vue/cli-plugin-pwa`](https://www.npmjs.com/package/@vue
    └── registerServiceWorker.js
 ```
 
-The plugin added itself and the `register-service-worker` package as dependencies to the `package.json` file. It also added a few files to the `public` folder, all of which you can edit to match your application: a `manifest.json`, `robot.txt` and a set of icons for various devices. It also adds a a few lines that initialize a Service Worker (in `main.js` and `registerServiceWorker.js`), via Google's [Workbox](https://developers.google.com/web/tools/workbox/) libray.
+* The plugin adds itself and the `register-service-worker` package as dependencies to your `package.json` file.
+* It created a few files in the `public` folder, all of which you can edit to match your application's design: a `manifest.json`, `robot.txt` and a set of icons for various devices.
+* It also adds a a few lines that initialize a Service Worker (in `main.js` and `registerServiceWorker.js`), via Google's [Workbox](https://developers.google.com/web/tools/workbox/) libray.
 
-We'll talk about how to configure the Service Worker in the next section. If you're unsure what a Service Worker is or what it's used for in a Progressive Web App -- keep in mind that we're only using it for caching network requests, so that your app (or at least parts of your app) are available offline or in unreliable network conditions.
+We'll talk about how to configure the Service Worker after the next section. If you're unsure what a Service Worker is or what it's used for in a Progressive Web App -- keep in mind that we're only using it for caching network requests, so that your app (or at least parts of your app) are available offline or in unreliable network conditions.
 
 ## Test the Progressive Web App plugin
 
-The Service Worker is disabled in development mode, because local changes may not show up while you develop your application when files are being cached. This means if you want to test your Progressive Web App you'll have to build your Vue application first. This can be done by simply running `npm run build`. 
+The Service Worker is disabled in development mode, because local changes may not show up while you develop your application when files are being cached. This means if you want to test your Progressive Web App you'll have to build your Vue application first, which can be done by simply running `npm run build`.
 
 #### Build (and serve) your application
 
-You will most likely encounter linting errors when trying to run `npm run build`. To fix them automatically just run `npm run lint --fix` and it will auto-fix `main.js` and `registerServiceWorker.js` to match your ESLint settings.
-
-Vue CLI 3 plugins can generate JavaScript files, but they can't and often won't match your ESLint settings, depending on the plugin author's preferences.
+You will most likely encounter linting errors when trying to run `npm run build`. To fix them just run `npm run lint --fix` and it will automatically fix `main.js` and `registerServiceWorker.js` to match your ESLint settings[<sup>4</sup>](#4).
 
 Now that you've build you application open the `dist` folder that was created and serve your application. You can do this with `npx http-server` or any other HTTP server that can serve files from a folder.
 
@@ -221,19 +221,19 @@ It's also a good idea to clear Service Workers and Cache Storage for <http://loc
 
 #### Inspect cache and test offline functionality
 
-When you visit your application in the browser the Service Worker automatically caches all HTML, JavaScript, CSS and image files. You can inspect the cache storage in your browser's development tools.
+When you visit your application in the browser the Service Worker automatically caches all HTML, CSS, JavaScript and image files. You can inspect the cache storage in your browser's development tools:
 
 ![Cache Storage](/images/vue-cli-3-pwa/cache-storage.png)
 
-Next, you should test if the Service Worker correctly proxies network requests when you're offline, and returns the cached results. You can unplug your Ethernet cable, disconnect from your Wi-Fi, or use a network filter in your browser's development tools. If you do so you should still be able to visit your site, as (almost) all assets are provided by the Service Worker.
+Next, you should test if the Service Worker correctly proxies network requests when you're offline, and returns the cached results. You can unplug your Ethernet cable, disconnect from your Wi-Fi, or use the network filter in your browser's development tools. If you do so you should still be able to visit your site, as (almost) all assets are provided by the Service Worker.
 
 ![Network ✔️ Offline (from ServiceWorker)](/images/vue-cli-3-pwa/from-service-worker.png)
 
 ## Configure the Progressive Web App plugin
 
-You have already seen where many libraries (Babel, PostCSS, ESLint …) can be configured: In dedicated config files or in `package.json` fields. For many plugins, especially official Vue CLI plugins in the `@vue` namespace there's another place for configuration: `vue.config.js`. 
+You have already seen where libraries (Babel, PostCSS, ESLint …) can be configured when using Vue CLI 3: in dedicated config files or in `package.json` fields. For many plugins, especially official Vue CLI plugins in the `@vue` namespace, there's another place for configuration: `vue.config.js`.
 
-The `vue.config.js` does not exist when you initially create a project with  Vue CLI 3. You have to create it youself if you want to change the default configuration of your Vue CLI plugins.
+The `vue.config.js` does not exist when you initially create a project with Vue CLI 3. You have to create it youself if you want to change the default configuration of your Vue CLI plugins. It has to export a single configuration object via `module.exports = {}`.
 
 Here's an example configuration for my [Japanese Phrasebook](https://japanese-phrasebook.com/) Progressive Web App built with Vue CLI 3:
 
@@ -262,7 +262,25 @@ module.exports = {
 };
 ```
 
-You can even debug your app's manifest.json in your browser's developer tools.
+The `workboxOptions` configure the Service Worker. In my case the cache's name is `phrasebook` and all Workbox files are loaded from my server, instead of Google’s CDNs. The application also has an [App Shell](https://developers.google.com/web/fundamentals/architecture/app-shell), so that the red header is always cached and shown until the application itself is ready and fully loaded.
+
+All other options change how your application is presented when installed on different systems. The plugin automatically adds all necessary HTML elements to your `index.html`.
+
+```html
+<link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#f44336">
+<meta name="apple-mobile-web-app-capable" content="no">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Japanese Phrasebook">
+<link rel="apple-touch-icon" href="/img/icons/apple-touch-icon-180x180.png">
+<link rel="mask-icon" href="/img/icons/safari-pinned-tab.svg" color="#f44336">
+<meta name="msapplication-TileImage" content="/img/icons/msapplication-icon-144x144.png">
+<meta name="msapplication-TileColor" content="#f44336">
+```
+
+You have to edit your app's `manifest.json` yourself, unfortunately. It should match the settings you choose for the Progressive Web App plugin. You can debug the manifest in your browser's developer tools:
 
 ![Manifest](/images/vue-cli-3-pwa/manifest.png)
 
@@ -536,3 +554,4 @@ I want this guide to be as helpful as possible, especially for beginners. If you
 1. <a name="1"></a>This is compared to running `vue init webpack my-project` and using the [`webpack` template](https://github.com/vuejs-templates/webpack/tree/develop/template).
 1. <a name="2"></a>The amount of dependencies of course depends on what you've selected in the `vue create` prompts.
 1. <a name="3"></a>Vue supports all browsers that support ES5 (IE8 and below are not supported).
+1. <a name="4"></a>Vue CLI 3 plugins can generate JavaScript files, but they can't and often won't match your ESLint settings, depending on the plugin author's preferences.
