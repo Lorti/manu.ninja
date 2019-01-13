@@ -2,10 +2,11 @@
 path: /scaffolding-a-progressive-web-app-using-vue-cli-3
 title: Scaffolding a Progressive Web App using Vue CLI 3
 htmlTitle: Scaffolding a Progressive Web App using Vue&nbsp;CLI&nbsp;3
-date: 2018-12-24
+date: 2019-01-13
 categories: [coding]
 tags: [meetups, pwa, slides, tools, vue]
 thumbnail: /images/vue-cli-3-pwa/scaffolding-a-progressive-web-app-using-vue-cli-3.jpg
+sharing: true
 ---
 
 Vue CLI 3 has been released and it's completely different from its previous version. Discover how it simplifies your toolchain, reduces configuration fatigue and improves your developer experience.
@@ -235,7 +236,7 @@ You have already seen where libraries (Babel, PostCSS, ESLint …) can be config
 
 The `vue.config.js` does not exist when you initially create a project with Vue CLI 3. You have to create it youself if you want to change the default configuration of your Vue CLI plugins. It has to export a single configuration object via `module.exports = {}`.
 
-Here's an example configuration for my [Japanese Phrasebook](https://japanese-phrasebook.com/) Progressive Web App built with Vue CLI 3:
+Here's an example configuration for my [Japanese Phrasebook](https://japanese-phrasebook.com/), a Progressive Web App built with Vue CLI 3:
 
 ```js
 module.exports = {
@@ -477,7 +478,7 @@ You might also want to add the `data-server-rendered` custom attribute to your a
 
 When you run a production build the plugin will now add `index.html`, `about/index.html` -- and any other route you have configured -- to your `dist` directory.
 
-Please have a look at the [Prerender SPA Plugin](https://github.com/chrisvfritz/prerender-spa-plugin) documentation for all its options. You can find a more advanced example in the `vue.config.js` file of my [full example application](#full-example-application) in the links/resources section.
+Please have a look at the [Prerender SPA Plugin](https://github.com/chrisvfritz/prerender-spa-plugin) documentation for all its options. You can find a more advanced example in the `vue.config.js` file of the [full example application](#full-example-application) in the links/resources section.
 
 ## Audit with WebPagetest and Lighthouse
 
@@ -491,7 +492,7 @@ A Compress Images
 D Cache static content
 ✔ Effective use of CDN](/images/vue-cli-3-pwa/webpagetest-score.png)
 
-Did I say straight A’s? The above results are actually for <https://www.japanese-phrasebook.com/>, the [full example application](#full-example-application) in the links/resources section. It uses Google Analytics, which does not send caching headers, so Google's scripts are always up to date, resulting in a D for caching static content:
+Did I say straight A’s? The above results are actually for my [Japanese Phrasebook](https://www.japanese-phrasebook.com/). It uses Google Analytics, which does not send caching headers, so Google's scripts are always up to date, resulting in a D for caching static content:
 
 ```
 Leverage browser caching of static assets: 60/100
@@ -502,26 +503,28 @@ FAILED - (45.7 minutes) - https://www.google-analytics.com/analytics.js
 
 ## Conclusion
 
+We've walked you through using the Vue CLI 3 for scaffolding a Progressive Web App, explaining the CLI's core concepts along the way, which should give you a great starting point for further Vue development.
+
 We did talk about
 
-* using the Vue CLI 3 to create a project
+* using the Vue CLI 3 to create a project,
 * adding and configuring Vue CLI plugins,
-* configuring the Progressive Web App plugin,
+* configuring the official Progressive Web App plugin,
 * configuring webpack,
 * prerendering pages for SEO
 * and building your application.
 
-We did not tap on
+We did not tap into
 
-* UI
-* Presets (for bypassing the prompts when creating a project)
-* Instant Prototyping
-* Build Targets (including the `--modern` flag)
-* Plugin Development
+* the Vue CLI 3 UI,
+* presets (for bypassing the prompts when creating a project),
+* instant prototyping,
+* build targets (including the `--modern` flag and web components)
+* and plugin development,
 
-which I may highlight in further articles, if you're interested.
+all of which I may highlight in further articles, if you're interested.
 
-If you want to see a complete Progresive Web App build with Vue CLI 3 have a look at the [full example application](#full-example-application) in the links/resources section. I have kept the Vue CLI 2 and Vue CLI 3 snapshots in separate branches, if you're interested in the exact differences when upgrading/migrating to Vue CLI 3.
+If you want to see a complete Progressive Web App build with Vue CLI 3 have a look at my [Japanese Phrasebook](https://www.japanese-phrasebook.com/), the [full example application](#full-example-application) in the links/resources section. I have kept the Vue CLI 2 and Vue CLI 3 snapshots in separate branches, if you're interested in the exact differences when upgrading/migrating to Vue CLI 3.
 
 I want this guide to be as helpful as possible, especially for beginners. If you have questions, suggestions or any feedback please leave them in the comments or contact me on Twitter.
  
