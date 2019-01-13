@@ -426,9 +426,9 @@ With these changes the `logo.svg` gets inlined (using the data URI scheme) as lo
 
 ## Prerender pages for SEO
 
-Your Progressive Web App is already up and running. This section explains an optional step you can take for search engine optimization (SEO): Configuring the [Prerender SPA Plugin](https://github.com/chrisvfritz/prerender-spa-plugin) webpack plugin to prerender certain pages (or routes) of your application. This gives bots the ability to crawl your public-facing pages without having to execute JavaScript.
+Your Progressive Web App is already up and running. This section explains an optional step you can take for search engine optimization (SEO): Configuring the [Prerender SPA Plugin](https://github.com/chrisvfritz/prerender-spa-plugin) for webpack to prerender pages -- actually a list of routes -- of your application. This gives search bots the ability to crawl your public-facing pages without having to execute JavaScript.
 
-First run `npm install prerender-spa-plugin`, then edit your `vue.config.js`:
+First run `npm install prerender-spa-plugin --save-dev`, then edit your `vue.config.js`:
 
 ```js
 const path = require('path');
@@ -467,7 +467,7 @@ new Vue({
 });
 ```
 
-You might also want to add the `data-server-rendered` custom attribute to your application's `public/index.html` file, so that Vue correctly takes over the static HTML sent by the server (a process called "client side hydration"):
+You might also want to add the `data-server-rendered` custom attribute to your application's `public/index.html` file. This helps Vue to correctly take over the static content sent by the server and replace it with dynamic content, a process called "client side hydration":
 
 ```html
 <body>
@@ -475,13 +475,13 @@ You might also want to add the `data-server-rendered` custom attribute to your a
 </body>
 ```
 
-When you run a production build the plugin will now add an `index.html`, `about/index.html` and any other route you have configured to your `dist` directory.
+When you run a production build the plugin will now add `index.html`, `about/index.html` -- and any other route you have configured -- to your `dist` directory.
 
-Please have a look at the [Prerender SPA Plugin](https://github.com/chrisvfritz/prerender-spa-plugin) documentation for all its options, as elaborating on the plugin would go beyond the scope of this guide. You can find a more advanced example in the `vue.config.js` file of my [full example application](#full-example-application) in the links/resources section.
+Please have a look at the [Prerender SPA Plugin](https://github.com/chrisvfritz/prerender-spa-plugin) documentation for all its options. You can find a more advanced example in the `vue.config.js` file of my [full example application](#full-example-application) in the links/resources section.
 
 ## Audit with WebPagetest and Lighthouse
 
-If you follow this guide you should be able to achieve an optimal [Lighthouse](https://developers.google.com/web/tools/lighthouse/) score with the help of Vue CLI 3, as well as straight A’s in [WebPagetest](https://www.webpagetest.org/).
+If you've followed this guide you should be able to achieve an optimal [Lighthouse](https://developers.google.com/web/tools/lighthouse/) score with the help of Vue CLI 3, as well as straight A’s in [WebPagetest](https://www.webpagetest.org/):
 
 ![100 Lighthouse PWA Score
 A First Byte Time
@@ -491,7 +491,7 @@ A Compress Images
 D Cache static content
 ✔ Effective use of CDN](/images/vue-cli-3-pwa/webpagetest-score.png)
 
-Did I say straight A’s? The above results are actually for <https://www.japanese-phrasebook.com/>, the [full example application](#full-example-application) in the links/resources section. It uses Google Analytics, which does not send caching headers, so their scripts are always up to date:
+Did I say straight A’s? The above results are actually for <https://www.japanese-phrasebook.com/>, the [full example application](#full-example-application) in the links/resources section. It uses Google Analytics, which does not send caching headers, so Google's scripts are always up to date, resulting in a D for caching static content:
 
 ```
 Leverage browser caching of static assets: 60/100
@@ -525,7 +525,7 @@ If you want to see a complete Progresive Web App build with Vue CLI 3 have a loo
 
 I want this guide to be as helpful as possible, especially for beginners. If you have questions, suggestions or any feedback please leave them in the comments or contact me on Twitter.
  
-## Further reading
+## Links/Resources
 
 * [Vue CLI 3 Guide](https://cli.vuejs.org/guide/)
 * [Vue CLI 3 Configuration Reference](https://cli.vuejs.org/config/)
