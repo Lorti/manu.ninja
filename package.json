@@ -23,6 +23,7 @@
     "gatsby-remark-smartypants": "^2.0.7",
     "gatsby-remark-toc": "^1.2.0",
     "gatsby-source-filesystem": "^2.0.16",
+    "gatsby-transformer-json": "^2.1.7",
     "gatsby-transformer-remark": "^2.2.0",
     "gatsby-transformer-sharp": "^2.1.10",
     "node-sass": "^4.11.0",

@@ -11,10 +11,19 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src/pages`,
         name: 'pages',
+        path: `${__dirname}/src/pages/`,
       },
     },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'data',
+        path: `${__dirname}/src/data/`,
+        ignore: ['**/.*'],
+      },
+    },
+    'gatsby-transformer-json',
     {
       resolve: 'gatsby-transformer-remark',
       options: {

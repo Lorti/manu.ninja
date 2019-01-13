@@ -1,0 +1,14 @@
+[
+    {
+        "title": "Corsair",
+        "url": "https://github.com/Lorti/corsair",
+        "description": "Corsair using RxJS, Immutable.js and WebGL/three.js",
+        "date": "2017-12"
+    },
+    {
+        "title": "RxJS Breakout",
+        "url": "https://github.com/Lorti/rxjs-breakout",
+        "description": "Breakout using Functional Reactive Programming and RxJS",
+        "date": "2016-04"
+    }
+]
