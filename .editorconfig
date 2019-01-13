@@ -9,10 +9,8 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[{*.json, *.svg}]
-indent_style = space
+[{*.json, *.scss, *.svg}]
 indent_size = 4
 
-[{package.json,*.yml,*rc}]
-indent_style = space
+[{package.json, *.yml, *rc}]
 indent_size = 2
