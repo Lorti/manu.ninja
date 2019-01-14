@@ -15,7 +15,7 @@ This guide is intended for beginners who've never used Vue as well as veterans w
 
 <style>
   .Article img {
-    max-width: 640px;
+    width: 640px;
   }
 </style>
 
