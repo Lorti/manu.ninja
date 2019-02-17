@@ -63,12 +63,19 @@
         list-style-type: disc;
     }
 
-    ol, ul {
+    ol, ul, dl {
         padding-left: 1.375em;
         @include baseline(null, 0, 1, true);
 
-        ol, ul {
+        ol, ul, dl {
             margin-left: 1.375em;
+        }
+    }
+
+    // I don't really know where to put this...
+    dt[class*="u-lg-size"] {
+        @media (min-width: 960px) {
+            text-align: right;
         }
     }
 
