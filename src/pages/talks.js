@@ -9,7 +9,7 @@ export default function Talks({ data }) {
       <div className="Column">
         <div className="Article">
           <div className="Article-header u-textCenter">
-            <h1 className="Article-title">Talks</h1>
+            <h1 className="Article-title">Speaking and Workshops</h1>
           </div>
           <div className="Article-content">
             <img
@@ -24,19 +24,13 @@ export default function Talks({ data }) {
               alt="Manuel Wieser speaking at Stahlstadt.js #18"
             />
             <p>
-              Do you want me to talk about web development topics at your event?
-              <br />
-              Send a message to{' '}
+              I’m available for speaking and workshops, just send a message to{' '}
               <a href="mailto:office@manuelwieser.com">
                 office@manuelwieser.com
               </a>
-              !
-            </p>
-            <p>
-              <small>
-                Click on a talk’s title to download the slides. If there’s a
-                video recording it’s linked in the deck’s description.
-              </small>
+              . I’d be happy to talk about web design and development, game
+              asset creation and challenges we’ve faced at{' '}
+              <a href="https://www.karriere.at/">karriere.at</a>.
             </p>
           </div>
         </div>
@@ -44,15 +38,18 @@ export default function Talks({ data }) {
           {projects.map(({ node: talk }) => {
             return (
               <div className="Talk">
-                <p className="Talk-meta">
-                  {talk.formattedDate} – {talk.location}
+                <p className="Talk-event">
+                  <a href={talk.url}>{talk.event}</a>
                 </p>
                 <h2 className="Talk-title">
-                  <a className="Talk-link" href={talk.slides}>
-                    {talk.title}
-                  </a>
+                  <a href={talk.slides}>{talk.title}</a>
                 </h2>
-                <p className="Talk-event">{talk.event}</p>
+                <p className="Talk-meta">
+                  <span>{talk.formattedDate}</span>
+                  <span>{talk.location}</span>
+                  {talk.slides ? <a href={talk.slides}>Slides</a> : ''}
+                  {talk.video ? <a href={talk.video}>Video</a> : ''}
+                </p>
               </div>
             )
           })}
@@ -69,9 +66,9 @@ export const query = graphql`
         node {
           title
           event
+          url
           slides
           video
-          date
           formattedDate: date(formatString: "MMM DD, YYYY")
           location
         }
