@@ -67,7 +67,7 @@
         padding-left: 1.375em;
         @include baseline(null, 0, 1, true);
 
-        ol, ul, dl {
+        ol, ul, dd {
             margin-left: 1.375em;
         }
     }

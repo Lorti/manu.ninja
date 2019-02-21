@@ -14,8 +14,8 @@ export default function Projects({ data }) {
             <h1 className="Article-title">Projects</h1>
           </div>
           <div className="Article-content">
-            <p>Here you’ll find a selection of open-source projects I’ve created or contributed to, as well as personal and professional work. There’s a list of featured projects and a chronological list of projects.</p>
-            <p>I try to actively maintain all of my open-source projects, if they’re not marked as deprecated.</p>
+            <p>Here you’ll find a selection of open-source projects I’ve created or contributed to, as well as personal and professional work. As soon as I find the time I’ll add games and digital art projects.</p>
+            <p>There’s a list of featured projects and a chronological list of projects. Also I try to actively maintain all of my open-source projects, if they’re not marked as deprecated.</p>
             <h2>Featured Projects ✨</h2>
             <dl>
               {featured.map(({ node: project }) => (

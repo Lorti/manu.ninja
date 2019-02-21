@@ -9,21 +9,21 @@
     {
         "title": "vue-cli-plugin-e2e-nightwatch-cucumber",
         "url": "https://github.com/karriereat/vue-cli-plugin-e2e-nightwatch-cucumber",
-        "description": "Nightwatch/Cucumber plugin for Vue CLI 3",
+        "description": "Nightwatch/Cucumber plugin for Vue CLI 3.",
         "date": "2018-10",
         "featured": true
     },
     {
         "title": "Corsair",
         "url": "https://github.com/Lorti/corsair",
-        "description": "Corsair using RxJS, Immutable.js and WebGL/three.js",
+        "description": "Corsair using RxJS, Immutable.js and WebGL/three.js.",
         "date": "2017-12",
         "featured": true
     },
     {
         "title": "RxJS Breakout",
         "url": "https://github.com/Lorti/rxjs-breakout",
-        "description": "Breakout using Functional Reactive Programming and RxJS",
+        "description": "Breakout using Functional Reactive Programming and RxJS.",
         "date": "2016-04",
         "featured": true
     },
@@ -151,6 +151,34 @@
         "url": "https://github.com/Lorti/dominant-colors-snippets",
         "description": "Snippets showcasing the differences between quantization techniques.",
         "date": "2016-05",
+        "featured": false
+    },
+    {
+        "title": "Clock Clock 24",
+        "url": "https://codepen.io/Lorti/pen/XpQewQ",
+        "description": "A take on the original design by Humans since 1982, where 24 analogue clocks form a digital clock.",
+        "date": "2017-02",
+        "featured": false
+    },
+    {
+        "title": "Liquid Loading",
+        "url": "https://codepen.io/Lorti/pen/ozExqp",
+        "description": "A “droplet effect” pull-to-refresh animation using SVG, CSS and JavaScript.",
+        "date": "2016-10",
+        "featured": false
+    },
+    {
+        "title": "WebGL Annotations",
+        "url": "https://codepen.io/Lorti/pen/Vbppap",
+        "description": "three.js example showing how to add a comment box or annotation box to a WebGL object as seen on Sketchfab.",
+        "date": "2017-04",
+        "featured": false
+    },
+    {
+        "title": "Clementine",
+        "url": "https://github.com/Lorti/clementine",
+        "description": "Radiated Pixel’s Clementine, the skill-based brain-twisting platformer, on iOS, Android or Windows Phone. Can you run further than your friends and beat their high scores?! The microsite lists all-time high scores of players.",
+        "date": "2014-04",
         "featured": false
     }
 ]
