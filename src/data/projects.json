@@ -4,7 +4,7 @@
         "url": "https://github.com/Lorti/manu.ninja",
         "description": "manu.ninja is the personal blog of Manuel Wieser, where he talks about front-end development, games and digital art",
         "date": "2015-09",
-        "featured": true
+        "featured": false
     },
     {
         "title": "vue-cli-plugin-e2e-nightwatch-cucumber",
@@ -30,7 +30,7 @@
     {
         "title": "Dominant Colors Lazy Loading (WordPress Plugin)",
         "url": "https://github.com/Lorti/dominant-colors-lazy-loading-wordpress-plugin",
-        "description": "This WordPress plugin allows you to lazy load your images while showing the dominant color of each image as a placeholder – like Pinterest or Google Images.",
+        "description": "This WordPress plugin allows you to lazy-load your images while showing the dominant color of each image as a placeholder – like Pinterest or Google Images.",
         "date": "2016-04",
         "featured": true
     },
@@ -94,14 +94,14 @@
         "title": "Laravel Handlebars",
         "url": "https://github.com/ProAI/laravel-handlebars",
         "description": "A Laravel 5 wrapper for LightnCandy for using the Handlebars (and Mustache) template engine. It allows you to use the same templates in different languages (like PHP and JavaScript) on the client and server.",
-        "date": "2015-05",
+        "date": "2016-08",
         "featured": false
     },
     {
         "title": "WebGL 3D Model Viewer Using three.js",
         "url": "https://github.com/Lorti/webgl-3d-model-viewer-using-three.js",
         "description": "three.js example using an OBJ/MTL loader, orbit controls, nearest-neighbor filtering and a pure white ambient light to showcase pixel art textures.",
-        "date": "2016-05",
+        "date": "2016-02",
         "featured": false
     },
     {
@@ -109,6 +109,48 @@
         "url": "https://github.com/Lorti/artur-web-interface",
         "description": "ARTUR (Autonomous Robot Playspace) is a game designed for the Deep Space 8K at Ars Electronica Center. It made its debut at the Ars Electronica Festival 2017 in Linz, Austria. The web interface allows visitors to take part in the game by spawning new items for the players.",
         "date": "2017-09",
+        "featured": false
+    },
+    {
+        "title": "Hacker News with Vue.js and GraphQL",
+        "url": "https://github.com/Lorti/v-gql-hn",
+        "description": "Example project for my lectures showing how to use Vue.js core libraries and tooling with GraphQL. A companion project sets up a serverless GraphQL backend via Graphcool.",
+        "date": "2018-04",
+        "featured": false
+    },
+    {
+        "title": "grunt-svg-symbols",
+        "url": "https://github.com/Lorti/grunt-svg-symbols",
+        "description": "Grunt plugin to generate an SVG icon system (based on <symbol>) of a specified folder.",
+        "date": "2016-05",
+        "featured": false
+    },
+    {
+        "title": "Web Push Notifications",
+        "url": "https://github.com/Lorti/web-push-notifications",
+        "description": "A complete example on how to send push notifications, using Service Workers, Notification API, Push API and Google’s and Mozilla’s push messaging services.",
+        "date": "2017-04",
+        "featured": false
+    },
+    {
+        "title": "resemble-image",
+        "url": "https://github.com/Lorti/resemble-image",
+        "description": "Provide color stops for a gradient that loosely resembles the original image. This package only contains the basic algorithms to use in any JavaScript application.",
+        "date": "2017-01",
+        "featured": false
+    },
+    {
+        "title": "postcss-resemble-image",
+        "url": "https://github.com/ben-eb/postcss-resemble-image",
+        "description": "Provide color stops for a gradient that loosely resembles the original image.",
+        "date": "2016-11",
+        "featured": false
+    },
+    {
+        "title": "dominant-colors-snippets",
+        "url": "https://github.com/Lorti/dominant-colors-snippets",
+        "description": "Snippets showcasing the differences between quantization techniques.",
+        "date": "2016-05",
         "featured": false
     }
 ]
