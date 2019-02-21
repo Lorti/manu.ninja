@@ -1,4 +1,5 @@
 import React from 'react'
+import { Fragment } from 'react';
 import Layout from '../components/layout'
 import { graphql } from 'gatsby'
 
@@ -17,25 +18,21 @@ export default function Projects({ data }) {
             <p>I try to actively maintain all of my open-source projects, if they’re not marked as deprecated.</p>
             <dl className="Grid Grid--withGutter">
               <h2 className="Grid-cell u-lg-before1of3">Featured Projects ✨</h2>
-              {featured.map(({ node: project }) => {
-                return (
-                  <>
-                    <dt className="Grid-cell u-lg-size1of3"><a href={project.url}>{project.title}</a></dt>
-                    <dd className="Grid-cell u-lg-size2of3"><p>{project.description}</p></dd>
-                  </>
-                )
-              })}
+              {featured.map(({ node: project }) => (
+                <Fragment key={project.url}>
+                  <dt className="Grid-cell u-lg-size1of3"><a href={project.url}>{project.title}</a></dt>
+                  <dd className="Grid-cell u-lg-size2of3"><p>{project.description}</p></dd>
+                </Fragment>
+              ))}
             </dl>
             <dl className="Grid Grid--withGutter">
               <h2 className="Grid-cell u-lg-before1of3">Projects <small>(Chronological 📅)</small></h2>
-              {projects.map(({ node: project }) => {
-                return (
-                  <>
-                    <dt className="Grid-cell u-lg-size1of3"><a href={project.url}>{project.title}</a></dt>
-                    <dd className="Grid-cell u-lg-size2of3"><p>{project.description}</p></dd>
-                  </>
-                )
-              })}
+              {projects.map(({ node: project }) => (
+                <Fragment key={project.url}>
+                  <dt className="Grid-cell u-lg-size1of3"><a href={project.url}>{project.title}</a></dt>
+                  <dd className="Grid-cell u-lg-size2of3"><p>{project.description}</p></dd>
+                </Fragment>
+              ))}
             </dl>
           </div>
         </div>

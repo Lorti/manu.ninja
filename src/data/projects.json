@@ -2,9 +2,9 @@
     {
         "title": "manu.ninja",
         "url": "https://github.com/Lorti/manu.ninja",
-        "description": "manu.ninja is the personal blog of Manuel Wieser, where he talks about front-end development, games and digital art",
+        "description": "manu.ninja is the personal blog of Manuel Wieser. Jekyll, then Gatsby.",
         "date": "2015-09",
-        "featured": false
+        "featured": true
     },
     {
         "title": "vue-cli-plugin-e2e-nightwatch-cucumber",

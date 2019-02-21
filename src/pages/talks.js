@@ -35,24 +35,22 @@ export default function Talks({ data }) {
           </div>
         </div>
         <div className="Talks">
-          {projects.map(({ node: talk }) => {
-            return (
-              <div className="Talk">
-                <p className="Talk-event">
-                  <a href={talk.url}>{talk.event}</a>
-                </p>
-                <h2 className="Talk-title">
-                  <a href={talk.slides}>{talk.title}</a>
-                </h2>
-                <p className="Talk-meta">
-                  <span>{talk.formattedDate}</span>
-                  <span>{talk.location}</span>
-                  {talk.slides ? <a href={talk.slides}>Slides</a> : ''}
-                  {talk.video ? <a href={talk.video}>Video</a> : ''}
-                </p>
-              </div>
-            )
-          })}
+          {projects.map(({ node: talk }) => (
+            <div className="Talk" key={talk.url}>
+              <p className="Talk-event">
+                <a href={talk.url}>{talk.event}</a>
+              </p>
+              <h2 className="Talk-title">
+                <a href={talk.slides}>{talk.title}</a>
+              </h2>
+              <p className="Talk-meta">
+                <span>{talk.formattedDate}</span>
+                <span>{talk.location}</span>
+                {talk.slides ? <a href={talk.slides}>Slides</a> : ''}
+                {talk.video ? <a href={talk.video}>Video</a> : ''}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </Layout>
