@@ -19,9 +19,10 @@ export default function Talks({ data }) {
                 maxWidth: '25%',
                 marginTop: 0,
                 marginLeft: '1.375em',
+                borderRadius: '50%'
               }}
               src="/speaking.jpg"
-              alt="Manuel Wieser speaking at Stahlstadt.js #18"
+              alt="Manuel Wieser"
             />
             <p>
               I’m available for speaking and workshops, just send a message to{' '}
