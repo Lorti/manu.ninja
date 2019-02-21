@@ -16,21 +16,21 @@ export default function Projects({ data }) {
           <div className="Article-content">
             <p>Here you’ll find a selection of open-source projects I’ve created or contributed to, as well as personal and professional work. There’s a list of featured projects and a chronological list of projects.</p>
             <p>I try to actively maintain all of my open-source projects, if they’re not marked as deprecated.</p>
-            <dl className="Grid Grid--withGutter">
-              <h2 className="Grid-cell u-lg-before1of3">Featured Projects ✨</h2>
+            <h2>Featured Projects ✨</h2>
+            <dl>
               {featured.map(({ node: project }) => (
                 <Fragment key={project.url}>
-                  <dt className="Grid-cell u-lg-size1of3"><a href={project.url}>{project.title}</a></dt>
-                  <dd className="Grid-cell u-lg-size2of3"><p>{project.description}</p></dd>
+                  <dt><a href={project.url}>{project.title}</a></dt>
+                  <dd><p>{project.description}</p></dd>
                 </Fragment>
               ))}
             </dl>
-            <dl className="Grid Grid--withGutter">
-              <h2 className="Grid-cell u-lg-before1of3">Projects <small>(Chronological 📅)</small></h2>
+            <h2>Projects <small>(Chronological 📅)</small></h2>
+            <dl>
               {projects.map(({ node: project }) => (
                 <Fragment key={project.url}>
-                  <dt className="Grid-cell u-lg-size1of3"><a href={project.url}>{project.title}</a></dt>
-                  <dd className="Grid-cell u-lg-size2of3"><p>{project.description}</p></dd>
+                  <dt><a href={project.url}>{project.title}</a></dt>
+                  <dd><p>{project.description}</p></dd>
                 </Fragment>
               ))}
             </dl>
