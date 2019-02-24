@@ -1,0 +1,16 @@
+.Navigation {
+    text-align: center;
+    text-transform: uppercase;
+    @include baseline(12px, 2, 2);
+    letter-spacing: .0625em;
+
+    @media (min-width: 768px) {
+        float: right;
+    }
+}
+
+.Navigation-item {
+    display: inline-block;
+    padding-left: 1em;
+    padding-right: 1em;
+}

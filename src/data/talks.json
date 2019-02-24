@@ -1,0 +1,51 @@
+[
+    {
+        "title": "Scaffolding a Progressive Web App using Vue CLI 3",
+        "event": "webclerks #15",
+        "url": "https://www.meetup.com/de-DE/webclerks/events/245731400/",
+        "slides": "https://speakerdeck.com/lorti/scaffolding-a-progressive-web-app-using-vue-cli-3-webclerks",
+        "date": "2018-11-14",
+        "location": "Vienna, Austria"
+    },
+    {
+        "title": "Scaffolding a Progressive Web App using Vue CLI 3",
+        "event": "Stahlstadt.js #18",
+        "url": "https://www.meetup.com/de-DE/stahlstadt-js/events/254352412/",
+        "slides": "https://speakerdeck.com/lorti/scaffolding-a-progressive-web-app-using-vue-cli-3-stahlstadt-dot-js",
+        "video": "https://www.youtube.com/watch?v=cKwcZTtF_EU",
+        "date": "2018-10-09",
+        "location": "Linz, Austria"
+    },
+    {
+        "title": "Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js ",
+        "event": "webclerks #10",
+        "url": "https://www.meetup.com/de-DE/webclerks/events/236971861/",
+        "slides": "https://speakerdeck.com/lorti/functional-reactive-game-programming",
+        "date": "2017-11-27",
+        "location": "Vienna, Austria"
+    },
+    {
+        "title": "Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js ",
+        "event": "Stahlstadt.js #14",
+        "url": "https://www.meetup.com/de-DE/stahlstadt-js/events/239660401/",
+        "slides": "https://speakerdeck.com/lorti/functional-reactive-game-programming",
+        "date": "2017-06-07",
+        "location": "Linz, Austria"
+    },
+    {
+        "title": "Web Push Notifications",
+        "event": "Stahlstadt.js #13",
+        "url": "https://www.meetup.com/de-DE/stahlstadt-js/events/238215491/",
+        "slides": "https://speakerdeck.com/lorti/web-push-notifications",
+        "date": "2017-03-27",
+        "location": "Linz, Austria"
+    },
+    {
+        "title": "Dominant Colors for Lazy-Loading Images",
+        "event": "Stahlstadt.js #9",
+        "url": "https://www.meetup.com/de-DE/stahlstadt-js/events/230486844/",
+        "slides": "https://speakerdeck.com/lorti/dominant-colors-for-lazy-loading-images",
+        "date": "2016-05-19",
+        "location": "Linz, Austria"
+    }
+]

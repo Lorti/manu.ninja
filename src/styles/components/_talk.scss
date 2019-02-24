@@ -1,0 +1,48 @@
+.Talks {
+    @include baseline($base-font-size, 2, 6, true);
+}
+
+.Talk {
+    margin-top: -1px;
+    margin-bottom: -1px;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+
+    &:first-of-type {
+        margin-top: 0;
+        border-top: 0;
+    }
+
+    &:last-of-type {
+        margin-bottom: 0;
+        border-bottom: 0;
+    }
+}
+
+.Talk-event {
+    @include baseline(12px, 1, .5);
+}
+
+.Talk-title {
+    @include baseline(20px, 0, 0);
+    font-weight: normal;
+}
+
+.Talk-meta {
+    @include baseline(12px, .5, 1);
+
+    > * {
+        display: inline-block;
+        padding-left: .5em;
+        padding-right: .5em;
+        border-right: 1px solid lightgray;
+
+        &:first-child {
+            padding-left: 0;
+        }
+
+        &:last-child {
+            border-right: none;
+        }
+    }
+}

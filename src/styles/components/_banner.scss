@@ -1,9 +1,14 @@
 .Banner {
     font-family: Oswald, sans-serif;
     font-weight: bold;
-    @include baseline(42px, 4, 6);
+    @include baseline(42px, 2, 6);
+
+    @media (min-width: 768px) {
+        @include baseline(42px, 4, 6, true);
+    }
 
     a {
+        display: block;
         color: inherit;
         text-decoration: none;
     }

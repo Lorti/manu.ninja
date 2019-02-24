@@ -63,12 +63,19 @@
         list-style-type: disc;
     }
 
-    ol, ul {
+    ol, ul, dl {
         padding-left: 1.375em;
         @include baseline(null, 0, 1, true);
 
-        ol, ul {
+        ol, ul, dd {
             margin-left: 1.375em;
+        }
+    }
+
+    // I don't really know where to put this...
+    dt[class*="u-lg-size"] {
+        @media (min-width: 960px) {
+            text-align: right;
         }
     }
 
@@ -119,6 +126,15 @@
 
     h4 {
         @include baseline(null, 2, 1);
+    }
+
+    dd {
+        > h3 {
+            @include baseline(18px, 1, 1);
+        }
+        > h4 {
+            @include baseline(null, 1, 1);
+        }
     }
 
     h2,

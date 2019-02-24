@@ -1,0 +1,67 @@
+[
+    {
+        "position": "Lead Web Developer",
+        "company": "karriere.at GmbH, Linz \uD83C\uDDE6\uD83C\uDDF9",
+        "start": "2017-11",
+        "end": "2017-11",
+        "current": true,
+        "description": "Technical leadership of a cross-functional Scrum/Kanban team. Responsible for code quality (security, performance, extensibility/scalability …), architecture, stakeholder communication, technical concepts and technology evaluation, training and mentoring of fellow developers. Assistance in recruiting and employer branding topics (open-source projects and developer blog; external talks, trainings and workshops …)"
+    },
+    {
+        "position": "Lecturer",
+        "company": "University of Applied Sciences Upper Austria, Hagenberg \uD83C\uDDE6\uD83C\uDDF9",
+        "start": "2018-03",
+        "end": "2018-07",
+        "current": true,
+        "description": "Teaching “Hypermedia User Experience Engineering” in the “Interactive Media” program. Topics include JavaScript, front-end frameworks (mainly Vue.js), tooling (webpack, Parcel, …), Progressive Web Apps, client/server communication (REST APIs, WebSockes, NoSQL, …), GraphQL, unit testing, end-to-end testing, and other front-end development matters."
+    },
+    {
+        "position": "Senior Front-End Developer",
+        "company": "karriere.at GmbH, Linz \uD83C\uDDE6\uD83C\uDDF9",
+        "start": "2014-06",
+        "end": "2017-10"
+    },
+    {
+        "position": "Lecturer",
+        "company": "University of Applied Sciences Kufstein, Tirol \uD83C\uDDE6\uD83C\uDDF9",
+        "start": "2017-02",
+        "end": "2017-09",
+        "description": "Supervision of a master’s thesis in the “Web Communication & Information Systems” program."
+    },
+    {
+        "position": "Front-End Developer",
+        "company": "bet-at-home.com Entertainment GmbH, Linz \uD83C\uDDE6\uD83C\uDDF9",
+        "start": "2012-10",
+        "end": "2014-05"
+    },
+    {
+        "position": "Tutor",
+        "company": "University of Applied Sciences Upper Austria, Hagenberg \uD83C\uDDE6\uD83C\uDDF9",
+        "start": "2009-10",
+        "end": "2012-06"
+    },
+    {
+        "position": "CG & VFX Generalist",
+        "company": "MEDIASQUAD Medienentwicklungs- und Vertriebs-GmbH, Brixlegg \uD83C\uDDE6\uD83C\uDDF9",
+        "start": "2011-07",
+        "end": "2012-04"
+    },
+    {
+        "position": "2D/3D Artist",
+        "company": "APEX Gaming Technology GmbH, Hagenberg \uD83C\uDDE6\uD83C\uDDF9",
+        "start": "2010-03",
+        "end": "2010-06"
+    },
+    {
+        "position": "CG & VFX Generalist",
+        "company": "Friendly Fire Communications GmbH, Vienna \uD83C\uDDE6\uD83C\uDDF9",
+        "start": "2009-07",
+        "end": "2009-08"
+    },
+    {
+        "position": "2D/3D Artist",
+        "company": "VRVis Zentrum für Virtual Reality und Visualisierung Forschungs-GmbH, Vienna \uD83C\uDDE6\uD83C\uDDF9",
+        "start": "2008-12",
+        "end": "2009-01"
+    }
+]

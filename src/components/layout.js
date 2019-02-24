@@ -3,6 +3,7 @@ import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
 import Banner from './banner'
+import Navigation from './navigation'
 import Footer from './footer'
 import Meta from './meta'
 import PersonSchema from './schema/person'
@@ -36,6 +37,7 @@ export default ({ children }) => (
           imageUrl={`${data.site.siteMetadata.siteUrl}/share.png`}
         />
         <div className="Column">
+          <Navigation />
           <Banner />
         </div>
         {children}
