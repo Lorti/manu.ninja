@@ -1,11 +1,15 @@
 import React from 'react'
 import Layout from '../components/layout'
 import { graphql } from 'gatsby'
+import Helmet from 'react-helmet'
 
 export default function Talks({ data }) {
   const projects = data.allTalksJson.edges
   return (
     <Layout>
+      <Helmet>
+        <title>Speaking and Workshops | manu.ninja</title>
+      </Helmet>
       <div className="Column">
         <div className="Article">
           <div className="Article-header u-textCenter">
@@ -19,7 +23,7 @@ export default function Talks({ data }) {
                 maxWidth: '25%',
                 marginTop: 0,
                 marginLeft: '1.375em',
-                borderRadius: '50%'
+                borderRadius: '50%',
               }}
               src="/speaking.jpg"
               alt="Manuel Wieser"
@@ -37,7 +41,7 @@ export default function Talks({ data }) {
         </div>
         <div className="Talks">
           {projects.map(({ node: talk }) => (
-            <div className="Talk" key={talk.url}>
+            <div className="Talk" key={talk.id}>
               <p className="Talk-event">
                 <a href={talk.url}>{talk.event}</a>
               </p>
@@ -63,6 +67,7 @@ export const query = graphql`
     allTalksJson(sort: { order: DESC, fields: [date] }) {
       edges {
         node {
+          id
           title
           event
           url
