@@ -21,6 +21,7 @@ const tags = {
   hardware: 'Hardware',
   icons: 'Icons',
   illustrator: 'Illustrator',
+  js: 'JavaScript',
   maya: 'Maya',
   meetups: 'Meetups',
   performance: 'Performance',
