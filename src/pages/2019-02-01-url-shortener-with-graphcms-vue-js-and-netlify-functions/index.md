@@ -9,54 +9,83 @@ thumbnail: /author.png
 sharing: true
 ---
 
+Vue CLI 3, `default`
+
 ```bash
 vue create url-shortener
 ```
 
 ```bash
+cd url-shortener
 npm install --save apollo-boost graphql vue-apollo vue-router
 ```
 
 ```js
 // src/main.js
-import Vue from 'vue'
-import VueApollo from 'vue-apollo'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueApollo from 'vue-apollo';
+import VueRouter from 'vue-router';
 
-import ApolloClient from 'apollo-boost'
+import ApolloClient from 'apollo-boost';
 
-import App from './App.vue'
+import App from './App.vue';
 import Form from './components/Form';
 import Redirector from './components/Redirector';
 
-Vue.use(VueApollo)
-Vue.use(VueRouter)
+Vue.use(VueApollo);
+Vue.use(VueRouter);
 
 const apolloClient = new ApolloClient({
   uri: 'YOUR_GRAPHCMS_ENDPOINT',
   headers: {
     Authorization: 'Bearer YOUR_PERMANENT_AUTH_TOKEN'
   }
-})
+});
 
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient,
-})
+});
 
 const router = new VueRouter({
   routes: [
     { path: '/', component: Form },
     { path: '/:url', component: Redirector, props: true }
   ]
-})
+});
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
   apolloProvider,
   router,
-  render: h => h(App),
-}).$mount('#app')
+  render: h => h(App)
+}).$mount('#app');
+```
+
+```js
+// src/graphql.js
+import gql from 'graphql-tag';
+
+export const URL_QUERY = gql`{
+  urls: uRLs {
+    id
+    originalUrl
+    shortUrl
+  }
+}`;
+
+export const URL_MUTATION = gql`
+  mutation ($originalUrl: String!, $shortUrl: String!) {
+    createURL(data: {
+      originalUrl: $originalUrl
+      shortUrl: $shortUrl
+    }) {
+      id
+      originalUrl
+      shortUrl
+    }
+  }
+`;
 ```
 
 ```html
@@ -68,60 +97,10 @@ new Vue({
     <router-view></router-view>
   </div>
 </template>
+```
 
-<script>
-import gql from 'graphql-tag'
-import nanoid from 'nanoid'
-
-const URLS_QUERY = gql`{
-  myUrls: uRLs {
-    id
-    originalUrl
-    shortUrl
-  }
-}`;
-
-export default {
-  name: 'app',
-  data() {
-    return {
-      urlInput: '',
-      myUrls: []
-    };
-  },
-  apollo: {
-    myUrls: {
-      query: URLS_QUERY
-    },
-  },
-  methods: {
-    async createUrl() {
-      await this.$apollo.mutate({
-        mutation: gql`mutation ($originalUrl: String!, $shortUrl: String!) {
-          createURL(data: {
-            originalUrl: $originalUrl
-            shortUrl: $shortUrl
-          }) {
-            id
-            originalUrl
-            shortUrl
-          }
-        }`,
-        variables: {
-          originalUrl: this.urlInput,
-          shortUrl: nanoid(),
-        },
-        update: (store, { data: { createURL } }) => {
-          const data = store.readQuery({ query: URLS_QUERY })
-          data.myUrls.push(createURL);
-          store.writeQuery({ query: URLS_QUERY, data })
-        },
-      });
-      this.urlInput = '';
-    }
-  }
-}
-</script>
+```
+npm install --save nanoid
 ```
 
 ```html
@@ -132,64 +111,47 @@ export default {
       URL <input type="text" v-model="urlInput">
     </label>
     <button type="submit">Submit</button>
-    <p v-for="url in myUrls" :key="url.id">
-      <router-link :to="`/${url.shortUrl}`">{{ url.shortUrl }}</router-link> → {{ url.originalUrl }}
+    <p v-for="url in urls" :key="url.id">
+      <router-link :to="`/${url.shortUrl}`">{{ url.shortUrl }}</router-link>
+      → {{ url.originalUrl }}
     </p>
   </form>
 </template>
 
 <script>
-import gql from 'graphql-tag'
-import nanoid from 'nanoid'
-
-const ALL_URLS = gql`{
-  myUrls: uRLs {
-    id
-    originalUrl
-    shortUrl
-  }
-}`;
+import { URL_QUERY, URL_MUTATION } from '../graphql';
+import nanoid from 'nanoid';
 
 export default {
-  name: 'formular',
   data() {
     return {
       urlInput: '',
-      myUrls: []
+      urls: []
     };
   },
   apollo: {
-    myUrls: {
-      query: ALL_URLS
+    urls: {
+      query: URL_QUERY
     },
   },
   methods: {
     async createUrl() {
       await this.$apollo.mutate({
-        mutation: gql`mutation ($originalUrl: String!, $shortUrl: String!) {
-          createURL(data: {
-            originalUrl: $originalUrl
-            shortUrl: $shortUrl
-          }) {
-            id
-            originalUrl
-            shortUrl
-          }
-        }`,
+        mutation: URL_MUTATION,
         variables: {
           originalUrl: this.urlInput,
-          shortUrl: nanoid(),
+          shortUrl: nanoid()
         },
         update: (store, { data: { createURL } }) => {
-          const data = store.readQuery({ query: ALL_URLS })
-          data.myUrls.push(createURL);
-          store.writeQuery({ query: ALL_URLS, data })
+          const data = store.readQuery({ query: URL_QUERY });
+          data.urls.push(createURL);
+          store.writeQuery({ query: URL_QUERY, data });
         },
       });
       this.urlInput = '';
     }
   }
-}
+};
 </script>
 ```
 
@@ -200,29 +162,22 @@ export default {
 </template>
 
 <script>
-import gql from 'graphql-tag'
-
-const ALL_URLS = gql`{
-  myUrls: uRLs {
-    originalUrl
-    shortUrl
-  }
-}`;
+import { URL_QUERY } from '../graphql';
 
 export default {
   name: 'redirector',
   props: ['url'],
   data() {
     return {
-      myUrls: [],
+      urls: [],
       originalUrl: ''
     };
   },
   apollo: {
     myUrls: {
-      query: ALL_URLS,
-      result({ data: { myUrls } }) {
-        const url = myUrls.find(x => x.shortUrl === this.url);
+      query: URL_QUERY,
+      result({ data: { urls } }) {
+        const url = urls.find(x => x.shortUrl === this.url);
         if (url) {
           let originalUrl = url.originalUrl;
           if (url.originalUrl.indexOf('https') !== 0) {
@@ -236,9 +191,11 @@ export default {
       }
     },
   },
-}
+};
 </script>
 ```
+
+<https://graphcms.com/>
 
 ![GraphCMS Schema](/images/graphcms-vue-netlify-functions/schema.png)
 
