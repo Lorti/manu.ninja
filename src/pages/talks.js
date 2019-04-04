@@ -16,18 +16,6 @@ export default function Talks({ data }) {
             <h1 className="Article-title">Speaking and Workshops</h1>
           </div>
           <div className="Article-content">
-            <img
-              style={{
-                float: 'right',
-                width: 240,
-                maxWidth: '25%',
-                marginTop: 0,
-                marginLeft: '1.375em',
-                borderRadius: '50%',
-              }}
-              src="/speaking.jpg"
-              alt="Manuel Wieser"
-            />
             <p>
               I’m available for speaking and workshops, just send a message to{' '}
               <a href="mailto:office@manuelwieser.com">
@@ -37,6 +25,7 @@ export default function Talks({ data }) {
               asset creation and challenges we’ve faced at{' '}
               <a href="https://www.karriere.at/">karriere.at</a>.
             </p>
+            <img src="/manuel-speaking-at-stahlstadt-js.jpg" alt="Manuel speaking at Stahlstadt.js"/>
           </div>
         </div>
         <div className="Talks">
