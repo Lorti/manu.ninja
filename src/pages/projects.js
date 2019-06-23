@@ -28,7 +28,12 @@ export default function Projects({ data }) {
               projects. Also I try to actively maintain all of my open-source
               projects, if they’re not marked as deprecated.
             </p>
-            <h2>Featured Projects ✨</h2>
+            <h2>
+              Featured Projects{' '}
+              <span role="img" aria-label="Star">
+                ✨
+              </span>
+            </h2>
             <dl>
               {featured.map(({ node: project }) => (
                 <Fragment key={project.id}>
@@ -42,7 +47,14 @@ export default function Projects({ data }) {
               ))}
             </dl>
             <h2>
-              Projects <small>(Chronological 📅)</small>
+              Projects{' '}
+              <small>
+                (Chronological{' '}
+                <span role="img" aria-label="Calendar">
+                  📅
+                </span>
+                )
+              </small>
             </h2>
             <dl>
               {projects.map(({ node: project }) => (

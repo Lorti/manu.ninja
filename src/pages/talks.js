@@ -25,7 +25,10 @@ export default function Talks({ data }) {
               asset creation and challenges we’ve faced at{' '}
               <a href="https://www.karriere.at/">karriere.at</a>.
             </p>
-            <img src="/manuel-speaking-at-stahlstadt-js.jpg" alt="Manuel speaking at Stahlstadt.js"/>
+            <img
+              src="/manuel-speaking-at-stahlstadt-js.jpg"
+              alt="Manuel speaking at Stahlstadt.js"
+            />
           </div>
         </div>
         <div className="Talks">

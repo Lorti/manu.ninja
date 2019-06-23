@@ -31,7 +31,11 @@ export default function Projects({ data }) {
               <br />
               (Occasional) Designer, Digital Artist and Game Developer
             </p>
-            <p className="Article-title">👨🏻‍💻👨🏻‍🏫👨🏻‍🎨</p>
+            <p className="Article-title">
+              <span role="img" aria-label="Skills">
+                👨🏻‍💻👨🏻‍🏫👨🏻‍🎨
+              </span>
+            </p>
           </div>
           <div className="Article-content">
             <h2>Third-Person Biography™</h2>
