@@ -7,11 +7,25 @@
         "featured": true
     },
     {
+        "title": "Microfrontends",
+        "url": "https://github.com/Lorti/microfrontends",
+        "description": "A simple microfrontend architecture for explaining/showcasing the concept.",
+        "date": "2019-04",
+        "featured": true
+    },
+    {
+        "title": "hochzeit.manuelwieser.com",
+        "url": "https://github.com/Lorti/hochzeit",
+        "description": "Personal wedding website with guest management, built using VuePress, Storyblok and Netlify Functions.",
+        "date": "2018-07",
+        "featured": false
+    },
+    {
         "title": "vue-cli-plugin-e2e-nightwatch-cucumber",
         "url": "https://github.com/karriereat/vue-cli-plugin-e2e-nightwatch-cucumber",
         "description": "Nightwatch/Cucumber plugin for Vue CLI 3.",
         "date": "2018-10",
-        "featured": true
+        "featured": false
     },
     {
         "title": "Corsair",
