@@ -1,23 +1,23 @@
 [
     {
-        "school": "University of Applied Sciences Upper Austria, Hagenberg \uD83C\uDDE6\uD83C\uDDF9",
+        "school": "University of Applied Sciences Upper Austria, Hagenberg",
         "program": "Digital Arts",
         "start": "2010-10",
         "end": "2012-10",
-        "description": "Master of Arts in Arts and Design – <em>magna cum laude</em><br>Master’s thesis on “Spatial orientation and navigation in three-dimensional game environments using diegetic and immersive interfaces”"
+        "description": "Master of Arts in Arts and Design – <em>magna cum laude</em><br>Master’s thesis on “Spatial orientation and navigation in three-dimensional game environments using diegetic and immersive interfaces”."
     },
     {
-        "school": "University of Applied Sciences Upper Austria, Hagenberg \uD83C\uDDE6\uD83C\uDDF9",
+        "school": "University of Applied Sciences Upper Austria, Hagenberg",
         "program": "Media Technology and Design",
         "start": "2007-10",
         "end": "2010-07",
-        "description": "Bachelor of Science in Engineering – <em>cum laude</em><br>Bachelor’s thesis on “Transhumanistic character design in Japanese animation at the beginning of the 21st century”"
+        "description": "Bachelor of Science in Engineering – <em>cum laude</em><br>Bachelor’s thesis on “Transhumanistic character design in Japanese animation at the beginning of the 21st century”."
     },
     {
-        "school": "HTL Anichstraße, Innsbruck \uD83C\uDDE6\uD83C\uDDF9",
+        "school": "HTL Anichstraße, Innsbruck",
         "program": "Wirtschaftsingenieurwesen, Betriebsinformatik",
         "start": "2002-09",
         "end": "2007-06",
-        "description": "Reifeprüfung – <em>cum laude</em><br>Diploma thesis on “Economy simulation as real-time strategy game with artificial intelligence"
+        "description": "Reifeprüfung – <em>cum laude</em><br>Diploma thesis on “Economy simulation as real-time strategy game with artificial intelligence”."
     }
 ]
