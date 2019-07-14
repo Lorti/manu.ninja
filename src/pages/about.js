@@ -8,7 +8,7 @@ export default function Projects({ data }) {
   const education = data.allEducationJson.edges
   const experience = data.allWorkExperienceJson.edges
   return (
-    <Layout>
+    <Layout minimal={true}>
       <Helmet>
         <title>Who’s Manuel Wieser? | manu.ninja</title>
       </Helmet>
@@ -20,30 +20,25 @@ export default function Projects({ data }) {
                 maxWidth: 240,
                 borderRadius: '50%',
               }}
-              src="/smile.jpg"
+              src="/author.jpg"
               alt="Manuel Wieser"
             />
             <h1 className="Article-title">I’m Manuel Wieser</h1>
             <p className="Article-date">
-              Lead Web Developer (Technical Lead and Full-Stack Web Developer)
+              Engineering Manager, Technical Lead, Full-Stack Web Developer
               <br />
               Speaker, Trainer and Lecturer
               <br />
               (Occasional) Designer, Digital Artist and Game Developer
             </p>
-            <p className="Article-title">
-              <span role="img" aria-label="Skills">
-                👨🏻‍💻👨🏻‍🏫👨🏻‍🎨
-              </span>
-            </p>
           </div>
           <div className="Article-content">
             <h2>Third-Person Biography™</h2>
             <p>
-              Manuel is Lead Web Developer at karriere.at, lecturer at the
-              University of Applied Sciences Upper Austria and writes about
-              Front-End Development, Games und Digital Art on his personal blog
-              manu.ninja.
+              Manuel is Head of Front-End Development at karriere.at, lecturer
+              at the University of Applied Sciences Upper Austria and writes
+              about Front-End Development, Games und Digital Art on his personal
+              blog manu.ninja.
             </p>
             {/*
             <h2>What I do for a living</h2>

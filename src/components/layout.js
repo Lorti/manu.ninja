@@ -11,7 +11,7 @@ import PersonSchema from './schema/person'
 import '../graphql/fragments'
 import '../styles/index.scss'
 
-export default ({ children }) => (
+export default ({ children, minimal }) => (
   <StaticQuery
     query={graphql`
       query LayoutQuery {
@@ -42,7 +42,7 @@ export default ({ children }) => (
         </div>
         {children}
         <div className="Column">
-          <Footer />
+          <Footer minimal={minimal} />
         </div>
         <PersonSchema imageUrl={`${data.site.siteMetadata.siteUrl}/manu.jpg`} />
       </>

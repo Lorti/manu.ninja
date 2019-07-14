@@ -1,11 +1,9 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
-export default function Footer() {
+function Biography() {
   return (
-    <footer className="Footer">
-      <hr />
-
+    <>
       <div className="Grid Grid--withGutter">
         <div className="Grid-cell u-size1of5">
           <img
@@ -34,6 +32,18 @@ export default function Footer() {
           </p>
         </div>
       </div>
+    </>
+  )
+}
+export default function Footer({ minimal }) {
+  return (
+    <footer className="Footer">
+      {!minimal && (
+        <>
+          <hr />
+          <Biography />
+        </>
+      )}
 
       <hr />
 
