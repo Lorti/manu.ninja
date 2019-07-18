@@ -1,15 +1,17 @@
 import React from 'react'
 import Layout from '../components/layout'
+import Meta from '../components/meta'
 import { graphql } from 'gatsby'
-import Helmet from 'react-helmet'
 
 export default function Talks({ data }) {
   const projects = data.allTalksJson.edges
   return (
     <Layout>
-      <Helmet>
-        <title>Speaking and Workshops | manu.ninja</title>
-      </Helmet>
+      <Meta
+        title="Speaking and Workshops | manu.ninja"
+        description="I’m available for speaking and workshops, talking about web design and development, game
+              asset creation and challenges we’ve faced at karriere.at."
+      />
       <div className="Column">
         <div className="Article">
           <div className="Article-header u-textCenter">

@@ -1,17 +1,24 @@
 import React from 'react'
 import { Fragment } from 'react'
 import Layout from '../components/layout'
+import Meta from '../components/meta'
 import { graphql } from 'gatsby'
-import Helmet from 'react-helmet'
 
 export default function Projects({ data }) {
   const education = data.allEducationJson.edges
   const experience = data.allWorkExperienceJson.edges
+  const thirdPersonBiography = `
+    Manuel is Head of Front-End Development at karriere.at,
+    lecturer at the University of Applied Sciences Upper Austria
+    and writes about Front-End Development, Games und Digital Art
+    on his personal blog manu.ninja.
+  `
   return (
     <Layout minimal={true}>
-      <Helmet>
-        <title>Who’s Manuel Wieser? | manu.ninja</title>
-      </Helmet>
+      <Meta
+        title="Who’s Manuel Wieser? | manu.ninja"
+        description={thirdPersonBiography.replace(/\s+/g, ' ').trim()}
+      />
       <div className="Column">
         <div className="Article">
           <div className="Article-header u-textCenter">
@@ -34,12 +41,7 @@ export default function Projects({ data }) {
           </div>
           <div className="Article-content">
             <h2>Third-Person Biography™</h2>
-            <p>
-              Manuel is Head of Front-End Development at karriere.at, lecturer
-              at the University of Applied Sciences Upper Austria and writes
-              about Front-End Development, Games und Digital Art on his personal
-              blog manu.ninja.
-            </p>
+            <p>{thirdPersonBiography}</p>
             {/*
             <h2>What I do for a living</h2>
             <ul>

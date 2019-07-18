@@ -1,17 +1,19 @@
 import React from 'react'
 import { Fragment } from 'react'
 import Layout from '../components/layout'
+import Meta from '../components/meta'
 import { graphql } from 'gatsby'
-import Helmet from 'react-helmet'
 
 export default function Projects({ data }) {
   const projects = data.allProjects.edges
   const featured = data.allFeaturedProjects.edges
   return (
     <Layout>
-      <Helmet>
-        <title>Projects | manu.ninja</title>
-      </Helmet>
+      <Meta
+        title="Projects | manu.ninja"
+        description="Here you’ll find a selection of open-source projects I’ve created
+              or contributed to, as well as personal and professional work."
+      />
       <div className="Column">
         <div className="Article">
           <div className="Article-header u-textCenter">
