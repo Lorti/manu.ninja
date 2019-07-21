@@ -14,10 +14,10 @@ function Biography() {
         </div>
         <div className="Grid-cell u-size4of5">
           <p>
-            I’m an experienced front-end developer and versatile digital artist.
-            I’m into building websites and creating content for real-time
-            rendering, film and animation. I’m also a bearded hacker making
-            games with my friends.
+            I’m an experienced front-end developer and lead developer for
+            cross-functional Scrum/Kanban teams. I’ve recently transitioned to
+            engineering management, trying to make everyone on my team an even
+            better developer than myself.
           </p>
           <p>
             You can contact me via <a href="https://github.com/Lorti">GitHub</a>
@@ -26,9 +26,9 @@ function Biography() {
             .
           </p>
           <p>
-            I’m currently working as a technical lead and full-stack web
-            developer for <a href="https://www.karriere.at">karriere.at</a>,
-            making software that helps people find the job of their dreams.
+            I’m currently working as the Head of Front-End Development for{' '}
+            <a href="https://www.karriere.at">karriere.at</a> in Linz, making
+            software that helps people find the job of their dreams.
           </p>
         </div>
       </div>
