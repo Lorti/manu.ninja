@@ -47,16 +47,14 @@ export default function Projects({ data }) {
               better developer than myself.
             </p>
             <p>
-              I love to share my knowledge and experience, whether on my
-              personal blog, through talks and workshops, by creating or
-              contributing to open-source projects, or as a lecturer at the
-              University of Applied Sciences Upper Austria.
+              I love to share my knowledge and experience, by means of my
+              personal blog, talks and workshops, open-source projects, or as a
+              lecturer at the University of Applied Sciences Upper Austria.
             </p>
             <p>
               I’m also a versatile digital artist, creating content for
-              real-time applications, film and animation. I’ve developed a lot of small games
-              with my friends, but all of this has unfortunately stopped being a
-              priority in my life.
+              real-time applications, film and animation. Since secondary school
+              I’ve developed many games with my friends.
             </p>
             <p>
               You can contact me via{' '}
