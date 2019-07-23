@@ -13,9 +13,13 @@ After IaaS, PaaS, BaaS and SaaS, FaaS – Function as a Service – is the lates
 
 ![XaaS](/images/graphcms-vue-netlify-functions/xaas.png)
 
-There are the large providers, such as AWS Lambda, Google Functions, Microsoft Azure Functions and IBM Cloud Functions, but we’re going to have a look at Netlify Functions. Netlify has a great free plan and you can host your site and functions on the same domain.
+There are large providers, such as AWS Lambda, Google Functions, Microsoft Azure Functions and IBM Cloud Functions, but we’re going to have a look at [Netlify Functions](https://www.netlify.com/products/functions/). Netlify has a great free plan and you can host your site and functions on the same domain.
 
 ![Serverless](/images/graphcms-vue-netlify-functions/serverless.png)
+
+<https://functions-playground.netlify.com/>
+
+## Vue.js
 
 Vue CLI 3, `default`
 
@@ -45,9 +49,6 @@ Vue.use(VueRouter);
 
 const apolloClient = new ApolloClient({
   uri: 'YOUR_GRAPHCMS_ENDPOINT',
-  headers: {
-    Authorization: 'Bearer YOUR_PERMANENT_AUTH_TOKEN'
-  }
 });
 
 const apolloProvider = new VueApollo({
@@ -75,7 +76,7 @@ new Vue({
 import gql from 'graphql-tag';
 
 export const URL_QUERY = gql`{
-  urls: uRLs {
+  urls: URLs {
     id
     originalUrl
     shortUrl
@@ -83,10 +84,9 @@ export const URL_QUERY = gql`{
 }`;
 
 export const URL_MUTATION = gql`
-  mutation ($originalUrl: String!, $shortUrl: String!) {
+  mutation ($originalUrl: String!) {
     createURL(data: {
       originalUrl: $originalUrl
-      shortUrl: $shortUrl
     }) {
       id
       originalUrl
@@ -107,10 +107,6 @@ export const URL_MUTATION = gql`
 </template>
 ```
 
-```
-npm install --save nanoid
-```
-
 ```html
 // src/components/Form.vue
 <template>
@@ -128,7 +124,6 @@ npm install --save nanoid
 
 <script>
 import { URL_QUERY, URL_MUTATION } from '../graphql';
-import nanoid from 'nanoid';
 
 export default {
   data() {
@@ -148,7 +143,6 @@ export default {
         mutation: URL_MUTATION,
         variables: {
           originalUrl: this.urlInput,
-          shortUrl: nanoid()
         },
         update: (store, { data: { createURL } }) => {
           const data = store.readQuery({ query: URL_QUERY });
@@ -203,6 +197,8 @@ export default {
 </script>
 ```
 
+## GraphCMS
+
 <https://graphcms.com/>
 
 ![GraphCMS Schema](/images/graphcms-vue-netlify-functions/schema.png)
@@ -213,6 +209,8 @@ export default {
 
 ![GraphCMS Content](/images/graphcms-vue-netlify-functions/content.png)
 
+## Netlify Functions
+
 ```json
 {
   "name": "create-short-url",
@@ -222,13 +220,12 @@ export default {
     "build": "netlify-lambda build src/functions"
   },
   "dependencies": {
-    "graphql": "^14.1.1",
+    "graphql": "^14.4.2",
     "graphql-request": "^1.8.2",
-    "nanoid": "^2.0.1",
-    "validate.js": "^0.12.0"
+    "nanoid": "^2.0.3"
   },
   "devDependencies": {
-    "netlify-lambda": "^1.2.0"
+    "netlify-lambda": "^1.5.0"
   }
 }
 ```
@@ -241,24 +238,14 @@ export default {
 
 ```js
 // src/functions/create-short-url.js
+import { graphql, buildSchema } from 'graphql';
 import { GraphQLClient } from 'graphql-request'
-import validate from 'validate.js';
 import nanoid from 'nanoid';
 
 const endpoint = 'YOUR_GRAPHCMS_ENDPOINT';
 const authorization = 'Bearer YOUR_PERMANENT_AUTH_TOKEN';
 
-exports.handler = function(event, context, callback) {
-    const data = JSON.parse(event.body);
-    const errors = validate(
-        data,
-        { url: { url: true } }
-    );
-    if (errors) {
-        callback('Required parameter `url` missing or invalid.');
-        return;
-    }
-
+async function createUrl({ originalUrl }) {
     const graphQLClient = new GraphQLClient(endpoint, {
         headers: {
             authorization
@@ -266,42 +253,67 @@ exports.handler = function(event, context, callback) {
     });
 
     const query = `
-    mutation($originalUrl: String!, $shortUrl: String!) {
-      createURL(data: {
-        status: PUBLISHED,
-        originalUrl: $originalUrl,
-        shortUrl: $shortUrl
-      }) {
-        id
+      mutation($originalUrl: String!, $shortUrl: String!) {
+        createURL(data: {
+          status: PUBLISHED,
+          originalUrl: $originalUrl,
+          shortUrl: $shortUrl
+        }) {
+          id
+        }
       }
-    }
     `;
 
     const variables = {
-        originalUrl: data.url,
+        originalUrl,
         shortUrl: nanoid()
     };
 
-    graphQLClient.request(query, variables)
-        .then(result => {
-            callback(null, {
-                statusCode: 200,
-                body: JSON.stringify(result, undefined, 2)
-            });
-        })
-        .catch(error => {
-            callback(error);
-        });
+    return graphQLClient.request(query, variables);
+}
+
+exports.handler = async function(event, context) {
+    const schema = buildSchema(`
+        type URL {
+            id: ID!
+            originalUrl: String!
+            shortUrl: String!
+        }
+        
+        type Mutation {
+            createURL(originalUrl: String!): URL
+        }
+    `);
+
+    const query = JSON.parse(event.body).query;
+
+    const root = {
+        createURL: createUrl,
+    };
+
+    const response = await graphql(schema, query, root);
+
+    return {
+        statusCode: 200,
+        body: JSON.stringify(response, undefined, 2),
+    };
 };
 ```
 
-<https://www.npmjs.com/package/@workpop/graphql-proxy>
-
 ![Netlify](/images/graphcms-vue-netlify-functions/netlify.png)
 
+```graphql
+mutation { 
+  createURL(originalUrl: "http://manu.ninja") { 
+    id 
+    originalUrl 
+    shortUrl 
+  }
+}
+```
 ```bash
 curl -X POST \
   https://YOUR_NETLIFY_SUBDOMAIN.netlify.com/.netlify/functions/create-short-url \
   -H 'Content-Type: application/javascript' \
-  -d '{ "url": "https://manu.ninja" }'
+  -d '{ "query": "mutation { createURL(originalUrl: \"http://manu.ninja\") { id originalUrl shortUrl } }" }'
 ```
