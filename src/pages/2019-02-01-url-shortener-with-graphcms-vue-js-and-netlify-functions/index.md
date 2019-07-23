@@ -112,7 +112,7 @@ export const URL_MUTATION = gql`
 <template>
   <form @submit.prevent="createUrl">
     <label>
-      URL <input type="text" v-model="urlInput">
+      URL <input type="text" v-model="input">
     </label>
     <button type="submit">Submit</button>
     <p v-for="url in urls" :key="url.id">
@@ -128,7 +128,7 @@ import { URL_QUERY, URL_MUTATION } from '../graphql';
 export default {
   data() {
     return {
-      urlInput: '',
+      input: '',
       urls: []
     };
   },
@@ -142,7 +142,7 @@ export default {
       await this.$apollo.mutate({
         mutation: URL_MUTATION,
         variables: {
-          originalUrl: this.urlInput,
+          originalUrl: this.input,
         },
         update: (store, { data: { createURL } }) => {
           const data = store.readQuery({ query: URL_QUERY });
@@ -150,7 +150,7 @@ export default {
           store.writeQuery({ query: URL_QUERY, data });
         },
       });
-      this.urlInput = '';
+      this.input = '';
     }
   }
 };
@@ -245,59 +245,63 @@ import nanoid from 'nanoid';
 const endpoint = 'YOUR_GRAPHCMS_ENDPOINT';
 const authorization = 'Bearer YOUR_PERMANENT_AUTH_TOKEN';
 
-async function createUrl({ originalUrl }) {
-    const graphQLClient = new GraphQLClient(endpoint, {
-        headers: {
-            authorization
-        },
-    });
+async function createURL({originalUrl}) {
+  const graphQLClient = new GraphQLClient(endpoint, {
+    headers: {
+      authorization,
+    },
+  });
 
-    const query = `
-      mutation($originalUrl: String!, $shortUrl: String!) {
-        createURL(data: {
-          status: PUBLISHED,
-          originalUrl: $originalUrl,
-          shortUrl: $shortUrl
-        }) {
-          id
-        }
+  const query = `
+    mutation($originalUrl: String!, $shortUrl: String!) {
+      createURL(data: {
+        status: PUBLISHED,
+        originalUrl: $originalUrl,
+        shortUrl: $shortUrl
+      }) {
+        id
+        originalUrl
+        shortUrl
       }
-    `;
+    }
+  `;
 
-    const variables = {
-        originalUrl,
-        shortUrl: nanoid()
-    };
+  const variables = {
+    originalUrl,
+    shortUrl: nanoid(),
+  };
 
-    return graphQLClient.request(query, variables);
+  const result = await graphQLClient.request(query, variables);
+  return result.createURL;
 }
 
-exports.handler = async function(event, context) {
-    const schema = buildSchema(`
-        type URL {
-            id: ID!
-            originalUrl: String!
-            shortUrl: String!
-        }
-        
-        type Mutation {
-            createURL(originalUrl: String!): URL
-        }
-    `);
+exports.handler = async function (event, context) {
+  const schema = buildSchema(`
+    type URL {
+      id: ID!
+      originalUrl: String!
+      shortUrl: String!
+    }
 
-    const query = JSON.parse(event.body).query;
+    type Mutation {
+      createURL(originalUrl: String!): URL
+    }
+  `);
 
-    const root = {
-        createURL: createUrl,
-    };
+  const query = JSON.parse(event.body).query;
 
-    const response = await graphql(schema, query, root);
+  const root = {
+    createURL,
+  };
 
-    return {
-        statusCode: 200,
-        body: JSON.stringify(response, undefined, 2),
-    };
+  const response = await graphql(schema, query, root);
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify(response, undefined, 2),
+  };
 };
+
 ```
 
 ![Netlify](/images/graphcms-vue-netlify-functions/netlify.png)
@@ -305,9 +309,9 @@ exports.handler = async function(event, context) {
 ```graphql
 mutation { 
   createURL(originalUrl: "http://manu.ninja") { 
-    id 
-    originalUrl 
-    shortUrl 
+    id
+    originalUrl
+    shortUrl
   }
 }
 ```
@@ -316,4 +320,16 @@ curl -X POST \
   https://YOUR_NETLIFY_SUBDOMAIN.netlify.com/.netlify/functions/create-short-url \
   -H 'Content-Type: application/javascript' \
   -d '{ "query": "mutation { createURL(originalUrl: \"http://manu.ninja\") { id originalUrl shortUrl } }" }'
+```
+
+```json
+{
+  "data": {
+    "createURL": {
+      "id": "cjyg8yzvcm16k99qs10d536yh",
+      "originalUrl": "http://manu.ninja",
+      "shortUrl": "4xclFS-CZKJmi5lCPT3ip"
+    }
+  }
+}
 ```
