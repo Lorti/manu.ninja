@@ -9,6 +9,14 @@ thumbnail: /author.png
 sharing: true
 ---
 
+After IaaS, PaaS, BaaS and SaaS, FaaS – Function as a Service – is the latest trend in cloud computing, which is also often called serverless computing.
+
+![XaaS](/images/graphcms-vue-netlify-functions/xaas.png)
+
+There are the large providers, such as AWS Lambda, Google Functions, Microsoft Azure Functions and IBM Cloud Functions, but we’re going to have a look at Netlify Functions. Netlify has a great free plan and you can host your site and functions on the same domain.
+
+![Serverless](/images/graphcms-vue-netlify-functions/serverless.png)
+
 Vue CLI 3, `default`
 
 ```bash
