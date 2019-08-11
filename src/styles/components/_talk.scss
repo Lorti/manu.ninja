@@ -1,5 +1,5 @@
 .Talks {
-    @include baseline($base-font-size, -4, 6, true);
+    @include baseline($base-font-size, 2, 4, true);
 }
 
 .Talk {
@@ -20,16 +20,20 @@
 }
 
 .Talk-event {
-    @include baseline(12px, 1, .5);
+    @include baseline(12px, 1, 1);
 }
 
-.Talk-title {
-    @include baseline(20px, 0, 0);
+.Talk-title.Talk-title {
+    @include baseline(20px, 1, 1);
     font-weight: normal;
 }
 
+.Talk-description {
+    @include baseline(12px, -.5, 0);
+}
+
 .Talk-meta {
-    @include baseline(12px, .5, 1);
+    @include baseline(12px, 1, 1);
 
     > * {
         display: inline-block;
