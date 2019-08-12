@@ -11,7 +11,7 @@
         "company": "University of Applied Sciences Upper Austria, Hagenberg",
         "start": "2019-03",
         "end": "2019-07",
-        "description": "Teaching “Hypermedia User Experience Engineering” in the “Interactive Media” program. Topics include JavaScript, front-end frameworks (mainly Vue.js), tooling (webpack, Parcel, …), Progressive Web Apps, client/server communication (REST APIs, WebSockes, NoSQL, …), GraphQL, unit testing, end-to-end testing, and other front-end development matters."
+        "description": "Teaching “Hypermedia User Experience Engineering” in the “Interactive Media” program. Topics include JavaScript, front-end frameworks (mainly Vue.js), tooling (webpack, Parcel, …), Progressive Web Apps, client/server communication (REST APIs, WebSockets, NoSQL, …), GraphQL, unit testing, end-to-end testing, and other front-end development matters."
     },
     {
         "position": "Lead Web Developer",
