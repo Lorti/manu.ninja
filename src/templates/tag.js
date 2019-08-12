@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
+import Meta from '../components/meta'
 import Layout from '../components/layout'
 import Header from '../components/article/header'
 import Content from '../components/article/content'
@@ -13,6 +14,12 @@ export default function Tags({ pageContext }) {
     const list = posts[tag]
     return (
       <Layout>
+        <Meta
+          title={`Tag “${mapTag(tag)}”`}
+          description={`manu.ninja has ${
+            list.length
+          } articles tagged with “${mapTag(tag)}”.`}
+        />
         <div className="Column">
           <div className="Taxonomy">
             <h1 className="Taxonomy__heading u-textCenter">

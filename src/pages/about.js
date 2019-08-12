@@ -47,9 +47,14 @@ export default function Projects({ data }) {
               better developer than myself.
             </p>
             <p>
-              I love to share my knowledge and experience, by means of my
-              personal blog, talks and workshops, open-source projects, or as a
-              lecturer at the University of Applied Sciences Upper Austria.
+              I love to share my knowledge and experience, by means of my{' '}
+              <a href="/">personal blog</a>,{' '}
+              <a href="/talks">talks and workshops</a>,{' '}
+              <a href="/projects">open-source projects</a>, or as a{' '}
+              <a href="https://www.fh-ooe.at/campus-hagenberg/studiengaenge/master/interactive-media/personen/lektorinnen/">
+                lecturer
+              </a>{' '}
+              at the University of Applied Sciences Upper Austria.
             </p>
             <p>
               I’m also a versatile digital artist, creating content for

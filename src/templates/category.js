@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
+import Meta from '../components/meta'
 import Layout from '../components/layout'
 import Content from '../components/article/content'
 import Header from '../components/article/header'
@@ -13,6 +14,12 @@ export default function Category({ pageContext }) {
     const list = posts[category]
     return (
       <Layout>
+        <Meta
+          title={`Category “${mapTag(category)}”`}
+          description={`manu.ninja has ${
+            list.length
+          } articles in the category “${mapTag(category)}”.`}
+        />
         <div className="Column">
           <div className="Taxonomy">
             <h1 className="Taxonomy__heading u-textCenter">

@@ -22,13 +22,13 @@ const createCategories = (createPage, edges) => {
     }
   })
 
-  createPage({
-    path: '/categories',
-    component: template,
-    context: {
-      posts,
-    },
-  })
+  // createPage({
+  //   path: '/categories',
+  //   component: template,
+  //   context: {
+  //     posts,
+  //   },
+  // })
 
   Object.keys(posts).forEach(category => {
     createPage({
@@ -57,13 +57,13 @@ const createTags = (createPage, edges) => {
     }
   })
 
-  createPage({
-    path: '/tags',
-    component: template,
-    context: {
-      posts,
-    },
-  })
+  // createPage({
+  //   path: '/tags',
+  //   component: template,
+  //   context: {
+  //     posts,
+  //   },
+  // })
 
   Object.keys(posts).forEach(tag => {
     createPage({

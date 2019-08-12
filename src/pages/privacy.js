@@ -1,4 +1,5 @@
 import React from 'react'
+import Meta from '../components/meta'
 import Layout from '../components/layout'
 import { graphql } from 'gatsby'
 
@@ -6,6 +7,10 @@ export default function Privacy({ data }) {
   const page = data.markdownRemark
   return (
     <Layout>
+      <Meta
+        title={page.frontmatter.title}
+        description={page.frontmatter.description}
+      />
       <div className="Column">
         <div className="Article">
           <div className="article-header u-textCenter">
@@ -27,6 +32,7 @@ export const query = graphql`
       html
       frontmatter {
         title
+        description
       }
     }
   }

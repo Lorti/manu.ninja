@@ -1,6 +1,7 @@
 ---
 path: /privacy
-title: Imprint & Data Privacy
+title: Imprint & Privacy Policy
+description: Here you’ll find legal information for manu.ninja.
 ---
 
 **Manuel Wieser**  
