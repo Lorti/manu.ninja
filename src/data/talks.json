@@ -5,28 +5,28 @@
         "description": "5 days of workshops at Tabakfabrik Linz, teaching 12 people about web development and how to continue their learning afterwards",
         "date": "2019-08-26",
         "location": "Linz, Austria",
-        "karriere.at": true
+        "karriere_at": true
     },
     {
         "title": "Netlify Functions (Serverless and other Buzzwords …)",
         "event": "karriere.at Dev-Café",
         "date": "2019-07-24",
         "location": "Linz, Austria",
-        "karriere.at": true
+        "karriere_at": true
     },
     {
         "title": "5+ Interesting ECMAScript Proposals",
         "event": "karriere.at Dev-Café",
         "date": "2019-06-26",
         "location": "Linz, Austria",
-        "karriere.at": true
+        "karriere_at": true
     },
     {
         "title": "Microfrontends",
         "event": "karriere.at Dev-Café",
         "date": "2019-04-17",
         "location": "Linz, Austria",
-        "karriere.at": true
+        "karriere_at": true
     },
     {
         "title": "Testing",
@@ -88,7 +88,7 @@
         "event": "IndY",
         "date": "2019-02-25",
         "location": "Linz, Austria",
-        "karriere.at": true
+        "karriere_at": true
     },
     {
         "title": "Scaffolding a Progressive Web App using Vue CLI 3",
@@ -113,7 +113,7 @@
         "event": "Workshop",
         "date": "2018-08-31",
         "location": "Linz, Austria",
-        "karriere.at": true
+        "karriere_at": true
     },
     {
         "title": "A/B Testing with Google Analytics",
@@ -121,7 +121,7 @@
         "event": "Workshop",
         "date": "2018-07-11",
         "location": "Linz, Austria",
-        "karriere.at": true
+        "karriere_at": true
     },
     {
         "title": "WebGL",
@@ -129,21 +129,21 @@
         "slides": "https://docs.google.com/presentation/d/1cbMGGaRJx20sytiCOTG5q7H-2KZEGP1kVtvnD1MKe94/edit?usp=sharing",
         "date": "2018-08-22",
         "location": "Linz, Austria",
-        "karriere.at": true
+        "karriere_at": true
     },
     {
         "title": "GraphQL",
         "event": "karriere.at Dev-Café",
         "date": "2018-02-28",
         "location": "Linz, Austria",
-        "karriere.at": true
+        "karriere_at": true
     },
     {
         "title": "Chrome Developer Tools",
         "event": "karriere.at Dev-Café",
         "date": "2017-11-28",
         "location": "Linz, Austria",
-        "karriere.at": true
+        "karriere_at": true
     },
     {
         "title": "Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js ",
@@ -159,7 +159,7 @@
         "event": "Workshop",
         "date": "2017-11-16",
         "location": "Linz, Austria",
-        "karriere.at": true
+        "karriere_at": true
     },
     {
         "title": "Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js ",
@@ -182,21 +182,21 @@
         "event": "karriere.at Dev-Café",
         "date": "2017-01-24",
         "location": "Linz, Austria",
-        "karriere.at": true
+        "karriere_at": true
     },
     {
         "title": "Electron Hacking",
         "event": "karriere.at Dev-Café",
         "date": "2016-07-26",
         "location": "Linz, Austria",
-        "karriere.at": true
+        "karriere_at": true
     },
     {
         "title": "Refactoring form.js with Functional JavaScript and Tape",
         "event": "karriere.at Dev-Café",
         "date": "2016-05-31",
         "location": "Linz, Austria",
-        "karriere.at": true
+        "karriere_at": true
     },
     {
         "title": "Dominant Colors for Lazy-Loading Images",
@@ -212,7 +212,7 @@
         "event": "karriere.at Dev-Café",
         "date": "2015-09-24",
         "location": "Linz, Austria",
-        "karriere.at": true
+        "karriere_at": true
     },
     {
         "title": "CSS Refactoring",
@@ -220,20 +220,20 @@
         "event": "karriere.at Dev-Café",
         "date": "2015-08-25",
         "location": "Linz, Austria",
-        "karriere.at": true
+        "karriere_at": true
     },
     {
         "title": "phpspec",
         "event": "karriere.at Dev-Café",
         "date": "2015-05-05",
         "location": "Linz, Austria",
-        "karriere.at": true
+        "karriere_at": true
     },
     {
         "title": "SVGs – What kind of sorcery is this?",
         "event": "karriere.at Dev-Café",
         "date": "2015-01-27",
         "location": "Linz, Austria",
-        "karriere.at": true
+        "karriere_at": true
     }
 ]
