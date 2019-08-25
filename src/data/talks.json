@@ -41,7 +41,7 @@
         "title": "GraphQL",
         "description": "GraphQL, GraphQL Services (GraphCMS, Hasura), Usage with Vue.js",
         "event": "Hypermedia User Experience Engineering",
-        "date": "2019-03-18",
+        "date": "2019-03-18 18:00",
         "slides": "https://docs.google.com/presentation/d/1oyEQ_CRiYBa78d4qGcB7xi3Yk6pXgbBISYwF5qmj-3o/edit?usp=sharing",
         "location": "Hagenberg, Austria",
         "hagenberg": true
@@ -50,7 +50,7 @@
         "title": "Communication",
         "description": "REST APIs, WebSockets, NoSQL (Firebase), Feathers",
         "event": "Hypermedia User Experience Engineering",
-        "date": "2019-03-18",
+        "date": "2019-03-18 12:00",
         "slides": "https://docs.google.com/presentation/d/1LprTPxByFcvbRaTV7o_-VJJX-ZYNv2C-EICDu60-MNY/edit?usp=sharing",
         "location": "Hagenberg, Austria",
         "hagenberg": true
@@ -59,7 +59,7 @@
         "title": "Progressive Web Apps",
         "description": "Progressive Web Apps, Manifest, Service Workers, Cache API, Testing",
         "event": "Hypermedia User Experience Engineering",
-        "date": "2019-03-11",
+        "date": "2019-03-11 18:00",
         "slides": "https://docs.google.com/presentation/d/1LprTPxByFcvbRaTV7o_-VJJX-ZYNv2C-EICDu60-MNY/edit?usp=sharing",
         "location": "Hagenberg, Austria",
         "hagenberg": true
@@ -68,7 +68,7 @@
         "title": "Tooling",
         "description": "webpack, Vue CLI 3, Task Runners, Module Bundlers, Server-Side Rendering, Prerendering, Freemium Hosting",
         "event": "Hypermedia User Experience Engineering",
-        "date": "2019-03-11",
+        "date": "2019-03-11 12:00",
         "slides": "https://docs.google.com/presentation/d/1DuEe_QgahXHeB9EWh7VNBW71ViX_4JSSqwss9QrVIc4/edit?usp=sharing",
         "location": "Hagenberg, Austria",
         "hagenberg": true
