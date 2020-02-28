@@ -18,6 +18,7 @@ const tags = {
   conversion: 'Conversion',
   electron: 'Electron',
   ffmpeg: 'ffmpeg',
+  graphql: 'GraphQL',
   hardware: 'Hardware',
   icons: 'Icons',
   illustrator: 'Illustrator',
