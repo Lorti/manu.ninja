@@ -82,7 +82,7 @@ For every content type Storyblok generates two fields.
 
 So if you have created a content type with the name `page` you will have the fields `PageItem` and `PageItems` in GraphQL.
 
-To get the documented schema definition of your content type you can use theGraphQL playground. Exchange `YOUR_TOKEN` with your “preview” token and open the link `http://gapi-browser.storyblok.com/?token=YOUR_TOKEN`.
+To get the documented schema definition of your content type you can use the GraphQL playground. Exchange `YOUR_TOKEN` with your “preview” token and open the link `http://gapi-browser.storyblok.com/?token=YOUR_TOKEN`.
 
 In the following example we query the `home` content item and output the page name in `src/App.vue`.
 
@@ -280,7 +280,7 @@ At the end (with some CSS added) you should have the following result when openi
 
 ## How to add Storyblok’s Visual Editor
 
-Adding Storyblok’s visual editing capability just requires a few steps. Your content editors will thank you going for that little extra effort.
+Adding Storyblok’s visual editing capability just requires a few more steps. In the end, your content editors will thank you for going on that extra mile.
 
 First add the Javascript bridge to the file `public/index.html` and replace `YOUR_TOKEN` with your “preview” token.
 
@@ -299,7 +299,7 @@ First add the Javascript bridge to the file `public/index.html` and replace `YOU
 </html>
 ```
 
-Next install the Storyblok binding for Vue.js to make elements clickable by the user.
+Next, install the Storyblok binding for Vue.js to make elements clickable by the user.
 
 ```
 npm install storyblok-vue --save
@@ -307,7 +307,7 @@ npm install storyblok-vue --save
 
 All that needs to be done is to add `v-editable="blok"` to your components and pass the current component object to it.
 
-Here's an example oh how to do that in the file `src/components/Teaser.vue`.
+Here's an example of how to do that in the file `src/components/Teaser.vue`:
 
 ```vue
 <template>
@@ -317,7 +317,7 @@ Here's an example oh how to do that in the file `src/components/Teaser.vue`.
 </template>
 ```
 
-After you have changed all components you can use the event listener `window.storyblok.on` to reload the app after content has been changed in the editor. You can do this in the `created` hook of the `App.vue` component.
+After you changed all of the components you can use the event listener `window.storyblok.on` to reload the app after content has been changed in the editor. You can do this in the `created` hook of the `App.vue` component.
 
 ```vue
 <script>
@@ -332,6 +332,6 @@ export default {
 </script>
 ```
 
-The last step is to configure the preview URL in Storyblok and check if it is working. Add the end you should have a clickable teaser element where the content updates if you click “Save”.
+The last step is to configure the preview URL in Storyblok and check if it is working. In the end, you should have a clickable teaser element that will update the content on the click of the “Save” button.
 
 -->
