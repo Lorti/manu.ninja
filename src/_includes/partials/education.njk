@@ -1,0 +1,10 @@
+<dl>
+  {% for item in education %}
+    <dt>{{ item.start }} – {{ item.end }}</dt>
+    <dd>
+      <h3>{{ item.school }}</h3>
+      <h4>{{ item.program }}</h4>
+      <p>{{ item.description | safe }}</p>
+    </dd>
+  {% endfor %}
+</dl>

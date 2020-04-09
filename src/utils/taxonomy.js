@@ -2,7 +2,7 @@ const categories = {
   art: 'Digital Art',
   coding: 'Coding',
   games: 'Games',
-}
+};
 
 const tags = {
   'functional-reactive-programming': 'Functional Reactive Programming',
@@ -38,8 +38,12 @@ const tags = {
   vue: 'Vue.js',
   webgl: 'WebGL',
   zbrush: 'ZBrush',
-}
+};
 
-export default function(keyword) {
-  return categories[keyword] || tags[keyword]
-}
+module.exports = {
+  categories,
+  tags,
+  mapTaxonomy(keyword) {
+    return categories[keyword] || tags[keyword];
+  },
+};

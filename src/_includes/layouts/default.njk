@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% set metaTitle = title + ' | manu.ninja' if title else metadata.title %}
+  {% set metaDescription = description or metadata.description %}
+  <title>{{ metaTitle }}</title>
+  <meta name="description" content="{{ metaDescription }}">
+  <meta property="og:title" content="{{ metaTitle }}">
+  <meta property="og:description" content="{{ metaDescription }}">
+  <meta name="twitter:title" content="{{ metaTitle }}">
+  <meta name="twitter:description" content="{{ metaDescription }}">
+  {# TODO https://github.com/Lorti/manu.ninja/blob/master/src/components/meta.js #}
+  {# TODO https://www.npmjs.com/package/eleventy-plugin-toc #}
+  {% styles %}
+  <meta name="google-site-verification"
+        content="ksUOGNNttZF4FJuFdVLzSvvTEJyh5Leip6UsFAElMSc">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  <link href="//www.google-analytics.com" rel="dns-prefetch">
+  <link rel="alternate" href="{{ metadata.feed.path | url }}" type="application/atom+xml" title="{{ metadata.title }}">
+</head>
+<body>
+<div>
+  <div class="Column">
+    <nav class="Navigation">
+      <a class="Navigation-item" href="/">Blog</a>
+      <a class="Navigation-item" href="/talks">Talks</a>
+      <a class="Navigation-item" href="/projects">Projects</a>
+      <a class="Navigation-item" href="/about">About</a>
+    </nav>
+    <h1 class="Banner">
+      <a href="/">
+        <img class="Banner-logo" src="/logo.svg" alt="Logo">
+        <span class="Banner-title">manu.ninja</span>
+        <span class="Banner-line">Front-End Development, Games and Digital Art</span>
+      </a>
+    </h1>
+  </div>
+  {{ content | safe }}
+  <div class="Column">
+    <footer class="Footer">
+      {% if not layoutSmallFooter %}
+      <hr />
+      <div class="Grid Grid--withGutter">
+        <div class="Grid-cell u-size1of5">
+          <img
+            class="Footer-image u-sizeFull u-round"
+            src="/author.jpg"
+            alt="Manuel Wieser, BSc MA"
+          />
+        </div>
+        <div class="Grid-cell u-size4of5">
+          <p>
+            I’m an experienced front-end developer and lead developer for
+            cross-functional Scrum/Kanban teams. I’ve recently transitioned to
+            engineering management, trying to make everyone on my team an even
+            better developer than myself.
+          </p>
+          <p>
+            You can contact me via <a href="https://github.com/Lorti">GitHub</a>,
+            <a href="http://twitter.com/manuelwieser">Twitter</a> or
+            <a href="mailto:office@manuelwieser.com">office@manuelwieser.com</a>.
+          </p>
+          <p>
+            I’m currently working as the Head of Front-End Development for
+            <a href="https://www.karriere.at">karriere.at</a> in Linz,
+            making software that helps people find the job of their dreams.
+          </p>
+        </div>
+      </div>
+      {% endif %}
+      <hr/>
+      <p class="Footer-copyright">
+        <a class="u-floatRight" href="/privacy">
+          Imprint & Privacy Policy
+        </a>
+        © {% currentYear %} Manuel Wieser
+        <br/>
+        <small>
+          <a href="/">manu.ninja</a> is the personal blog of Manuel Wieser,
+          where he talks about front-end development, games and digital art
+        </small>
+      </p>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

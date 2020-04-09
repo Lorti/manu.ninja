@@ -1,0 +1,21 @@
+<div class="Talks">
+  {% for item in talks %}
+    <div class="Talk">
+      <p class="Talk-event">
+        {% if item.url %}<a href="{{ item.url }}">{{ item.event }}</a>{% else %}{{ item.event }}{% endif %}
+      </p>
+      <h4 class="Talk-title">
+        {% if item.slides %}<a href="{{ item.slides }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}
+      </h4>
+      {% if item.description %}
+        <p class="Talk-description">{{ item.description | safe }}</p>
+      {% endif %}
+      <p class="Talk-meta">
+        <span>{{ item.date.substring(0, 10) }}</span>
+        <span>{{ item.location }}</span>
+        {% if item.slides %}<a href="{{ item.slides }}">Slides</a>{% endif %}
+        {% if item.video %}<a href="{{ item.video }}">Video</a>{% endif %}
+      </p>
+    </div>
+  {% endfor %}
+</div>

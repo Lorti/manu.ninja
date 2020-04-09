@@ -1,0 +1,30 @@
+{% macro articleHeader(title, url, isExternal, language, categories, tags, date, content) %}
+  <div class="Article-header u-textCenter">
+    <p class="Article-category">
+      {% for category in categories %}
+        <a href="/categories/{{ category }}">{{ category | taxonomy }}</a>
+      {% endfor %}
+      {% for tag in tags %}
+        <a href="/tags/{{ tag }}">{{ tag | taxonomy }}</a>
+      {% endfor %}
+    </p>
+
+    <h1 class="Article-title">
+      {% if url %}
+      <a href="{{ url }}"
+         hrefLang="{{ language or 'en' }}"
+         {% if isExternal %}target="_blank" rel="noopener noreferrer"{% endif %}>
+        {{ title | safeTitleWrap | safe }}
+      </a>
+      {% else %}
+        {{ title | safeTitleWrap | safe }}
+      {% endif %}
+    </h1>
+
+    <p class="Article-date">
+      <time dateTime="{{ date | htmlDateString }}">{{ date | readableDate }}</time>
+      &middot;
+      {{ content | length }}
+    </p>
+  </div>
+{% endmacro %}

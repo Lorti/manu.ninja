@@ -1,0 +1,14 @@
+<dl>
+  {% for item in experience %}
+    {% if item.current %}
+    <dt>since {{ item.start }}</dt>
+    {% else %}
+      <dt>{{ item.start }} – {{ item.end }}</dt>
+    {% endif %}
+    <dd>
+      <h3>{{ item.position }}</h3>
+      <h4>{{ item.company }}</h4>
+      <p>{{ item.description | safe }}</p>
+    </dd>
+  {% endfor %}
+</dl>

@@ -1,0 +1,67 @@
+---
+layout: layouts/default.njk
+---
+<div class="Column">
+  <article class="Article">
+    {% import "macros.njk" as macros %}
+    {{ macros.articleHeader(title, false, false, language, categories, tags, date, content) }}
+    <div class="Article-content">
+      {% if external %}
+        <p>{{ summary or content | excerpt }}</p>
+        <p class="Article-link">
+          <a href="{{ external }}" hrefLang="{{ language or 'en' }}"
+             target="_blank" rel="noopener noreferrer">Read more…</a>
+          <a href="{{ external }}">Read more…</a>
+      {% else %}
+        {{ content | safe }}
+        {% if sharing %}
+          <p>
+            If you liked this article, please consider
+            <a href="https://twitter.com/intent/tweet?text={{ title }}&url={{ page.url | canonical }}&via=manuelwieser" target="_blank" rel="noopener noreferrer">sharing</a>
+            it with your followers.
+          </p>
+        {% endif %}
+      {% endif %}
+    </div>
+  </article>
+
+  <div id="disqus_thread"></div>
+  <script>
+    window.disqus_config = function () {
+      this.page.url = '{{ page.url | canonical }}';
+      this.page.identifier = '{{ page.url | slug }}';
+    };
+    const script = document.createElement('script');
+    script.src = 'https://manuninja.disqus.com/embed.js';
+    script.setAttribute('data-timestamp', +new Date());
+    document.body.appendChild(script);
+  </script>
+
+  <div class="Links">
+    <h3 class="Links-heading">Related Articles</h3>
+    <ul>
+      {% for post in related %}
+        <li class="Links-item">
+          <span class="Links-meta">
+            {% for category in post.categories %}
+              <a href="/categories/{{ category }}">{{ category | taxonomy }}</a>
+            {% endfor %}
+          </span>
+          <a class="Links-link u-truncated"
+             href="{{ post.url }}" hrefLang="{{ post.language or 'en' }}"
+             {% if post.isExternal %}target="_blank" rel="noopener noreferrer"{% endif %}>
+            {{ post.title }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="Donation">
+    <small>
+      You can support <a href="/">manu.ninja</a> via
+      <a href="https://www.paypal.me/manuninja">PayPal</a>
+      and buy me a 🍺 or a cup o’ joe.
+    </small>
+  </div>
+</div>

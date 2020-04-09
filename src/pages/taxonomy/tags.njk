@@ -1,0 +1,20 @@
+---
+pagination:
+  data: allTags
+  size: 1
+  alias: tag
+layout: layouts/default.njk
+permalink: /tags/{{ tag }}/
+---
+<div class="Column">
+  <div class="Taxonomy">
+    <h1 class="Taxonomy__heading u-textCenter">
+      <strong>{{ tag | taxonomy }}</strong> ({{ collections[tag].length }} Articles)
+    </h1>
+  </div>
+</div>
+<div class="Column">
+  {% for post in collections[tag]  %}
+    {% include 'partials/list.njk' %}
+  {% endfor %}
+</div>

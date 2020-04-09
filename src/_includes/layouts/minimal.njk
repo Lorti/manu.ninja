@@ -1,0 +1,25 @@
+---
+layout: layouts/default.njk
+---
+<div class="Column">
+  <div class="Article">
+    {% if layoutSmallFooter %}
+      <div class="Article-header u-textCenter">
+        <img style="max-width: 240px; border-radius: 50%" src="/author.jpg" alt="Manuel Wieser">
+        <h1 class="Article-title">I’m Manuel Wieser</h1>
+        <p class="Article-date">
+          Engineering Manager, Technical Lead, Front-End Developer<br>
+          Speaker, Trainer and Lecturer<br>
+          (Occasional) Designer, Digital Artist and Game Developer
+        </p>
+      </div>
+    {% else %}
+    <div class="article-header u-textCenter">
+      <h1 class="Article-title">{{ title }}</h1>
+    </div>
+    {% endif %}
+    <div class="Article-content">
+      {{ content | safe }}
+    </div>
+  </div>
+</div>

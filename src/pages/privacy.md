@@ -1,13 +1,14 @@
 ---
-path: /privacy
+layout: layouts/minimal.njk
+permalink: /privacy/
 title: Imprint & Privacy Policy
 description: Here you’ll find legal information for manu.ninja.
 ---
 
-**Manuel Wieser**  
-[office@manuelwieser.com](mailto:office@manuelwieser.com)  
-Weingartshofstraße 29  
-4020 Linz  
+**Manuel Wieser**<br>
+[office@manuelwieser.com](mailto:office@manuelwieser.com)<br>
+Weingartshofstraße 29<br>
+4020 Linz<br>
 AUSTRIA
 
 ## Cookies

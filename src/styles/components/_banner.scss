@@ -26,7 +26,7 @@
     display: block;
     margin-right: -10px;
     font-family: Lato, sans-serif;
-    font-weight: 100;
+    font-weight: normal;
     @include baseline(12px, 0, 0);
 
     @media (min-width: 480px) {

@@ -1,0 +1,19 @@
+<article class="Article">
+  {% import "macros.njk" as macros %}
+  {{ macros.articleHeader(
+    post.data.title,
+    post.data.external or post.url, post.data.external,
+    post.data.language,
+    post.data.categories, post.data.tags,
+    post.date,
+    post.templateContent
+  ) }}
+  <div class="Article-content">
+    <p>{{ post.data.summary or post.templateContent | excerpt }}</p>
+    <p class="Article-link">
+      <a href="{{ post.data.external or post.url }}"
+         hrefLang="{{ post.data.language or 'en' }}"
+         {% if post.data.external %}target="_blank" rel="noopener noreferrer"{% endif %}>Read more…</a>
+    </p>
+  </div>
+</article>

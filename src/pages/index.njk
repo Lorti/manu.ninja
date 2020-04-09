@@ -1,0 +1,18 @@
+---
+layout: layouts/default.njk
+permalink: index.html
+---
+<div class="Introduction">
+  <div class="Column">
+    <h2 class="Introduction-bigText">Hi, I’m Manuel.</h2>
+    <p class="Introduction-smallText">
+      I make web applications, games and digital art.<br>
+      You are enjoying my personal blog.
+    </p>
+  </div>
+</div>
+<div class="Column">
+  {% for post in collections.posts  %}
+    {% include 'partials/list.njk' %}
+  {% endfor %}
+</div>
