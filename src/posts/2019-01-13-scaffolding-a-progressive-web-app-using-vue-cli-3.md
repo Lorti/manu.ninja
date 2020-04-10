@@ -19,7 +19,9 @@ This guide is intended for beginners who've never used Vue as well as veterans w
   }
 </style>
 
-## Table of Contents
+<h2>Table of Contents</h2>
+
+[[toc]]
 
 ## Vue? Vue CLI?
 

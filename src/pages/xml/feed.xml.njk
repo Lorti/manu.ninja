@@ -15,7 +15,7 @@ eleventyExcludeFromCollections: true
     <name>{{ metadata.author.name }}</name>
     <email>{{ metadata.author.email }}</email>
   </author>
-  {% for post in collections.posts %}
+  {%- for post in collections.posts -%}
     {% set absolutePostUrl %}{{ post.url | url | absoluteUrl(metadata.url) }}{% endset %}
     <entry>
       <title>{{ post.data.title }}</title>
@@ -24,16 +24,12 @@ eleventyExcludeFromCollections: true
       <id>{{ absolutePostUrl }}</id>
       <content type="html">
         {% if post.data.external %}
-          {% if post.data.summary %}
-            {{ post.data.summary }}
-          {% else %}
-            {{ post.templateContent | excerpt }}
-          {% endif %}
+          {{ post.data.summary or post.templateContent | excerpt }}
           <a href="{{ post.data.external }}">Read more…</a>
         {% else %}
           {{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) }}
         {% endif %}
       </content>
     </entry>
-  {% endfor %}
+  {%- endfor -%}
 </feed>

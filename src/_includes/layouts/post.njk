@@ -33,12 +33,20 @@ layout: layouts/default.njk
     };
     const script = document.createElement('script');
     script.src = 'https://manuninja.disqus.com/embed.js';
+    script.async = true;
+    script.defer = true;
     script.setAttribute('data-timestamp', +new Date());
     document.body.appendChild(script);
   </script>
 
   <div class="Links">
-    <h3 class="Links-heading">Related Articles</h3>
+    <h3 class="Links-heading">
+      Articles on
+      {% set comma = joiner() %}
+      {%- for tag in tags -%}
+        {{ comma() }} <a href="/tags/{{ tag }}">{{ tag | taxonomy }}</a>
+      {%- endfor -%}
+    </h3>
     <ul>
       {% for post in related %}
         <li class="Links-item">

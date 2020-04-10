@@ -1,5 +1,5 @@
 <div class="Talks">
-  {% for item in talks %}
+  {%- for item in talks -%}
     <div class="Talk">
       <p class="Talk-event">
         {% if item.url %}<a href="{{ item.url }}">{{ item.event }}</a>{% else %}{{ item.event }}{% endif %}
@@ -17,5 +17,5 @@
         {% if item.video %}<a href="{{ item.video }}">Video</a>{% endif %}
       </p>
     </div>
-  {% endfor %}
+  {%- endfor -%}
 </div>

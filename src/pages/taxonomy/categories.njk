@@ -14,7 +14,7 @@ permalink: /categories/{{ category }}/
   </div>
 </div>
 <div class="Column">
-  {% for post in collections[category]  %}
+  {% for post in collections[category] %}
     {% include 'partials/list.njk' %}
   {% endfor %}
 </div>

@@ -5,7 +5,7 @@ const categories = {
 };
 
 const tags = {
-  'functional-reactive-programming': 'Functional Reactive Programming',
+  'functional-programming': 'Functional Programming',
   'image-processing': 'Image Processing',
   'interaction-design': 'Interaction Design',
   'lazy-loading': 'Lazy-Loading',
