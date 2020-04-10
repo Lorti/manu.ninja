@@ -1,5 +1,6 @@
 const cheerio = require('cheerio');
 const { DateTime } = require('luxon');
+const fs = require('fs');
 const markdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
 const markdownItTableOfContents = require('markdown-it-table-of-contents');
@@ -110,21 +111,8 @@ function addFilters(eleventyConfig) {
 }
 
 function addShortcodes(eleventyConfig) {
-  eleventyConfig.addShortcode('styles', () => {
-    const result = sass.renderSync({
-      file: __dirname + '/src/styles/index.scss',
-      outFile: __dirname + '/public/styles.css',
-      style: 'compressed',
-      precision: 5,
-    });
-    return `<style>${result.css}</style>`;
-  });
-
   eleventyConfig.addShortcode('currentDate', () => new Date().toISOString());
-  eleventyConfig.addShortcode(
-    'currentYear',
-    () => `${new Date().getFullYear()}`
-  );
+  eleventyConfig.addShortcode('currentYear', () => `${new Date().getFullYear()}`);
 }
 
 module.exports = function (eleventyConfig) {
@@ -168,6 +156,12 @@ module.exports = function (eleventyConfig) {
     }
     return content;
   });
+
+  const { css } = sass.renderSync({
+    file: __dirname + '/src/styles/index.scss',
+    style: 'compressed',
+  })
+  fs.writeFileSync(__dirname + '/public/styles.css', css);
 
   eleventyConfig.addTransform('styles', async (content, path) => {
     if (path.endsWith('.html')) {
