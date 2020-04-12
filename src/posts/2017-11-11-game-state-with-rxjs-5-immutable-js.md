@@ -1,7 +1,8 @@
 ---
 layout: layouts/post.njk
-permalink: /game-state-with-rxjs-5-immutable-js/index.html
+permalink: /game-state-with-rxjs-5-immutable-js/
 title: Game State with RxJS 5/Immutable.js
+description: This is the second part in a series on creating a game with RxJS 5, Immutable.js and three.js. We’ll look into describing the game state with RxJS 5 observables and Immutable.js. The goal of this part is to have a stream of objects, where each object is an Immutable.js collection that represents the whole game state at a particular point in time.
 date: 2017-11-11
 categories: [coding, games]
 tags: [rxjs, functional-programming]

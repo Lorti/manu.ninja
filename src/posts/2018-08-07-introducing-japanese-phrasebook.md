@@ -1,7 +1,8 @@
 ---
 layout: layouts/post.njk
-permalink: /introducing-japanese-phrasebook/index.html
+permalink: /introducing-japanese-phrasebook/
 title: Introducing “Japanese Phrasebook”
+description: For the last few weeks I have built an open-source Japanese Phrasebook app optimized for travel and offline usage. The app’s content is nearly 700 phrases from Wikitravel, transformed to a structured data model. This blog post explains my motivation and outlines what I am trying to achieve with this project.
 date: 2018-08-07
 categories: [coding]
 tags: [interaction-design, pwa, performance, vue]

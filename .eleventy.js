@@ -75,26 +75,19 @@ function addCollections(eleventyConfig) {
 }
 
 function addFilters(eleventyConfig) {
-  eleventyConfig.addFilter('excerpt', (html) => {
-    const $ = cheerio.load(html);
-    return $('p').first().text();
-  });
-
   eleventyConfig.addFilter('length', length);
   eleventyConfig.addFilter('taxonomy', mapTaxonomy);
 
   eleventyConfig.addFilter('readableDate', (date) => {
     return DateTime.fromJSDate(date, { zone: 'utc' }).toFormat('LLL dd, yyyy');
   });
+
   eleventyConfig.addFilter('htmlDateString', (date) => {
     return DateTime.fromJSDate(date, { zone: 'utc' }).toFormat('yyyy-LL-dd');
   });
 
-  eleventyConfig.addFilter('canonical', (url) => {
-    return 'https://manu.ninja' + url.replace(/(\/|index.html)$/g, '');
-  });
   eleventyConfig.addFilter('slug', (url) => {
-    return url.replace(/(\/|index.html)/g, '');
+    return url.replace(/(\/)/g, '');
   });
 
   eleventyConfig.addFilter('safeTitleWrap', (title) => {

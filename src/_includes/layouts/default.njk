@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {% set metaTitle = title + ' | manu.ninja' if tags else metadata.title %}
-  {% set metaDescription = description or metadata.description %}
+  {% set metaTitle = title + ' | manu.ninja' if title else metadata.title %}
+  {% set metaDescription = description | safe or metadata.description %}
+  <link rel="canonical" href="{{ page.url | url | absoluteUrl(metadata.url) }}">
   <title>{{ metaTitle }}</title>
   <meta name="description" content="{{ metaDescription }}">
   <meta property="og:title" content="{{ metaTitle }}">

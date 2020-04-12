@@ -1,11 +1,11 @@
 ---
 layout: layouts/post.njk
-permalink: /brew-your-first-tests-with-mocha-chai-and-three-and-a-half-minutes/index.html
+permalink: /brew-your-first-tests-with-mocha-chai-and-three-and-a-half-minutes/
 title: "Brew Your First Tests with Mocha, Chai and 3½ Minutes"
+description: "This post is for front-end developers who want to start writing tests. People have told them that testing their code is beneficial to their sanity. For some reason, though, they never got started – maybe because there are a lot of lenghty articles and different tools to consider. This article is different: It is a copy & paste guide to your first tests with a steeping time of about 3½ Minutes."
 date: 2016-03-25
 categories: [coding]
 tags: [testing, tools]
-summary: "This post is for front-end developers who want to start writing tests. People have told them that testing their code is beneficial to their sanity. For some reason, though, they never got started – maybe because there are a lot of lenghty articles and different tools to consider. This article is different: It is a copy & paste guide to your first tests with a steeping time of about 3½ Minutes."
 ---
 
 This post is for front-end developers who want to start writing tests. People have told them that testing their code is beneficial to their sanity. For some reason, though, they never got started -- maybe because there are a lot of lenghty articles and different tools to consider. This article is different: It is a copy & paste guide to your first tests with [Mocha](http://mochajs.org/) and [Chai](http://chaijs.com/), with a steeping time of about 3½ Minutes.

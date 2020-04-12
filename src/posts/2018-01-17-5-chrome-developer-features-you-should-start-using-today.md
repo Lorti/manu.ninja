@@ -1,11 +1,12 @@
 ---
 layout: layouts/post.njk
-permalink: /5-chrome-developer-features-you-should-start-using-today/index.html
+permalink: /5-chrome-developer-features-you-should-start-using-today/
+external: https://dev.karriere.at/a/chrome-developer-tools
 title: 5 Chrome Developer Tools Features You Should Start Using Today
+description: Developers use the Chrome DevTools on a regular basis. However, most developers limit themselves to a few features that are familiar to them – like changing CSS styles or checking JavaScript errors. It pays off to explore and discover new tools. In this post I’ll show you 5 features you may not yet know, but which I find very helpful in my work.
 date: 2018-01-17
 categories: [coding]
 tags: [tools, performance]
-external: https://dev.karriere.at/a/chrome-developer-tools
 language: de
 ---
 

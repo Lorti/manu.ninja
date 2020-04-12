@@ -1,12 +1,13 @@
 ---
 layout: layouts/post.njk
-permalink: /private-methods-and-fields-in-javascript-classes/index.html
+permalink: /private-methods-and-fields-in-javascript-classes/
+external: https://dev.karriere.at/a/private-methods-and-fields-in-javascript-classes
 title: Private Methods and Fields in JavaScript Classes
+description: Ever since classes were introduced in ECMAScript 2015 people wanted to use private methods and fields, which are well-known from programming languages like C++, PHP or Java. There is now a Stage 3 ECMAScript Proposal regarding private methods, getter/setters and fields. We’ll look at the proposed syntax – which is how you’ll (propably) write private methods and fields in future JavaScript versions – and how to achieve the same functionality with current language features.
 date: 2019-03-13
 categories: [coding]
 tags: [js]
 thumbnail: /author.jpg
-external: https://dev.karriere.at/a/private-methods-and-fields-in-javascript-classes
 ---
 
 Ever since classes were introduced in ECMAScript 2015 people wanted to use private methods and fields, which are well-known from programming languages like C++, PHP or Java. There is now a Stage 3 ECMAScript Proposal regarding private methods, getter/setters and fields. We'll look at the proposed syntax -- which is how you'll (propably) write private methods and fields in future JavaScript versions -- and how to achieve the same functionality with current language features.

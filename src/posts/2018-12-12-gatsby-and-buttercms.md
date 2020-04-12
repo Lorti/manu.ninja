@@ -1,12 +1,13 @@
 ---
 layout: layouts/post.njk
-permalink: /gatsby-and-buttercms/index.html
+permalink: /gatsby-and-buttercms/
+external: https://buttercms.com/blog/how-to-use-gatsby-with-a-headless-cms
 title: Gatsby and ButterCMS
+description: Learn how to build a Gatsby blog using ButterCMS. The code examples in this article let you combine Gatsby and ButterCMS in just a few minutes, no matter if you are a beginner or an expert.
 date: 2018-12-12
 categories: [coding]
 tags: [tools]
 thumbnail: /author.jpg
-external: https://buttercms.com/blog/how-to-use-gatsby-with-a-headless-cms
 ---
 
 Learn how to build a Gatsby blog using ButterCMS. The code examples in this article let you combine Gatsby and ButterCMS in just a few minutes, no matter if you are a beginner or an expert.

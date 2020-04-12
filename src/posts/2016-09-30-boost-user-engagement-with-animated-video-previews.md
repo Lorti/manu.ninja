@@ -1,7 +1,8 @@
 ---
 layout: layouts/post.njk
-permalink: /boost-user-engagement-with-animated-video-previews/index.html
+permalink: /boost-user-engagement-with-animated-video-previews/
 title: Boost User Engagement with Animated Video Previews
+description: If you are building a video portal, an artist’s portfolio or any other showcase of films, from smartphone footage to news coverage to sports clips, you typically look for engaging thumbnails. Though you don’t have to stop there and can boost your video previews and click-through rate by showing more than a single still image of each video. This article highlights two approaches to grab your viewers’ attention.
 date: 2016-09-30
 categories: [coding]
 tags: [animation, conversion, ffmpeg]

@@ -7,7 +7,7 @@ layout: layouts/default.njk
     {{ macros.articleHeader(title, false, false, language, categories, tags, date, content) }}
     <div class="Article-content">
       {% if external %}
-        <p>{{ summary or content | excerpt }}</p>
+        <p>{{ description | safe }}</p>
         <p class="Article-link">
           <a href="{{ external }}" hrefLang="{{ language or 'en' }}"
              target="_blank" rel="noopener noreferrer">Read more…</a>
@@ -17,7 +17,7 @@ layout: layouts/default.njk
         {% if sharing %}
           <p>
             If you liked this article, please consider
-            <a href="https://twitter.com/intent/tweet?text={{ title }}&url={{ page.url | canonical }}&via=manuelwieser" target="_blank" rel="noopener noreferrer">sharing</a>
+            <a href="https://twitter.com/intent/tweet?text={{ title }}&url={{ page.url | url | absoluteUrl(metadata.url) }}&via=manuelwieser" target="_blank" rel="noopener noreferrer">sharing</a>
             it with your followers.
           </p>
         {% endif %}
@@ -28,7 +28,7 @@ layout: layouts/default.njk
   <div id="disqus_thread"></div>
   <script>
     window.disqus_config = function () {
-      this.page.url = '{{ page.url | canonical }}';
+      this.page.url = '{{ page.url | url | absoluteUrl(metadata.url) }}';
       this.page.identifier = '{{ page.url | slug }}';
     };
     const script = document.createElement('script');

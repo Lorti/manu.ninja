@@ -1,7 +1,8 @@
 ---
 layout: layouts/post.njk
-permalink: /using-web-technologies-for-a-pull-to-refresh-animation/index.html
+permalink: /using-web-technologies-for-a-pull-to-refresh-animation/
 title: Using Web Technologies for a “Pull to Refresh” Animation
+description: Pull-to-refresh is a touchscreen gesture used in many mobile applications. This article shows a way of creating a simple pull-to-refresh animation using web technologies. The animation has seven different parts implemented with SVG, CSS and JavaScript.
 date: 2016-10-23
 categories: [coding]
 tags: [animation, interaction-design]

@@ -1,7 +1,8 @@
 ---
 layout: layouts/post.njk
-permalink: /using-the-speech-synthesis-interface-of-the-web-speech-api/index.html
+permalink: /using-the-speech-synthesis-interface-of-the-web-speech-api/
 title: Using the Speech Synthesis Interface of the Web Speech API
+description: Speech synthesis has come a long way since it’s first appearance in operating systems in the 1980s. In the 1990s Apple already offered system-wide text-to-speech support. Alexa, Cortana, Siri and other virtual assistants recently brought speech synthesis to the masses. In modern browsers the Web Speech Api allows you to gain access to your device’s speech capabilities, so let’s start using it!
 date: 2018-08-27
 categories: [coding]
 tags: [accessibility, apis, interaction-design, pwa]

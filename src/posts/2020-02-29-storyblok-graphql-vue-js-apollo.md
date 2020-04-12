@@ -1,12 +1,13 @@
 ---
 layout: layouts/post.njk
-permalink: /headless-cms-storyblok-graphql-vue-js-apollo/index.html
+permalink: /headless-cms-storyblok-graphql-vue-js-apollo/
+external: https://www.storyblok.com/tp/headless-cms-storyblok-graphql-vue-js-apollo
 title: How to use Storyblok’s GraphQL endpoint with Vue.js and Apollo
+description: Learn how to use Storyblok’s GraphQL API with Vue.js and Apollo. The full examples in this article let you combine the Headless CMS with Vue.js in just a few minutes.
 date: 2020-02-29
 categories: [coding]
 tags: [graphql, tools, vue]
 thumbnail: /author.jpg
-external: https://www.storyblok.com/tp/headless-cms-storyblok-graphql-vue-js-apollo
 ---
 
 Learn how to use Storyblok’s GraphQL API with Vue.js and Apollo. The full examples in this article let you combine the Headless CMS with Vue.js in just a few minutes.

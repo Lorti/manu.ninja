@@ -1,7 +1,8 @@
 ---
 layout: layouts/post.njk
-permalink: /inline-svg-how-i-learned-to-stop-worrying-and-love-gzip/index.html
+permalink: /inline-svg-how-i-learned-to-stop-worrying-and-love-gzip/
 title: Inline SVG – How I Learned to Stop Worrying and Love gzip
+description: What If I told you, that you can inline all of your SVG icons and stop worrying about the alternatives? In this article I suggest that you make your life easier by embracing gzip and replacing all of your &lt;use&gt; references.
 date: 2016-08-28
 categories: [coding]
 tags: [svg, icons, performance]

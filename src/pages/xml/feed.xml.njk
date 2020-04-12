@@ -24,7 +24,7 @@ eleventyExcludeFromCollections: true
       <id>{{ absolutePostUrl }}</id>
       <content type="html">
         {% if post.data.external %}
-          {{ post.data.summary or post.templateContent | excerpt }}
+          {{ post.data.description | safe }}
           <a href="{{ post.data.external }}">Read more…</a>
         {% else %}
           {{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) }}

@@ -1,12 +1,12 @@
 ---
 layout: layouts/post.njk
-permalink: /functional-reactive-game-programming-rxjs-5-immutable-js-and-three-js/index.html
+permalink: /functional-reactive-game-programming-rxjs-5-immutable-js-and-three-js/
 title: Functional Reactive Game Programming – RxJS 5, Immutable.js and three.js
+description: This series of blog posts will guide you through creating a computer game using RxJS 5, Immutable.js and WebGL/three.js, following the functional reactive programming paradigm in JavaScript. You can find the full source code on GitHub, which you can fork and adapt for your own projects.
 date: 2017-08-22
 categories: [art, coding, games]
 tags: [functional-programming, rxjs, three-js, webgl]
 thumbnail: /images/corsair.jpg
-summary: This series of blog posts will guide you through creating a computer game using RxJS 5, Immutable.js and WebGL/three.js, following the functional reactive programming paradigm in JavaScript. You can find the full source code on GitHub, which you can fork and adapt for your own projects.
 ---
 
 Last year I played with RxJS to expand my programming horizon and learn about functional reactive programming in JavaScript. I had recreated [Breakout] using streams and written about my experience as a beginner to RxJS. The release of RxJS 5 encouraged me to build on that knowledge and recreate yet another game, this time using RxJS 5, Immutable.js and WebGL/three.js. The game is a clone of [Telegram's Corsairs][Telegram], which is available through their Bot Platform.

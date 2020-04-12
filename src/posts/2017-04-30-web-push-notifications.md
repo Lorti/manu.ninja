@@ -1,13 +1,13 @@
 ---
 layout: layouts/post.njk
-permalink: /web-push-notifications/index.html
+permalink: /web-push-notifications/
 title: Web Push Notifications
+description: Developers use push notifications to engage and retain users. Unfortunately, sending push notifications on the open web was difficult in the past. It has become simpler in 2017. This tutorial shows you a complete working example to get you started. The final code is on GitHub and you’ll find a video demonstrating how you can send your first push notification.
 date: 2017-04-30
 categories: [coding]
 tags: [business, conversion, meetups, slides]
 thumbnail: /images/web-push-notifications.png
 sharing: true
-summary: Developers use push notifications to engage and retain users. Unfortunately, sending push notifications on the open web was difficult in the past. It has become simpler in 2017. This tutorial shows you a complete working example to get you started. The final code is on GitHub and you'll find a video demonstrating how you can send your first push notification.
 ---
 
 Developers use push notifications to engage and retain users. Unfortunately, sending push notifications on the open web was difficult in the past. It has become simpler in 2017. This tutorial shows you a complete working example to get you started. The final code is on [GitHub] and you'll find a [video] demonstrating how you can send your first push notification.

@@ -1,7 +1,8 @@
 ---
 layout: layouts/post.njk
-permalink: /game-graphics-with-webgl-three-js-and-lazy-loading-of-3d-models/index.html
+permalink: /game-graphics-with-webgl-three-js-and-lazy-loading-of-3d-models/
 title: Game Graphics with WebGL/three.js and Lazy-Loading of 3D Models
+description: This is the third part in a series on creating a game with RxJS 5, Immutable.js and three.js. We’ll look at rendering 3D graphics with WebGL by using the three.js library. The goal of this part is to have a scene that’s updated according to the Immutable.js collection returned by our game state stream.
 date: 2017-12-13
 categories: [art, coding, games]
 tags: [functional-programming, lazy-loading, rxjs, three-js, webgl]

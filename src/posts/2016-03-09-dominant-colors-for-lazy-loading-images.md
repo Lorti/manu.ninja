@@ -1,7 +1,8 @@
 ---
 layout: layouts/post.njk
-permalink: /dominant-colors-for-lazy-loading-images/index.html
+permalink: /dominant-colors-for-lazy-loading-images/
 title: Dominant Colors for Lazy-Loading Images
+description: Pinterest, Google Images and lots of image-heavy sites lazy-load their content. They also calculate the dominant color of each image to use as a placeholder. This post presents a few methods to do the same and helps you understand the GIF file format to make the most of data URIs.
 date: 2016-03-09
 categories: [coding]
 tags: [image-processing, lazy-loading, performance, tools]

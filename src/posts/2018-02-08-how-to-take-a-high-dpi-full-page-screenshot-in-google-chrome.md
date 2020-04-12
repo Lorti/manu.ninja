@@ -1,11 +1,12 @@
 ---
 layout: layouts/post.njk
-permalink: /how-to-take-a-high-dpi-full-page-screenshot-in-google-chrome/index.html
+permalink: /how-to-take-a-high-dpi-full-page-screenshot-in-google-chrome/
+external: https://dev.karriere.at/a/how-to-take-a-high-dpi-full-page-screenshot-in-google-chrome
+description: "Whether you want to ask for design feedback from your colleagues, inspect changes between versions, use them in your presentation slides or your marketing folders: There are quite a lot of use-cases for screenshots of your web page. This blog post shows how to take high-DPI full page screenshot right inside of Google Chrome."
 title: How to Take a High-DPI Full Page Screenshot in Google Chrome
 date: 2018-02-08
 categories: [art, coding, games]
 tags: [tools, slides]
-external: https://dev.karriere.at/a/how-to-take-a-high-dpi-full-page-screenshot-in-google-chrome
 ---
 
 Whether you want to ask for design feedback from your colleagues, inspect changes between versions, use them in your presentation slides or your marketing folders: There are quite a lot of use-cases for screenshots of your web page. This blog post shows how to take high-DPI full page screenshot right inside of Google Chrome.

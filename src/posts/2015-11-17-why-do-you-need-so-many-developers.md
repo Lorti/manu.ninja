@@ -1,11 +1,12 @@
 ---
 layout: layouts/post.njk
-permalink: /why-do-you-need-so-many-developers/index.html
+permalink: /why-do-you-need-so-many-developers/
+external: https://dev.karriere.at/a/viele-entwickler-homepage
 title: “Why Do You Need so Many Developers?”
+description: I am currently working for karriere.at as a full-stack web developer, leaning more towards design than algorithms and data structures. I have the pleasure of working with 18 other developers, which is why we are often asked at events and meetups what all of those developers actually do all day at our company. Recent graduates and students – as well as experienced developers – know karriere.at as Austria’s leading job search site and wonder why running it is such a demanding and complex task. But karriere.at is far more than just a job search site. This is why I wrote an article to give fellow developers a short overview.
 date: 2015-11-17
 categories: [coding]
 tags: [business]
-external: https://dev.karriere.at/a/viele-entwickler-homepage
 language: de
 ---
 

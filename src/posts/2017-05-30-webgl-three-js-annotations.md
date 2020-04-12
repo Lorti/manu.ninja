@@ -1,13 +1,13 @@
 ---
 layout: layouts/post.njk
-permalink: /webgl-three-js-annotations/index.html
+permalink: /webgl-three-js-annotations/
 title: WebGL/three.js Annotations
+description: How do you add a comment box or annotation box to a WebGL object as seen on Sketchfab? This tutorial features a working example on CodePen and explains the essential code segments.
 date: 2017-05-30
 categories: [art, coding, games]
 tags: [interaction-design, three-js, webgl]
 thumbnail: /images/webgl-three-js-annotations.png
 sharing: true
-summary: How do you add a comment box or annotation box to a WebGL object as seen on Sketchfab? This tutorial features a working example on CodePen and explains the essential code segments.
 ---
 
 How do you add a comment box or annotation box to a WebGL object as seen on [Sketchfab][Dodo]? This tutorial features a working example on [CodePen] and explains the essential code segments.

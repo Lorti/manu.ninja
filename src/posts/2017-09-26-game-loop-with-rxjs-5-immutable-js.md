@@ -1,7 +1,8 @@
 ---
 layout: layouts/post.njk
-permalink: /game-loop-with-rxjs-5-immutable-js/index.html
+permalink: /game-loop-with-rxjs-5-immutable-js/
 title: Game Loop with RxJS 5/Immutable.js
+description: This is the first part in a series on creating a game with RxJS 5, Immutable.js and three.js. We’ll look into how to create a basic game loop, which serves as a starting point for further development of the game project.
 date: 2017-09-26
 categories: [coding, games]
 tags: [rxjs, functional-programming]

@@ -1,7 +1,8 @@
 ---
 layout: layouts/post.njk
-permalink: /lightweight-testing-of-front-end-npm-packages/index.html
+permalink: /lightweight-testing-of-front-end-npm-packages/
 title: Lightweight Testing of Front-End npm Packages
+description: This tutorial explains using npm for front-end JavaScript package management and writing lightweight automated tests with Browserify, tape and Sinon. It also features transpiling with Babel, handling npm hooks and using npm privately without publishing your package.
 date: 2016-12-15
 categories: [coding]
 tags: [testing, tools]

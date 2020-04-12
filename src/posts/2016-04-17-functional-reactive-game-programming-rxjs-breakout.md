@@ -1,7 +1,8 @@
 ---
 layout: layouts/post.njk
-permalink: /functional-reactive-game-programming-rxjs-breakout/index.html
+permalink: /functional-reactive-game-programming-rxjs-breakout/
 title: Functional Reactive Game Programming – RxJS Breakout
+description: Functional Reactive Programming is currently one of the hottest paradigms in the JavaScript community. I played with RxJS over the last couple of weeks and decided that there is no better way to dive into it than recreating a classic game. Computer games infamously store a lot of external state and my goal was to model everything as streams without relying on a single external state variable.
 date: 2016-04-17
 categories: [coding, games]
 tags: [rxjs, functional-programming]

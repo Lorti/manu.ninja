@@ -1,11 +1,12 @@
 ---
 layout: layouts/post.njk
-permalink: /ab-testing-using-google-analytics/index.html
+permalink: /ab-testing-using-google-analytics/
+external: https://dev.karriere.at/a/google-analytics-ab-testing
+description: A/B testing allows you to continually improve your product’s user experience or various sales and marketing KPIs, as long as your goals are well-defined and you have a clear hypothesis. This article does not tell you why you should do A/B testing, but focuses on how to track the test and analyze its result using JavaScript and Google Analytics.
 title: A/B Testing Using Google Analytics
 date: 2018-06-25
 categories: [coding]
 tags: [business, conversion, performance, testing, tools]
-external: https://dev.karriere.at/a/google-analytics-ab-testing
 ---
 
 A/B testing allows you to continually improve your product's user experience or various sales and marketing KPIs, as long as your goals are well-defined and you have a clear hypothesis. This article does not tell you why you should do A/B testing, but focuses on how to track the test and analyze its result using JavaScript and Google Analytics.

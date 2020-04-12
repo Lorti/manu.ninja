@@ -1,6 +1,8 @@
 ---
 layout: layouts/post.njk
-permalink: /25-real-world-applications-using-webgl/index.html
+permalink: /25-real-world-applications-using-webgl/
+description: Whenever I’ve tried to explain the fascination of WebGL I failed to think of examples apart from demos, experiments and games. Since then I’ve done research and collected 25 inspiring real-world applications using WebGL/WebVR.
+
 title: 25+ Real-World Applications Using WebGL
 date: 2018-06-17
 categories: [coding, games]

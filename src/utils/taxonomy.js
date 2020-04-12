@@ -8,7 +8,7 @@ const tags = {
   'functional-programming': 'Functional Programming',
   'image-processing': 'Image Processing',
   'interaction-design': 'Interaction Design',
-  'lazy-loading': 'Lazy-Loading',
+  'lazy-loading': 'Lazy Loading',
   'three-js': 'three.js',
   accessibility: 'Accessibility',
   animation: 'Animation',

@@ -1,7 +1,8 @@
 ---
 layout: layouts/post.njk
-permalink: /character-rigging-and-animation-workflow-for-unity-in-maya/index.html
+permalink: /character-rigging-and-animation-workflow-for-unity-in-maya/
 title: Character Rigging and Animation Workflow for Unity in Maya
+description: This article highlights pitfalls I’ve come across while animating a character in Autodesk Maya. They often surface when you export your model to .fbx format for real-time applications such as Unity. Learn from my mistakes and read the following sections on rigging, animating and exporting.
 date: 2017-02-21
 categories: [art, games]
 tags: [animation, rigging, unity, maya]

@@ -1,7 +1,8 @@
 ---
 layout: layouts/post.njk
-permalink: /simple-electron-gui-wrapper-for-a-command-line-utility/index.html
+permalink: /simple-electron-gui-wrapper-for-a-command-line-utility/
 title: Simple Electron GUI Wrapper for a Command-Line Utility
+description: This post summarizes my experience building a simple Electron app. It guides you through providing a GUI for a command-line utility. It also provides a succinct overview of the few things you really need to know when you are just getting started.
 date: 2016-07-31
 categories: [coding]
 tags: [electron, animation]
