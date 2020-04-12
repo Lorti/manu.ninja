@@ -11,7 +11,7 @@ thumbnail: /images/japanese-phrasebook-screens.png
 
 For the last few weeks I have built an open-source [Japanese Phrasebook](https://www.japanese-phrasebook.com) app optimized for travel and offline usage. The app's content is nearly 700 phrases from Wikitravel, transformed to a structured data model. This blog post explains my motivation and outlines what I am trying to achieve with this project.
 
-[![](/images/japanese-phrasebook-screens.png)](https://www.japanese-phrasebook.com)
+[![Japanese Phrasebook](/images/japanese-phrasebook-screens.png)](https://www.japanese-phrasebook.com)
 
 The app is free for everyone to use at [https://www.japanese-phrasebook.com](https://www.japanese-phrasebook.com). You can add it to your mobile device's home screen and use it while traveling Japan, even when you have no internet connection.
 
