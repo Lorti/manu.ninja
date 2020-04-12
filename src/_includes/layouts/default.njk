@@ -3,14 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {% set metaTitle = title + ' | manu.ninja' if title else metadata.title %}
+  {% set metaTitle = title + ' | manu.ninja' if tags else metadata.title %}
   {% set metaDescription = description or metadata.description %}
   <title>{{ metaTitle }}</title>
   <meta name="description" content="{{ metaDescription }}">
   <meta property="og:title" content="{{ metaTitle }}">
   <meta property="og:description" content="{{ metaDescription }}">
+  <meta property="og:type" content="{{ 'article' if tags else 'website' }}">
+  {% if page.url %}<meta property="og:url" content="{{ page.url | url | absoluteUrl(metadata.url) }}">{% endif %}
+  {% if thumbnail %}<meta property="og:image" content="{{ thumbnail | url | absoluteUrl(metadata.url) }}">{% endif %}
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@manuelwieser">
   <meta name="twitter:title" content="{{ metaTitle }}">
   <meta name="twitter:description" content="{{ metaDescription }}">
+  {% if thumbnail %}<meta property="twitter:image" content="{{ thumbnail | url | absoluteUrl(metadata.url) }}">{% endif %}
   <style>/* Placeholder */</style>
   <meta name="google-site-verification"
         content="ksUOGNNttZF4FJuFdVLzSvvTEJyh5Leip6UsFAElMSc">

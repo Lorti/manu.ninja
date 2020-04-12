@@ -2,6 +2,7 @@
 layout: layouts/post.njk
 permalink: /scaffolding-a-progressive-web-app-using-vue-cli-3/index.html
 title: Scaffolding a Progressive Web App using Vue CLI 3
+description: Vue CLI 3 has been released and it’s completely different from its previous version. Discover how it simplifies your toolchain, reduces configuration fatigue and improves your developer experience.
 date: 2019-01-13
 categories: [coding]
 tags: [meetups, pwa, slides, tools, vue]

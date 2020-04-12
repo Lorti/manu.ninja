@@ -4,7 +4,7 @@ permalink: /game-state-with-rxjs-5-immutable-js/index.html
 title: Game State with RxJS 5/Immutable.js
 date: 2017-11-11
 categories: [coding, games]
-tags: [rxjs, functional-reactive-programming]
+tags: [rxjs, functional-programming]
 thumbnail: /images/corsair.jpg
 ---
 

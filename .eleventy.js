@@ -157,13 +157,12 @@ module.exports = function (eleventyConfig) {
     return content;
   });
 
-  const { css } = sass.renderSync({
-    file: __dirname + '/src/styles/index.scss',
-    style: 'compressed',
-  })
-  fs.writeFileSync(__dirname + '/public/styles.css', css);
-
   eleventyConfig.addTransform('styles', async (content, path) => {
+    const { css } = sass.renderSync({
+      file: __dirname + '/src/styles/index.scss',
+      style: 'compressed',
+    })
+    fs.writeFileSync(__dirname + '/public/styles.css', css);
     if (path.endsWith('.html')) {
       const purgeCSSResult = await new PurgeCSS().purge({
         content: [path],

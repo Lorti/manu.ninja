@@ -4,7 +4,7 @@ permalink: /game-loop-with-rxjs-5-immutable-js/index.html
 title: Game Loop with RxJS 5/Immutable.js
 date: 2017-09-26
 categories: [coding, games]
-tags: [rxjs, functional-reactive-programming]
+tags: [rxjs, functional-programming]
 thumbnail: /images/corsair.jpg
 ---
 
