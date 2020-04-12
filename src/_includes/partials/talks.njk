@@ -7,9 +7,9 @@
       <h4 class="Talk-title">
         {% if item.slides %}<a href="{{ item.slides }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}
       </h4>
-      {% if item.description %}
+      {%- if item.description -%}
         <p class="Talk-description">{{ item.description | safe }}</p>
-      {% endif %}
+      {%- endif -%}
       <p class="Talk-meta">
         <span>{{ item.date.substring(0, 10) }}</span>
         <span>{{ item.location }}</span>

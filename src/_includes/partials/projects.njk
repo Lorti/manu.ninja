@@ -1,5 +1,5 @@
 <dl>
-  {% for item in projects %}
+  {%- for item in projects -%}
     <dt>
       <a href="{{ item.url }}">{{ item.title }}</a>
       <small>{{ item.date.substring(0, 4) }}</small>
@@ -7,5 +7,5 @@
     <dd>
       <p>{{ item.description}}</p>
     </dd>
-  {% endfor %}
+  {%- endfor -%}
 </dl>
