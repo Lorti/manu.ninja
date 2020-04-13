@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="{{ metaTitle | safe  }}">
   <meta name="twitter:description" content="{{ metaDescription | safe  }}">
   {% if thumbnail %}<meta property="twitter:image" content="{{ thumbnail | url | absoluteUrl(metadata.url) }}">{% endif %}
-  <style>/* Placeholder */</style>
+  {% styles %}
   <link href="https://cdnjs.cloudflare.com" rel="dns-prefetch">
   <link href="https://www.google-analytics.com" rel="dns-prefetch">
   <link href="https://www.googletagmanager.com" rel="dns-prefetch">
@@ -25,6 +25,11 @@
   <link rel="canonical" href="{{ page.url | url | absoluteUrl(metadata.url) }}">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="sitemap" href="/sitemap.xml" type="application/xml">
+  <meta name="theme-color" content="#f58231">
+  <link rel="apple-touch-icon" sizes="192x192" href="/icon-192x192.png">
+  <link rel="apple-touch-icon" sizes="256x256" href="/icon-256x256.png">
+  <link rel="apple-touch-icon" sizes="384x384" href="/icon-384x384.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="/icon-512x512.png">
   <meta name="google-site-verification" content="ksUOGNNttZF4FJuFdVLzSvvTEJyh5Leip6UsFAElMSc">
   <script async defer src="https://www.googletagmanager.com/gtag/js?id=UA-68912237-1"></script>
   <script>
@@ -101,5 +106,12 @@
     </footer>
   </div>
 </div>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js');
+    });
+  }
+</script>
 </body>
 </html>

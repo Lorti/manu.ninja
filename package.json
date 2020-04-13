@@ -5,17 +5,21 @@
   "author": "Manuel Wieser <office@manuelwieser.com>",
   "license": "MIT",
   "scripts": {
-    "build": "eleventy",
+    "build:clean": "rm -rf public",
+    "build:eleventy": "eleventy",
+    "build:service-worker": "workbox generateSW workbox-config.js",
+    "build:purge-css": "node purge-css.js",
+    "build": "npm run build:clean; npm run build:eleventy; npm run build:service-worker; npm run build:purge-css",
     "watch": "eleventy --watch",
     "serve": "eleventy --serve",
     "debug": "DEBUG=* eleventy",
-    "format": "prettier --single-quote --write '.eleventy.js' 'src/**/*.js'"
+    "format": "prettier --single-quote --write './*.js' 'src/**/*.js'"
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.11.0-beta.3",
     "@11ty/eleventy-plugin-rss": "^1.0.7",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
-    "cheerio": "^1.0.0-rc.3",
+    "glob": "^7.1.6",
     "html-minifier": "^4.0.0",
     "luxon": "^1.23.0",
     "markdown-it": "^10.0.0",

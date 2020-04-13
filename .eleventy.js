@@ -1,11 +1,8 @@
-const cheerio = require('cheerio');
 const { DateTime } = require('luxon');
-const fs = require('fs');
 const markdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
 const markdownItTableOfContents = require('markdown-it-table-of-contents');
 const minifier = require('html-minifier');
-const { PurgeCSS } = require('purgecss');
 const rss = require('@11ty/eleventy-plugin-rss');
 const sass = require('node-sass');
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
@@ -104,8 +101,19 @@ function addFilters(eleventyConfig) {
 }
 
 function addShortcodes(eleventyConfig) {
+  eleventyConfig.addShortcode('styles', () => {
+    const { css } = sass.renderSync({
+      file: __dirname + '/src/styles/index.scss',
+      outputStyle: 'compressed',
+    });
+    return `<style>${css}</style>`;
+  });
+
   eleventyConfig.addShortcode('currentDate', () => new Date().toISOString());
-  eleventyConfig.addShortcode('currentYear', () => `${new Date().getFullYear()}`);
+  eleventyConfig.addShortcode(
+    'currentYear',
+    () => `${new Date().getFullYear()}`
+  );
 }
 
 module.exports = function (eleventyConfig) {
@@ -146,25 +154,6 @@ module.exports = function (eleventyConfig) {
         removeComments: true,
         useShortDoctype: true,
       });
-    }
-    return content;
-  });
-
-  eleventyConfig.addTransform('styles', async (content, path) => {
-    const { css } = sass.renderSync({
-      file: __dirname + '/src/styles/index.scss',
-      style: 'compressed',
-    })
-    fs.writeFileSync(__dirname + '/public/styles.css', css);
-    if (path.endsWith('.html')) {
-      const purgeCSSResult = await new PurgeCSS().purge({
-        content: [path],
-        css: ['public/styles.css'],
-      });
-      return content.replace(
-        '<style></style>',
-        `<style>${purgeCSSResult[0].css}</style>`
-      );
     }
     return content;
   });
