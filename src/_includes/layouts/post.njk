@@ -29,16 +29,29 @@ layout: layouts/default.njk
 
   <div id="disqus_thread"></div>
   <script>
-    window.disqus_config = function () {
-      this.page.url = '{{ page.url | url | absoluteUrl(metadata.url) }}';
-      this.page.identifier = '{{ page.url | slug }}';
-    };
-    const script = document.createElement('script');
-    script.src = 'https://manuninja.disqus.com/embed.js';
-    script.async = true;
-    script.defer = true;
-    script.setAttribute('data-timestamp', +new Date());
-    document.body.appendChild(script);
+    function loadDisqus() {
+      window.disqus_config = function () {
+        this.page.url = '{{ page.url | url | absoluteUrl(metadata.url) }}';
+        this.page.identifier = '{{ page.url | slug }}';
+      };
+      const script = document.createElement('script');
+      script.src = 'https://manuninja.disqus.com/embed.js';
+      script.async = true;
+      script.defer = true;
+      script.setAttribute('data-timestamp', +new Date());
+      document.body.appendChild(script);
+    }
+    const observer = new IntersectionObserver((entries, self) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          loadDisqus();
+          self.disconnect();
+        }
+      });
+    }, { rootMargin: '0px 0px 960px 0px' });
+    window.addEventListener('load', () => {
+      observer.observe(document.getElementById('disqus_thread'));
+    })
   </script>
 
   <div class="Links">
