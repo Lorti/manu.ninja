@@ -1,0 +1,55 @@
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "BlogPosting",
+  "author": {
+    "@type": "Person",
+    "name": "Manuel Wieser"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "manu.ninja",
+    "url": "https://manu.ninja",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://manu.ninja/logo.svg",
+      "width": 1600,
+      "height": 1000
+    }
+  },
+  "headline": "{{ title }}",
+  "datePublished": "{{ date.toISOString() }}",
+  "dateModified": "{% currentDate %}",
+  "image": "{{ thumbnail }}",
+  "description": "{{ description }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ page.url | url | absoluteUrl(metadata.url) }}"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Person",
+  "name": "Manuel Wieser",
+  "honorificSuffix": "BSc MA",
+  "image": "https://manu.ninja/author.jpg",
+  "jobTitle": "Head of Front-End Development",
+  "alumniOf": "University of Applied Sciences Upper Austria",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "karriere.at"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "Austria"
+  },
+  "email": "office@manuelwieser.com",
+  "url": [
+    "https://manu.ninja",
+    "https://github.com/Lorti",
+    "https://twitter.com/manuelwieser"
+  ]
+}
+</script>

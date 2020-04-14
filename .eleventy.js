@@ -10,6 +10,16 @@ const length = require('./src/utils/length');
 const { categories, tags, mapTaxonomy } = require('./src/utils/taxonomy');
 
 function addCollections(eleventyConfig) {
+  function relatedPostFactory(post) {
+    return {
+      title: post.data.title,
+      url: post.data.external || post.url,
+      language: post.data.language,
+      isExternal: !!post.data.external,
+      categories: post.data.categories,
+    };
+  }
+
   eleventyConfig.addCollection('posts', function (collection) {
     const posts = collection.getFilteredByGlob('src/posts/*.md').reverse();
     return posts.map((a) => {
@@ -25,14 +35,7 @@ function addCollections(eleventyConfig) {
 
           const score = matches.length;
           if (score > 1) {
-            related.push({
-              title: b.data.title,
-              url: b.data.external || b.url,
-              language: b.data.language,
-              isExternal: !!b.data.external,
-              categories: b.data.categories,
-              score,
-            });
+            related.push(Object.assign(relatedPostFactory(b), { score }));
           }
         }
       });
@@ -78,7 +81,6 @@ function addFilters(eleventyConfig) {
   eleventyConfig.addFilter('readableDate', (date) => {
     return DateTime.fromJSDate(date, { zone: 'utc' }).toFormat('LLL dd, yyyy');
   });
-
   eleventyConfig.addFilter('htmlDateString', (date) => {
     return DateTime.fromJSDate(date, { zone: 'utc' }).toFormat('yyyy-LL-dd');
   });
