@@ -10,7 +10,7 @@ const length = require('./src/utils/length');
 const { categories, tags, mapTaxonomy } = require('./src/utils/taxonomy');
 
 function addCollections(eleventyConfig) {
-  function relatedPostFactory(post) {
+  function relatedPost(post) {
     return {
       title: post.data.title,
       url: post.data.external || post.url,
@@ -26,8 +26,8 @@ function addCollections(eleventyConfig) {
       let related = [];
       posts.forEach((b) => {
         if (a.data.permalink !== b.data.permalink) {
-          const alpha = a.data.categories.concat(a.data.tags).sort();
-          const beta = b.data.categories.concat(b.data.tags).sort();
+          const alpha = [...a.data.categories, ...a.data.tags].sort();
+          const beta = [...b.data.categories, ...b.data.tags].sort();
 
           const matches = alpha.filter((keyword) => {
             return beta.includes(keyword);
@@ -35,7 +35,7 @@ function addCollections(eleventyConfig) {
 
           const score = matches.length;
           if (score > 1) {
-            related.push(Object.assign(relatedPostFactory(b), { score }));
+            related.push(Object.assign(relatedPost(b), { score }));
           }
         }
       });

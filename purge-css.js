@@ -20,8 +20,6 @@ async function purgeInlineCSS(file) {
   fs.writeFileSync(file, html.replace(pattern, `<style>${result}</style>`));
 }
 
-purgeInlineCSS('./public/index.html');
-
-glob('./public/**/*.html', (error, files) => {
+glob('./public/!(files)/**/*.html', (error, files) => {
   Promise.all(files.map(async (file) => purgeInlineCSS(file)));
 });
