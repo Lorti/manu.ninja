@@ -1,116 +1,137 @@
 article {
-  code,
-  pre {
-      color: #393A34;
-      font-family: Consolas, Monaco, monospace;
-      direction: ltr;
-      text-align: left;
-      white-space: pre;
-      word-spacing: normal;
-      word-break: normal;
-      font-size: 0.95em;
-      line-height: 1.2em;
+    code,
+    pre {
+        color: #393A34;
+        font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+        direction: ltr;
+        text-align: left;
+        white-space: pre;
+        word-spacing: normal;
+        word-break: normal;
+        font-size: 0.95em;
+        line-height: 1.2em;
 
-      -moz-tab-size: 4;
-      -o-tab-size: 4;
-      tab-size: 4;
+        -moz-tab-size: 4;
+        -o-tab-size: 4;
+        tab-size: 4;
 
-      -webkit-hyphens: none;
-      -moz-hyphens: none;
-      -ms-hyphens: none;
-      hyphens: none;
-  }
+        -webkit-hyphens: none;
+        -moz-hyphens: none;
+        -ms-hyphens: none;
+        hyphens: none;
+    }
 
-  pre::-moz-selection, pre ::-moz-selection,
-  code::-moz-selection, code ::-moz-selection {
-      background: #b3d4fc;
-  }
+    pre::-moz-selection, pre ::-moz-selection,
+    code::-moz-selection, code ::-moz-selection {
+        background: #b3d4fc;
+    }
 
-  pre::selection, pre ::selection,
-  code::selection, code ::selection {
-      background: #b3d4fc;
-  }
+    pre::selection, pre ::selection,
+    code::selection, code ::selection {
+        background: #b3d4fc;
+    }
 
-  /* Code blocks */
-  pre {
-      padding: 1em;
-      margin: .5em 0;
-      overflow: auto;
-      border: 1px solid #dddddd;
-      background-color: white;
-  }
+    /* Code blocks */
+    pre {
+        padding: 1em;
+        margin: .5em 0;
+        overflow: auto;
+        border: 1px solid #dddddd;
+        background-color: white;
+    }
 
-  :not(pre) > code,
-  pre {
-  }
+    :not(pre) > code {
+        padding: 1px .2em;
+        background: #f8f8f8;
+        border: 1px solid #dddddd;
+    }
 
-  /* Inline code */
-  :not(pre) > code {
-      padding: .2em;
-      padding-top: 1px; padding-bottom: 1px;
-      background: #f8f8f8;
-      border: 1px solid #dddddd;
-  }
+    .token.comment,
+    .token.prolog,
+    .token.doctype,
+    .token.cdata {
+        color: #999988;
+        font-style: italic;
+    }
 
-  .token.comment,
-  .token.prolog,
-  .token.doctype,
-  .token.cdata {
-      color: #999988; font-style: italic;
-  }
+    .token.namespace {
+        opacity: .7;
+    }
 
-  .token.namespace {
-      opacity: .7;
-  }
+    .token.string,
+    .token.attr-value {
+        color: #e3116c;
+    }
 
-  .token.string,
-  .token.attr-value {
-      color: #e3116c;
-  }
-  .token.punctuation,
-  .token.operator {
-      color: #393A34; /* no highlight */
-  }
+    .token.punctuation,
+    .token.operator {
+        color: #393A34;
+    }
 
-  .token.entity,
-  .token.url,
-  .token.symbol,
-  .token.number,
-  .token.boolean,
-  .token.variable,
-  .token.constant,
-  .token.property,
-  .token.regex,
-  .token.inserted {
-      color: #36acaa;
-  }
+    .token.entity,
+    .token.url,
+    .token.symbol,
+    .token.number,
+    .token.boolean,
+    .token.variable,
+    .token.constant,
+    .token.property,
+    .token.regex,
+    .token.inserted {
+        color: #36acaa;
+    }
 
-  .token.atrule,
-  .token.keyword,
-  .token.attr-name,
-  .language-autohotkey .token.selector {
-      color: #00a4db;
-  }
+    .token.atrule,
+    .token.keyword,
+    .token.attr-name,
+    .language-autohotkey .token.selector {
+        color: #00a4db;
+    }
 
-  .token.function,
-  .token.deleted,
-  .language-autohotkey .token.tag {
-      color: #9a050f;
-  }
+    .token.function,
+    .token.deleted,
+    .language-autohotkey .token.tag {
+        color: #9a050f;
+    }
 
-  .token.tag,
-  .token.selector,
-  .language-autohotkey .token.keyword {
-      color: #00009f;
-  }
+    .token.tag,
+    .token.selector,
+    .language-autohotkey .token.keyword {
+        color: #00009f;
+    }
 
-  .token.important,
-  .token.function,
-  .token.bold {
-      font-weight: bold;
-  }
+    .token.important,
+    .token.function,
+    .token.bold {
+        font-weight: bold;
+    }
 
-  .token.italic {
-      font-style: italic;
-  }
+    .token.italic {
+        font-style: italic;
+    }
+}
+
+.highlight-line {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+}
+
+// Allow highlighting of empty lines.
+.highlight-line:empty:before {
+    content: ' ';
+}
+
+.highlight-line:not(:last-child) {
+    min-width: 100%;
+}
+
+.highlight-line .highlight-line:not(:last-child) {
+    min-width: 0;
+}
+
+mark.highlight-line {
+    margin-left: -1px;
+    border-left: 1px solid #ffd33d;
+    background: #ffdf5d33;
 }
