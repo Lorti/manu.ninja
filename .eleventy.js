@@ -69,7 +69,7 @@ function addCollections(eleventyConfig) {
     const categoryLists = Object.keys(categories).map((category) => ({
       url: '/categories/' + category,
     }));
-    const tagLists = Object.keys(tags).map((tag) => ({ url: '/tags/' + tag }));
+    const tagLists = Object.keys(tags).map((tag) => ({ url: `/tags/${tag}/` }));
     return [...pages, ...posts, ...categoryLists, ...tagLists];
   });
 }
