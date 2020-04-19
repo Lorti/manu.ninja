@@ -5,14 +5,14 @@
   "author": "Manuel Wieser <office@manuelwieser.com>",
   "license": "MIT",
   "scripts": {
-    "clean": "rm -rf public",
-    "service-worker": "workbox generateSW workbox-config.js",
-    "purge-css": "node purge-css.js",
-    "build": "run-s clean eleventy; run-p service-worker purge-css --aggregate-output",
+    "build:clean": "rm -rf public",
+    "build:eleventy": "ELEVENTY_ENV=production eleventy",
+    "build:service-worker": "workbox generateSW workbox-config.js",
+    "build": "npm-run-all build:*",
     "watch": "eleventy --watch",
     "serve": "eleventy --serve",
     "debug": "DEBUG=* eleventy",
-    "format": "prettier --single-quote --write './*.js' 'src/**/*.js'"
+    "format": "prettier --single-quote --write '*.js' 'src/utils/*.js' 'src/**/*.js'"
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.11.0-beta.3",

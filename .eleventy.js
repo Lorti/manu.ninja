@@ -1,133 +1,31 @@
-const { DateTime } = require('luxon');
 const markdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
 const markdownItTableOfContents = require('markdown-it-table-of-contents');
 const minifier = require('html-minifier');
+const collections = require('./src/utils/collections');
+const filters = require('./src/utils/filters');
+const shortcodes = require('./src/utils/shortcodes');
+const purgeStyles = require('./src/utils/purge-styles');
 const rss = require('@11ty/eleventy-plugin-rss');
-const sass = require('node-sass');
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
-const length = require('./src/utils/length');
-const { categories, tags, mapTaxonomy } = require('./src/utils/taxonomy');
-
-function addCollections(eleventyConfig) {
-  function relatedPost(post) {
-    return {
-      title: post.data.title,
-      url: post.data.external || post.url,
-      language: post.data.language,
-      isExternal: !!post.data.external,
-      categories: post.data.categories,
-    };
-  }
-
-  eleventyConfig.addCollection('posts', function (collection) {
-    const posts = collection.getFilteredByGlob('src/posts/*.md').reverse();
-    return posts.map((a) => {
-      let related = [];
-      posts.forEach((b) => {
-        if (a.data.permalink !== b.data.permalink) {
-          const alpha = [...a.data.categories, ...a.data.tags].sort();
-          const beta = [...b.data.categories, ...b.data.tags].sort();
-
-          const matches = alpha.filter((keyword) => {
-            return beta.includes(keyword);
-          });
-
-          const score = matches.length;
-          if (score > 1) {
-            related.push(Object.assign(relatedPost(b), { score }));
-          }
-        }
-      });
-      a.data.related = related.sort((a, b) => b.score - a.score).slice(0, 5);
-      return a;
-    });
-  });
-
-  function categoryCollectionFactory(collection, category) {
-    return collection
-      .getFilteredByGlob('src/posts/*')
-      .reverse()
-      .filter((post) => post.data.categories.includes(category));
-  }
-
-  eleventyConfig.addCollection('art', (collection) =>
-    categoryCollectionFactory(collection, 'art')
-  );
-  eleventyConfig.addCollection('coding', (collection) =>
-    categoryCollectionFactory(collection, 'coding')
-  );
-  eleventyConfig.addCollection('games', (collection) =>
-    categoryCollectionFactory(collection, 'games')
-  );
-
-  eleventyConfig.addCollection('sitemap', function (collection) {
-    const pages = collection.getFilteredByGlob('src/pages/*');
-    const posts = collection
-      .getFilteredByGlob('src/posts/*')
-      .filter((item) => !item.data.external);
-    const categoryLists = Object.keys(categories).map((category) => ({
-      url: '/categories/' + category,
-    }));
-    const tagLists = Object.keys(tags).map((tag) => ({ url: `/tags/${tag}/` }));
-    return [...pages, ...posts, ...categoryLists, ...tagLists];
-  });
-}
-
-function addFilters(eleventyConfig) {
-  eleventyConfig.addFilter('length', length);
-  eleventyConfig.addFilter('taxonomy', mapTaxonomy);
-
-  eleventyConfig.addFilter('readableDate', (date) => {
-    return DateTime.fromJSDate(date, { zone: 'utc' }).toFormat('LLL dd, yyyy');
-  });
-  eleventyConfig.addFilter('htmlDateString', (date) => {
-    return DateTime.fromJSDate(date, { zone: 'utc' }).toFormat('yyyy-LL-dd');
-  });
-
-  eleventyConfig.addFilter('slug', (url) => {
-    return url.replace(/(\/)/g, '');
-  });
-
-  eleventyConfig.addFilter('safeTitleWrap', (title) => {
-    const tokens = title.split(' ');
-    const end = [tokens.pop(), tokens.pop()];
-    return (
-      tokens.join(' ') +
-      (end[0].length + end[1].length < 10 ? '&nbsp;' : ' ') +
-      end[1] +
-      '&nbsp;' +
-      end[0]
-    );
-  });
-}
-
-function addShortcodes(eleventyConfig) {
-  eleventyConfig.addShortcode('styles', () => {
-    const { css } = sass.renderSync({
-      file: __dirname + '/src/styles/index.scss',
-      outputStyle: 'compressed',
-    });
-    return `<style>${css}</style>`;
-  });
-
-  eleventyConfig.addShortcode('currentDate', () => new Date().toISOString());
-  eleventyConfig.addShortcode(
-    'currentYear',
-    () => `${new Date().getFullYear()}`
-  );
-}
 
 module.exports = function (eleventyConfig) {
-  addCollections(eleventyConfig);
-  addFilters(eleventyConfig);
-  addShortcodes(eleventyConfig);
-
-  eleventyConfig.addPassthroughCopy({ static: '.' });
-
   eleventyConfig.addPlugin(rss);
   eleventyConfig.addPlugin(syntaxHighlight);
 
+  Object.entries(collections).map(([key, value]) => {
+    eleventyConfig.addCollection(key, value);
+  });
+
+  Object.entries(filters).map(([key, value]) => {
+    eleventyConfig.addFilter(key, value);
+  });
+
+  Object.entries(shortcodes).map(([key, value]) => {
+    eleventyConfig.addShortcode(key, value);
+  });
+
+  eleventyConfig.addPassthroughCopy({ static: '.' });
   eleventyConfig.addWatchTarget('src/styles/');
 
   let markdownLibrary = markdownIt({
@@ -151,14 +49,16 @@ module.exports = function (eleventyConfig) {
     if (path.endsWith('.html')) {
       return minifier.minify(content, {
         collapseWhitespace: true,
-        minifyCSS: true,
-        minifyJS: true,
         removeComments: true,
         useShortDoctype: true,
       });
     }
     return content;
   });
+
+  if (process.env.ELEVENTY_ENV === 'production') {
+    eleventyConfig.addTransform('purge-styles', purgeStyles);
+  }
 
   return {
     markdownTemplateEngine: 'njk',

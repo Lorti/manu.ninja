@@ -1,6 +1,11 @@
 module.exports = {
   globDirectory: 'public/',
-  globPatterns: ['**/*.{html,woff,woff2}', 'favicon.ico', 'logo.svg', 'author.jpg'],
+  globPatterns: [
+    '**/*.{html,woff,woff2}',
+    'favicon.ico',
+    'logo.svg',
+    'author.jpg',
+  ],
   swDest: 'public/sw.js',
   runtimeCaching: [
     {
