@@ -9,9 +9,9 @@
     {
         "position": "Lecturer",
         "company": "University of Applied Sciences Upper Austria, Hagenberg",
-        "start": "2019-03",
-        "end": "2019-07",
-        "description": "Teaching “Hypermedia User Experience Engineering” in the “Interactive Media” program. Topics include JavaScript, front-end frameworks (mainly Vue.js), tooling (webpack, Parcel, …), Progressive Web Apps, client/server communication (REST APIs, WebSockets, NoSQL, …), GraphQL, unit testing, end-to-end testing, and other front-end development matters."
+        "start": "2018-03",
+        "current": true,
+        "description": "Teaching “Hypermedia User Experience Engineering” in the “Interactive Media” program. Topics include JavaScript, front-end frameworks (mainly Vue.js), tooling (webpack, Parcel, …), Progressive Web Apps, client/server communication (REST APIs, WebSockets, NoSQL, …), GraphQL, unit testing, end-to-end testing, RxJS, WebGL and other front-end development matters."
     },
     {
         "position": "Lead Web Developer",
@@ -19,13 +19,6 @@
         "start": "2017-11",
         "end": "2019-06",
         "description": "Technical leadership of a cross-functional Scrum/Kanban team. Responsible for code quality (security, performance, extensibility/scalability …), software architecture, stakeholder communication, technical concepts and technology evaluation, training and mentoring of fellow developers. Assistance in recruiting, onboarding and employer branding topics (open-source projects and developer blog; external talks, trainings and workshops …)."
-    },
-    {
-        "position": "Lecturer",
-        "company": "University of Applied Sciences Upper Austria, Hagenberg",
-        "start": "2018-03",
-        "end": "2018-07",
-        "description": "Teaching “Hypermedia User Experience Engineering” in the “Interactive Media” program. Topics include JavaScript, front-end frameworks (mainly Vue.js), tooling (webpack …), Progressive Web Apps, GraphQL, unit testing, end-to-end testing, WebGL and other front-end development matters."
     },
     {
         "position": "Senior Front-End Developer",

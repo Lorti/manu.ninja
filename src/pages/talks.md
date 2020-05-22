@@ -11,8 +11,8 @@ I’d be happy to talk about web design and development, game asset creation and
 ![Manuel speaking at Stahlstadt.js](/manuel-speaking-at-stahlstadt-js.jpg)
 
 {% set publicTalks = talks  | selectattr('public') %}
-{% set hagenbergTalks = talks  | selectattr('hagenberg') %}
-{% set internalTalks = talks | selectattr('karriere_at') %}
+{% set hagenbergTalks = talks  | selectattr('hagenberg-2019') | reverse %}
+{% set internalTalks = talks | selectattr('karriere.at') %}
 
 ## Talks
 

@@ -1,33 +1,43 @@
 const talks = [
   {
+    title: 'Porting DOOM (1993) to WebAssembly',
+    event: 'Stahlstadt.js #25',
+    url: 'https://www.meetup.com/de-DE/stahlstadt-js/events/269972560/',
+    date: '2020-04-23',
+    slides: 'https://speakerdeck.com/lorti/porting-doom-1993-to-webassembly',
+    video: 'https://www.youtube.com/watch?v=lZnz46a58_Y',
+    location: 'Online (Twitch)',
+    public: true,
+  },
+  {
     title: 'karriere.at Bootcamp 2019',
     event: 'Workshop',
     description:
       '5 days of workshops at Tabakfabrik Linz, teaching 12 people about web development and how to continue their learning afterwards',
     date: '2019-08-26',
     location: 'Linz, Austria',
-    karriere_at: true,
+    'karriere.at': true,
   },
   {
     title: 'Netlify Functions (Serverless and other Buzzwords …)',
     event: 'karriere.at Dev-Café',
     date: '2019-07-24',
     location: 'Linz, Austria',
-    karriere_at: true,
+    'karriere.at': true,
   },
   {
     title: '5+ Interesting ECMAScript Proposals',
     event: 'karriere.at Dev-Café',
     date: '2019-06-26',
     location: 'Linz, Austria',
-    karriere_at: true,
+    'karriere.at': true,
   },
   {
     title: 'Microfrontends',
     event: 'karriere.at Dev-Café',
     date: '2019-04-17',
     location: 'Linz, Austria',
-    karriere_at: true,
+    'karriere.at': true,
   },
   {
     title: 'Testing',
@@ -38,7 +48,7 @@ const talks = [
     slides:
       'https://docs.google.com/presentation/d/1tyPn8oa_QkFNQ2TKAUIy6tq2fne2xb6gzMhT5VYSMEs/edit?usp=sharing',
     location: 'Hagenberg, Austria',
-    hagenberg: true,
+    'hagenberg-2019': true,
   },
   {
     title: 'GraphQL',
@@ -49,7 +59,7 @@ const talks = [
     slides:
       'https://docs.google.com/presentation/d/1oyEQ_CRiYBa78d4qGcB7xi3Yk6pXgbBISYwF5qmj-3o/edit?usp=sharing',
     location: 'Hagenberg, Austria',
-    hagenberg: true,
+    'hagenberg-2019': true,
   },
   {
     title: 'Communication',
@@ -59,7 +69,7 @@ const talks = [
     slides:
       'https://docs.google.com/presentation/d/1LprTPxByFcvbRaTV7o_-VJJX-ZYNv2C-EICDu60-MNY/edit?usp=sharing',
     location: 'Hagenberg, Austria',
-    hagenberg: true,
+    'hagenberg-2019': true,
   },
   {
     title: 'Progressive Web Apps',
@@ -70,7 +80,7 @@ const talks = [
     slides:
       'https://docs.google.com/presentation/d/1LprTPxByFcvbRaTV7o_-VJJX-ZYNv2C-EICDu60-MNY/edit?usp=sharing',
     location: 'Hagenberg, Austria',
-    hagenberg: true,
+    'hagenberg-2019': true,
   },
   {
     title: 'Tooling',
@@ -81,7 +91,7 @@ const talks = [
     slides:
       'https://docs.google.com/presentation/d/1DuEe_QgahXHeB9EWh7VNBW71ViX_4JSSqwss9QrVIc4/edit?usp=sharing',
     location: 'Hagenberg, Austria',
-    hagenberg: true,
+    'hagenberg-2019': true,
   },
   {
     title: 'Vue.js',
@@ -92,7 +102,7 @@ const talks = [
     slides:
       'https://docs.google.com/presentation/d/1k2RKJaX2Jd8zEozuIQEgYDxYFSCivfdK1Zc3exlxSj4/edit?usp=sharing',
     location: 'Hagenberg, Austria',
-    hagenberg: true,
+    'hagenberg-2019': true,
   },
   {
     title: 'Vue.js Workshop',
@@ -100,7 +110,7 @@ const talks = [
     event: 'IndY',
     date: '2019-02-25',
     location: 'Linz, Austria',
-    karriere_at: true,
+    'karriere.at': true,
   },
   {
     title: 'Scaffolding a Progressive Web App using Vue CLI 3',
@@ -130,7 +140,7 @@ const talks = [
     event: 'Workshop',
     date: '2018-08-31',
     location: 'Linz, Austria',
-    karriere_at: true,
+    'karriere.at': true,
   },
   {
     title: 'A/B Testing with Google Analytics',
@@ -139,7 +149,7 @@ const talks = [
     event: 'Workshop',
     date: '2018-07-11',
     location: 'Linz, Austria',
-    karriere_at: true,
+    'karriere.at': true,
   },
   {
     title: 'WebGL',
@@ -148,21 +158,21 @@ const talks = [
       'https://docs.google.com/presentation/d/1cbMGGaRJx20sytiCOTG5q7H-2KZEGP1kVtvnD1MKe94/edit?usp=sharing',
     date: '2018-08-22',
     location: 'Linz, Austria',
-    karriere_at: true,
+    'karriere.at': true,
   },
   {
     title: 'GraphQL',
     event: 'karriere.at Dev-Café',
     date: '2018-02-28',
     location: 'Linz, Austria',
-    karriere_at: true,
+    'karriere.at': true,
   },
   {
     title: 'Chrome Developer Tools',
     event: 'karriere.at Dev-Café',
     date: '2017-11-28',
     location: 'Linz, Austria',
-    karriere_at: true,
+    'karriere.at': true,
   },
   {
     title:
@@ -181,7 +191,7 @@ const talks = [
     event: 'Workshop',
     date: '2017-11-16',
     location: 'Linz, Austria',
-    karriere_at: true,
+    'karriere.at': true,
   },
   {
     title:
@@ -208,21 +218,21 @@ const talks = [
     event: 'karriere.at Dev-Café',
     date: '2017-01-24',
     location: 'Linz, Austria',
-    karriere_at: true,
+    'karriere.at': true,
   },
   {
     title: 'Electron Hacking',
     event: 'karriere.at Dev-Café',
     date: '2016-07-26',
     location: 'Linz, Austria',
-    karriere_at: true,
+    'karriere.at': true,
   },
   {
     title: 'Refactoring form.js with Functional JavaScript and Tape',
     event: 'karriere.at Dev-Café',
     date: '2016-05-31',
     location: 'Linz, Austria',
-    karriere_at: true,
+    'karriere.at': true,
   },
   {
     title: 'Dominant Colors for Lazy-Loading Images',
@@ -240,7 +250,7 @@ const talks = [
     event: 'karriere.at Dev-Café',
     date: '2015-09-24',
     location: 'Linz, Austria',
-    karriere_at: true,
+    'karriere.at': true,
   },
   {
     title: 'CSS Refactoring',
@@ -249,21 +259,21 @@ const talks = [
     event: 'karriere.at Dev-Café',
     date: '2015-08-25',
     location: 'Linz, Austria',
-    karriere_at: true,
+    'karriere.at': true,
   },
   {
     title: 'phpspec',
     event: 'karriere.at Dev-Café',
     date: '2015-05-05',
     location: 'Linz, Austria',
-    karriere_at: true,
+    'karriere.at': true,
   },
   {
     title: 'SVGs – What kind of sorcery is this?',
     event: 'karriere.at Dev-Café',
     date: '2015-01-27',
     location: 'Linz, Austria',
-    karriere_at: true,
+    'karriere.at': true,
   },
 ];
 module.exports = talks.sort((a, b) => new Date(b.date) - new Date(a.date));

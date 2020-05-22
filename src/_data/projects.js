@@ -8,6 +8,21 @@ const projects = [
     featured: true,
   },
   {
+    title: 'sdldoom.wasm',
+    url: 'https://github.com/Lorti/sdldoom.wasm',
+    description: 'SDLDoom 1.10 compiled to WebAssembly using Emscripten.',
+    date: '2020-04',
+    featured: true,
+  },
+  {
+    title: 'Module Bundlers and Task Runners',
+    url: 'https://github.com/Lorti/module-bundlers-and-task-runners',
+    description:
+      'Examples of JavaScript module bundlers and task runners for my lectures and workshops, focusing on JS, HTML/CSS (Sass) and Vue.js.',
+    date: '2019-05',
+    featured: false,
+  },
+  {
     title: 'Microfrontends',
     url: 'https://github.com/Lorti/microfrontends',
     description:
@@ -65,7 +80,7 @@ const projects = [
     title: 'snow.js️',
     url: 'https://github.com/Lorti/snow.js',
     description:
-      "snow.js is a module that exports a snow() function, which you can pass the number of snowflakes you'd like and an HTML element where they should be drawn.",
+      'snow.js is a module that exports a snow() function, which you can pass the number of snowflakes you’d like and an HTML element where they should be drawn.',
     date: '2018-11',
     featured: false,
   },
