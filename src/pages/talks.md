@@ -10,8 +10,9 @@ I’d be happy to talk about web design and development, game asset creation and
 
 ![Manuel speaking at Stahlstadt.js](/manuel-speaking-at-stahlstadt-js.jpg)
 
-{% set publicTalks = talks  | selectattr('public') %}
-{% set hagenbergTalks = talks  | selectattr('hagenberg-2019') | reverse %}
+{% set publicTalks = talks | selectattr('public') %}
+{% set hagenberg2019Talks = talks | selectattr('hagenberg-2019') | reverse %}
+{% set hagenberg2020Talks = talks | selectattr('hagenberg-2020') | reverse %}
 {% set internalTalks = talks | selectattr('karriere.at') %}
 
 ## Talks
@@ -27,7 +28,7 @@ contain examples and repository links that may also benefit others
 learning the discussed technology, which is why I wanted them to
 be public after the course(s).
 
-{% set talks = hagenbergTalks %}
+{% set talks = hagenberg2020Talks %}
 {% include 'partials/talks.njk' %}
 
 ## karriere.at
