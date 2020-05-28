@@ -10,6 +10,29 @@ const talks = [
     public: true,
   },
   {
+    title: 'webpack++',
+    event: 'Workshop',
+    date: '2020-05-08',
+    location: 'Online (Slack)',
+    'karriere.at': true,
+  },
+  {
+    title: 'History of the karriere.at Dev Café',
+    event: 'karriere.at Dev-Café',
+    date: '2020-03-18',
+    location: 'Online (YouTube)',
+    'karriere.at': true,
+  },
+  {
+    title: 'Google Analytics',
+    description:
+      'Implement and debug Google Analytics tracking with `analytics.js`, `gtag.js` and `gtm.js`',
+    event: 'Workshop',
+    date: '2020-02-07',
+    location: 'Linz, Austria',
+    'karriere.at': true,
+  },
+  {
     title: 'WebGL',
     description:
       'Use Cases for WebGL, CG Basics, WebGL, Three.js, A-Frame, WebXR',
