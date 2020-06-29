@@ -5,6 +5,7 @@
   "author": "Manuel Wieser <office@manuelwieser.com>",
   "license": "MIT",
   "scripts": {
+    "install": "npm install workbox-cli --global",
     "start": "npm run serve",
     "build:clean": "rm -rf public",
     "build:eleventy": "ELEVENTY_ENV=production eleventy",
@@ -28,10 +29,10 @@
     "node-sass": "^4.14.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.5",
-    "purgecss": "^2.2.1",
+    "purgecss": "^2.3.0",
     "striptags": "^3.1.1",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
+    "webpack-cli": "^3.3.12",
     "wordcount": "^1.1.1"
   },
   "dependencies": {}

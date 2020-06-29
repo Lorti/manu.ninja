@@ -9,6 +9,7 @@ const tags = {
   'image-processing': 'Image Processing',
   'interaction-design': 'Interaction Design',
   'lazy-loading': 'Lazy Loading',
+  'software-architecture': 'Software Architecture',
   'three-js': 'three.js',
   accessibility: 'Accessibility',
   animation: 'Animation',
