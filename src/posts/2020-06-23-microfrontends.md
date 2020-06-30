@@ -3,7 +3,7 @@ layout: layouts/post.njk
 permalink: /microfrontends-at-karriere.at/
 external: https://devland.at/a/microfrontends-at-karriere-at
 title: Microfrontends at karriere.at
-description: Learn how we’ve split the karriere.at “front-end monolith” into smaller parts that our teams can develop effectively and independently! 🪓
+description: Learn how we’ve split the karriere.at “front-end monolith” into smaller parts that our teams can develop effectively and independently! ⛏
 date: 2020-06-23
 categories: [coding]
 tags: [software-architecture]
