@@ -5,7 +5,7 @@ title: Imprint & Privacy Policy
 description: Here you’ll find legal information for manu.ninja.
 ---
 
-**Manuel Wieser**<br>
+**Manuel Timelthaler**<br>
 [office@manuelwieser.com](mailto:office@manuelwieser.com)<br>
 Weingartshofstraße 29<br>
 4020 Linz<br>

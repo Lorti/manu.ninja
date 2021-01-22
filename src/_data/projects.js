@@ -3,7 +3,7 @@ const projects = [
     title: 'manu.ninja',
     url: 'https://github.com/Lorti/manu.ninja',
     description:
-      'manu.ninja is the personal blog of Manuel Wieser. Jekyll, then Gatsby 1-2, then 11ty.',
+      'manu.ninja is the personal blog of Manuel Timelthaler. Jekyll, then Gatsby 1-2, then 11ty.',
     date: '2015-09',
     featured: true,
   },

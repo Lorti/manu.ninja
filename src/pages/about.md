@@ -1,7 +1,7 @@
 ---
 layout: layouts/minimal.njk
 layoutSmallFooter: true
-title: Who’s Manuel Wieser?
+title: Who’s Manuel Timelthaler?
 description: Manuel is Head of Front-End Development at karriere.at, lecturer at the University of Applied Sciences Upper Austria and writes about Front-End Development, Games und Digital Art on his personal blog manu.ninja.
 permalink: /about/
 ---

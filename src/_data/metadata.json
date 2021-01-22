@@ -1,15 +1,15 @@
 {
     "title": "manu.ninja | Front-End Development, Games and Digital Art",
     "url": "https://manu.ninja",
-    "description": "manu.ninja is the personal blog of Manuel Wieser, where he talks about front-end development, web development, coding, games and digital art",
+    "description": "manu.ninja is the personal blog of Manuel Timelthaler, where he talks about front-end development, web development, coding, games and digital art",
     "feed": {
-        "subtitle": "manu.ninja is the personal blog of Manuel Wieser, where he talks about front-end development, web development, coding, games and digital art",
+        "subtitle": "manu.ninja is the personal blog of Manuel Timelthaler, where he talks about front-end development, web development, coding, games and digital art",
         "filename": "feed.xml",
         "path": "/feed.xml",
         "id": "https://manu.ninja/"
     },
     "author": {
-        "name": "Manuel Wieser",
+        "name": "Manuel Timelthaler",
         "email": "office@manuelwieser.com"
     }
 }
