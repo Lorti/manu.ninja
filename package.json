@@ -1,8 +1,8 @@
 {
   "name": "manu.ninja",
-  "description": "manu.ninja is the personal blog of Manuel Wieser, where he talks about front-end development, web development, coding, games and digital art",
+  "description": "manu.ninja is the personal blog of Manuel Timelthaler, where he talks about front-end development, web development, coding, games and digital art",
   "version": "4.0.0",
-  "author": "Manuel Wieser <office@manuelwieser.com>",
+  "author": "Manuel Timelthaler <office@manuelwieser.com>",
   "license": "MIT",
   "scripts": {
     "install": "npm install workbox-cli --global",
