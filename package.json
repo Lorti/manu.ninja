@@ -5,7 +5,6 @@
   "author": "Manuel Timelthaler <office@manuelwieser.com>",
   "license": "MIT",
   "scripts": {
-    "install": "npm install workbox-cli --global",
     "start": "npm run serve",
     "build:clean": "rm -rf public",
     "build:eleventy": "ELEVENTY_ENV=production eleventy",
@@ -16,6 +15,7 @@
     "debug": "DEBUG=* eleventy",
     "format": "prettier --single-quote --write '*.js' 'src/utils/*.js' 'src/**/*.js'"
   },
+  "dependencies": {},
   "devDependencies": {
     "@11ty/eleventy": "^0.11.0",
     "@11ty/eleventy-plugin-rss": "^1.0.7",
@@ -23,17 +23,19 @@
     "glob": "^7.1.6",
     "html-minifier": "^4.0.0",
     "luxon": "^1.24.1",
-    "markdown-it": "^11.0.0",
-    "markdown-it-anchor": "^5.3.0",
-    "markdown-it-table-of-contents": "^0.4.4",
-    "node-sass": "^4.14.1",
+    "markdown-it": "^12.0.4",
+    "markdown-it-anchor": "^7.0.1",
+    "markdown-it-table-of-contents": "^0.5.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.5",
-    "purgecss": "^2.3.0",
+    "purgecss": "^4.0.0",
+    "sass": "^1.32.5",
     "striptags": "^3.1.1",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12",
+    "webpack": "^5.19.0",
+    "webpack-cli": "^4.4.0",
     "wordcount": "^1.1.1"
   },
-  "dependencies": {}
+  "peerDependencies": {
+    "workbox-cli": "^6.1.0"
+  }
 }

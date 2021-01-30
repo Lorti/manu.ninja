@@ -1,4 +1,4 @@
-const { renderSync } = require('node-sass');
+const { renderSync } = require('sass');
 
 let lastModified = 0;
 let cachedStyles = '';
