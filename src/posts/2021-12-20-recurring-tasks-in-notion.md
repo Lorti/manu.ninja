@@ -39,9 +39,12 @@ In Pipedream you can then create what's called a workflow. Follow the steps in t
 ![](/images/notion-pipedream-step-3.jpg)
 ![](/images/notion-pipedream-step-4.jpg)
 
-The image above shows you where you should copy and paste the script into.
+You should now be ready to copy and paste the script into your Node.js workflow step.
 
-But first, create two environment variables: `NOTION_KEY` and `NOTION_DATABASE_ID`. Paste your `Token` and `Database ID` as their values.
+But first, create two environment variables:
+
+1. Name the first variable `NOTION_KEY` and paste your `Token` as its value.
+1. Name the second variable `NOTION_DATABASE_ID` and paste your `Database ID` as its value.
 
 ![](/images/notion-pipedream-step-5.jpg)
 
@@ -62,6 +65,8 @@ const notion = new Client({ auth: process.env.NOTION_KEY });
 
 const databaseId = process.env.NOTION_DATABASE_ID;
 
+// This function creates a task with the three properties `name`, `date`
+// and `frequency` in the Notion database you have specified.
 async function createTask(name, date, frequency) {
     try {
         await notion.pages.create({
@@ -94,19 +99,26 @@ async function createTask(name, date, frequency) {
     }
 }
 
+// This is a helper function to get the value of a deeply nested title property.
 function getNameValue(page) {
     return page.properties.Name.title[0].text.content;
 }
 
+// This is a helper function to get the value of a date property.
 function getDateValue(page) {
     return page.properties.Date.date.start;
 }
 
+// This is a helper function to get the value of a select property.
 function getFrequencyValue(page) {
     return page.properties.Frequency.select.name;
 }
 
-async function getFutureTaskHash() {
+// This function creates a list of all future tasks, so that we can test,
+// if a task has already been created. To make this comparison easier each
+// task is stored as a simple hash, where all properties are put together
+// in a unique string, for example `Clean the house2021-12-18Weekly`.
+async function getFutureTaskHashes() {
     const response = await notion.databases.query({
         database_id: databaseId,
         filter: {
@@ -152,6 +164,8 @@ function createTaskHashFromProps(name, date, frequency) {
     return name + date + frequency;
 }
 
+// This function uses the `date-fns` library to calculate the next dates.
+// If you want to use different intervals, just update the function.
 function calculateNextDateBasedOnFrequency(date, frequency) {
     if (frequency === 'Daily') {
         return addDays(date, 1);
@@ -167,8 +181,9 @@ function calculateNextDateBasedOnFrequency(date, frequency) {
     }
 }
 
+// This is the main function of this script. The execution starts here.
 async function handleRecurringTasks() {
-    const futureTaskHashes = await getFutureTaskHash();
+    const futureTaskHashes = await getFutureTaskHashes();
     const response = await notion.databases.query({
         database_id: databaseId,
         filter: {
