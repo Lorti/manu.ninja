@@ -3,26 +3,26 @@ layout: layouts/post.njk
 permalink: /recurring-tasks-in-notion/
 title: (Real) Recurring Tasks in Notion
 description: Learn how to create (real) recurring tasks in Notion. There’s only basic coding skills necessary. Any tech-savvy person can level up from Notion formulas using this tutorial.
-date: 2021-07-20
+date: 2021-12-20
 categories: [coding]
 tags: [apis, business, js, tools]
 ---
 
-I only recently discovered Notion. It looks like it can replace both Evernote and Remember the Milk for my personal organization. One thing that bugs me, though, is that there's no built-in way of creating recurring tasks. I have watched a lot of YouTube videos, but all of them seem to be workarounds for non-programmers. Luckily Notion provides an API---although still in beta---so we can automate everything by code.
+I only recently discovered Notion. I was thrilled. It looked like it can replace both Evernote and Remember the Milk for my personal organization. However, Notion lacks a major feature: There's no built-in way of creating recurring tasks. I have watched some YouTube videos, but all of them seem to be workarounds. Luckily Notion provides an API---although still in beta---so we can automate everything by code.
 
-In this article I'll show you a way to create real recurring tasks in Notion. It's targeted to programmers, but any tech-savvy person should be able to set this up. You only need a code editor and a free [Pipedream](https://pipedream.com/) account. If you are not a coder but have written a few Notion formula's I am confident that you can take my script and adapt it to your needs. So let's go.
-
-First we'll create a task database in Notion, of course. This can be as simple as having a `Title`, `Date` and `Frequency` property.
+In this article I'll show you a way to create real recurring tasks in Notion. It's meant for programmers, but any tech-savvy person should be able to set this up. You don't even need a code editor, just a free [Pipedream](https://pipedream.com/) account. If you have written a few Notion formulas I am confident that you can take my script and adapt it to your needs. So let's go.
 
 ![](/images/notion-database-setup.jpg)
 
-The `Frequency` property is what flags a task as a recurring task. You can set any intervals that you'd like. I have created a select property with `Yearly`, `Monthly`, `Weekly` and `Daily` intervals for my recurring tasks.
+First we'll create a task database in Notion, of course. This can be as simple as having a `Name`, `Date` and `Frequency` property. You can add any other properties that you'd like, but the script won't copy their values.
+
+You can see in the image above that I have created two tasks `Clean the house` and `Water the plants`. As I have written this article on _December 20, 2021_, these tasks were scheduled for yesterday and the day before yesterday.
 
 ![](/images/notion-page-properties.jpg)
 
-Be sure to create a few example tasks, so that we can test the script later. I have created two tasks `Clean the house` and `Water the plants`, that were due to yesterday and the day before yesterday (I have written this on December 20, 2021).
+The `Frequency` property is what marks your tasks as recurring tasks. You can set any intervals you'd like. I have created a select property with `Yearly`, `Monthly`, `Weekly` and `Daily` intervals for my recurring tasks.
 
-The next step is to create your Notion integration at <https://www.notion.so/my-integrations>. There is a guide on how to do this in the [Getting started](https://developers.notion.com/docs/getting-started#step-1-create-an-integration) page of the API docs, which is where I took the GIF below from. Thank you, Notion. The important thing is to copy your `Internal Integration Token` for later use. This allows you to create, update and delete data in your Notion workspaces.
+The next step is to create your Notion integration at <https://www.notion.so/my-integrations>. This allows you to create, update and delete data in your Notion workspaces. There is a guide on how to do this in the [Getting started](https://developers.notion.com/docs/getting-started#step-1-create-an-integration) page of the API docs, which is where I took the GIF below from. Thank you, Notion. The important thing is to copy your `Internal Integration Token` for later use.
 
 ![](https://files.readme.io/2ec137d-093ad49-create-integration.gif)
 
@@ -30,9 +30,9 @@ The next step is to share our database with our integration. There's also a guid
 
 ![](https://files.readme.io/0a267dd-share-database-with-integration.gif)
 
-Equipped with your `Token` and your `Database ID` you can start coding. If you are familiar with running Node.js scripts on your computer you can directly copy und adapt the script below, and create a scheduled task (or classic cron job) for it. If not, please head directly to [Pipedream](https://pipedream.com/) and create an account.
+Equipped with your `Token` and your `Database ID` you can start coding. If you are familiar with running Node.js scripts on your computer you can directly copy und adapt the script below, and create a scheduled task (or classic cron job) for it. If not, please head to [Pipedream](https://pipedream.com/) and create an account.
 
-In Pipedream you can then create what's called a workflow. Follow the steps in the screenshots to create a Node.js script that runs daily:
+In Pipedream you can then create what's called a workflow. Follow the steps in the screenshots to create a Node.js script that runs every day:
 
 ![](/images/notion-pipedream-step-1.jpg)
 ![](/images/notion-pipedream-step-2.jpg)
@@ -236,11 +236,11 @@ async function handleRecurringTasks() {
 await handleRecurringTasks();
 ```
 
-If you're done setting everything up, save your workflow and deploy it to production. To test your script hit the large "run now" button. You should get this success message:
+If you're done setting everything up, save your workflow and deploy it to production. To test your script hit the large "run now" button. You should now see the script's output, telling you that it has created two tasks. Success!
 
 ![](/images/notion-pipedream-success.jpg)
 
-And there's now two future tasks in Notion. It does not matter if you've marked the old tasks as completed. The script will take a look at any tasks in the past week, to create recurring tasks in the future. Why look back a whole week? This is actually just for demonstration purposes.
+And there's now two future tasks in Notion! It actually doesn't matter if you've marked the old tasks as completed. The script will take a look at any tasks in the past week, to create recurring tasks in the future. Why look back a whole week? This is actually just for demonstration purposes. As the script runs daily it would be enough to look at any tasks in the past 24 hours.
 
 ![](/images/notion-database-success.jpg)
 
@@ -248,4 +248,6 @@ What's also important is that you can run the script as often as you want. It wo
 
 ![](/images/notion-pipedream-skipped.jpg)
 
-And that's how you create real recurring tasks in Notion. Feel free to copy the script and adapt it to your needs. Maybe you need different intervals? Just add a few more `if` statements to the `calculateNextDateBasedOnFrequency()` function. Your properties have different names? Just change the property names throughout the script (you can usually search and replace in any editor). As always, please let me know if you find this article useful or have any feedback or questions.
+And that's how you create real recurring tasks in Notion. Feel free to copy the script and adapt it to your needs. Maybe you need different intervals? No problem, just change the `if` statements in the `calculateNextDateBasedOnFrequency()` function. Your properties have different names? You can usually search and replace in any editor to change the property names throughout the script.
+
+As always, please let me know if you find this article useful or have any feedback or questions.
