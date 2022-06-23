@@ -1,7 +1,6 @@
 ---
 layout: layouts/post.njk
 permalink: /microfrontends-at-karriere.at/
-external: https://devland.at/a/microfrontends-at-karriere-at
 title: Microfrontends at karriere.at
 description: Learn how we’ve split the karriere.at “front-end monolith” into smaller parts that our teams can develop effectively and independently! ⛏
 date: 2020-06-23
@@ -10,11 +9,9 @@ tags: [software-architecture]
 thumbnail: /images/microfrontends/split-apple-rock.jpg
 ---
 
-<!--
-
 I had first heard about microfrontends at the Frontend Developer Love conference in Amsterdam on Valentine's Day 2019. Luca Mezzalira and Max Gallo from DAZN gave an [introductory high-level talk][Amsterdam] about microfrontends, but didn't go into any technical details. Still, I immediately had a feeling that the concept could solve some of our pains at karriere.at, so when I got home I created a proof of concept for how we might implement this idea for karriere.at.
 
-https://drive.google.com/file/d/1b6HXNkVIqLpnge5Ur5-ez-EQdEYZjLsY/view?usp=sharing (Diagrams)
+<!-- https://drive.google.com/file/d/1b6HXNkVIqLpnge5Ur5-ez-EQdEYZjLsY/view?usp=sharing (Diagrams) -->
 
 If you've never heard of microfrontends, please read the [introductory article][martinfowler.com] by Cam Jackson. It serves as a great reference and shows how microfrontends can be implemented using different web development techniques.
 
@@ -91,8 +88,6 @@ The legacy application has its own list of already migrated routes. This means i
 #### Authentication and Authorization
 
 We are currently finalizing the last steps towards a [single sign-on service](https://en.wikipedia.org/wiki/Single_sign-on) for all karriere.at applications. This service will itself be a vertical application slice that guides the user through an authentication process. In the end the client receives a [JSON Web Token (JWT)](https://jwt.io/) that we can use for any request that needs authorization.
-
-If you want to know more about our SSO project, stay tuned and visit our blog again in a few weeks!
 
 #### Design (UX/UI)
 
@@ -203,9 +198,7 @@ Is the solution presented in this article what every developer considers a micro
 
 As our system's architecture evolves and orchestration / module federation becomes an industry standard we will challenge and rethink our approach. We prefer tried and tested solutions, not jumping on everything new, and choose the simplest thing that works for what we're trying to accomplish.
 
-In the next month we'll release a follow-up article with a full microfrontends coding example using this approach. There's also a list of links at the end of this article, if you want to dive deeper into microfrontends.
-
-If you have any thoughts or questions please ask me on [Twitter](https://twitter.com/manuelwieser) or write an email to [manuel.wieser@karriere.at](mailto:manuel.wieser@karriere.at). Also we're always on the lookout for talented people. So, if you find this topic interesting, why not have a chat about joining our team?
+If you have any thoughts or questions please ask me on [Twitter](https://twitter.com/manuelwieser) or write an email to [manuel.timelthaler@karriere.at](mailto:manuel.timelthaler@karriere.at). There's also a list of links at the end of this article, if you want to dive deeper into microfrontends. Also we're always on the lookout for talented people. So, if you find this topic interesting, why not have a chat about joining our team?
 
 ## Sources
 
@@ -249,5 +242,3 @@ If you have any thoughts or questions please ask me on [Twitter](https://twitter
 [Tailor]: https://github.com/zalando/tailor
 [Luigi]: https://github.com/SAP/luigi
 [WebComponents]: https://www.webcomponents.org/introduction#what-are-web-components
-
--->

@@ -54,13 +54,16 @@ layout: layouts/default.njk
     })
   </script>
 
+  {# TODO Ideally, the whole Links block gets hidden, when there's no related posts, without breaking the layout ... #}
   <div class="Links">
     <h3 class="Links-heading">
-      Articles on
-      {% set comma = joiner() %}
-      {%- for tag in tags -%}
-        {{ comma() }} <a href="/tags/{{ tag }}">{{ tag | taxonomy }}</a>
-      {%- endfor -%}
+      {% if related.length %}
+        Articles on
+        {% set comma = joiner() %}
+        {%- for tag in tags -%}
+          {{ comma() }} <a href="/tags/{{ tag }}">{{ tag | taxonomy }}</a>
+        {%- endfor -%}
+      {% endif %}
     </h3>
     <ul>
       {% for post in related %}
